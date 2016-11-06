@@ -20,9 +20,7 @@ export class ProjectConfig extends SeedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      {src: 'normalize-css/normalize.css', inject: true},
-      {src: 'material-design-lite/material.min.css', inject: true},
-      {src: 'material-design-lite/material.min.js', inject: 'libs'}
+      {src: 'normalize-css/normalize.css', inject: true}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
@@ -34,6 +32,14 @@ export class ProjectConfig extends SeedConfig {
 
     /* Add to or override NPM module configurations: */
     // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    this.addPackageBundles({
+      name: 'angular2-mdl',
+      path: 'node_modules/angular2-mdl/bundle/angular2-mdl.js',
+      packageMeta: {
+        main: 'components/index.js',
+        defaultExtension: 'js'
+      }
+    });
   }
 
 }

@@ -6,8 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
+import { SharedModule } from './shared/shared.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
-import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   imports: [
