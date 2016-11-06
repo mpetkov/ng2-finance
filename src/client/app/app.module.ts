@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { PortfolioModule } from './portfolio/portfolio.module';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    SharedModule,
     PortfolioModule
   ],
   declarations: [AppComponent],
