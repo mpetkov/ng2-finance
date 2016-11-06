@@ -20,8 +20,9 @@ export class ProjectConfig extends SeedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      // {src: 'lodash/lodash.min.js', inject: 'libs'},
+      {src: 'normalize-css/normalize.css', inject: true},
+      {src: 'material-design-lite/material.min.css', inject: true},
+      {src: 'material-design-lite/material.min.js', inject: 'libs'}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
