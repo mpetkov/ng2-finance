@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
-import { PortfolioComponent } from './portfolio.component';
+import { SharedModule } from '../shared/shared.module';
+import { PortfolioComponent, StocksComponent } from './index';
 
 @NgModule({
-  declarations: [PortfolioComponent],
+  imports: [
+    SharedModule
+  ],
+  declarations: [
+    PortfolioComponent,
+    StocksComponent
+  ],
   exports: [PortfolioComponent]
 })
 export class PortfolioModule { }
