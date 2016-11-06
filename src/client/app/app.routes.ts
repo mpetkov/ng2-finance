@@ -1,3 +1,7 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { PortfolioRoutes } from './portfolio/index';
+
+export const routes: Routes = [
+  ...PortfolioRoutes
+];
