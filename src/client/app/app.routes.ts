@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { PortfolioRoutes } from './portfolio/index';
+import { WatchlistRoutes } from './watchlist/index';
 
 export const routes: Routes = [
-  ...PortfolioRoutes
+  ...WatchlistRoutes
 ];

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { SharedModule } from './shared/shared.module';
-import { PortfolioModule } from './portfolio/portfolio.module';
+import { WatchlistModule } from './watchlist/watchlist.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { PortfolioModule } from './portfolio/portfolio.module';
     HttpModule,
     RouterModule.forRoot(routes),
     SharedModule,
-    PortfolioModule
+    WatchlistModule
   ],
   declarations: [AppComponent],
   providers: [{
