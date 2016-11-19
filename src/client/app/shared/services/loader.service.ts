@@ -7,7 +7,7 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class LoaderService {
-  constructor(http: Http) {}
+  constructor(protected http: Http) {}
   get(url:string): Observable<string[]> {
     return this.http.get(url)
       .map((res: Response) => res.json())
