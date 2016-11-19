@@ -40,6 +40,15 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     });
+
+    this.addPackageBundles({
+      name: 'lodash',
+      path: 'node_modules/lodash/lodash.js',
+      packageMeta: {
+        main: 'index.js',
+        defaultExtension: 'js'
+      }
+    });
   }
 
 }
