@@ -1,0 +1,17 @@
+body {
+  font-family:"Roboto","Helvetica","Arial",sans-serif;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
