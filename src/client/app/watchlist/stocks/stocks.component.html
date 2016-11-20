@@ -1,6 +1,14 @@
-<nav class="mdl-navigation">
-  <a *ngFor="let stock of stocks"
+<ul class="mdl-navigation">
+  <li *ngFor="let stock of stocks"
      class="mdl-navigation__link">
-    {{stock.symbol}}
-  </a>
-</nav>
+    <div class="pull-left text">
+      <p><b>{{stock.symbol}}</b></p>
+      <p class="small truncate">{{stock.name}}</p>
+    </div>
+
+    <div class="pull-right pill">
+      <b>{{stock.change}}</b>
+    </div>
+    <b class="pull-right">{{stock.price}}</b>
+  </li>
+</ul>
