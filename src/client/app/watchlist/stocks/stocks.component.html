@@ -1,5 +1,6 @@
 <nav class="mdl-navigation">
-  <a class="mdl-navigation__link" >Link</a>
-  <a class="mdl-navigation__link" >Link</a>
-  <a class="mdl-navigation__link" >Link</a>
+  <a *ngFor="let stock of stocks"
+     class="mdl-navigation__link">
+    {{stock.symbol}}
+  </a>
 </nav>
