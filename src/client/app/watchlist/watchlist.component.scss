@@ -1,0 +1,11 @@
+:host {
+  .mdl-layout__drawer {
+    transform: translateX(0);
+    width: 320px;
+    background: white;
+  }
+
+  .mdl-layout__content {
+    margin-left: 320px;
+  }
+}
