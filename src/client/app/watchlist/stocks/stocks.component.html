@@ -6,10 +6,11 @@
       <p class="small truncate">{{stock.name}}</p>
     </div>
 
-    <div class="pull-right pill"
+    <span class="pull-right pill"
+         [ngClass]="{green: stock.change >= 0}"
          (click)="changePill()">
-      <b>{{stock[pillType]}}</b>
-    </div>
+      {{stock[pillType]}}
+    </span>
     <b class="pull-right">{{stock.price}}</b>
   </li>
 </ul>

@@ -15,6 +15,7 @@ $height: 40px;
     color: #000;
 
     p,
+    b,
     span {
       font-size: 1.15rem;
       margin-bottom: 0;
@@ -26,17 +27,21 @@ $height: 40px;
     }
 
     .text {
-      width: 130px;
+      width: 150px;
     }
 
     .pill {
-      background: red;
+      background: #ef172f;
       height: 30px;
-      width: 95px;
+      width: 70px;
       line-height: 30px;
       text-align: center;
       margin: 5px 0 0 10px;
       color: white;
+    }
+
+    .pill.green {
+      background: #17c566;
     }
   }
 
