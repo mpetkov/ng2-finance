@@ -11,6 +11,8 @@ import { StocksService } from './stocks.service';
 
 export class StocksComponent {
   stocks:any[] = [];
+  pillType:string = PillEnum[PillEnum.change];
+  private pillIndex:number = PillEnum.change;
 
   constructor(private stocksService: StocksService) {
     stocksService.data$.subscribe(
@@ -19,4 +21,18 @@ export class StocksComponent {
 
     stocksService.load(['YHOO']);
   }
+
+  changePill() {
+    this.pillIndex++;
+    if(this.pillIndex > PillEnum.percentage) {
+      this.pillIndex = PillEnum.change;
+    }
+
+    this.pillType = PillEnum[this.pillIndex];
+  }
+}
+
+enum PillEnum {
+  change,
+  percentage
 }

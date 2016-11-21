@@ -30,9 +30,8 @@ export class StocksService extends LoaderService {
         symbol: quote.symbol,
         name: quote.Name,
         price: quote.LastTradePriceOnly,
-        marketCap: quote.MarketCapitalization,
         change: quote.Change,
-        changePercent: this.calculateChangePercent(quote.Change, quote.LastTradePriceOnly)
+        percentage: this.calculateChangePercent(quote.Change, quote.LastTradePriceOnly)
       }
     });
   }

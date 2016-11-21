@@ -6,8 +6,9 @@
       <p class="small truncate">{{stock.name}}</p>
     </div>
 
-    <div class="pull-right pill">
-      <b>{{stock.change}}</b>
+    <div class="pull-right pill"
+         (click)="changePill()">
+      <b>{{stock[pillType]}}</b>
     </div>
     <b class="pull-right">{{stock.price}}</b>
   </li>
