@@ -19,3 +19,18 @@ body {
 b, strong {
   font-weight: 500;
 }
+
+p {
+  margin: 0;
+}
+
+
+.mdl-menu {
+  padding: 0;
+  min-width: auto;
+
+  .mdl-menu__item {
+    height: 30px;
+    line-height: 30px;
+  }
+}

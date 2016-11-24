@@ -1,25 +1,41 @@
 $height: 40px;
+$border: 1px solid #dcdcdc;
+$padding: 8px 15px;
 
 :host {
+  height: 100%;
+
+  p,
+  b,
+  span {
+    font-size: 1.15rem;
+  }
+
+  .header {
+    border-bottom: $border;
+    padding: $padding;
+    height: 32px;
+
+    p {
+      line-height: 32px;
+    }
+  }
+
   .mdl-navigation {
     padding: 0;
     margin: 0;
+    height: calc(100% - 49px);
+    overflow: auto;
   }
 
   .mdl-navigation__link {
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: $border;
     height: $height;
     line-height: $height;
-    padding: 8px 15px;
+    padding: $padding;
     cursor: pointer;
     color: #000;
-
-    p,
-    b,
-    span {
-      font-size: 1.15rem;
-      margin-bottom: 0;
-    }
+    position: relative;
 
     .small {
       font-size: 0.85rem;
@@ -27,7 +43,7 @@ $height: 40px;
     }
 
     .text {
-      width: 150px;
+      width: 130px;
     }
 
     .prices {

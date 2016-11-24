@@ -1,3 +1,18 @@
+<div class="header">
+  <p class="pull-left"><b>Stocks</b></p>
+  <button class="pull-right"
+          mdl-button
+          #btn1="mdlButton"
+          (click)="m1.toggle($event, btn1)"
+          mdl-button-type="icon"
+          mdl-ripple>
+    <mdl-icon>more_vert</mdl-icon>
+  </button>
+  <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
+    <mdl-menu-item mdl-ripple>Edit List</mdl-menu-item>
+    <mdl-menu-item mdl-ripple>Add Symbol</mdl-menu-item>
+  </mdl-menu>
+</div>
 <ul class="mdl-navigation">
   <li *ngFor="let stock of stocks"
       class="mdl-navigation__link">

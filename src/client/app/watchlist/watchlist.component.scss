@@ -5,6 +5,7 @@ $sidebarWidth: 330px;
     transform: translateX(0);
     width: $sidebarWidth;
     background: white;
+    overflow: hidden;
   }
 
   .mdl-layout__content {
