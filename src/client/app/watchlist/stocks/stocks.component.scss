@@ -30,10 +30,15 @@ $height: 40px;
       width: 150px;
     }
 
+    .prices {
+      position: absolute;
+      right: 15px;
+    }
+
     .pill {
       background: #ef172f;
       height: 30px;
-      width: 70px;
+      width: 80px;
       line-height: 30px;
       text-align: center;
       margin: 5px 0 0 10px;
