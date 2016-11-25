@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MdlModule } from 'angular2-mdl';
 import { HeaderComponent } from './header/index';
-import { SidebarComponent } from './sidebar/index';
+import { NavbarComponent } from './navbar/index';
 
 @NgModule({
   imports: [
@@ -9,11 +9,11 @@ import { SidebarComponent } from './sidebar/index';
   ],
   declarations: [
     HeaderComponent,
-    SidebarComponent
+    NavbarComponent
   ],
   exports: [
     HeaderComponent,
-    SidebarComponent,
+    NavbarComponent,
     MdlModule
   ]
 })

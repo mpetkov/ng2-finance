@@ -1,3 +1,3 @@
 export * from './header/index';
-export * from './sidebar/index';
+export * from './navbar/index';
 export * from './services/index';
