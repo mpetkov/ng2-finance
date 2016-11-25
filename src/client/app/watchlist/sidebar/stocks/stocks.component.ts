@@ -19,7 +19,7 @@ export class StocksComponent {
       data => this.stocks = data
     );
 
-    stocksService.load(['YHOO']);
+    stocksService.load(['YHOO', 'AAPL', 'GOOG', 'ADS']);
   }
 
   changePill() {

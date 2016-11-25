@@ -1,26 +1,4 @@
-$height: 40px;
-$border: 1px solid #dcdcdc;
-$padding: 8px 15px;
-
 :host {
-  height: 100%;
-
-  p,
-  b,
-  span {
-    font-size: 1.15rem;
-  }
-
-  .header {
-    border-bottom: $border;
-    padding: $padding;
-    height: 32px;
-
-    p {
-      line-height: 32px;
-    }
-  }
-
   .mdl-navigation {
     padding: 0;
     margin: 0;
@@ -29,10 +7,10 @@ $padding: 8px 15px;
   }
 
   .mdl-navigation__link {
-    border-bottom: $border;
+    border-bottom: 1px solid #dcdcdc;
     height: $height;
     line-height: $height;
-    padding: $padding;
+    padding: 8px 15px;
     cursor: pointer;
     color: #000;
     position: relative;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import {
   WatchlistComponent,
+  SidebarComponent,
   StocksComponent
 } from './index';
 
@@ -13,6 +14,7 @@ import {
   ],
   declarations: [
     WatchlistComponent,
+    SidebarComponent,
     StocksComponent
   ]
 })

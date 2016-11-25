@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {
   ConfigService,
   LoaderService
-} from '../../shared/index';
+} from '../../../shared/index';
 
 @Injectable()
 export class StocksService extends LoaderService {
