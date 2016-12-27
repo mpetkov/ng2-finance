@@ -3,8 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
+
+import { sidebarReducer } from './shared/index';
 
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
@@ -14,6 +17,9 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    StoreModule.provideStore({
+      sidebar: sidebarReducer
+    }),
     SharedModule,
     WatchlistModule
   ],

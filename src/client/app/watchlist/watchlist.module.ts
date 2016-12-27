@@ -4,7 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 import {
   WatchlistComponent,
   SidebarComponent,
-  StocksComponent
+  StocksComponent,
+  ToolbarComponent
 } from './index';
 
 @NgModule({
@@ -15,7 +16,8 @@ import {
   declarations: [
     WatchlistComponent,
     SidebarComponent,
-    StocksComponent
+    StocksComponent,
+    ToolbarComponent
   ]
 })
 export class WatchlistModule { }

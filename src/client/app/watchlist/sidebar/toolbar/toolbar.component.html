@@ -8,6 +8,6 @@
   <mdl-icon>more_vert</mdl-icon>
 </button>
 <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
-  <mdl-menu-item mdl-ripple>Edit List</mdl-menu-item>
-  <mdl-menu-item mdl-ripple>Add Symbol</mdl-menu-item>
+  <mdl-menu-item mdl-ripple (click)="edit()">Edit List</mdl-menu-item>
+  <mdl-menu-item mdl-ripple (click)="add()">Add Symbol</mdl-menu-item>
 </mdl-menu>
