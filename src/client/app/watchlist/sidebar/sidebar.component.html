@@ -1,2 +1,4 @@
 <mp-toolbar></mp-toolbar>
-<mp-stocks></mp-stocks>
+<span [ngSwitch]="(sidebarStore | async).type">
+  <mp-stocks *ngSwitchCase="0"></mp-stocks>
+</span>
