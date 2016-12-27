@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { SidebarActions, SidebarTypeEnum } from "../../../shared/index";
+import { SidebarActions, SidebarTypeEnum, SidebarStateInterface } from "../../../shared/index";
 
 @Component({
   moduleId: module.id,
@@ -11,7 +11,7 @@ import { SidebarActions, SidebarTypeEnum } from "../../../shared/index";
 })
 
 export class ToolbarComponent {
-  sidebarStore: Observable<any>;
+  sidebarStore: Observable<SidebarStateInterface>;
   title:string;
 
   constructor(private store: Store){
