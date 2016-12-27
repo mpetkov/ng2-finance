@@ -26,12 +26,13 @@ export class StocksService extends LoaderService {
       quotes = [quotes];
     }
     return quotes.map((quote:any) => {
+      let change:string = quote.Change || '0.00';
       return {
         symbol: quote.symbol,
         name: quote.Name,
         price: quote.LastTradePriceOnly,
-        change: quote.Change,
-        percentage: this.calculateChangePercent(quote.Change, quote.LastTradePriceOnly)
+        change: change,
+        percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       }
     });
   }
