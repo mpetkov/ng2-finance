@@ -1,13 +1,20 @@
-<p class="pull-left"><b>Stocks</b></p>
+<p class="pull-left"><b>{{title}}</b></p>
 <button class="pull-right"
+        *ngIf="(sidebarStore | async).type !== 0"
+        mdl-button
+        (click)="close()"
+        mdl-button-type="icon">
+  <mdl-icon>close</mdl-icon>
+</button>
+<button class="pull-right"
+        *ngIf="(sidebarStore | async).type === 0"
         mdl-button
         #btn1="mdlButton"
         (click)="m1.toggle($event, btn1)"
-        mdl-button-type="icon"
-        mdl-ripple>
+        mdl-button-type="icon">
   <mdl-icon>more_vert</mdl-icon>
 </button>
 <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
-  <mdl-menu-item mdl-ripple (click)="edit()">Edit List</mdl-menu-item>
-  <mdl-menu-item mdl-ripple (click)="add()">Add Symbol</mdl-menu-item>
+  <mdl-menu-item (click)="edit()">Edit List</mdl-menu-item>
+  <mdl-menu-item (click)="add()">Add Symbol</mdl-menu-item>
 </mdl-menu>
