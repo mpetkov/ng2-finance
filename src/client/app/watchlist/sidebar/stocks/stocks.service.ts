@@ -26,20 +26,19 @@ export class StocksService extends LoaderService {
       quotes = [quotes];
     }
     return quotes.map((quote:any) => {
-      let change:string = quote.Change || '0.00';
+      let change:number = parseFloat(quote.Change).toFixed(2) || 0.00;
       return {
         symbol: quote.symbol,
         name: quote.Name,
-        price: quote.LastTradePriceOnly,
+        price: parseFloat(quote.LastTradePriceOnly).toFixed(2),
         change: change,
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       }
     });
   }
 
-  private calculateChangePercent(change:string, price:string):string {
-    let changeNumber:number = parseFloat(change);
-    let plusSign:string = (changeNumber > 0) ? '+' : '';
-    return plusSign + (changeNumber/(parseFloat(price) - changeNumber)*100).toFixed(2) + '%';
+  private calculateChangePercent(change:Number, price:string):string {
+    let plusSign:string = (change > 0) ? '+' : '';
+    return plusSign + (change/(parseFloat(price) - change)*100).toFixed(2) + '%';
   }
 }
