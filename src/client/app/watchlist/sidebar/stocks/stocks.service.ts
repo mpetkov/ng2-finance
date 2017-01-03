@@ -31,14 +31,17 @@ export class StocksService extends LoaderService {
         symbol: quote.symbol,
         name: quote.Name,
         price: parseFloat(quote.LastTradePriceOnly).toFixed(2),
-        change: change,
+        change: this.getPlusSign(change) + change,
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       }
     });
   }
 
   private calculateChangePercent(change:Number, price:string):string {
-    let plusSign:string = (change > 0) ? '+' : '';
-    return plusSign + (change/(parseFloat(price) - change)*100).toFixed(2) + '%';
+    return this.getPlusSign(change) + (change/(parseFloat(price) - change)*100).toFixed(2) + '%';
+  }
+
+  private getPlusSign(change:Number):string {
+    return (change > 0) ? '+' : '';
   }
 }
