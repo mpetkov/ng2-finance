@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import {
   WatchlistComponent,
   ContentComponent,
+  ChartComponent,
   SidebarComponent,
   StocksComponent,
   ToolbarComponent
@@ -17,6 +18,7 @@ import {
   declarations: [
     WatchlistComponent,
     ContentComponent,
+    ChartComponent,
     SidebarComponent,
     StocksComponent,
     ToolbarComponent
