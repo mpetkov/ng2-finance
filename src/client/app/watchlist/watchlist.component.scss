@@ -6,9 +6,11 @@ $sidebarWidth: 330px;
     width: $sidebarWidth;
     background: white;
     overflow: hidden;
+    box-shadow: none;
   }
 
   .mdl-layout__content {
     margin-left: $sidebarWidth;
+    height: 100%;
   }
 }

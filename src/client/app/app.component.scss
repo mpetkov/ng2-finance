@@ -46,3 +46,11 @@ span {
 .mdl-card__title {
   padding: 8px 15px;
 }
+
+.mdl-card__supporting-text {
+  width: calc(100% - 32px);
+}
+
+.mdl-cell {
+  margin: 0;
+}
