@@ -4,10 +4,12 @@ body {
 
 .pull-left {
   float: left;
+  margin-right: auto;
 }
 
 .pull-right {
   float: right;
+  margin-left: auto;
 }
 
 .truncate {
@@ -45,6 +47,7 @@ span {
 
 .mdl-card__title {
   padding: 8px 15px;
+  background: #f8f8f8;
 }
 
 .mdl-card__supporting-text {
