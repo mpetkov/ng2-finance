@@ -6,6 +6,7 @@ import {
   ContentComponent,
   ChartComponent,
   InfoComponent,
+  NewsComponent,
   SidebarComponent,
   StocksComponent,
   ToolbarComponent
@@ -21,6 +22,7 @@ import {
     ContentComponent,
     ChartComponent,
     InfoComponent,
+    NewsComponent,
     SidebarComponent,
     StocksComponent,
     ToolbarComponent
