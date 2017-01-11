@@ -5,6 +5,7 @@ import {
   WatchlistComponent,
   ContentComponent,
   ChartComponent,
+  InfoComponent,
   SidebarComponent,
   StocksComponent,
   ToolbarComponent
@@ -19,6 +20,7 @@ import {
     WatchlistComponent,
     ContentComponent,
     ChartComponent,
+    InfoComponent,
     SidebarComponent,
     StocksComponent,
     ToolbarComponent
