@@ -12,5 +12,6 @@ $sidebarWidth: 330px;
   .mdl-layout__content {
     margin-left: $sidebarWidth;
     height: 100%;
+    padding: 8px;
   }
 }

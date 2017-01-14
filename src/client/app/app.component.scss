@@ -47,7 +47,10 @@ span {
 
 .mdl-card__title {
   padding: 8px 15px;
-  background: #f8f8f8;
+
+  h4 {
+    line-height: 1.1;
+  }
 }
 
 .mdl-card__supporting-text {
@@ -56,16 +59,5 @@ span {
 }
 
 .mdl-cell {
-  margin: 0;
   float: left;
-  border-right: 1px solid rgba(0,0,0,.1);
-  border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-.mdl-cell--9-col, .mdl-cell--9-col-desktop.mdl-cell--9-col-desktop {
-  width: 75%;
-}
-
-.mdl-cell--3-col, .mdl-cell--3-col-desktop.mdl-cell--3-col-desktop {
-  width: 25%;
 }
