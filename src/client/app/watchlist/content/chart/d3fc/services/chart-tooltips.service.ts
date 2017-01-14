@@ -31,7 +31,7 @@ export class ChartTooltipsService {
 
     sel.select('text')
       .attr('transform',
-        'translate(' + this.chartOptionsService.options.yAxisWidth + ', '
+        'translate(' + (this.chartOptionsService.options.yAxisWidth - 2) + ', '
         + (this.chartOptionsService.options.calloutHeight / 4) + ')')
       .attr('x', 0)
       .attr('y', 0);
@@ -43,13 +43,23 @@ export class ChartTooltipsService {
       .select('text')
       .remove();
 
+    sel.select('.bottom-handle')
+      .attr('transform', function (d:any) {
+        let x:number = this.parentNode.getAttribute('transform').match(/translate\((.*),/).pop();
+        if(x < 30) {
+          return 'translate(30, 0)';
+        } else {
+          return 'translate(0, 0)';
+        }
+    });
+
     let container:any = sel.enter()
       .select('.bottom-handle');
 
     container.classed('callout', true)
       .append('rect')
-      .attr('transform', 'translate(-40, 0)')
-      .attr('width', 80)
+      .attr('transform', 'translate(-30, 0)')
+      .attr('width', 60)
       .attr('height', this.chartOptionsService.options.xAxisHeight);
 
     container.append('text')

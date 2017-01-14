@@ -26,10 +26,17 @@ $gray: #444;
 
   .background {
     opacity: 0.7;
+    stroke: #FFF;
+    fill: #FFF;
   }
 
   .plot-area {
     overflow: visible;
+  }
+
+  .plot-area > g > g.y:last-child,
+  .y-axis > g.tick:nth-last-child(2) {
+    display: none;
   }
 
   .annotation.close line {
@@ -42,6 +49,12 @@ $gray: #444;
 
   .annotation.close path {
     fill: $blue;
+  }
+
+  .gridline,
+  .axis .domain,
+  .axis .tick line{
+    stroke: #DDD;
   }
 
   .label {
@@ -69,22 +82,15 @@ $gray: #444;
     text-anchor: middle;
     dominant-baseline: central;
   }
-}
 
-.legend {
-  position: absolute;
-  border-color: #e5e5e5;
-  background: rgba(255, 255, 255, 0.85);
-  margin: 15px;
-  font-size: 0.9rem;
-  th {
-    padding: 2px 5px 2px 10px;
-    text-align: right;
-    color: #999;
+  .axis text,
+  .annotation text {
+    font-size: 11px;
+    font-family: inherit;
+    font-weight: 700;
   }
 
-  td {
-    padding: 2px 10px 2px 5px;
-    color: black;
+  .axis .domain {
+    stroke-opacity: 0;
   }
 }

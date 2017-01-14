@@ -94,12 +94,12 @@ export class D3fcComponent {
       .yDomain(fc.util.extent(data, ['open', 'close']))
       .xTickFormat(this.chartOptionsService.options.dateFormat)
       .yTickFormat(this.chartOptionsService.options.priceFormat)
-      .yTicks(5)
-      .yNice(5)
+      .yTicks(this.chartOptionsService.options.yTicks)
+      .yNice(this.chartOptionsService.options.yTicks)
       .yOrient('right')
       .yTickSize(this.chartOptionsService.options.yAxisWidth, 0)
       .xTickSize(this.chartOptionsService.options.xAxisHeight)
-      .xTicks(3);
+      .xTicks(this.chartOptionsService.options.xTicks);
   }
 
   private getArea(data:any, y0Value:number):any {
@@ -119,7 +119,7 @@ export class D3fcComponent {
 
   private getGridLines():any {
     return fc.annotation.gridline()
-      .yTicks(5)
-      .xTicks(0);
+      .yTicks(this.chartOptionsService.options.yTicks)
+      .xTicks(this.chartOptionsService.options.xTicks);
   }
 }

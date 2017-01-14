@@ -8,6 +8,8 @@ export class ChartOptionsService {
 
   constructor() {
     this.options = {
+      yTicks: 8,
+      xTicks: 4,
       yAxisWidth: 50,
       xAxisHeight: 20,
       calloutLeftMargin: 8,

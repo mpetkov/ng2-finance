@@ -1,0 +1,8 @@
+:host {
+  .mdl-card__supporting-text {
+    padding: 0;
+    padding-right: 16px;
+    height: calc(100% - 49px - 4px);
+    width: calc(100% - 16px);
+  }
+}

@@ -5,6 +5,7 @@ import { ChartService } from './chart.service';
   moduleId: module.id,
   selector: 'mp-chart',
   templateUrl: 'chart.component.html',
+  styleUrls: ['chart.component.css'],
   providers: [ChartService]
 })
 
