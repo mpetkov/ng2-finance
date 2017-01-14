@@ -16,7 +16,10 @@ export class ChartOptionsService {
       calloutHeight: 16,
       dateFormat: d3.time.format('%b%e \'%y'),
       priceFormat: d3.format('.2f'),
-      volumeFormat: d3.format('s')
+      volumeFormat: function(value:number) {
+        let prefix:any = d3.formatPrefix(value);
+        return prefix.scale(value).toFixed(2) + prefix.symbol;
+      }
     };
 
     this.options.calloutWidth = this.options.yAxisWidth - this.options.calloutLeftMargin;
