@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, HostListener } from '@angular/core';
 import { ChartVolumeService } from './services/chart-volume.service';
 import { ChartCrosshairService } from './services/chart-crosshair.service';
 import { ChartTooltipsService } from './services/chart-tooltips.service';
@@ -24,6 +24,10 @@ declare let d3:any;
 
 export class D3fcComponent {
   @ViewChild('svg') svg:any;
+  private data:any;
+  private container:any;
+  private chart:any;
+
   constructor(private chartService:ChartService,
               private chartOptionsService:ChartOptionsService,
               private chartCrosshairService:ChartCrosshairService,
@@ -31,22 +35,28 @@ export class D3fcComponent {
               private chartVolumeService:ChartVolumeService) {
 
     chartService.data$.subscribe(
-      data => this.render(data.rows)
+      data => this.init(data.rows)
     );
   }
 
-  private render(data:any) {
-    let container:any = d3.select(this.svg.nativeElement);
-    this.chartVolumeService.init(data, container);
+  @HostListener('window:resize', ['$event'])
+  onResize(e:any) {
+    this.render(this.data, this.container, this.chart);
+  }
 
-    let chart:any = this.getChart(data);
-    let area:any = this.getArea(data, chart.yDomain()[0]);
+  private init(data:any) {
+    this.data = data;
+    this.container = d3.select(this.svg.nativeElement);
+    this.chartVolumeService.init(data, this.container);
+
+    this.chart = this.getChart(data);
+    let area:any = this.getArea(data, this.chart.yDomain()[0]);
     let line:any = this.getLine();
     let gridlines:any = this.getGridLines();
     let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
     let lastClose:any = this.chartTooltipsService.getLastClose();
 
-    chart.plotArea(fc.series.multi()
+    this.chart.plotArea(fc.series.multi()
       .series([gridlines, area, line, lastClose, crosshair])
       .mapping((series) => {
         switch (series) {
@@ -59,13 +69,16 @@ export class D3fcComponent {
         }
       }));
 
+    this.render(data, this.container, this.chart);
+  }
+
+  private render(data, container, chart) {
     container
       .datum(data)
       .call(chart);
 
     this.chartVolumeService.render(data, chart.xScale());
     this.chartOptionsService.updateSelectedPoint(data[data.length - 1]);
-
     this.applyPostRenderChanges();
   }
 
