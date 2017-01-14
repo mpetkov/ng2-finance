@@ -7,15 +7,15 @@ import {
 } from '../../../shared/index';
 
 @Injectable()
-export class ChartsService extends LoaderService {
-  constructor(http: Http) {
+export class ChartService extends LoaderService {
+  constructor(http:Http) {
     super(http);
   }
 
   load(stock:string) {
     this.get('./assets/json/chart.json')
       .subscribe(
-        data => this.changeData(this.transform(data)) ,
+        data => this.changeData(this.transform(data)),
         error =>  console.log(error)
       );
   }
@@ -26,7 +26,7 @@ export class ChartsService extends LoaderService {
       rows: []
     };
     let chartData:any = _.get(rawData, 'chart.result[0]', {});
-    if(chartData) {
+    if (chartData) {
       data.info = chartData.meta || {};
       let items:any = {
         close: _.get(chartData, 'indicators.quote[0].close', []),

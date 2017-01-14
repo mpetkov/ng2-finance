@@ -1,3 +1,6 @@
+$blue: #1A9AF9;
+$gray: #444;
+
 .mp-chart {
   width: calc(100% - 40px);
   height: 100%;
@@ -14,12 +17,7 @@
   }
 
   path.line {
-    stroke: rgb(26, 154, 249);
-  }
-
-  path.ema {
-    stroke: #c00;
-    fill: none;
+    stroke: $blue;
   }
 
   .x-axis text {
@@ -34,7 +32,6 @@
     overflow: visible;
   }
 
-  .annotation.ema line,
   .annotation.close line {
     display: none;
   }
@@ -43,12 +40,8 @@
     fill: white;
   }
 
-  .annotation.ema path {
-    fill: #c00;
-  }
-
   .annotation.close path {
-    fill: rgb(26, 154, 249);
+    fill: $blue;
   }
 
   .label {
@@ -64,11 +57,11 @@
   .crosshair .callout path,
   .crosshair .callout rect,
   .crosshair .trackball circle {
-    fill: #444;
+    fill: $gray;
   }
 
   .crosshair line {
-    stroke: #444;
+    stroke: $gray;
     stroke-dasharray: 3, 3;
   }
 
@@ -78,13 +71,20 @@
   }
 }
 
-#legend {
+.legend {
   position: absolute;
-  top: 0;
-  left: 0;
-  margin: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  line-height: 0.8em;
-  width: 100px;
-  font-size: 0.8em;
+  border-color: #e5e5e5;
+  background: rgba(255, 255, 255, 0.85);
+  margin: 15px;
+  font-size: 0.9rem;
+  th {
+    padding: 2px 5px 2px 10px;
+    text-align: right;
+    color: #999;
+  }
+
+  td {
+    padding: 2px 10px 2px 5px;
+    color: black;
+  }
 }
