@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { SidebarStateInterface, SidebarActions } from "../../../shared/index";
 import { StocksService } from './stocks.service';
 
 @Component({
@@ -12,13 +15,16 @@ import { StocksService } from './stocks.service';
 export class StocksComponent {
   stocks:any[] = [];
   pillType:string = PillEnum[PillEnum.change];
+  sidebarStore: Observable<SidebarStateInterface>;
   private pillIndex:number = PillEnum.change;
 
-  constructor(private stocksService: StocksService) {
+  constructor(private store: Store,
+              private stocksService: StocksService) {
     stocksService.data$.subscribe(
       data => this.stocks = data
     );
 
+    this.sidebarStore = store.select(store => store.sidebar);
     stocksService.load(['YHOO', 'AAPL', 'GOOG', 'ADS']);
   }
 
@@ -29,6 +35,10 @@ export class StocksComponent {
     }
 
     this.pillType = PillEnum[this.pillIndex];
+  }
+
+  changeStock(stock:string) {
+    this.store.dispatch(SidebarActions.stock(stock));
   }
 }
 
