@@ -30,7 +30,7 @@ export class StocksService extends LoaderService {
       return {
         symbol: quote.symbol,
         name: quote.Name,
-        price: parseFloat(quote.LastTradePriceOnly).toFixed(2),
+        price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {maximumFractionDigits: 2}),
         change: this.getPlusSign(change) + change,
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       }
