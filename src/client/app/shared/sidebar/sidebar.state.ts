@@ -8,8 +8,10 @@ export enum SidebarTypeEnum {
 
 export interface SidebarStateInterface extends Map<string,any> {
   type?:SidebarTypeEnum;
+  stock?:string;
 }
 
 export const SidebarInitialState = Record({
-  type: SidebarTypeEnum.List
+  type: SidebarTypeEnum.List,
+  stock: 'AAPL'
 });

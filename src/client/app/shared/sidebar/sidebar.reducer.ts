@@ -8,6 +8,8 @@ export const sidebarReducer: ActionReducer<SidebarStateInterface>  = (state: Sid
   switch (action.type) {
     case SidebarActions.TYPE:
       return state.set('type', action.payload);
+    case SidebarActions.STOCK:
+      return state.set('stock', action.payload);
     default:
       return state;
   }
