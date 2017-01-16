@@ -1,7 +1,7 @@
 <ul class="mdl-navigation">
   <li *ngFor="let stock of stocks"
       class="mdl-navigation__link"
-      [ngClass]="{active: (sidebarStore | async).stock === stock.symbol}"
+      [ngClass]="{active: (stocksStore | async).stock === stock.symbol}"
       (click)="changeStock(stock.symbol)">
     <div class="pull-left text">
       <p><b>{{stock.symbol}}</b></p>
