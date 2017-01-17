@@ -6,8 +6,10 @@ const initialState:StockStateInterface = new StockInitialState() as StockStateIn
 
 export const stockReducer:ActionReducer<StockStateInterface> = (state:StockStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
-    case StockActions.SELECT:
+    case StockActions.CHANGE_STOCK:
       return state.set('symbol', action.payload);
+    case StockActions.CHANGE_STOCK_DATA:
+      return state.set('data', action.payload);
     default:
       return state;
   }

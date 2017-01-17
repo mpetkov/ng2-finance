@@ -18,8 +18,9 @@ export class StocksStateService {
     this.stocks$ = store$.let(this.getStocks());
   }
 
-  changeStock(stock:string) {
-    this.store$.dispatch(StockActions.select(stock));
+  changeStock(stock:any) {
+    this.store$.dispatch(StockActions.changeStock(stock.symbol));
+    this.store$.dispatch(StockActions.changeStockData(stock));
   }
 
   private getWatchlist():any {

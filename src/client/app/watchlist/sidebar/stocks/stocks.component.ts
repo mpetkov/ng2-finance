@@ -31,7 +31,7 @@ export class StocksComponent {
     this.pillType = PillEnum[this.pillIndex];
   }
 
-  changeStock(stock:string) {
+  changeStock(stock:any) {
     this.stocksState.changeStock(stock);
   }
 }

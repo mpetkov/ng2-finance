@@ -2,7 +2,7 @@
   <li *ngFor="let stock of (stocksState.stocks$ | async)"
       class="mdl-navigation__link"
       [ngClass]="{active: (stocksState.stock$ | async) === stock.symbol}"
-      (click)="changeStock(stock.symbol)">
+      (click)="changeStock(stock)">
     <div class="pull-left text">
       <p><b>{{stock.symbol}}</b></p>
       <p class="small truncate">{{stock.name}}</p>
