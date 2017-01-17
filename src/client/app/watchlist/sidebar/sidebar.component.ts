@@ -10,9 +10,9 @@ import { SidebarStateInterface } from '../../shared/index';
 })
 
 export class SidebarComponent {
-  sidebarStore: Observable<SidebarStateInterface>;
+  sidebarStore:Observable<SidebarStateInterface>;
 
-  constructor(private store: Store){
-    this.sidebarStore = store.select(store => store.sidebar);
+  constructor(private store:Store<any>) {
+    this.sidebarStore = store.select((store:any) => store.sidebar);
   }
 }

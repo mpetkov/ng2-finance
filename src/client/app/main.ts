@@ -3,7 +3,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app.module';
 
-if (String('<%= BUILD_TYPE %>') === 'prod') { enableProdMode(); }
+if (String('<%= BUILD_TYPE %>') === 'prod') {
+  enableProdMode();
+}
 
 
 platformBrowserDynamic().bootstrapModule(AppModule);

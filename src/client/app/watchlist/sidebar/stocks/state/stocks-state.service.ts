@@ -8,10 +8,10 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
 export class StocksStateService {
-  watchlist$: Observable<string[]>;
-  stock$: Observable<string>;
+  watchlist$:Observable<string[]>;
+  stock$:Observable<string>;
 
-  constructor(private store$: Store) {
+  constructor(private store$:Store<any>) {
     this.watchlist$ = store$.let(this.getWatchlist());
     this.stock$ = store$.let(this.getStock());
   }
@@ -20,15 +20,15 @@ export class StocksStateService {
     this.store$.dispatch(StockActions.select(stock));
   }
 
-  private getWatchlist(): any {
-    return state$ => state$
-      .map(state => state.watchlist.symbols)
+  private getWatchlist():any {
+    return (state$:any) => state$
+      .map((state:any) => state.watchlist.symbols)
       .distinctUntilChanged();
   }
 
-  private getStock(): any {
-    return state$ => state$
-      .map(state => state.stock.symbol)
+  private getStock():any {
+    return (state$:any) => state$
+      .map((state:any) => state.stock.symbol)
       .distinctUntilChanged();
   }
 }

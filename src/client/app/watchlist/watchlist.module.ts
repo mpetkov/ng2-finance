@@ -32,4 +32,5 @@ import {
     ToolbarComponent
   ]
 })
-export class WatchlistModule { }
+export class WatchlistModule {
+}

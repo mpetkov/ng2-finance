@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
-import {ChartOptionsService} from '../services/chart-options.service';
+import { ChartOptionsService } from '../services/chart-options.service';
 
 declare let fc:any;
 declare let d3:any;
@@ -14,6 +14,7 @@ declare let d3:any;
 
 export class LegendComponent {
   private legend:any;
+
   constructor(private chartOptionsService:ChartOptionsService,
               private elementRef:ElementRef) {
     this.legend = fc.chart.legend()

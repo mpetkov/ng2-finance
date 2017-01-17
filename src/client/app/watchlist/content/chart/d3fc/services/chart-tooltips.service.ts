@@ -46,12 +46,12 @@ export class ChartTooltipsService {
     sel.select('.bottom-handle')
       .attr('transform', function (d:any) {
         let x:number = this.parentNode.getAttribute('transform').match(/translate\((.*),/).pop();
-        if(x < 30) {
+        if (x < 30) {
           return 'translate(30, 0)';
         } else {
           return 'translate(0, 0)';
         }
-    });
+      });
 
     let container:any = sel.enter()
       .select('.bottom-handle');

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as _ from 'lodash';
 import {
-  ConfigService,
   LoaderService
 } from '../../../shared/index';
 

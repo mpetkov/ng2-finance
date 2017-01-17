@@ -41,7 +41,7 @@ export class ChartVolumeService {
       .yValue((d:any) => {
         return d.volume;
       })
-      .decorate((sel) => {
+      .decorate((sel:any) => {
         sel.select('path')
           .style('stroke', (d:any) => {
             return d.close > d.open ? 'red' : 'green';

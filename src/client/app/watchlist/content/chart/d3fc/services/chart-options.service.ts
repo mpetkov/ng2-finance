@@ -16,7 +16,7 @@ export class ChartOptionsService {
       calloutHeight: 16,
       dateFormat: d3.time.format('%b%e \'%y'),
       priceFormat: d3.format('.2f'),
-      volumeFormat: function(value:number) {
+      volumeFormat: function (value:number) {
         let prefix:any = d3.formatPrefix(value);
         return prefix.scale(value).toFixed(2) + prefix.symbol;
       }
@@ -31,7 +31,7 @@ export class ChartOptionsService {
   }
 
   updateSelectedPoint(data:any) {
-    if(this.selectedPointObserver) {
+    if (this.selectedPointObserver) {
       this.selectedPointObserver.next(data);
     }
   }

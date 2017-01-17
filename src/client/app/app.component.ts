@@ -10,7 +10,4 @@ import './operators';
 })
 
 export class AppComponent {
-  constructor() {
-
-  }
 }

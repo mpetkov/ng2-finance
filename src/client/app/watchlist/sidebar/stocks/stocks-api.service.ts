@@ -8,37 +8,37 @@ import {
 
 @Injectable()
 export class StocksApiService extends LoaderService {
-  constructor(private http: Http) {
+  constructor(private http:Http) {
     super(http);
   }
 
   load(stocks:string[]) {
     this.get(ConfigService.queries().quotes.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
-        data => this.changeData(this.transform(data)) ,
+        data => this.changeData(this.transform(data)),
         error =>  console.log(error)
       );
   }
 
   private transform(data:any) {
     let quotes:any = _.get(data, 'query.results.quote', []);
-    if(!_.isArray(quotes)) {
+    if (!_.isArray(quotes)) {
       quotes = [quotes];
     }
     return quotes.map((quote:any) => {
-      let change:number = parseFloat(quote.Change).toFixed(2) || 0.00;
+      let change:number = parseFloat(quote.Change) || 0.00;
       return {
         symbol: quote.symbol,
         name: quote.Name,
         price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {maximumFractionDigits: 2}),
-        change: this.getPlusSign(change) + change,
+        change: this.getPlusSign(change) + change.toFixed(2),
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
-      }
+      };
     });
   }
 
   private calculateChangePercent(change:Number, price:string):string {
-    return this.getPlusSign(change) + (change/(parseFloat(price) - change)*100).toFixed(2) + '%';
+    return this.getPlusSign(change) + (change / (parseFloat(price) - change) * 100).toFixed(2) + '%';
   }
 
   private getPlusSign(change:Number):string {

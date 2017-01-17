@@ -35,4 +35,5 @@ import { WatchlistModule } from './watchlist/watchlist.module';
 
 })
 
-export class AppModule { }
+export class AppModule {
+}

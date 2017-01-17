@@ -58,7 +58,7 @@ export class D3fcComponent {
 
     this.chart.plotArea(fc.series.multi()
       .series([gridlines, area, line, lastClose, crosshair])
-      .mapping((series) => {
+      .mapping((series:any) => {
         switch (series) {
           case lastClose:
             return [data[data.length - 1]];
@@ -72,7 +72,7 @@ export class D3fcComponent {
     this.render(data, this.container, this.chart);
   }
 
-  private render(data, container, chart) {
+  private render(data:any, container:any, chart:any) {
     container
       .datum(data)
       .call(chart);
@@ -118,14 +118,14 @@ export class D3fcComponent {
   private getArea(data:any, y0Value:number):any {
     return fc.series.area()
       .y0Value(y0Value)
-      .yValue((d) => {
+      .yValue((d:any) => {
         return d.open;
       });
   }
 
   private getLine():any {
     return fc.series.line()
-      .yValue((d) => {
+      .yValue((d:any) => {
         return d.open;
       });
   }

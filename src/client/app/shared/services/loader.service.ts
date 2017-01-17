@@ -11,25 +11,25 @@ export class LoaderService {
   data$:Observable<any[]>;
   private dataObserver:Observer<any[]>;
 
-  constructor(protected http: Http) {
+  constructor(protected http:Http) {
     this.data$ = new Observable<any[]>(
       (observer:Observer<any[]>) => this.dataObserver = observer
     );
   }
 
-  get(url:string): Observable<string[]> {
+  get(url:string):Observable<string[]> {
     return this.http.get(url)
-      .map((res: Response) => res.json())
+      .map((res:Response) => res.json())
       .catch(this.handleError);
   }
 
   changeData(data:Array<any>) {
-    if(this.dataObserver) {
+    if (this.dataObserver) {
       this.dataObserver.next(data);
     }
   }
 
-  private handleError (error: any) {
+  private handleError(error:any) {
     let errMsg:string = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(errMsg);

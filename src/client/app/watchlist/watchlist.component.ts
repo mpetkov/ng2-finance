@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['watchlist.component.css']
 })
 
-export class WatchlistComponent {}
+export class WatchlistComponent {
+}

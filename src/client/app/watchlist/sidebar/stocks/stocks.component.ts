@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { StocksApiService } from './stocks-api.service';
 import { StocksStateService } from './state/stocks-state.service';
 
@@ -16,8 +15,8 @@ export class StocksComponent {
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
 
-  constructor(private stocksApiService: StocksApiService,
-              private stocksState: StocksStateService) {
+  constructor(private stocksApiService:StocksApiService,
+              private stocksState:StocksStateService) {
     stocksApiService.data$.subscribe(
       data => this.stocks = data
     );
@@ -29,7 +28,7 @@ export class StocksComponent {
 
   changePill() {
     this.pillIndex++;
-    if(this.pillIndex > PillEnum.percentage) {
+    if (this.pillIndex > PillEnum.percentage) {
       this.pillIndex = PillEnum.change;
     }
 
