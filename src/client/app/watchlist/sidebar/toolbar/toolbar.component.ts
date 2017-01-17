@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { SidebarActions, SidebarTypeEnum, SidebarStateInterface } from '../../../shared/index';
+import { SidebarStateService, SidebarTypeEnum } from "../index";
 
 @Component({
   moduleId: module.id,
@@ -11,26 +11,24 @@ import { SidebarActions, SidebarTypeEnum, SidebarStateInterface } from '../../..
 })
 
 export class ToolbarComponent {
-  sidebarStore:Observable<SidebarStateInterface>;
   title:string;
 
-  constructor(private store:Store<any>) {
-    this.sidebarStore = store.select((store:any) => store.sidebar);
+  constructor(public sidebarState:SidebarStateService) {
     this.title = 'Stocks';
   }
 
   add() {
-    this.store.dispatch(SidebarActions.type(SidebarTypeEnum.Add));
+    this.sidebarState.changeType(SidebarTypeEnum.Add);
     this.title = 'Add';
   }
 
   edit() {
-    this.store.dispatch(SidebarActions.type(SidebarTypeEnum.Edit));
+    this.sidebarState.changeType(SidebarTypeEnum.Edit);
     this.title = 'Edit';
   }
 
   close() {
-    this.store.dispatch(SidebarActions.type(SidebarTypeEnum.List));
+    this.sidebarState.changeType(SidebarTypeEnum.List);
     this.title = 'Stocks';
   }
 }

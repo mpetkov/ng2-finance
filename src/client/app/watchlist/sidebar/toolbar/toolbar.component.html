@@ -1,13 +1,13 @@
 <h4 class="pull-left">{{title}}</h4>
 <button class="pull-right"
-        *ngIf="(sidebarStore | async).type !== 0"
+        *ngIf="(sidebarState.type$ | async) !== 0"
         mdl-button
         (click)="close()"
         mdl-button-type="icon">
   <mdl-icon>close</mdl-icon>
 </button>
 <button class="pull-right"
-        *ngIf="(sidebarStore | async).type === 0"
+        *ngIf="(sidebarState.type$ | async) === 0"
         mdl-button
         #btn1="mdlButton"
         (click)="m1.toggle($event, btn1)"

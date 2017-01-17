@@ -7,8 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
-import { sidebarReducer } from './shared/index';
-import { stockReducer, watchlistReducer } from './watchlist/index';
+import { sidebarReducer, stockReducer, watchlistReducer } from './watchlist/index';
 
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
