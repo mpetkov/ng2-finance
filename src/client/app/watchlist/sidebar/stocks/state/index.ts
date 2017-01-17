@@ -1,3 +1,3 @@
-export * from './stocks.actions';
-export * from './stocks.reducer';
-export * from './stocks.state';
+export * from './stock/index';
+export * from './watchlist/index';
+export * from './stocks-state.service';

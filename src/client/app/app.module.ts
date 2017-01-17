@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import { sidebarReducer } from './shared/index';
-import { stocksReducer } from './watchlist/index';
+import { stockReducer, watchlistReducer } from './watchlist/index';
 
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
@@ -20,7 +20,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     RouterModule.forRoot(routes),
     StoreModule.provideStore({
       sidebar: sidebarReducer,
-      stocks: stocksReducer
+      stock: stockReducer,
+      watchlist: watchlistReducer
     }),
     SharedModule,
     WatchlistModule

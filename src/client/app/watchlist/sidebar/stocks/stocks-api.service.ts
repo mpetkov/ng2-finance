@@ -7,8 +7,8 @@ import {
 } from '../../../shared/index';
 
 @Injectable()
-export class StocksService extends LoaderService {
-  constructor(http: Http) {
+export class StocksApiService extends LoaderService {
+  constructor(private http: Http) {
     super(http);
   }
 

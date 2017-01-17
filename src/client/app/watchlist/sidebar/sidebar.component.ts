@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { SidebarStateInterface } from "../../shared/index";
+import { SidebarStateInterface } from '../../shared/index';
 
 @Component({
   moduleId: module.id,
