@@ -17,10 +17,6 @@ export class StocksComponent {
 
   constructor(private stocksApiService:StocksApiService,
               private stocksState:StocksStateService) {
-    stocksApiService.data$.subscribe(
-      data => this.stocks = data
-    );
-
     stocksState.watchlist$.subscribe(
       value => stocksApiService.load(value)
     );

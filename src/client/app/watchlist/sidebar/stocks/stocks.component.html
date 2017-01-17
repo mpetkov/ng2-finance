@@ -1,5 +1,5 @@
 <ul class="mdl-navigation">
-  <li *ngFor="let stock of stocks"
+  <li *ngFor="let stock of (stocksState.stocks$ | async)"
       class="mdl-navigation__link"
       [ngClass]="{active: (stocksState.stock$ | async) === stock.symbol}"
       (click)="changeStock(stock.symbol)">
