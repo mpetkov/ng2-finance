@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { SidebarActions } from './sidebar.actions';
-import { SidebarStateInterface, SidebarInitialState } from "./sidebar.state";
+import { SidebarStateInterface, SidebarInitialState } from './sidebar.state';
 
 export const initialState:SidebarStateInterface = new SidebarInitialState() as SidebarStateInterface;
 
@@ -13,4 +13,4 @@ export const sidebarReducer: ActionReducer<SidebarStateInterface>  = (state: Sid
     default:
       return state;
   }
-}
+};

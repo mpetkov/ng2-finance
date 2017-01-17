@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { SidebarActions, SidebarTypeEnum, SidebarStateInterface } from "../../../shared/index";
+import { SidebarActions, SidebarTypeEnum, SidebarStateInterface } from '../../../shared/index';
 
 @Component({
   moduleId: module.id,
