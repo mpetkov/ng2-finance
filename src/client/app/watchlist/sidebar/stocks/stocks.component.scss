@@ -1,29 +1,5 @@
 :host {
-  .mdl-navigation {
-    padding: 0;
-    margin: 0;
-    height: calc(100% - 49px);
-    overflow: auto;
-  }
-
   .mdl-navigation__link {
-    border-bottom: 1px solid #dcdcdc;
-    height: 40px;
-    line-height: 40px;
-    padding: 8px 15px;
-    cursor: pointer;
-    color: #000;
-    position: relative;
-
-    .small {
-      font-size: 0.85rem;
-      margin-top: -6px;
-    }
-
-    .text {
-      width: 130px;
-    }
-
     .prices {
       position: absolute;
       right: 15px;

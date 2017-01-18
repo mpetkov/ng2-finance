@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   SidebarStateInterface,
   SidebarStateService,
@@ -9,6 +9,8 @@ import {
   moduleId: module.id,
   selector: 'mp-sidebar',
   templateUrl: 'sidebar.component.html',
+  styleUrls: ['sidebar.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [SidebarStateService, StocksStateService]
 })
 
