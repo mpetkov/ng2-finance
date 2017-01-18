@@ -10,6 +10,7 @@ import {
   InfoComponent,
   NewsComponent,
   SidebarComponent,
+  EditComponent,
   StocksComponent,
   ToolbarComponent
 } from './index';
@@ -28,6 +29,7 @@ import {
     InfoComponent,
     NewsComponent,
     SidebarComponent,
+    EditComponent,
     StocksComponent,
     ToolbarComponent
   ]
