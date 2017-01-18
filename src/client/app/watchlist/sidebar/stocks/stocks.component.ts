@@ -7,7 +7,7 @@ import { StocksStateService } from './state/stocks-state.service';
   selector: 'mp-stocks',
   templateUrl: 'stocks.component.html',
   styleUrls: ['stocks.component.css'],
-  providers: [StocksApiService, StocksStateService]
+  providers: [StocksApiService]
 })
 
 export class StocksComponent {

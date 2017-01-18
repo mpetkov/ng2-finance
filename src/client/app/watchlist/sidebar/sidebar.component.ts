@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { SidebarStateInterface, SidebarStateService } from "./index";
+import {
+  SidebarStateInterface,
+  SidebarStateService,
+  StocksStateService
+} from './index';
 
 @Component({
   moduleId: module.id,
   selector: 'mp-sidebar',
   templateUrl: 'sidebar.component.html',
-  providers: [SidebarStateService]
+  providers: [SidebarStateService, StocksStateService]
 })
 
 export class SidebarComponent {
