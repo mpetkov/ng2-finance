@@ -1,8 +1,14 @@
 :host {
   .mdl-navigation__link {
+    cursor: pointer;
+
     .prices {
       position: absolute;
       right: 15px;
+    }
+
+    .text {
+      width: 130px;
     }
 
     .pill {
