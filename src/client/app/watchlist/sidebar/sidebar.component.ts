@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  SidebarStateInterface,
   SidebarStateService,
   StocksStateService
 } from './index';

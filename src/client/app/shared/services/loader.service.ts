@@ -8,12 +8,12 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class LoaderService {
-  data$:Observable<any[]>;
-  private dataObserver:Observer<any[]>;
+  data$:Observable<any>;
+  private dataObserver:Observer<any>;
 
   constructor(protected http:Http) {
-    this.data$ = new Observable<any[]>(
-      (observer:Observer<any[]>) => this.dataObserver = observer
+    this.data$ = new Observable<any>(
+      (observer:Observer<any>) => this.dataObserver = observer
     );
   }
 

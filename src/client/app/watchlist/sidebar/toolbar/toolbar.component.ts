@@ -1,7 +1,5 @@
-import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { SidebarStateService, SidebarTypeEnum } from "../index";
+import { SidebarStateService, SidebarTypeEnum } from '../index';
 
 @Component({
   moduleId: module.id,

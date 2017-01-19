@@ -10,7 +10,7 @@ import { WatchlistActions } from './index';
 
 @Injectable()
 export class StocksApiService extends LoaderService {
-  constructor(private http:Http,
+  constructor(public http:Http,
               private store$:Store<any>) {
     super(http);
   }
@@ -40,11 +40,11 @@ export class StocksApiService extends LoaderService {
     });
   }
 
-  private calculateChangePercent(change:Number, price:string):string {
+  private calculateChangePercent(change:number, price:string):string {
     return this.getPlusSign(change) + (change / (parseFloat(price) - change) * 100).toFixed(2) + '%';
   }
 
-  private getPlusSign(change:Number):string {
+  private getPlusSign(change:number):string {
     return (change > 0) ? '+' : '';
   }
 }
