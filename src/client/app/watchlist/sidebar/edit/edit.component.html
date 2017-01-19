@@ -2,7 +2,7 @@
   <li *ngFor="let stock of (sidebarState.stocks$ | async)"
       class="mdl-navigation__link">
     <div class="delete"
-         (click)="delete(stock.symbol)">
+         (click)="delete(stock.symbol, $event)">
       Delete
     </div>
     <div class="tab"

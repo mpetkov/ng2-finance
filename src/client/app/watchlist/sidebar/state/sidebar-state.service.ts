@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import {
   SidebarTypeEnum,
   SidebarActions,
-  StockActions
+  StockActions,
+  WatchlistActions
 } from './index';
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/map';
@@ -31,6 +32,10 @@ export class SidebarStateService {
   changeStock(stock:any) {
     this.store$.dispatch(StockActions.changeStock(stock.symbol));
     this.store$.dispatch(StockActions.changeStockData(stock));
+  }
+
+  deleteStock(stock:string) {
+    this.store$.dispatch(WatchlistActions.deleteStock(stock));
   }
 
   private getType():any {
