@@ -14,28 +14,29 @@ export class EditComponent implements OnDestroy {
 
   constructor(public sidebarState:SidebarStateService,
               private renderer:Renderer) {
-    sidebarState.watchlist$.subscribe(
-      () => this.hideDelete()
-    );
   }
 
   showDelete(symbol:string, event:any) {
     event.stopPropagation();
     this.deleteSymbol = symbol;
-    this.windowClickListener = this.renderer.listenGlobal('window', 'click', (event:any) => {this.hideDelete();});
+    this.windowClickListener = this.renderer.listenGlobal('window', 'click',
+      (event:any) => {
+        this.deleteSymbol = null;
+        this.destroyListener();
+      });
   }
 
   delete(symbol:string, event:any) {
     event.stopPropagation();
     this.sidebarState.deleteStock(symbol);
+    this.destroyListener();
   }
 
   ngOnDestroy() {
-    this.hideDelete();
+    this.destroyListener();
   }
 
-  private hideDelete() {
-    this.deleteSymbol = null;
+  private destroyListener() {
     if(this.windowClickListener) {
       this.windowClickListener();
       this.windowClickListener = null;
