@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StocksApiService } from './stocks-api.service';
-import { StocksStateService } from './state/stocks-state.service';
+import { SidebarStateService } from '../state/index';
 
 @Component({
   moduleId: module.id,
@@ -15,9 +15,9 @@ export class StocksComponent {
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
 
-  constructor(private stocksApiService:StocksApiService,
-              private stocksState:StocksStateService) {
-    stocksState.watchlist$.subscribe(
+  constructor(public sidebarState:SidebarStateService,
+              private stocksApiService:StocksApiService) {
+    sidebarState.watchlist$.subscribe(
       value => stocksApiService.load(value)
     );
   }
@@ -32,7 +32,7 @@ export class StocksComponent {
   }
 
   changeStock(stock:any) {
-    this.stocksState.changeStock(stock);
+    this.sidebarState.changeStock(stock);
   }
 }
 

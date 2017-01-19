@@ -6,7 +6,7 @@ import {
   ConfigService,
   LoaderService
 } from '../../../shared/index';
-import { WatchlistActions } from './index';
+import { WatchlistActions } from '../index';
 
 @Injectable()
 export class StocksApiService extends LoaderService {

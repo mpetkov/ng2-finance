@@ -1,5 +1,5 @@
 <ul class="mdl-navigation">
-  <li *ngFor="let stock of (stocksState.stocks$ | async)"
+  <li *ngFor="let stock of (sidebarState.stocks$ | async)"
       class="mdl-navigation__link">
     <div class="delete"
          (click)="delete(stock.symbol)">

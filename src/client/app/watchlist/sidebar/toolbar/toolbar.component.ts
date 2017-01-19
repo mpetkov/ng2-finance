@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarStateService, SidebarTypeEnum } from '../index';
+import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 @Component({
   moduleId: module.id,

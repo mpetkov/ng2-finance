@@ -1,5 +1,5 @@
-import { Component, HostListener, Renderer, OnDestroy } from '@angular/core';
-import { StocksStateService } from '../stocks/state/stocks-state.service';
+import { Component, Renderer, OnDestroy } from '@angular/core';
+import { SidebarStateService } from '../state/index';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +12,7 @@ export class EditComponent implements OnDestroy {
   deleteSymbol:string;
   private windowClickListener: Function;
 
-  constructor(public stocksState:StocksStateService,
+  constructor(public sidebarState:SidebarStateService,
               private renderer:Renderer) {
   }
 
@@ -30,7 +30,7 @@ export class EditComponent implements OnDestroy {
     this.hideDelete();
   }
 
-  private hideDelete(){
+  private hideDelete() {
     this.deleteSymbol = null;
     if(this.windowClickListener) {
       this.windowClickListener();
