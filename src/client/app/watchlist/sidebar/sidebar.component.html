@@ -1,4 +1,5 @@
 <mp-toolbar class="mdl-card__title"></mp-toolbar>
 <span [ngSwitch]="sidebarState.type$ | async">
   <mp-stocks *ngSwitchCase="0"></mp-stocks>
+  <mp-edit *ngSwitchCase="1"></mp-edit>
 </span>
