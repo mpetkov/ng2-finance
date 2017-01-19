@@ -1,9 +1,18 @@
 <ul class="mdl-navigation">
   <li *ngFor="let stock of (stocksState.stocks$ | async)"
       class="mdl-navigation__link">
-    <div class="pull-left text">
-      <p><b>{{stock.symbol}}</b></p>
-      <p class="small truncate">{{stock.name}}</p>
+    <div class="delete"
+         (click)="delete(stock.symbol)">
+      Delete
+    </div>
+    <div class="tab"
+         [ngClass]="{active: deleteSymbol === stock.symbol}">
+      <mdl-icon class="pull-left"
+                (click)="showDelete(stock.symbol, $event)">remove_circle</mdl-icon>
+      <div class="text">
+        <p><b>{{stock.symbol}}</b></p>
+        <p class="small truncate">{{stock.name}}</p>
+      </div>
     </div>
   </li>
 </ul>
