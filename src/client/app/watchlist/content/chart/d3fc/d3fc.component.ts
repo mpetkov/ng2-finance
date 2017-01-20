@@ -1,9 +1,9 @@
-import { Component, ViewEncapsulation, ViewChild, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, HostListener, AfterViewInit } from '@angular/core';
 import { ChartVolumeService } from './services/chart-volume.service';
 import { ChartCrosshairService } from './services/chart-crosshair.service';
 import { ChartTooltipsService } from './services/chart-tooltips.service';
-import { ChartService } from '../chart.service';
 import { ChartOptionsService } from './services/chart-options.service';
+import { ChartStateService } from '../state/index';
 
 declare let fc:any;
 declare let d3:any;
@@ -22,19 +22,21 @@ declare let d3:any;
   ]
 })
 
-export class D3fcComponent {
+export class D3fcComponent implements AfterViewInit {
   @ViewChild('svg') svg:any;
   private data:any;
   private container:any;
   private chart:any;
 
-  constructor(private chartService:ChartService,
+  constructor(public chartState:ChartStateService,
               private chartOptionsService:ChartOptionsService,
               private chartCrosshairService:ChartCrosshairService,
               private chartTooltipsService:ChartTooltipsService,
               private chartVolumeService:ChartVolumeService) {
+  }
 
-    chartService.data$.subscribe(
+  ngAfterViewInit() {
+    this.chartState.data$.subscribe(
       data => this.init(data.rows)
     );
   }
@@ -45,31 +47,33 @@ export class D3fcComponent {
   }
 
   private init(data:any) {
-    this.data = data;
-    this.container = d3.select(this.svg.nativeElement);
-    this.chartVolumeService.init(data, this.container);
+    if(data) {
+      this.data = data;
+      this.container = d3.select(this.svg.nativeElement);
+      this.chartVolumeService.init(data, this.container);
 
-    this.chart = this.getChart(data);
-    let area:any = this.getArea(data, this.chart.yDomain()[0]);
-    let line:any = this.getLine();
-    let gridlines:any = this.getGridLines();
-    let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
-    let lastClose:any = this.chartTooltipsService.getLastClose();
+      this.chart = this.getChart(data);
+      let area:any = this.getArea(data, this.chart.yDomain()[0]);
+      let line:any = this.getLine();
+      let gridlines:any = this.getGridLines();
+      let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
+      let lastClose:any = this.chartTooltipsService.getLastClose();
 
-    this.chart.plotArea(fc.series.multi()
-      .series([gridlines, area, line, lastClose, crosshair])
-      .mapping((series:any) => {
-        switch (series) {
-          case lastClose:
-            return [data[data.length - 1]];
-          case crosshair:
-            return data.crosshair;
-          default:
-            return data;
-        }
-      }));
+      this.chart.plotArea(fc.series.multi()
+        .series([gridlines, area, line, lastClose, crosshair])
+        .mapping((series:any) => {
+          switch (series) {
+            case lastClose:
+              return [data[data.length - 1]];
+            case crosshair:
+              return data.crosshair;
+            default:
+              return data;
+          }
+        }));
 
-    this.render(data, this.container, this.chart);
+      this.render(data, this.container, this.chart);
+    }
   }
 
   private render(data:any, container:any, chart:any) {
@@ -78,7 +82,7 @@ export class D3fcComponent {
       .call(chart);
 
     this.chartVolumeService.render(data, chart.xScale());
-    this.chartOptionsService.updateSelectedPoint(data[data.length - 1]);
+    this.chartState.changeSelectedPoint(data[data.length - 1]);
     this.applyPostRenderChanges();
   }
 

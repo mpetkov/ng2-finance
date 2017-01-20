@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { ChartService } from './chart.service';
+import { ChartApiService } from './chart-api.service';
+import { ChartStateService } from './state/index';
 
 @Component({
   moduleId: module.id,
   selector: 'mp-chart',
   templateUrl: 'chart.component.html',
   styleUrls: ['chart.component.css'],
-  providers: [ChartService]
+  providers: [ChartApiService, ChartStateService]
 })
 
 export class ChartComponent {
-  constructor(private chartService:ChartService) {
-    chartService.load('YHOO');
+  constructor(private chartApiService:ChartApiService) {
+    chartApiService.load('YHOO');
   }
 }

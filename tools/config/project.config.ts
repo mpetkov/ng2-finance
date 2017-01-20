@@ -54,7 +54,7 @@ export class ProjectConfig extends SeedConfig {
       name: '@ngrx/core',
       path: 'node_modules/@ngrx/core/bundles/core.umd.js',
       packageMeta: {
-        main: 'core.umd.js',
+        main: 'index.js',
         defaultExtension: 'js'
       }
     });
@@ -63,7 +63,7 @@ export class ProjectConfig extends SeedConfig {
       name: '@ngrx/store',
       path: 'node_modules/@ngrx/store/bundles/store.umd.js',
       packageMeta: {
-        main: 'store.umd.js',
+        main: 'index.js',
         defaultExtension: 'js'
       }
     });
@@ -72,7 +72,7 @@ export class ProjectConfig extends SeedConfig {
       name: 'immutable',
       path: 'node_modules/immutable/dist/immutable.js',
       packageMeta: {
-        main: 'immutable/dist/immutable.js',
+        main: 'dist/immutable.js',
         defaultExtension: 'js'
       }
     });

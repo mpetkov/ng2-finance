@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import {
   LoaderService
 } from '../../../shared/index';
+import { ChartActions } from './index';
 
 @Injectable()
-export class ChartService extends LoaderService {
-  constructor(http:Http) {
+export class ChartApiService extends LoaderService {
+  constructor(public http:Http,
+              private store$:Store<any>) {
     super(http);
   }
 
   load(stock:string) {
     this.get('./assets/json/chart.json')
       .subscribe(
-        data => this.changeData(this.transform(data)),
+        data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
         error =>  console.log(error)
       );
   }

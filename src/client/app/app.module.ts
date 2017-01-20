@@ -7,7 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
-import { sidebarReducer, stockReducer, watchlistReducer } from './watchlist/index';
+import {
+  sidebarReducer,
+  stockReducer,
+  watchlistReducer,
+  chartReducer
+} from './watchlist/index';
 
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
@@ -20,7 +25,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     StoreModule.provideStore({
       sidebar: sidebarReducer,
       stock: stockReducer,
-      watchlist: watchlistReducer
+      watchlist: watchlistReducer,
+      chart: chartReducer
     }),
     SharedModule,
     WatchlistModule

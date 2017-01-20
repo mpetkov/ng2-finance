@@ -1,10 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 declare let d3:any;
 export class ChartOptionsService {
   options:any;
-  selectedPoint$:Observable<any>;
-  private selectedPointObserver:Observer<any>;
 
   constructor() {
     this.options = {
@@ -24,16 +20,6 @@ export class ChartOptionsService {
 
     this.options.calloutWidth = this.options.yAxisWidth - this.options.calloutLeftMargin;
     this.options.calloutPathData = this.getCalloutPathData(this.options.calloutWidth, this.options.calloutHeight);
-
-    this.selectedPoint$ = new Observable<any>(
-      (observer:Observer<any>) => this.selectedPointObserver = observer
-    );
-  }
-
-  updateSelectedPoint(data:any) {
-    if (this.selectedPointObserver) {
-      this.selectedPointObserver.next(data);
-    }
   }
 
   private getCalloutPathData(width:number, height:number):any[] {

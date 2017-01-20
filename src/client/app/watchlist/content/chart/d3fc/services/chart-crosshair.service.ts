@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ChartTooltipsService } from './chart-tooltips.service';
 import { ChartOptionsService } from './chart-options.service';
+import { ChartStateService } from '../../state/index';
 declare let fc:any;
 declare let d3:any;
 
 @Injectable()
 export class ChartCrosshairService {
   constructor(private chartTooltipsService:ChartTooltipsService,
-              private chartOptionsService:ChartOptionsService) {
+              private chartOptionsService:ChartOptionsService,
+              private chartState:ChartStateService) {
   }
 
   getCrosshair(data:any, line:any):any {
@@ -26,10 +28,10 @@ export class ChartCrosshairService {
         this.chartTooltipsService.addXTooltip(sel);
       })
       .on('trackingmove', (crosshairData:any) => {
-        this.chartOptionsService.updateSelectedPoint(crosshairData[0].datum);
+        this.chartState.changeSelectedPoint(crosshairData[0].datum);
       })
       .on('trackingend', () => {
-        this.chartOptionsService.updateSelectedPoint(data[data.length - 1]);
+        this.chartState.changeSelectedPoint(data[data.length - 1]);
       });
   }
 

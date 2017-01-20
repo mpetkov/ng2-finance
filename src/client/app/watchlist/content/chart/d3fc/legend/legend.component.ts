@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
 import { ChartOptionsService } from '../services/chart-options.service';
+import { ChartStateService } from '../../state/index';
 
 declare let fc:any;
 declare let d3:any;
@@ -16,6 +17,7 @@ export class LegendComponent {
   private legend:any;
 
   constructor(private chartOptionsService:ChartOptionsService,
+              private chartState:ChartStateService,
               private elementRef:ElementRef) {
     this.legend = fc.chart.legend()
       .items([
@@ -36,7 +38,7 @@ export class LegendComponent {
         }]
       ]);
 
-    this.chartOptionsService.selectedPoint$
+    this.chartState.selectedPoint$
       .subscribe(
         data => this.render(data)
       );
