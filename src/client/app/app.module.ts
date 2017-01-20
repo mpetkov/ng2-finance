@@ -11,7 +11,8 @@ import {
   sidebarReducer,
   stockReducer,
   watchlistReducer,
-  chartReducer
+  chartReducer,
+  newsReducer
 } from './watchlist/index';
 
 import { SharedModule } from './shared/shared.module';
@@ -26,7 +27,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
       sidebar: sidebarReducer,
       stock: stockReducer,
       watchlist: watchlistReducer,
-      chart: chartReducer
+      chart: chartReducer,
+      news: newsReducer
     }),
     SharedModule,
     WatchlistModule
