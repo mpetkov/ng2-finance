@@ -6,8 +6,7 @@ import { SidebarStateService } from './state/index';
   selector: 'mp-sidebar',
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [SidebarStateService]
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SidebarComponent {
