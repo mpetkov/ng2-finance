@@ -20,7 +20,8 @@ export class ProjectConfig extends SeedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      {src: 'normalize-css/normalize.css', inject: true}
+      {src: 'normalize-css/normalize.css', inject: true},
+      {src: 'moment/min/moment.min.js', inject: true}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
