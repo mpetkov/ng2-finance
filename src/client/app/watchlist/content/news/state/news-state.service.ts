@@ -14,6 +14,10 @@ export class NewsStateService {
     this.data$ = store$.let(this.getData());
   }
 
+  fetchNewsFulfilled(data:any[]) {
+    this.store$.dispatch(NewsActions.fetchNewsFulfilled(data));
+  }
+
   private getData():any {
     return (state$:any) => state$
       .map((state:any) => state.news.data)
