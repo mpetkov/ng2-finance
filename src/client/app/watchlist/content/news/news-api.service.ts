@@ -6,7 +6,7 @@ import {
   LoaderService
 } from '../../../shared/index';
 import { NewsStateService } from './state/index';
-
+declare let moment:any;
 
 @Injectable()
 export class NewsApiService extends LoaderService {
@@ -23,7 +23,23 @@ export class NewsApiService extends LoaderService {
       );
   }
 
-  private transform(rawData:any):any[] {
-    return _.get(rawData, 'query.results.item', []);
+  private transform(data:any):any[] {
+    let news:any[] = _.get(data, 'query.results.item', []);
+    return news.map((item:any) => {
+      item.pubDate = this.convertDate(item.pubDate);
+      item.title = this.convertLinks(item.title);
+
+      return item;
+    });
+  }
+
+  private convertDate(date:string):string {
+    return moment(new Date(date)).format('ddd, MMM Do YYYY h:mm A');
+  }
+
+  private convertLinks(text:string):string {
+    text = text.replace('href=', 'target="_blank" href=');
+    text = text.replace('href="/', 'href="https://finance.yahoo.com/');
+    return text;
   }
 }
