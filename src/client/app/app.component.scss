@@ -39,6 +39,11 @@ a,
   cursor: pointer;
 }
 
+a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
 .mdl-menu {
   padding: 0;
   min-width: auto;
@@ -59,7 +64,8 @@ a,
 
 .mdl-card__supporting-text {
   width: calc(100% - 32px);
-  height: calc(100% - 49px - 32px);
+  height: calc(100% - 34px - 32px);
+  color: black;
 }
 
 .mdl-cell {
