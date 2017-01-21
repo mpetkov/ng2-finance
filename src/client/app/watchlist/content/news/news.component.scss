@@ -18,6 +18,10 @@
        height: auto;
        .mdl-list__item-sub-title {
          font-size: 0.85rem;
+         .material-icons {
+           font-size: 1.15rem;
+           margin-top: 1px;
+         }
        }
      }
    }

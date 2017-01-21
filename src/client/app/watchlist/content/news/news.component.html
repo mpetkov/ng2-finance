@@ -5,10 +5,16 @@
   <ul class="mdl-list">
     <li *ngFor="let article of (newsState.data$ | async)"
         class="mdl_list__item mdl-list__item--two-line">
-       <span class="mdl-list__item-primary-content">
-         <span [innerHTML]="article.title"></span>
-         <span class="mdl-list__item-sub-title">{{article.pubDate}}</span>
+      <a [href]="article.link"
+         target="_blank">
+        <span class="mdl-list__item-primary-content">
+         <span class="mdl-color-text--black" [innerHTML]="article.title"></span>
+         <span class="mdl-list__item-sub-title">
+           {{article.pubDate}}
+           <mdl-icon class="pull-right" title="Read More">launch</mdl-icon>
+         </span>
        </span>
+      </a>
     </li>
   </ul>
 </div>

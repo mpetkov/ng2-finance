@@ -29,8 +29,7 @@ p {
 
 h4,
 p,
-b,
-span {
+b {
   font-size: 1.15rem;
 }
 
@@ -42,6 +41,7 @@ a,
 a {
   color: #2196f3;
   text-decoration: none;
+  font-weight: 400;
 }
 
 .mdl-menu {
