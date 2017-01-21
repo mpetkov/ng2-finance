@@ -1,5 +1,10 @@
 <div class="mdl-card__title">
-  <h4 class="pull-left">Edit</h4>
+  <button mdl-button
+          (click)="add()"
+          mdl-button-type="icon">
+    <mdl-icon>add</mdl-icon>
+  </button>
+  <h4>Edit</h4>
   <button class="pull-right"
           mdl-button
           (click)="close()"

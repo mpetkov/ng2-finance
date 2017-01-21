@@ -1,4 +1,12 @@
 :host {
+  .mdl-card__title {
+    h4 {
+      text-align: center;
+      width: 100%;
+      padding: 0;
+    }
+  }
+
   .mdl-navigation__link:hover {
     background: inherit;
   }

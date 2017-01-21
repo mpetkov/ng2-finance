@@ -30,6 +30,10 @@ export class EditComponent implements OnDestroy {
     this.sidebarState.changeType(SidebarTypeEnum.List);
   }
 
+  add() {
+    this.sidebarState.changeType(SidebarTypeEnum.Add);
+  }
+
   delete(symbol:string, event:any) {
     event.stopPropagation();
     this.sidebarState.deleteStock(symbol);
