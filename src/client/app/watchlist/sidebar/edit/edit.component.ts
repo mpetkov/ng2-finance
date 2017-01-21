@@ -1,5 +1,5 @@
 import { Component, Renderer, OnDestroy } from '@angular/core';
-import { SidebarStateService } from '../state/index';
+import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 @Component({
   moduleId: module.id,
@@ -24,6 +24,10 @@ export class EditComponent implements OnDestroy {
         this.deleteSymbol = null;
         this.destroyListener();
       });
+  }
+
+  close() {
+    this.sidebarState.changeType(SidebarTypeEnum.List);
   }
 
   delete(symbol:string, event:any) {

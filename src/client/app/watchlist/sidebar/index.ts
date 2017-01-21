@@ -1,5 +1,5 @@
+export * from './add/index';
 export * from './edit/index';
 export * from './state/index';
 export * from './stocks/index';
-export * from './toolbar/index';
 export * from './sidebar.component';

@@ -56,7 +56,8 @@ a {
 
 .mdl-card__title {
   padding: 8px 15px;
-
+  border-bottom: 1px solid #dcdcdc;
+  display: flex;
   h4 {
     line-height: 1.1;
   }

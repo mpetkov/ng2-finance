@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StocksApiService } from './stocks-api.service';
-import { SidebarStateService } from '../state/index';
+import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 @Component({
   moduleId: module.id,
@@ -20,6 +20,14 @@ export class StocksComponent {
     sidebarState.watchlist$.subscribe(
       value => stocksApiService.load(value)
     );
+  }
+
+  add() {
+    this.sidebarState.changeType(SidebarTypeEnum.Add);
+  }
+
+  edit() {
+    this.sidebarState.changeType(SidebarTypeEnum.Edit);
   }
 
   changePill() {

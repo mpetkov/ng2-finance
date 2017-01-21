@@ -1,3 +1,12 @@
+<div class="mdl-card__title">
+  <h4 class="pull-left">Edit</h4>
+  <button class="pull-right"
+          mdl-button
+          (click)="close()"
+          mdl-button-type="icon">
+    <mdl-icon>close</mdl-icon>
+  </button>
+</div>
 <ul class="mdl-navigation">
   <li *ngFor="let stock of (sidebarState.stocks$ | async)"
       class="mdl-navigation__link">

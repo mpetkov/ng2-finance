@@ -11,8 +11,7 @@ import {
   NewsComponent,
   SidebarComponent,
   EditComponent,
-  StocksComponent,
-  ToolbarComponent
+  StocksComponent
 } from './index';
 
 @NgModule({
@@ -30,8 +29,7 @@ import {
     NewsComponent,
     SidebarComponent,
     EditComponent,
-    StocksComponent,
-    ToolbarComponent
+    StocksComponent
   ]
 })
 export class WatchlistModule {
