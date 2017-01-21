@@ -22,7 +22,6 @@ export class SearchBoxComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.input);
     this.input.nativeElement.focus();
   }
 
