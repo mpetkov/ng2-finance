@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
-import { HeaderComponent } from './header/index';
-import { NavbarComponent } from './navbar/index';
+import { HeaderComponent, NavbarComponent, SearchBoxComponent } from './index';
 
 @NgModule({
   imports: [
-    MdlModule
+    MdlModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   declarations: [
     HeaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchBoxComponent
   ],
   exports: [
     HeaderComponent,
     NavbarComponent,
-    MdlModule
+    SearchBoxComponent,
+    MdlModule,
+    CommonModule
   ]
 })
 

@@ -1,0 +1,26 @@
+:host {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 6px;
+  position: relative;
+  .mdl-textfield__input {
+    border: none;
+    width: calc(100% - 30px);
+    padding: 3px;
+    font-size: 1rem;
+    line-height: 18px;
+  }
+
+  .mp-clear {
+    position: absolute;
+    right: 6px;
+    line-height: 24px;
+    font-size: 1rem;
+    color: #666;
+    display: none;
+  }
+
+  .mp-clear.active {
+    display: block;
+  }
+}

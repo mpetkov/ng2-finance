@@ -1,0 +1,9 @@
+<mdl-icon class="pull-left">search</mdl-icon>
+<input #input
+       type="text"
+       class="mdl-textfield__input pull-right"
+       placeholder="Search..."
+       [formControl]="formControl">
+<mdl-icon class="mp-clear"
+          [ngClass]="{active: formControl.value}"
+          (click)="clear()">cancel</mdl-icon>
