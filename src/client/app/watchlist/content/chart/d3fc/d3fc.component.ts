@@ -43,7 +43,9 @@ export class D3fcComponent implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(e:any) {
-    this.render(this.data, this.container, this.chart);
+    if (this.data) {
+      this.render(this.data, this.container, this.chart);
+    }
   }
 
   private init(data:any) {

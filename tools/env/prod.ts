@@ -5,7 +5,7 @@ const yqlUrl:string = 'https://query.yahooapis.com/v1/public/yql';
 const ProdConfig: ConfigInterface = {
   env: 'PROD',
   paths: {
-    charts: 'https://query1.finance.yahoo.com/v7/finance/chart/YHOO?period2=1482851933&period1=1356707933&interval=1d' +
+    charts: 'https://query1.finance.yahoo.com/v7/finance/chart/$stock?period2=1482851933&period1=1356707933&interval=1d' +
     '&indicators=quote&includeTimestamps=true&includePrePost=true&events=div%7Csplit%7Cearn&corsDomain=finance.yahoo.com',
     news: yqlUrl +
     '?q=select%20*%20from%20rss%20where%20url%3D%27http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2Fheadline%3Fs%3Dyhoo%27' +

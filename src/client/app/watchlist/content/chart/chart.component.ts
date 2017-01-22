@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartApiService } from './chart-api.service';
 import { ChartStateService } from './state/index';
+import { SidebarStateService } from '../../sidebar/state/index';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,10 @@ import { ChartStateService } from './state/index';
 })
 
 export class ChartComponent {
-  constructor(private chartApiService:ChartApiService) {
-    chartApiService.load('YHOO');
+  constructor(private chartApiService:ChartApiService,
+              private sidebarState:SidebarStateService) {
+    sidebarState.stock$.subscribe(
+      value => chartApiService.load(value)
+    );
   }
 }
