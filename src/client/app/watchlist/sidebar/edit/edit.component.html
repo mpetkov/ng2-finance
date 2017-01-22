@@ -14,13 +14,14 @@
 </div>
 <ul class="mdl-navigation">
   <li *ngFor="let stock of (sidebarState.stocks$ | async)"
-      class="mdl-navigation__link">
+      class="mdl-navigation__link slide-fade"
+      [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete"
          (click)="delete(stock.symbol, $event)">
       Delete
     </div>
     <div class="tab"
-         [ngClass]="{active: deleteSymbol === stock.symbol}">
+         [ngClass]="{active: selected === stock.symbol}">
       <mdl-icon class="pull-left"
                 (click)="showDelete(stock.symbol, $event)">remove_circle</mdl-icon>
       <div class="text">

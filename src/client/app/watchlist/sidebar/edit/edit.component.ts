@@ -9,7 +9,8 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 })
 
 export class EditComponent implements OnDestroy {
-  deleteSymbol:string;
+  selected:string;
+  deleted:string[] = [];
   private windowClickListener: Function;
 
   constructor(public sidebarState:SidebarStateService,
@@ -18,25 +19,27 @@ export class EditComponent implements OnDestroy {
 
   showDelete(symbol:string, event:any) {
     event.stopPropagation();
-    this.deleteSymbol = symbol;
+    this.selected = symbol;
     this.windowClickListener = this.renderer.listenGlobal('window', 'click',
       (event:any) => {
-        this.deleteSymbol = null;
+        this.selected = null;
         this.destroyListener();
       });
   }
 
   close() {
+    this.sidebarState.deleteStocks(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.List);
   }
 
   add() {
+    this.sidebarState.deleteStocks(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.Add);
   }
 
   delete(symbol:string, event:any) {
     event.stopPropagation();
-    this.sidebarState.deleteStock(symbol);
+    this.deleted.push(symbol);
     this.destroyListener();
   }
 

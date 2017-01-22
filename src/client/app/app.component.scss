@@ -101,3 +101,14 @@ input {
     background: #f3f9fe;
   }
 }
+
+.slide-fade {
+  transition: all 0.3s;
+}
+
+.slide-fade.hide {
+  opacity: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}

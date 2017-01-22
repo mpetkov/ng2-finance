@@ -36,8 +36,8 @@ export class SidebarStateService {
     this.store$.dispatch(StockActions.changeStockData(stock));
   }
 
-  deleteStock(stock:string) {
-    this.store$.dispatch(WatchlistActions.deleteStock(stock));
+  deleteStocks(stocks:string[]) {
+    this.store$.dispatch(WatchlistActions.deleteStocks(stocks));
   }
 
   addStock(stock:string) {
