@@ -13,6 +13,8 @@ export const watchlistReducer:ActionReducer<WatchlistStateInterface> =
       return state.set('search', action.payload);
     case WatchlistActions.DELETE_STOCK:
       return state.set('symbols', state.symbols.filter((symbol:string) => symbol !== action.payload));
+    case WatchlistActions.ADD_STOCK:
+      return state.set('symbols', [action.payload, ...state.symbols]);
     default:
       return state;
   }

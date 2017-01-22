@@ -40,6 +40,10 @@ export class SidebarStateService {
     this.store$.dispatch(WatchlistActions.deleteStock(stock));
   }
 
+  addStock(stock:string) {
+    this.store$.dispatch(WatchlistActions.addStock(stock));
+  }
+
   fetchStocksSearchFulfilled(data:any[]) {
     this.store$.dispatch(WatchlistActions.fetchStocksSearchFulfilled(data));
   }
