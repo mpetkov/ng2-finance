@@ -2,32 +2,7 @@
   .mdl-card__supporting-text {
     padding: 0;
     width: 100%;
-    height: calc(100% - 34px);
+    height: calc(100% - 38px);
     overflow: auto;
   }
-
- .mdl-list {
-   padding: 0;
-   margin: 0;
-   .mdl-list__item--two-line {
-     border-bottom: 1px solid #dcdcdc;
-     padding: 8px 15px;
-     height: auto;
-     cursor: pointer;
-     .mdl-list__item-primary-content {
-       height: auto;
-       .mdl-list__item-sub-title {
-         font-size: 0.85rem;
-         .material-icons {
-           font-size: 1.15rem;
-           margin-top: 1px;
-         }
-       }
-     }
-   }
-
-   .mdl-list__item--two-line:hover {
-     background: #f3f9fe;
-   }
- }
 }
