@@ -17,12 +17,14 @@ export class SidebarStateService {
   watchlist$:Observable<string[]>;
   stock$:Observable<string>;
   stocks$:Observable<any[]>;
+  search$:Observable<any[]>;
 
   constructor(private store$:Store<any>) {
     this.type$ = store$.let(this.getType());
     this.watchlist$ = store$.let(this.getWatchlist());
     this.stock$ = store$.let(this.getStock());
     this.stocks$ = store$.let(this.getStocks());
+    this.search$ = store$.let(this.getSearch());
   }
 
   changeType(type:SidebarTypeEnum) {
@@ -36,6 +38,10 @@ export class SidebarStateService {
 
   deleteStock(stock:string) {
     this.store$.dispatch(WatchlistActions.deleteStock(stock));
+  }
+
+  fetchStocksSearchFulfilled(data:any[]) {
+    this.store$.dispatch(WatchlistActions.fetchStocksSearchFulfilled(data));
   }
 
   private getType():any {
@@ -59,6 +65,12 @@ export class SidebarStateService {
   private getStocks():any {
     return (state$:any) => state$
       .map((state:any) => state.watchlist.data)
+      .distinctUntilChanged();
+  }
+
+  private getSearch():any {
+    return (state$:any) => state$
+      .map((state:any) => state.watchlist.search)
       .distinctUntilChanged();
   }
 }

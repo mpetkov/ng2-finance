@@ -9,6 +9,8 @@ export const watchlistReducer:ActionReducer<WatchlistStateInterface> =
   switch (action.type) {
     case WatchlistActions.FETCH_STOCKS_FULFILLED:
       return state.set('data', action.payload);
+    case WatchlistActions.FETCH_STOCKS_SEARCH_FULFILLED:
+      return state.set('search', action.payload);
     case WatchlistActions.DELETE_STOCK:
       return state.set('symbols', state.symbols.filter((symbol:string) => symbol !== action.payload));
     default:
