@@ -1,8 +1,6 @@
-import { EnvConfig } from './env-config.interface';
+import { ConfigInterface } from './config.interface';
 
-const BaseConfig: EnvConfig = {
-  // Sample API url
-  API: 'https://demo.com'
+const BaseConfig: ConfigInterface = {
 };
 
 export = BaseConfig;

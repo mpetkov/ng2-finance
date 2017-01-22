@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import {
+  Config,
   LoaderService
 } from '../../../shared/index';
 import { ChartActions } from './index';
@@ -15,11 +16,19 @@ export class ChartApiService extends LoaderService {
   }
 
   load(stock:string) {
-    this.get('./assets/json/chart.json')
-      .subscribe(
-        data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
-        error =>  console.log(error)
-      );
+    if(Config.env === 'PROD') {
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.charts.replace('$stock', encodeURIComponent(stock))))
+        .subscribe(
+          data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
+          error =>  console.log(error)
+        );
+    } else {
+      this.get(Config.paths.charts)
+        .subscribe(
+          data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
+          error =>  console.log(error)
+        );
+    }
   }
 
   private transform(rawData:any):any {

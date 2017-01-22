@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import {
-  ConfigService,
+  Config,
   LoaderService
 } from '../../../shared/index';
 import { WatchlistActions } from '../index';
@@ -16,7 +16,7 @@ export class StocksApiService extends LoaderService {
   }
 
   load(stocks:string[]) {
-    this.get(ConfigService.queries().quotes.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
+    this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
         data => this.store$.dispatch(WatchlistActions.fetchStocksFulfilled(this.transform(data))),
         error =>  console.log(error)
@@ -24,11 +24,11 @@ export class StocksApiService extends LoaderService {
   }
 
   private transform(data:any) {
-    let quotes:any = _.get(data, 'query.results.quote', []);
-    if (!_.isArray(quotes)) {
-      quotes = [quotes];
+    let stocks:any = _.get(data, 'query.results.quote', []);
+    if (!_.isArray(stocks)) {
+      stocks = [stocks];
     }
-    return quotes.map((quote:any) => {
+    return stocks.map((quote:any) => {
       let change:number = parseFloat(quote.Change) || 0.00;
       return {
         symbol: quote.symbol,
