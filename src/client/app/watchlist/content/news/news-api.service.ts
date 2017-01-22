@@ -16,7 +16,7 @@ export class NewsApiService extends LoaderService {
   }
 
   load(stock:string) {
-    this.get(Config.paths.news)
+    this.get(Config.paths.news.replace('$stock', encodeURIComponent(stock)))
       .subscribe(
         data => this.newsState.fetchNewsFulfilled(this.transform(data)),
         error =>  console.log(error)

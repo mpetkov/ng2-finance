@@ -8,7 +8,7 @@ const ProdConfig: ConfigInterface = {
     charts: 'https://query1.finance.yahoo.com/v7/finance/chart/$stock?period2=1482851933&period1=1356707933&interval=1d' +
     '&indicators=quote&includeTimestamps=true&includePrePost=true&events=div%7Csplit%7Cearn&corsDomain=finance.yahoo.com',
     news: yqlUrl +
-    '?q=select%20*%20from%20rss%20where%20url%3D%27http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2Fheadline%3Fs%3Dyhoo%27' +
+    '?q=select%20*%20from%20rss%20where%20url%3D%27http%3A%2F%2Ffeeds.finance.yahoo.com%2Frss%2Fheadline%3Fs%3D$stock%27' +
     '&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=',
     proxy: 'http://www.marinpetkov.com/proxy.php',
     search: 'https://finance.yahoo.com/_finance_doubledown/api/resource/searchassist;gossipConfig=%7B%22isJSONP%22%3A' +
