@@ -33,7 +33,10 @@ export class StocksApiService extends LoaderService {
       return {
         symbol: quote.symbol,
         name: quote.Name,
-        price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {maximumFractionDigits: 2}),
+        price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2
+        }),
         change: this.getPlusSign(change) + change.toFixed(2),
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       };
