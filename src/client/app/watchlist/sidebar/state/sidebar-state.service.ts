@@ -48,6 +48,11 @@ export class SidebarStateService {
     this.store$.dispatch(WatchlistActions.fetchStocksSearchFulfilled(data));
   }
 
+  fetchStocksFulfilled(data:any[]) {
+    this.store$.dispatch(WatchlistActions.fetchStocksSearchFulfilled(data));
+    this.store$.dispatch(WatchlistActions.fetchStocksFulfilled(data));
+  }
+
   private getType():any {
     return (state$:any) => state$
       .map((state:any) => state.sidebar.type)

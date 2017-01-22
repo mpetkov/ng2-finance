@@ -20,6 +20,10 @@ export class ChartStateService {
     this.store$.dispatch(ChartActions.changeSelectedPoint(selectedPoint));
   }
 
+  fetchChartFulfilled(data:any[]) {
+    this.store$.dispatch(ChartActions.fetchChartFulfilled(data));
+  }
+
   private getData():any {
     return (state$:any) => state$
       .map((state:any) => state.chart.data)

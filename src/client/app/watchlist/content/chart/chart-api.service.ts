@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import {
   Config,
   LoaderService
 } from '../../../shared/index';
-import { ChartActions } from './index';
+import { ChartStateService } from './state/index';
 
 @Injectable()
 export class ChartApiService extends LoaderService {
   constructor(public http:Http,
-              private store$:Store<any>) {
+              private chartState:ChartStateService) {
     super(http);
   }
 
@@ -19,13 +18,13 @@ export class ChartApiService extends LoaderService {
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.charts.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
+          data => this.chartState.fetchChartFulfilled(this.transform(data)),
           error =>  console.log(error)
         );
     } else {
       this.get(Config.paths.charts)
         .subscribe(
-          data => this.store$.dispatch(ChartActions.fetchChartFulfilled(this.transform(data))),
+          data => this.chartState.fetchChartFulfilled(this.transform(data)),
           error =>  console.log(error)
         );
     }

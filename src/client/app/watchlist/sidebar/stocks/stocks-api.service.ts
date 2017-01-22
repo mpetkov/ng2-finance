@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import {
   Config,
   LoaderService
 } from '../../../shared/index';
-import { WatchlistActions } from '../index';
+import { SidebarStateService } from '../state/index';
 
 @Injectable()
 export class StocksApiService extends LoaderService {
   constructor(public http:Http,
-              private store$:Store<any>) {
+              private sidebarState:SidebarStateService) {
     super(http);
   }
 
   load(stocks:string[]) {
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
-        data => this.store$.dispatch(WatchlistActions.fetchStocksFulfilled(this.transform(data))),
+        data => this.sidebarState.fetchStocksFulfilled(this.transform(data)),
         error =>  console.log(error)
       );
   }
