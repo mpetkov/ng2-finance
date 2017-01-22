@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
-import { FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/debounceTime';
 export class SearchBoxComponent implements OnChanges, AfterViewInit {
   @Input() value:string;
   @Output() changed:EventEmitter<string> = new EventEmitter();
-  @ViewChild('input') input;
+  @ViewChild('input') input:any;
   formControl:FormControl = new FormControl();
 
   constructor() {
