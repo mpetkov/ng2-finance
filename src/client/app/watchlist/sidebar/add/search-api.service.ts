@@ -9,9 +9,13 @@ import { SidebarStateService } from '../state/index';
 
 @Injectable()
 export class SearchApiService extends LoaderService {
+  private watchlist:string[] = [];
   constructor(public http:Http,
               private sidebarState:SidebarStateService) {
     super(http);
+    this.sidebarState.watchlist$.subscribe(
+      data => this.watchlist = data
+    );
   }
 
   load(stock:string) {
@@ -31,6 +35,8 @@ export class SearchApiService extends LoaderService {
   }
 
   private transform(data:any):any[] {
-    return _.get(data, 'data.items', []);
+    return _.get(data, 'data.items', []).filter((item:any) => {
+      return this.watchlist.indexOf(item.symbol) === -1;
+    });
   }
 }
