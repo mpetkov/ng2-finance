@@ -8,7 +8,7 @@ import {
 import { SidebarStateService } from '../state/index';
 
 @Injectable()
-export class StocksApiService extends LoaderService {
+export class FavoritesApiService extends LoaderService {
   constructor(public http:Http,
               private sidebarState:SidebarStateService) {
     super(http);
@@ -17,9 +17,13 @@ export class StocksApiService extends LoaderService {
   load(stocks:string[]) {
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
-        data => this.sidebarState.fetchStocksFulfilled(this.transform(data)),
+        data => this.complete(data),
         error =>  console.log(error)
       );
+  }
+
+  private complete(data:any) {
+    this.sidebarState.fetchFavoritesFulfilled(this.transform(data));
   }
 
   private transform(data:any) {

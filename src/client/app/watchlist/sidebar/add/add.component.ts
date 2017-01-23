@@ -20,7 +20,7 @@ export class AddComponent {
   }
 
   add(stock:any) {
-    this.sidebarState.addStock(stock.symbol);
+    this.sidebarState.addFavorite(stock.symbol);
     this.sidebarState.changeType(SidebarTypeEnum.List);
     this.sidebarState.changeStock(stock);
   }

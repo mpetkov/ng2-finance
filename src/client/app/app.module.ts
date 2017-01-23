@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 import {
   sidebarReducer,
   stockReducer,
-  watchlistReducer,
+  favoritesReducer,
   chartReducer,
   newsReducer
 } from './watchlist/index';
@@ -26,7 +26,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     StoreModule.provideStore({
       sidebar: sidebarReducer,
       stock: stockReducer,
-      watchlist: watchlistReducer,
+      favorites: favoritesReducer,
       chart: chartReducer,
       news: newsReducer
     }),

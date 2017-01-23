@@ -28,12 +28,12 @@ export class EditComponent implements OnDestroy {
   }
 
   close() {
-    this.sidebarState.deleteStocks(this.deleted);
+    this.sidebarState.deleteFavorites(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.List);
   }
 
   add() {
-    this.sidebarState.deleteStocks(this.deleted);
+    this.sidebarState.deleteFavorites(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.Add);
   }
 

@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import { StocksApiService } from './stocks-api.service';
+import { FavoritesApiService } from './favorites-api.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 @Component({
   moduleId: module.id,
-  selector: 'mp-stocks',
-  templateUrl: 'stocks.component.html',
-  styleUrls: ['stocks.component.css'],
-  providers: [StocksApiService]
+  selector: 'mp-favorites',
+  templateUrl: 'favorites.component.html',
+  styleUrls: ['favorites.component.css'],
+  providers: [FavoritesApiService]
 })
 
-export class StocksComponent {
-  stocks:any[] = [];
+export class FavoritesComponent {
+  favorites:any[] = [];
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
 
   constructor(public sidebarState:SidebarStateService,
-              private stocksApiService:StocksApiService) {
-    sidebarState.watchlist$.subscribe(
-      value => stocksApiService.load(value)
+              private favoritesApiService:FavoritesApiService) {
+    sidebarState.favorites$.subscribe(
+      value => favoritesApiService.load(value)
     );
   }
 

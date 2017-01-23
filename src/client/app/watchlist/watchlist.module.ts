@@ -11,7 +11,7 @@ import {
   SidebarComponent,
   AddComponent,
   EditComponent,
-  StocksComponent
+  FavoritesComponent
 } from './index';
 
 @NgModule({
@@ -29,7 +29,7 @@ import {
     SidebarComponent,
     AddComponent,
     EditComponent,
-    StocksComponent
+    FavoritesComponent
   ]
 })
 export class WatchlistModule {
