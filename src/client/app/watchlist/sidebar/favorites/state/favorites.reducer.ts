@@ -7,15 +7,13 @@ const initialState:FavoritesStateInterface = new FavoritesInitialState() as Favo
 export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
   (state:FavoritesStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
-    case FavoritesActions.FETCH_FAVORITES_FULFILLED:
+    case FavoritesActions.FETCH_FULFILLED:
       return state.set('data', action.payload);
-    case FavoritesActions.FETCH_FAVORITES_SEARCH_FULFILLED:
-      return state.set('search', action.payload);
-    case FavoritesActions.DELETE_FAVORITES:
+    case FavoritesActions.DELETE:
       return state.set('symbols', state.symbols.filter(
         (symbol:string) => action.payload.indexOf(symbol) === -1)
       );
-    case FavoritesActions.ADD_FAVORITE:
+    case FavoritesActions.ADD:
       return state.set('symbols', [action.payload, ...state.symbols]);
     default:
       return state;

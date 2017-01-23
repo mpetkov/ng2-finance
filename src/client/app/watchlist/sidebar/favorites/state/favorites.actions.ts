@@ -1,35 +1,27 @@
 import { Action } from '@ngrx/store';
 
 export class FavoritesActions {
-  static FETCH_FAVORITES_FULFILLED = 'WATCHLIST:FETCH_FAVORITES_FULFILLED';
-  static FETCH_FAVORITES_SEARCH_FULFILLED = 'WATCHLIST:FETCH_FAVORITES_SEARCH_FULFILLED';
-  static DELETE_FAVORITES = 'WATCHLIST:DELETE_FAVORITES';
-  static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
+  static FETCH_FULFILLED = 'WATCHLIST:FAVORITES:FETCH_FULFILLED';
+  static DELETE = 'WATCHLIST:FAVORITES:DELETE';
+  static ADD = 'WATCHLIST:FAVORITES:ADD';
 
-  static fetchFavoritesFulfilled(payload:any):Action {
+  static fetchFulfilled(payload:any):Action {
     return {
-      type: this.FETCH_FAVORITES_FULFILLED,
+      type: this.FETCH_FULFILLED,
       payload: payload
     };
   }
 
-  static fetchFavoritesSearchFulfilled(payload:any):Action {
+  static delete(payload:string[]):Action {
     return {
-      type: this.FETCH_FAVORITES_SEARCH_FULFILLED,
+      type: this.DELETE,
       payload: payload
     };
   }
 
-  static deleteFavorites(payload:string[]):Action {
+  static add(payload:string):Action {
     return {
-      type: this.DELETE_FAVORITES,
-      payload: payload
-    };
-  }
-
-  static addFavorite(payload:string):Action {
-    return {
-      type: this.ADD_FAVORITE,
+      type: this.ADD,
       payload: payload
     };
   }
