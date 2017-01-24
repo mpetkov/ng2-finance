@@ -13,7 +13,7 @@
   </button>
 </div>
 <ul class="mdl-navigation">
-  <li *ngFor="let stock of (sidebarState.stocks$ | async)"
+  <li *ngFor="let stock of (favoritesState.data$ | async)"
       class="mdl-navigation__link slide-fade"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete"

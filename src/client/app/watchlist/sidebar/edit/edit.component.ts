@@ -1,5 +1,6 @@
 import { Component, Renderer, OnDestroy } from '@angular/core';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
+import { FavoritesStateService } from '../favorites/state/index';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,8 @@ export class EditComponent implements OnDestroy {
   deleted:string[] = [];
   private windowClickListener: Function;
 
-  constructor(public sidebarState:SidebarStateService,
+  constructor(public favoritesState:FavoritesStateService,
+              private sidebarState:SidebarStateService,
               private renderer:Renderer) {
   }
 
@@ -28,12 +30,12 @@ export class EditComponent implements OnDestroy {
   }
 
   close() {
-    this.sidebarState.deleteFavorites(this.deleted);
+    this.favoritesState.delete(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.List);
   }
 
   add() {
-    this.sidebarState.deleteFavorites(this.deleted);
+    this.favoritesState.delete(this.deleted);
     this.sidebarState.changeType(SidebarTypeEnum.Add);
   }
 

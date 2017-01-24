@@ -7,16 +7,15 @@ import {
   D3fcComponent,
   LegendComponent,
   InfoComponent,
-  NewsComponent,
-  SidebarComponent,
-  AddComponent,
-  EditComponent,
-  FavoritesComponent
+  NewsComponent
 } from './index';
+
+import { SidebarModule } from './sidebar/sidebar.module';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    SidebarModule
   ],
   declarations: [
     WatchlistComponent,
@@ -25,11 +24,7 @@ import {
     D3fcComponent,
     LegendComponent,
     InfoComponent,
-    NewsComponent,
-    SidebarComponent,
-    AddComponent,
-    EditComponent,
-    FavoritesComponent
+    NewsComponent
   ]
 })
 export class WatchlistModule {

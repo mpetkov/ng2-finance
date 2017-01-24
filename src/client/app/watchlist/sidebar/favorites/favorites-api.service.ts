@@ -5,12 +5,12 @@ import {
   Config,
   LoaderService
 } from '../../../shared/index';
-import { SidebarStateService } from '../state/index';
+import { FavoritesStateService } from './state/index';
 
 @Injectable()
 export class FavoritesApiService extends LoaderService {
   constructor(public http:Http,
-              private sidebarState:SidebarStateService) {
+              private favoritesState:FavoritesStateService) {
     super(http);
   }
 
@@ -23,7 +23,7 @@ export class FavoritesApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.sidebarState.fetchFavoritesFulfilled(this.transform(data));
+    this.favoritesState.fetchFulfilled(this.transform(data));
   }
 
   private transform(data:any) {

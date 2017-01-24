@@ -5,16 +5,18 @@ import {
   Config,
   LoaderService
 } from '../../../shared/index';
-import { SidebarStateService } from '../state/index';
+import { FavoritesStateService } from '../favorites/state/index';
+import { SearchStateService } from './state/index';
 
 @Injectable()
 export class SearchApiService extends LoaderService {
   private favorites:string[] = [];
   constructor(public http:Http,
-              private sidebarState:SidebarStateService) {
+              private favoritesState:FavoritesStateService,
+              private searchState:SearchStateService) {
     super(http);
-    this.sidebarState.favorites$.subscribe(
-      data => this.favorites = data
+    this.favoritesState.symbols$.subscribe(
+      symbols => this.favorites = symbols
     );
   }
 
@@ -22,13 +24,13 @@ export class SearchApiService extends LoaderService {
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.search.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.sidebarState.fetchFavoritesSearchFulfilled(this.transform(data)),
+          data => this.searchState.fetchFulfilled(this.transform(data)),
           error =>  console.log(error)
         );
     } else {
       this.get(Config.paths.search)
         .subscribe(
-          data => this.sidebarState.fetchFavoritesSearchFulfilled(this.transform(data)),
+          data => this.searchState.fetchFulfilled(this.transform(data)),
           error =>  console.log(error)
         );
     }

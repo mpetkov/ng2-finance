@@ -8,10 +8,12 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
 export class FavoritesStateService {
-  favorites$:Observable<string[]>;
+  symbols$:Observable<string[]>;
+  data$:Observable<any[]>;
 
   constructor(private store$:Store<any>) {
-    this.favorites$ = store$.let(this.getFavorites());
+    this.symbols$ = store$.let(this.getSymbols());
+    this.data$ = store$.let(this.getData());
   }
 
   fetchFulfilled(data:any[]) {
@@ -26,9 +28,15 @@ export class FavoritesStateService {
     this.store$.dispatch(FavoritesActions.add(symbol));
   }
 
-  private getFavorites():any {
+  private getSymbols():any {
     return (state$:any) => state$
       .map((state:any) => state.favorites.symbols)
+      .distinctUntilChanged();
+  }
+
+  private getData():any {
+    return (state$:any) => state$
+      .map((state:any) => state.favorites.data)
       .distinctUntilChanged();
   }
 }

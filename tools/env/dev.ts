@@ -1,7 +1,5 @@
 import { ConfigInterface } from './config.interface';
 
-const yqlUrl:string = 'https://query.yahooapis.com/v1/public/yql';
-
 const DevConfig: ConfigInterface = {
   env: 'DEV',
   paths: {

@@ -9,7 +9,7 @@
   </button>
 </div>
 <ul class="mdl-list mdl-navigation">
-  <li *ngFor="let stock of (sidebarState.search$ | async)"
+  <li *ngFor="let stock of (searchState.data$ | async)"
       class="mdl_list__item mdl-list__item--two-line"
       (click)="add(stock)">
       <span class="mdl-list__item-primary-content">

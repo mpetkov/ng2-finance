@@ -8,12 +8,17 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 import {
-  sidebarReducer,
   stockReducer,
-  favoritesReducer,
   chartReducer,
   newsReducer
 } from './watchlist/index';
+
+
+import {
+  favoritesReducer,
+  searchReducer,
+  sidebarReducer
+} from './watchlist/sidebar/index';
 
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
@@ -24,9 +29,10 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     HttpModule,
     RouterModule.forRoot(routes),
     StoreModule.provideStore({
-      sidebar: sidebarReducer,
       stock: stockReducer,
       favorites: favoritesReducer,
+      sidebar: sidebarReducer,
+      search: searchReducer,
       chart: chartReducer,
       news: newsReducer
     }),

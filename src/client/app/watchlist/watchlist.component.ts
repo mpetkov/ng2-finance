@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { SidebarStateService } from './sidebar/state/index';
+import { WatchlistStateService } from './state/watchlist-state.service';
 
 @Component({
   moduleId: module.id,
   selector: 'mp-watchlist',
   templateUrl: 'watchlist.component.html',
   styleUrls: ['watchlist.component.css'],
-  providers: [SidebarStateService]
+  providers: [WatchlistStateService]
 })
 
 export class WatchlistComponent {

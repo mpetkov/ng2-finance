@@ -13,10 +13,10 @@
   </mdl-menu>
 </div>
 <ul class="mdl-navigation">
-  <li *ngFor="let stock of (sidebarState.stocks$ | async)"
+  <li *ngFor="let stock of (favoritesState.data$ | async)"
       class="mdl-navigation__link"
-      [ngClass]="{active: (sidebarState.stock$ | async) === stock.symbol}"
-      (click)="changeStock(stock)">
+      [ngClass]="{active: (watchlistState.stockSymbol$ | async) === stock.symbol}"
+      (click)="select(stock)">
     <div class="pull-left text">
       <p><b>{{stock.symbol}}</b></p>
       <p class="small truncate">{{stock.name}}</p>
@@ -26,7 +26,7 @@
       <b class="pull-left">{{stock.price}}</b>
       <div class="pill pull-left"
            [ngClass]="{green: stock.change >= 0}"
-           (click)="changePill()">
+           (click)="togglePill()">
         {{stock[pillType]}}
       </div>
     </div>

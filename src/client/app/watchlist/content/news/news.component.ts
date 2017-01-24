@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NewsApiService } from './news-api.service';
 import { NewsStateService } from './state/index';
-import { SidebarStateService } from '../../sidebar/state/index';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
 
 @Component({
   moduleId: module.id,
@@ -13,10 +13,10 @@ import { SidebarStateService } from '../../sidebar/state/index';
 
 export class NewsComponent {
   constructor(public newsState:NewsStateService,
-              private sidebarState:SidebarStateService,
+              private watchlistState:WatchlistStateService,
               private newsApiService:NewsApiService) {
-    sidebarState.stock$.subscribe(
-      stock => newsApiService.load(stock)
+    watchlistState.stockSymbol$.subscribe(
+      symbol => newsApiService.load(symbol)
     );
   }
 }

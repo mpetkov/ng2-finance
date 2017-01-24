@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FavoritesApiService } from './favorites-api.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 @Component({
@@ -15,10 +17,12 @@ export class FavoritesComponent {
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
 
-  constructor(public sidebarState:SidebarStateService,
-              private favoritesApiService:FavoritesApiService) {
-    sidebarState.favorites$.subscribe(
-      value => favoritesApiService.load(value)
+  constructor(public watchlistState:WatchlistStateService,
+              public favoritesState:FavoritesStateService,
+              private favoritesApiService:FavoritesApiService,
+              private sidebarState:SidebarStateService) {
+    favoritesState.symbols$.subscribe(
+      symbols => favoritesApiService.load(symbols)
     );
   }
 
@@ -30,17 +34,17 @@ export class FavoritesComponent {
     this.sidebarState.changeType(SidebarTypeEnum.Edit);
   }
 
-  changePill() {
+  select(stock:any) {
+    this.watchlistState.changeStock(stock);
+  }
+
+  togglePill() {
     this.pillIndex++;
     if (this.pillIndex > PillEnum.percentage) {
       this.pillIndex = PillEnum.change;
     }
 
     this.pillType = PillEnum[this.pillIndex];
-  }
-
-  changeStock(stock:any) {
-    this.sidebarState.changeStock(stock);
   }
 }
 

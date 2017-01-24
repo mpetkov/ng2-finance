@@ -6,7 +6,7 @@ const initialState:SidebarStateInterface = new SidebarInitialState() as SidebarS
 
 export const sidebarReducer:ActionReducer<SidebarStateInterface> = (state:SidebarStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
-    case SidebarActions.CHANGE_SIDEBAR_TYPE:
+    case SidebarActions.CHANGE_TYPE:
       return state.set('type', action.payload);
     default:
       return state;

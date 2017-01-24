@@ -1,5 +1,5 @@
 <span [ngSwitch]="sidebarState.type$ | async">
   <mp-favorites *ngSwitchCase="0"></mp-favorites>
   <mp-edit *ngSwitchCase="1"></mp-edit>
-  <mp-add *ngSwitchCase="2"></mp-add>
+  <mp-search *ngSwitchCase="2"></mp-search>
 </span>

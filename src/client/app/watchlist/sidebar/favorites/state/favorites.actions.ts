@@ -5,24 +5,24 @@ export class FavoritesActions {
   static DELETE = 'WATCHLIST:FAVORITES:DELETE';
   static ADD = 'WATCHLIST:FAVORITES:ADD';
 
-  static fetchFulfilled(payload:any):Action {
+  static fetchFulfilled(data:any[]):Action {
     return {
       type: this.FETCH_FULFILLED,
-      payload: payload
+      payload: data
     };
   }
 
-  static delete(payload:string[]):Action {
+  static delete(symbols:string[]):Action {
     return {
       type: this.DELETE,
-      payload: payload
+      payload: symbols
     };
   }
 
-  static add(payload:string):Action {
+  static add(symbol:string):Action {
     return {
       type: this.ADD,
-      payload: payload
+      payload: symbol
     };
   }
 }
