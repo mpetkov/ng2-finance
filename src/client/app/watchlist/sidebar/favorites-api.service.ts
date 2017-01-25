@@ -24,8 +24,7 @@ export class FavoritesApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    let favorites:any[] = this.transform(data);
-    this.favoritesState.fetchFulfilled([]);
+    this.favoritesState.fetchFulfilled(this.transform(data));
     this.favoritesState.fetchLoader(false);
   }
 
