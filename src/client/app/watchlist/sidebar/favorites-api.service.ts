@@ -4,8 +4,8 @@ import * as _ from 'lodash';
 import {
   Config,
   LoaderService
-} from '../../../shared/index';
-import { FavoritesStateService } from './state/index';
+} from '../../shared/index';
+import { FavoritesStateService } from './favorites/state/index';
 
 @Injectable()
 export class FavoritesApiService extends LoaderService {
@@ -15,15 +15,18 @@ export class FavoritesApiService extends LoaderService {
   }
 
   load(stocks:string[]) {
+    this.favoritesState.fetchLoader(true);
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
         data => this.complete(data),
-        error =>  console.log(error)
+        error =>  this.favoritesState.fetchError(error)
       );
   }
 
   private complete(data:any) {
-    this.favoritesState.fetchFulfilled(this.transform(data));
+    let favorites:any[] = this.transform(data);
+    this.favoritesState.fetchFulfilled([]);
+    this.favoritesState.fetchLoader(false);
   }
 
   private transform(data:any) {

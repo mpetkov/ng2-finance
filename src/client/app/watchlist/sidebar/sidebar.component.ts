@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { SidebarStateService } from './state/index';
+import { FavoritesStateService } from './favorites/state/favorites-state.service';
+import { FavoritesApiService } from './favorites-api.service';
 
 @Component({
   moduleId: module.id,
@@ -10,6 +12,11 @@ import { SidebarStateService } from './state/index';
 })
 
 export class SidebarComponent {
-  constructor(public sidebarState:SidebarStateService) {
+  constructor(public sidebarState:SidebarStateService,
+              private favoritesState:FavoritesStateService,
+              private favoritesApiService:FavoritesApiService) {
+    favoritesState.symbols$.subscribe(
+      symbols => favoritesApiService.load(symbols)
+    );
   }
 }

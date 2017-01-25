@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
@@ -8,8 +7,7 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
   moduleId: module.id,
   selector: 'mp-favorites',
   templateUrl: 'favorites.component.html',
-  styleUrls: ['favorites.component.css'],
-  providers: [FavoritesApiService]
+  styleUrls: ['favorites.component.css']
 })
 
 export class FavoritesComponent {
@@ -19,11 +17,7 @@ export class FavoritesComponent {
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
-              private favoritesApiService:FavoritesApiService,
               private sidebarState:SidebarStateService) {
-    favoritesState.symbols$.subscribe(
-      symbols => favoritesApiService.load(symbols)
-    );
   }
 
   add() {

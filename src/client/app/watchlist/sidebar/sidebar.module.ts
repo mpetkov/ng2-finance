@@ -6,6 +6,7 @@ import {
   SearchComponent,
   SidebarStateService,
   FavoritesStateService,
+  FavoritesApiService
 } from './index';
 import { WatchlistStateService } from '../state/watchlist-state.service';
 import { SharedModule } from '../../shared/shared.module';
@@ -25,8 +26,9 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   providers: [
     SidebarStateService,
+    WatchlistStateService,
     FavoritesStateService,
-    WatchlistStateService
+    FavoritesApiService
   ]
 })
 export class SidebarModule {
