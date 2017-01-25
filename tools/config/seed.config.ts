@@ -473,6 +473,7 @@ export class SeedConfig {
       middleware: [require('connect-history-api-fallback')({
         index: `${this.APP_BASE}index.html`
       })],
+      online: false,
       port: this.PORT,
       startPath: this.APP_BASE,
       open: argv['b'] ? false : true,
