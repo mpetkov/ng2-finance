@@ -8,7 +8,8 @@
     <mdl-icon>more_vert</mdl-icon>
   </button>
   <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
-    <mdl-menu-item (click)="edit()">Edit List</mdl-menu-item>
+    <mdl-menu-item (click)="edit()"
+                   *ngIf="favorites?.length !== 0">Edit List</mdl-menu-item>
     <mdl-menu-item (click)="add()">Add Symbol</mdl-menu-item>
   </mdl-menu>
 </div>
