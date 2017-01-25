@@ -12,23 +12,33 @@
     <mdl-menu-item (click)="add()">Add Symbol</mdl-menu-item>
   </mdl-menu>
 </div>
-<ul class="mdl-navigation">
-  <li *ngFor="let stock of (favoritesState.data$ | async)"
-      class="mdl-navigation__link"
-      [ngClass]="{active: (watchlistState.stockSymbol$ | async) === stock.symbol}"
-      (click)="select(stock)">
-    <div class="pull-left text">
-      <p><b>{{stock.symbol}}</b></p>
-      <p class="small truncate">{{stock.name}}</p>
-    </div>
-
-    <div class="prices">
-      <b class="pull-left">{{stock.price}}</b>
-      <div class="pill pull-left"
-           [ngClass]="{green: stock.change >= 0}"
-           (click)="togglePill()">
-        {{stock[pillType]}}
+<mp-notification *ngIf="notificationType !== 0"
+                 [type]="notificationType"
+                 [value]="notification"></mp-notification>
+<span *ngIf="notificationType === 0">
+  <div *ngIf="favorites?.length === 0">
+    EMPTY
+  </div>
+  <ul *ngIf="favorites?.length !== 0"
+      class="mdl-navigation">
+    <li *ngFor="let stock of favorites"
+        class="mdl-navigation__link"
+        [ngClass]="{active: (watchlistState.stockSymbol$ | async) === stock.symbol}"
+        (click)="select(stock)">
+      <div class="pull-left text">
+        <p><b>{{stock.symbol}}</b></p>
+        <p class="small truncate">{{stock.name}}</p>
       </div>
-    </div>
-  </li>
-</ul>
+
+      <div class="prices">
+        <b class="pull-left">{{stock.price}}</b>
+        <div class="pill pull-left"
+             [ngClass]="{green: stock.change >= 0}"
+             (click)="togglePill()">
+          {{stock[pillType]}}
+        </div>
+      </div>
+    </li>
+  </ul>
+</span>
+

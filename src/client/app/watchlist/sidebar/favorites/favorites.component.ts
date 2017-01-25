@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
+import { NotificationTypeEnum } from '../../../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -12,12 +13,25 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 
 export class FavoritesComponent {
   favorites:any[] = [];
+  notification:string;
+  notificationType:NotificationTypeEnum;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService) {
+    favoritesState.data$.subscribe(
+      data => this.favorites = data
+    );
+
+    favoritesState.loader$.subscribe(
+      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
+    );
+
+    favoritesState.error$.subscribe(
+      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
+    );
   }
 
   add() {
@@ -39,6 +53,11 @@ export class FavoritesComponent {
     }
 
     this.pillType = PillEnum[this.pillIndex];
+  }
+
+  private updateNotification(type:NotificationTypeEnum, value:string = null) {
+    this.notificationType = type;
+    this.notification = value;
   }
 }
 

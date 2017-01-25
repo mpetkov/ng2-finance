@@ -9,6 +9,10 @@ export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
   switch (action.type) {
     case FavoritesActions.FETCH_FULFILLED:
       return state.set('data', action.payload);
+    case FavoritesActions.FETCH_LOADER:
+      return state.set('loader', action.payload);
+    case FavoritesActions.FETCH_ERROR:
+      return state.set('error', action.payload);
     case FavoritesActions.DELETE:
       return state.set('symbols', state.symbols.filter(
         (symbol:string) => action.payload.indexOf(symbol) === -1)

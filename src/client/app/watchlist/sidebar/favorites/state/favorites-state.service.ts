@@ -10,14 +10,26 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class FavoritesStateService {
   symbols$:Observable<string[]>;
   data$:Observable<any[]>;
+  loader$:Observable<boolean>;
+  error$:Observable<string>;
 
   constructor(private store$:Store<any>) {
     this.symbols$ = store$.let(this.getSymbols());
     this.data$ = store$.let(this.getData());
+    this.loader$ = store$.let(this.getLoader());
+    this.error$ = store$.let(this.getError());
   }
 
   fetchFulfilled(data:any[]) {
     this.store$.dispatch(FavoritesActions.fetchFulfilled(data));
+  }
+
+  fetchLoader(loader:boolean) {
+    this.store$.dispatch(FavoritesActions.fetchLoader(loader));
+  }
+
+  fetchError(error:string) {
+    this.store$.dispatch(FavoritesActions.fetchError(error));
   }
 
   delete(symbols:string[]) {
@@ -37,6 +49,18 @@ export class FavoritesStateService {
   private getData():any {
     return (state$:any) => state$
       .map((state:any) => state.favorites.data)
+      .distinctUntilChanged();
+  }
+
+  private getLoader():any {
+    return (state$:any) => state$
+      .map((state:any) => state.favorites.loader)
+      .distinctUntilChanged();
+  }
+
+  private getError():any {
+    return (state$:any) => state$
+      .map((state:any) => state.favorites.error)
       .distinctUntilChanged();
   }
 }
