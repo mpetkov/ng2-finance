@@ -30,13 +30,11 @@ export class EditComponent implements OnDestroy {
   }
 
   close() {
-    this.favoritesState.delete(this.deleted);
-    this.sidebarState.changeType(SidebarTypeEnum.List);
+    this.closeScreen(SidebarTypeEnum.List);
   }
 
   add() {
-    this.favoritesState.delete(this.deleted);
-    this.sidebarState.changeType(SidebarTypeEnum.Add);
+    this.closeScreen(SidebarTypeEnum.Add);
   }
 
   delete(symbol:string, event:any) {
@@ -54,5 +52,12 @@ export class EditComponent implements OnDestroy {
       this.windowClickListener();
       this.windowClickListener = null;
     }
+  }
+
+  private closeScreen(type:SidebarTypeEnum) {
+    if (this.deleted.length > 0) {
+      this.favoritesState.delete(this.deleted);
+    }
+    this.sidebarState.changeType(type);
   }
 }
