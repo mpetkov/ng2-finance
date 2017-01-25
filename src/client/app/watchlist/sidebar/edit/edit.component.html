@@ -12,8 +12,13 @@
     <mdl-icon>close</mdl-icon>
   </button>
 </div>
-<ul class="mdl-navigation">
-  <li *ngFor="let stock of (favoritesState.data$ | async)"
+
+<mp-notification *ngIf="notification"
+                 [type]="1"
+                 [value]="notification"></mp-notification>
+<ul *ngIf="!notification"
+    class="mdl-navigation">
+  <li *ngFor="let stock of favorites"
       class="mdl-navigation__link slide-fade"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete"

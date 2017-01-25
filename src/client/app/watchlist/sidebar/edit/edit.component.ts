@@ -10,13 +10,18 @@ import { FavoritesStateService } from '../favorites/state/index';
 })
 
 export class EditComponent implements OnDestroy {
+  favorites:any[] = [];
+  notification:string;
   selected:string;
   deleted:string[] = [];
   private windowClickListener: Function;
 
-  constructor(public favoritesState:FavoritesStateService,
+  constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
               private renderer:Renderer) {
+    favoritesState.data$.subscribe(
+      data => this.favorites = data
+    );
   }
 
   showDelete(symbol:string, event:any) {
@@ -40,6 +45,9 @@ export class EditComponent implements OnDestroy {
   delete(symbol:string, event:any) {
     event.stopPropagation();
     this.deleted.push(symbol);
+    if (this.deleted.length === this.favorites.length) {
+      this.notification = 'Your favorites is now empty';
+    }
     this.destroyListener();
   }
 
