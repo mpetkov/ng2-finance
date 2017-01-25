@@ -1,0 +1,11 @@
+<span [ngSwitch]="type">
+  <p *ngSwitchCase="1"><b>{{value}}</b></p>
+  <p *ngSwitchCase="2"
+     class="red"><b>{{value}}</b></p>
+  <div *ngSwitchCase="3"
+       class="loader">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</span>
