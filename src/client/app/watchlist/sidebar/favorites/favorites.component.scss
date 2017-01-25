@@ -30,4 +30,13 @@
   .mdl-navigation__link.active {
     background: #f3f9fe;
   }
+
+  .mp-empty {
+    margin: 10px;
+    text-align: center;
+    button {
+      padding-left: 10px;
+      margin-top: 10px;
+    }
+  }
 }
