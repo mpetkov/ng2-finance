@@ -6,7 +6,6 @@ import {
   D3fcComponent,
   LegendComponent
 } from './index';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
   ],
   providers: [
     ChartApiService,
-    ChartStateService,
-    WatchlistStateService
+    ChartStateService
   ]
 })
 export class ChartModule {

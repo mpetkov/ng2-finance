@@ -9,6 +9,7 @@ import {
 import { ChartModule } from './content/chart/chart.module';
 import { InfoModule } from './content/info/info.module';
 import { SidebarModule } from './sidebar/sidebar.module';
+import { WatchlistStateService } from './state/watchlist-state.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,9 @@ import { SidebarModule } from './sidebar/sidebar.module';
     WatchlistComponent,
     ContentComponent,
     NewsComponent
+  ],
+  providers: [
+    WatchlistStateService
   ]
 })
 export class WatchlistModule {

@@ -9,7 +9,6 @@ import {
   FavoritesStateService,
   FavoritesApiService
 } from './index';
-import { WatchlistStateService } from '../state/watchlist-state.service';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
@@ -28,7 +27,6 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   providers: [
     SidebarStateService,
-    WatchlistStateService,
     FavoritesStateService,
     FavoritesApiService
   ]
