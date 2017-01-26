@@ -19,6 +19,7 @@ export class SearchComponent {
   notification:string;
   notificationType:NotificationTypeEnum;
   private search:string;
+  private order:string[];
 
   constructor(private searchState:SearchStateService,
               private sidebarState:SidebarStateService,
@@ -27,6 +28,10 @@ export class SearchComponent {
               private searchApiService:SearchApiService) {
     searchState.data$.subscribe(
       data => this.updateStocks(data)
+    );
+
+    favoritesState.order$.subscribe(
+      order => this.order = order
     );
 
     searchState.loader$.subscribe(
@@ -44,10 +49,14 @@ export class SearchComponent {
     this.search = value;
     if (value) {
       this.searchApiService.load(value);
+    } else {
+      this.updateStocks([]);
     }
   }
 
   add(stock:any) {
+    this.order.unshift(stock.symbol);
+    this.favoritesState.changeOrder(this.order);
     this.favoritesState.add(stock.symbol);
     this.sidebarState.changeType(SidebarTypeEnum.List);
     this.watchlistState.changeStock(stock);
