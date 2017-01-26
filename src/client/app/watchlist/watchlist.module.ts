@@ -1,27 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import {
-  WatchlistComponent,
-  ContentComponent
-} from './index';
+import { WatchlistComponent } from './index';
 
-import { ChartModule } from './content/chart/chart.module';
-import { InfoModule } from './content/info/info.module';
-import { NewsModule } from './content/news/news.module';
+import { ContentModule } from './content/content.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { WatchlistStateService } from './state/watchlist-state.service';
 
 @NgModule({
   imports: [
     SharedModule,
-    ChartModule,
-    InfoModule,
-    NewsModule,
+    ContentModule,
     SidebarModule
   ],
   declarations: [
-    WatchlistComponent,
-    ContentComponent
+    WatchlistComponent
   ],
   providers: [
     WatchlistStateService
