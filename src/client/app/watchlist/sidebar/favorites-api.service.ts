@@ -28,8 +28,8 @@ export class FavoritesApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.favoritesState.fetchFulfilled(this.transform(data));
     this.favoritesState.fetchLoader(false);
+    this.favoritesState.fetchFulfilled(this.transform(data));
   }
 
   private transform(data:any) {
