@@ -42,7 +42,7 @@
       <div class="prices">
         <b class="pull-left">{{stock.price}}</b>
         <div class="pill pull-left"
-             [ngClass]="{green: stock.change >= 0}"
+             [ngClass]="stock.change >= 0 ? 'mdl-color--green-A700' : 'mdl-color--red'"
              (click)="togglePill()">
           {{stock[pillType]}}
         </div>
