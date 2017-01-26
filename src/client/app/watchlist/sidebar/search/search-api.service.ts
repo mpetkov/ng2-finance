@@ -21,19 +21,25 @@ export class SearchApiService extends LoaderService {
   }
 
   load(stock:string) {
+    this.searchState.fetchLoader(true);
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.search.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.searchState.fetchFulfilled(this.transform(data)),
-          error =>  console.log(error)
+          data => this.complete(data),
+          error => this.searchState.fetchError(error)
         );
     } else {
       this.get(Config.paths.search)
         .subscribe(
-          data => this.searchState.fetchFulfilled(this.transform(data)),
-          error =>  console.log(error)
+          data => this.complete(data),
+          error => this.searchState.fetchError(error)
         );
     }
+  }
+
+  private complete(data:any) {
+    this.searchState.fetchFulfilled(this.transform(data));
+    this.searchState.fetchLoader(false);
   }
 
   private transform(data:any):any[] {
