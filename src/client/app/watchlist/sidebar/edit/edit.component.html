@@ -2,14 +2,14 @@
   <button mdl-button
           (click)="add()"
           mdl-button-type="icon">
-    <mdl-icon>add</mdl-icon>
+    <mdl-icon title="Add symbol">add</mdl-icon>
   </button>
   <h4>Edit</h4>
   <button class="pull-right"
           mdl-button
           (click)="close()"
           mdl-button-type="icon">
-    <mdl-icon>close</mdl-icon>
+    <mdl-icon title="Go back to favorites">close</mdl-icon>
   </button>
 </div>
 
@@ -24,18 +24,21 @@
       class="mdl-navigation__link slide-fade mp-edit-item"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete mdl-color--red"
+         title="Confirm delete"
          (click)="delete(stock.symbol, $event)">
       Delete
     </div>
     <div class="tab"
          [ngClass]="{active: selected === stock.symbol}">
       <mdl-icon class="pull-left mdl-color-text--red"
+                title="Delete symbol from favorites"
                 (click)="showDelete(stock.symbol, $event)">remove_circle</mdl-icon>
       <div class="text">
         <p><b>{{stock.symbol}}</b></p>
         <p class="mp-small-font truncate">{{stock.name}}</p>
       </div>
-      <mdl-icon class="pull-right mp-drag mdl-color-text--grey-400">menu</mdl-icon>
+      <mdl-icon class="pull-right mp-drag mdl-color-text--grey-400"
+                title="Drag to re-order">menu</mdl-icon>
     </div>
   </li>
 </ul>
