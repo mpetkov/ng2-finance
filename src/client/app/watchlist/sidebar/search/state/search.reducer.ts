@@ -9,6 +9,10 @@ export const searchReducer:ActionReducer<SearchStateInterface> =
   switch (action.type) {
     case SearchActions.FETCH_FULFILLED:
       return state.set('data', action.payload);
+    case SearchActions.FETCH_LOADER:
+      return state.set('loader', action.payload);
+    case SearchActions.FETCH_ERROR:
+      return state.set('error', action.payload);
     default:
       return state;
   }
