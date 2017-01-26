@@ -3,26 +3,22 @@ import { SharedModule } from '../shared/shared.module';
 import {
   WatchlistComponent,
   ContentComponent,
-  ChartComponent,
-  D3fcComponent,
-  LegendComponent,
   InfoComponent,
   NewsComponent
 } from './index';
 
+import { ChartModule } from './content/chart/chart.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 
 @NgModule({
   imports: [
     SharedModule,
+    ChartModule,
     SidebarModule
   ],
   declarations: [
     WatchlistComponent,
     ContentComponent,
-    ChartComponent,
-    D3fcComponent,
-    LegendComponent,
     InfoComponent,
     NewsComponent
   ]

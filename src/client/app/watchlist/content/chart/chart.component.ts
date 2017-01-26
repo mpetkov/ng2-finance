@@ -7,8 +7,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
   moduleId: module.id,
   selector: 'mp-chart',
   templateUrl: 'chart.component.html',
-  styleUrls: ['chart.component.css'],
-  providers: [ChartApiService, ChartStateService]
+  styleUrls: ['chart.component.css']
 })
 
 export class ChartComponent {
