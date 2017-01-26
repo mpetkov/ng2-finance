@@ -21,6 +21,7 @@ export class ProjectConfig extends SeedConfig {
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
       {src: 'normalize-css/normalize.css', inject: true},
+      {src: 'dragula/dist/dragula.min.css', inject: true},
       {src: 'moment/min/moment.min.js', inject: true}
     ];
 
@@ -76,6 +77,24 @@ export class ProjectConfig extends SeedConfig {
       path: 'node_modules/immutable/dist/immutable.js',
       packageMeta: {
         main: 'dist/immutable.js',
+        defaultExtension: 'js'
+      }
+    });
+
+    this.addPackageBundles({
+      name: 'dragula',
+      path: 'node_modules/dragula/dist/dragula.min.js',
+      packageMeta: {
+        main: 'dragula.js',
+        defaultExtension: 'js'
+      }
+    });
+
+    this.addPackageBundles({
+      name: 'ng2-dragula',
+      path: 'node_modules/ng2-dragula/ng2-dragula.js',
+      packageMeta: {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     });
