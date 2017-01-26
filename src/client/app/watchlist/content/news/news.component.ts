@@ -7,8 +7,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
   moduleId: module.id,
   selector: 'mp-news',
   templateUrl: 'news.component.html',
-  styleUrls: ['news.component.css'],
-  providers: [NewsApiService, NewsStateService]
+  styleUrls: ['news.component.css']
 })
 
 export class NewsComponent {
