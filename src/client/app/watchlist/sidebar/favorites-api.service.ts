@@ -9,9 +9,13 @@ import { FavoritesStateService } from './favorites/state/index';
 
 @Injectable()
 export class FavoritesApiService extends LoaderService {
+  private order:string[] = [];
   constructor(public http:Http,
               private favoritesState:FavoritesStateService) {
     super(http);
+    favoritesState.order$.subscribe(
+      order => this.order = order
+    );
   }
 
   load(stocks:string[]) {
@@ -33,11 +37,17 @@ export class FavoritesApiService extends LoaderService {
     if (!_.isArray(stocks)) {
       stocks = [stocks];
     }
-    return stocks.map((quote:any) => {
+
+    let favorites:any[] = stocks.map((quote:any) => {
       let change:number = parseFloat(quote.Change) || 0.00;
+      let index:number = this.order.indexOf(quote.symbol);
+      if(index < 0) {
+        index = 999;
+      }
       return {
         symbol: quote.symbol,
         name: quote.Name,
+        order: index,
         price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {
           maximumFractionDigits: 2,
           minimumFractionDigits: 2
@@ -46,6 +56,8 @@ export class FavoritesApiService extends LoaderService {
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       };
     });
+
+    return _.sortBy(favorites, ['order']);
   }
 
   private calculateChangePercent(change:number, price:string):string {

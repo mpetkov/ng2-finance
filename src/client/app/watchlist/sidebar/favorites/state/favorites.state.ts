@@ -5,11 +5,13 @@ export interface FavoritesStateInterface extends Map<string,any> {
   data?:any[];
   loader?:boolean;
   error?:string;
+  order?:string[];
 }
 
 export const FavoritesInitialState = Record({
   symbols: ['YHOO', 'AAPL', 'GOOG', 'ADS'],
   data: [],
   loader: false,
-  error: null
+  error: null,
+  order: []
 });

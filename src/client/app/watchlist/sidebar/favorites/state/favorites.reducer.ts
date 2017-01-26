@@ -19,6 +19,8 @@ export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
       );
     case FavoritesActions.ADD:
       return state.set('symbols', [action.payload, ...state.symbols]);
+    case FavoritesActions.CHANGE_ORDER:
+      return state.set('order',  action.payload);
     default:
       return state;
   }

@@ -12,12 +12,14 @@ export class FavoritesStateService {
   data$:Observable<any[]>;
   loader$:Observable<boolean>;
   error$:Observable<string>;
+  order$:Observable<string[]>;
 
   constructor(private store$:Store<any>) {
     this.symbols$ = store$.let(this.getSymbols());
     this.data$ = store$.let(this.getData());
     this.loader$ = store$.let(this.getLoader());
     this.error$ = store$.let(this.getError());
+    this.order$ = store$.let(this.getOrder());
   }
 
   fetchFulfilled(data:any[]) {
@@ -38,6 +40,10 @@ export class FavoritesStateService {
 
   add(symbol:string) {
     this.store$.dispatch(FavoritesActions.add(symbol));
+  }
+
+  changeOrder(order:string[]) {
+    this.store$.dispatch(FavoritesActions.changeOrder(order));
   }
 
   private getSymbols():any {
@@ -61,6 +67,12 @@ export class FavoritesStateService {
   private getError():any {
     return (state$:any) => state$
       .map((state:any) => state.favorites.error)
+      .distinctUntilChanged();
+  }
+
+  private getOrder():any {
+    return (state$:any) => state$
+      .map((state:any) => state.favorites.order)
       .distinctUntilChanged();
   }
 }

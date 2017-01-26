@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DragulaModule } from 'ng2-dragula';
 import {
   SidebarComponent,
   EditComponent,
@@ -13,7 +14,8 @@ import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    DragulaModule
   ],
   declarations: [
     SidebarComponent,

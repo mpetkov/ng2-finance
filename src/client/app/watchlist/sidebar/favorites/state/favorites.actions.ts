@@ -6,6 +6,7 @@ export class FavoritesActions {
   static FETCH_ERROR = 'WATCHLIST:FAVORITES:FETCH_ERROR';
   static DELETE = 'WATCHLIST:FAVORITES:DELETE';
   static ADD = 'WATCHLIST:FAVORITES:ADD';
+  static CHANGE_ORDER = 'WATCHLIST:FAVORITES:CHANGE_ORDER';
 
   static fetchFulfilled(data:any[]):Action {
     return {
@@ -39,6 +40,13 @@ export class FavoritesActions {
     return {
       type: this.ADD,
       payload: symbol
+    };
+  }
+
+  static changeOrder(order:string[]):Action {
+    return {
+      type: this.CHANGE_ORDER,
+      payload: order
     };
   }
 }

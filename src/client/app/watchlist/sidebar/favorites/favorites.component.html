@@ -3,11 +3,12 @@
   <button class="pull-right"
           mdl-button
           #btn1="mdlButton"
-          (click)="m1.toggle($event, btn1)"
+          (click)="mdlMenu.toggle($event, btn1)"
           mdl-button-type="icon">
     <mdl-icon>more_vert</mdl-icon>
   </button>
-  <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
+  <mdl-menu #mdlMenu
+            mdl-menu-position="bottom-right">
     <mdl-menu-item (click)="edit()"
                    *ngIf="favorites?.length !== 0">Edit List</mdl-menu-item>
     <mdl-menu-item (click)="add()">Add Symbol</mdl-menu-item>
@@ -36,7 +37,7 @@
         (click)="select(stock)">
       <div class="pull-left text">
         <p><b>{{stock.symbol}}</b></p>
-        <p class="small truncate">{{stock.name}}</p>
+        <p class="mp-small-font truncate">{{stock.name}}</p>
       </div>
 
       <div class="prices">

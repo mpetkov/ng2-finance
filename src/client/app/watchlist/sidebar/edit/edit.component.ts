@@ -1,4 +1,5 @@
-import { Component, Renderer, OnDestroy } from '@angular/core';
+import { Component, Renderer, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { DragulaService } from 'ng2-dragula';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
 
@@ -6,7 +7,8 @@ import { FavoritesStateService } from '../favorites/state/index';
   moduleId: module.id,
   selector: 'mp-edit',
   templateUrl: 'edit.component.html',
-  styleUrls: ['edit.component.css']
+  styleUrls: ['edit.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class EditComponent implements OnDestroy {
@@ -14,14 +16,22 @@ export class EditComponent implements OnDestroy {
   notification:string;
   selected:string;
   deleted:string[] = [];
+  dragName:string = 'editDrag';
   private windowClickListener: Function;
 
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
-              private renderer:Renderer) {
+              private renderer:Renderer,
+              private dragulaService: DragulaService) {
     favoritesState.data$.subscribe(
       data => this.favorites = data
     );
+
+    dragulaService.setOptions(this.dragName, {
+      moves: function (el:any, container:any, handle:any) {
+        return handle.className.indexOf('mp-drag') !== -1;
+      }
+    });
   }
 
   showDelete(symbol:string, event:any) {
@@ -53,6 +63,7 @@ export class EditComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.destroyListener();
+    this.dragulaService.destroy(this.dragName);
   }
 
   private destroyListener() {
@@ -67,5 +78,16 @@ export class EditComponent implements OnDestroy {
       this.favoritesState.delete(this.deleted);
     }
     this.sidebarState.changeType(type);
+    this.updateOrder();
+  }
+
+  private updateOrder() {
+    let order:string[] = [];
+    this.favorites.forEach((item:any) => {
+      if (this.deleted.indexOf(item.symbol) === -1) {
+        order.push(item.symbol);
+      }
+    });
+    this.favoritesState.changeOrder(order);
   }
 }

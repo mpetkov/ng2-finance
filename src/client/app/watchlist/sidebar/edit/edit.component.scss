@@ -1,4 +1,4 @@
-:host {
+.mp-edit {
   .mdl-card__title {
     h4 {
       text-align: center;
@@ -6,46 +6,51 @@
       padding: 0;
     }
   }
+}
 
-  .mdl-navigation__link:hover {
-    background: inherit;
+.mdl-navigation__link.mp-edit-item:hover {
+  background: inherit;
+}
+
+.mdl-navigation__link.mp-edit-item {
+  .material-icons {
+    line-height: 42px;
   }
 
-  .mdl-navigation__link {
-    .material-icons {
-      line-height: 42px;
-      color: #ef172f;
-    }
+  .material-icons.pull-right {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    cursor: move;
+  }
 
-    .text {
-      padding: 0 35px;
-    }
+  .text {
+    padding: 0 35px;
+  }
 
-    .tab,
-    .delete {
-      position: absolute;
-      right: 0;
-      top: 0;
-      padding: 5px 10px;
-      height: 40px;
-    }
+  .tab,
+  .delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 10px;
+    height: 40px;
+  }
 
-    .tab {
-      background: white;
-      width: calc(100% - 20px);
-      left: 0;
-      transition: 0.3s ease-out;
-    }
+  .tab {
+    background: white;
+    width: calc(100% - 20px);
+    left: 0;
+    transition: 0.3s ease-out;
+  }
 
-    .tab.active {
-      transform: translateX(-69px);
-    }
+  .tab.active {
+    transform: translateX(-59px);
+  }
 
-    .delete {
-      background: #ef172f;
-      color: white;
-      font-weight: 500;
-      cursor: pointer;
-    }
+  .delete {
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
   }
 }

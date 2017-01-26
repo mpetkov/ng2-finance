@@ -17,9 +17,11 @@
                  [type]="1"
                  [value]="notification"></mp-notification>
 <ul *ngIf="!notification"
-    class="mdl-navigation">
+    class="mdl-navigation"
+    [dragula]="dragName"
+    [dragulaModel]="favorites">
   <li *ngFor="let stock of favorites"
-      class="mdl-navigation__link slide-fade"
+      class="mdl-navigation__link slide-fade mp-edit-item"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete mdl-color--red"
          (click)="delete(stock.symbol, $event)">
@@ -31,8 +33,9 @@
                 (click)="showDelete(stock.symbol, $event)">remove_circle</mdl-icon>
       <div class="text">
         <p><b>{{stock.symbol}}</b></p>
-        <p class="small truncate">{{stock.name}}</p>
+        <p class="mp-small-font truncate">{{stock.name}}</p>
       </div>
+      <mdl-icon class="pull-right mp-drag mdl-color-text--grey-400">menu</mdl-icon>
     </div>
   </li>
 </ul>

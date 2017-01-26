@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MdlMenuComponent } from 'angular2-mdl';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
@@ -12,6 +13,7 @@ import { NotificationTypeEnum } from '../../../shared/index';
 })
 
 export class FavoritesComponent {
+  @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
   favorites:any[] = [];
   notification:string;
   notificationType:NotificationTypeEnum;
