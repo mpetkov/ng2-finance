@@ -16,11 +16,19 @@ export class NewsApiService extends LoaderService {
   }
 
   load(stock:string) {
-    this.get(Config.paths.news.replace('$stock', encodeURIComponent(stock)))
-      .subscribe(
-        data => this.newsState.fetchNewsFulfilled(this.transform(data)),
-        error =>  console.log(error)
-      );
+    if(Config.env === 'PROD') {
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.news.replace('$stock', encodeURIComponent(stock))))
+        .subscribe(
+          data => this.newsState.fetchNewsFulfilled(this.transform(data)),
+          error =>  console.log(error)
+        );
+    } else {
+      this.get(Config.paths.charts)
+        .subscribe(
+          data => this.newsState.fetchNewsFulfilled(this.transform(data)),
+          error =>  console.log(error)
+        );
+    }
   }
 
   private transform(data:any):any[] {
