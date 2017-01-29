@@ -2,17 +2,23 @@
   <h4>News</h4>
 </div>
 <div class="mdl-card__supporting-text">
-  <ul class="mdl-list">
-    <li *ngFor="let article of (newsState.data$ | async)"
+  <mp-notification *ngIf="notificationType > 0"
+                   [type]="notificationType"
+                   [value]="notification"></mp-notification>
+  <ul *ngIf="notificationType === 0"
+      class="mdl-list">
+    <li *ngFor="let article of news"
         class="mdl_list__item mdl-list__item--two-line">
       <a [href]="article.url"
          target="_blank">
         <div class="mdl-list__item-primary-content">
-          <div class="mdl-list__item-sub-title">{{article.source}}</div>
-          <div class="mp-main mdl-color-text--black" [innerHTML]="article.title"></div>
+          <div class="mdl-list__item-sub-title" [innerHTML]="article.source"></div>
+          <div class="mp-main mdl-color-text--black">
+            <b>{{article.title}}</b>
+          </div>
           <img *ngIf="article.image"
                [src]="article.image">
-          <div class="mdl-list__item-sub-title">
+          <div class="mdl-list__item-sub-title mdl-color-text--black">
            {{article.date}}
            <mdl-icon class="pull-right" title="Read More">launch</mdl-icon>
           </div>
