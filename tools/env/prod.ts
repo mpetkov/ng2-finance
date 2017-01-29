@@ -7,7 +7,7 @@ const ProdConfig: ConfigInterface = {
   paths: {
     charts: 'https://query1.finance.yahoo.com/v7/finance/chart/$stock?period2=1482851933&period1=1356707933&interval=1d' +
     '&indicators=quote&includeTimestamps=true&includePrePost=true&events=div%7Csplit%7Cearn&corsDomain=finance.yahoo.com',
-    news: 'https://query1.finance.yahoo.com/v2/finance/news?lang=en-US&region=US&symbols=YHOO&corsDomain=finance.yahoo.com',
+    news: 'https://query1.finance.yahoo.com/v2/finance/news?lang=en-US&region=US&symbols=$stock&corsDomain=finance.yahoo.com',
     proxy: 'http://www.marinpetkov.com/proxy.php',
     search: 'https://finance.yahoo.com/_finance_doubledown/api/resource/searchassist;gossipConfig=%7B%22isJSONP%22%3A' +
     'true%2C%22queryKey%22%3A%22query%22%2C%22resultAccessor%22%3A%22ResultSet.Result%22%2C%22suggestionTitleAccessor%22%3A%22' +
