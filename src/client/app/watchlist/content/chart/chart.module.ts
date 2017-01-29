@@ -6,8 +6,12 @@ import {
   D3fcComponent,
   LegendComponent
 } from './index';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
+  imports: [
+    SharedModule
+  ],
   declarations: [
     ChartComponent,
     D3fcComponent,

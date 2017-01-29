@@ -1,5 +1,10 @@
 <div class="mdl-card__title mdl-card--border">
-  <h4>Title</h4>
+  <h4 *ngIf="!stock.symbol">Chart</h4>
+  <h4 *ngIf="stock.symbol">
+    <span>{{stock.name}} ({{stock.symbol}})</span>
+    <b class="mp-price">{{stock.price}}</b>
+    <b [ngClass]="stock.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stock.change}} ({{stock.percentage}})</b>
+  </h4>
 </div>
 <div class="mdl-card__supporting-text">
   <mp-d3fc></mp-d3fc>

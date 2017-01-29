@@ -11,10 +11,15 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 })
 
 export class ChartComponent {
+  stock:any = {};
   constructor(private chartApiService:ChartApiService,
               private watchlistState:WatchlistStateService) {
     watchlistState.stockSymbol$.subscribe(
       symbol => chartApiService.load(symbol)
+    );
+
+    watchlistState.stock$.subscribe(
+      stock => this.stock = stock
     );
   }
 }

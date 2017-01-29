@@ -1,8 +1,15 @@
 :host {
+  h4 {
+    .mp-price {
+      font-size: 1.25rem;
+      margin: 0 5px;
+    }
+  }
+
   .mdl-card__supporting-text {
     padding: 0;
     padding-right: 16px;
-    height: calc(100% - 49px - 4px);
+    height: calc(100% - 44px);
     width: calc(100% - 16px);
   }
 }
