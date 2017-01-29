@@ -4,5 +4,15 @@
     width: 100%;
     height: calc(100% - 38px);
     overflow: auto;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 5px;
+    }
+
+    .mp-main {
+      margin: 3px 0;
+    }
   }
 }

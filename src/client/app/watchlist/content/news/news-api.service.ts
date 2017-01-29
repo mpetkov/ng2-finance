@@ -24,22 +24,19 @@ export class NewsApiService extends LoaderService {
   }
 
   private transform(data:any):any[] {
-    let news:any[] = _.get(data, 'query.results.item', []);
+    let news:any[] = _.get(data, 'Content.result', []);
     return news.map((item:any) => {
-      item.pubDate = this.convertDate(item.pubDate);
-      item.title = this.convertLinks(item.title);
-
-      return item;
+      return {
+        source: item.provider_name,
+        date: this.convertDate(item.provider_publish_time),
+        title: item.title,
+        url: item.url,
+        image: item.thumbnail
+      };
     });
   }
 
-  private convertDate(date:string):string {
-    return moment(new Date(date)).format('ddd, MMM Do YYYY h:mm A');
-  }
-
-  private convertLinks(text:string):string {
-    text = text.replace('href=', 'target="_blank" href=');
-    text = text.replace('href="/', 'href="https://finance.yahoo.com/');
-    return text;
+  private convertDate(date:number):string {
+    return moment(date*1000).format('ddd, MMM Do YYYY h:mm A');
   }
 }
