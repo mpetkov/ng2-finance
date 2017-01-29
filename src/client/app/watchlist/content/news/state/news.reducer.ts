@@ -7,8 +7,12 @@ const initialState:NewsStateInterface = new NewsInitialState() as NewsStateInter
 export const newsReducer:ActionReducer<NewsStateInterface> =
   (state:NewsStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
-    case NewsActions.FETCH_NEWS_FULFILLED:
+    case NewsActions.FETCH_FULFILLED:
       return state.set('data', action.payload);
+    case NewsActions.FETCH_LOADER:
+      return state.set('loader', action.payload);
+    case NewsActions.FETCH_ERROR:
+      return state.set('error', action.payload);
     default:
       return state;
   }
