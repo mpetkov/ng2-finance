@@ -4,6 +4,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
+import * as _ from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -19,12 +20,17 @@ export class FavoritesComponent {
   notificationType:NotificationTypeEnum;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
+  private selected:string;
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService) {
+    watchlistState.stockSymbol$.subscribe(
+      symbol => this.selected = symbol
+    );
+
     favoritesState.data$.subscribe(
-      data => this.favorites = data
+      data => this.updateFavorites(data)
     );
 
     favoritesState.loader$.subscribe(
@@ -46,6 +52,7 @@ export class FavoritesComponent {
 
   select(stock:any) {
     this.watchlistState.changeStock(stock);
+    this.watchlistState.changeStockSymbol(stock.symbol);
   }
 
   togglePill() {
@@ -60,6 +67,11 @@ export class FavoritesComponent {
   private updateNotification(type:NotificationTypeEnum, value:string = null) {
     this.notificationType = type;
     this.notification = value;
+  }
+
+  private updateFavorites(data:any[]) {
+    this.favorites = data;
+    this.watchlistState.changeStock(_.find(data, ['symbol', this.selected]) || {});
   }
 }
 

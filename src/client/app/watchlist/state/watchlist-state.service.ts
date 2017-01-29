@@ -17,8 +17,11 @@ export class WatchlistStateService {
   }
 
   changeStock(stock:any) {
-    this.store$.dispatch(StockActions.change(stock.symbol));
     this.store$.dispatch(StockActions.changeData(stock));
+  }
+
+  changeStockSymbol(symbol:string) {
+    this.store$.dispatch(StockActions.change(symbol));
   }
 
   private getStock():any {
