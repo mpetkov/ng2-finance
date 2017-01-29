@@ -3,7 +3,7 @@
   <h4 *ngIf="stock.symbol">
     <span>{{stock.name}} ({{stock.symbol}})</span>
     <b class="mp-price">{{stock.price}}</b>
-    <b [ngClass]="stock.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stock.change}} ({{stock.percentage}})</b>
+    <span [ngClass]="stock.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stock.change}} ({{stock.percentage}})</span>
   </h4>
 </div>
 <div class="mdl-card__supporting-text">
