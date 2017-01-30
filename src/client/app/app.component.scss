@@ -37,9 +37,18 @@ a,
   cursor: pointer;
 }
 
+a,
+a:link,
+a:active,
+a:hover,
+a:visited,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
 a {
   color: #2196f3;
-  text-decoration: none;
   font-weight: 400;
 }
 
