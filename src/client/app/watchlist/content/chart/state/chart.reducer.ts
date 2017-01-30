@@ -9,6 +9,8 @@ export const chartReducer:ActionReducer<ChartStateInterface> =
   switch (action.type) {
     case ChartActions.CHANGE_POINT:
       return state.set('point', action.payload);
+    case ChartActions.CHANGE_RANGE:
+      return state.set('range', action.payload);
     case ChartActions.FETCH_FULFILLED:
       return state.set('data', action.payload);
     case ChartActions.FETCH_LOADER:

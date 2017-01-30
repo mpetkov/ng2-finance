@@ -9,12 +9,14 @@ import 'rxjs/add/operator/distinctUntilChanged';
 @Injectable()
 export class ChartStateService {
   point$:Observable<any>;
+  range$:Observable<string>;
   data$:Observable<any[]>;
   loader$:Observable<boolean>;
   error$:Observable<string>;
 
   constructor(private store$:Store<any>) {
     this.point$ = store$.let(this.getPoint());
+    this.range$ = store$.let(this.getRange());
     this.data$ = store$.let(this.getData());
     this.loader$ = store$.let(this.getLoader());
     this.error$ = store$.let(this.getError());
@@ -22,6 +24,10 @@ export class ChartStateService {
 
   changePoint(point:any) {
     this.store$.dispatch(ChartActions.changePoint(point));
+  }
+
+  changeRange(range:string) {
+    this.store$.dispatch(ChartActions.changeRange(range));
   }
 
   fetchFulfilled(data:any[]) {
@@ -39,6 +45,12 @@ export class ChartStateService {
   private getPoint():any {
     return (state$:any) => state$
       .map((state:any) => state.chart.point)
+      .distinctUntilChanged();
+  }
+
+  private getRange():any {
+    return (state$:any) => state$
+      .map((state:any) => state.chart.range)
       .distinctUntilChanged();
   }
 
