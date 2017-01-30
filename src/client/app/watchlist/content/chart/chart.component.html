@@ -11,6 +11,13 @@
                    [type]="notificationType"
                    [value]="notification"></mp-notification>
   <span *ngIf="notificationType === 0">
+    <mdl-tabs mdl-ripple
+              mdl-tab-active-index="0"
+              (mdl-tab-active-changed)="tabChanged($event.index)">
+      <mdl-tab-panel *ngFor="let range of chartRanges"
+                     mdl-tab-panel-title="{{range.text}}"
+                     (click)="changeRange(range)"></mdl-tab-panel>
+    </mdl-tabs>
     <mp-d3fc></mp-d3fc>
   </span>
 </div>

@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ChartApiService } from './chart-api.service';
 import { ChartStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
+import { Config, ChartRangesInterface } from '../../../shared/index';
 
 @Component({
   moduleId: module.id,
   selector: 'mp-chart',
   templateUrl: 'chart.component.html',
-  styleUrls: ['chart.component.css']
+  styleUrls: ['chart.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ChartComponent {
   stock:any = {};
+  chartRanges:ChartRangesInterface[] = Config.chartRanges;
   notification:string;
   notificationType:NotificationTypeEnum;
   private symbol:string;
@@ -38,6 +41,10 @@ export class ChartComponent {
     chartState.error$.subscribe(
       error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     );
+  }
+
+  tabChanged(index:number) {
+    console.log(range);
   }
 
   private updateSymbol(symbol:string) {

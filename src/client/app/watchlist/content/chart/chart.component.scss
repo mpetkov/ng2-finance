@@ -1,4 +1,4 @@
-:host {
+.mp-chart {
   h4 {
     .mp-price {
       margin: 0 5px;
@@ -7,8 +7,15 @@
 
   .mdl-card__supporting-text {
     padding: 0;
-    padding-right: 16px;
     height: calc(100% - 44px);
-    width: calc(100% - 16px);
+    width: 100%;
+
+    .mdl-tabs__tab-bar {
+      height: auto;
+      .mdl-tabs__tab {
+        height: 30px;
+        line-height: 30px;
+      }
+    }
   }
 }
