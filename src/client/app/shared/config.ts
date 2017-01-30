@@ -1,6 +1,7 @@
 export interface ConfigInterface {
   paths?: ConfigPathsInterface;
   env?: string;
+  chartRanges?:ChartRangesInterface[];
 }
 
 export interface ConfigPathsInterface {
@@ -9,6 +10,12 @@ export interface ConfigPathsInterface {
   proxy?: string;
   search?: string;
   stocks?: string;
+}
+
+export interface ChartRangesInterface {
+  id?: string;
+  text?: string;
+  interval?: string;
 }
 
 
