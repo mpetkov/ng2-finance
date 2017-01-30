@@ -14,10 +14,13 @@ export class ChartApiService extends LoaderService {
     super(http);
   }
 
-  load(stock:string) {
+  load(stock:string, range:string, interval:string) {
     this.chartState.fetchLoader(true);
     if(Config.env === 'PROD') {
-      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.charts.replace('$stock', encodeURIComponent(stock))))
+      let url:string = Config.paths.charts.replace('$stock', stock);
+      url = url.replace('$range', range);
+      url = url.replace('$interval', interval);
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(data),
           error => this.chartState.fetchError(error)
