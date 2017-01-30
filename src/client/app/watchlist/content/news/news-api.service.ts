@@ -24,7 +24,7 @@ export class NewsApiService extends LoaderService {
           error => this.newsState.fetchError(error)
         );
     } else {
-      this.get(Config.paths.charts)
+      this.get(Config.paths.news)
         .subscribe(
           data => this.complete(data),
           error => this.newsState.fetchError(error)
