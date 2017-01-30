@@ -37,7 +37,7 @@ export class D3fcComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.chartState.data$.subscribe(
-      data => this.init(data.rows)
+      data => this.init(data)
     );
   }
 
@@ -49,7 +49,7 @@ export class D3fcComponent implements AfterViewInit {
   }
 
   private init(data:any) {
-    if(data) {
+    if(data && data.length > 0) {
       this.data = data;
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
@@ -84,7 +84,7 @@ export class D3fcComponent implements AfterViewInit {
       .call(chart);
 
     this.chartVolumeService.render(data, chart.xScale());
-    this.chartState.changeSelectedPoint(data[data.length - 1]);
+    this.chartState.selectPoint(data[data.length - 1]);
     this.applyPostRenderChanges();
   }
 

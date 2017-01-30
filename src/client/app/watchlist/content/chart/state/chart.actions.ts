@@ -1,20 +1,36 @@
 import { Action } from '@ngrx/store';
 
 export class ChartActions {
-  static FETCH_CHART_FULFILLED = 'WATCHLIST:FETCH_CHART_FULFILLED';
-  static CHANGE_SELECTED_POINT = 'WATCHLIST:CHANGE_CHART_SELECTED_POINT';
+  static FETCH_FULFILLED = 'WATCHLIST:CHART:FETCH_FULFILLED';
+  static FETCH_LOADER = 'WATCHLIST:CHART:FETCH_LOADER';
+  static FETCH_ERROR = 'WATCHLIST:CHART:FETCH_ERROR';
+  static SELECT_POINT = 'WATCHLIST:CHART:SELECT_POINT';
 
-  static fetchChartFulfilled(payload:any):Action {
+  static selectPoint(point:any):Action {
     return {
-      type: this.FETCH_CHART_FULFILLED,
-      payload: payload
+      type: this.SELECT_POINT,
+      payload: point
     };
   }
 
-  static changeSelectedPoint(payload:any):Action {
+  static fetchFulfilled(data:any[]):Action {
     return {
-      type: this.CHANGE_SELECTED_POINT,
-      payload: payload
+      type: this.FETCH_FULFILLED,
+      payload: data
+    };
+  }
+
+  static fetchLoader(loader:boolean):Action {
+    return {
+      type: this.FETCH_LOADER,
+      payload: loader
+    };
+  }
+
+  static fetchError(error:string):Action {
+    return {
+      type: this.FETCH_ERROR,
+      payload: error
     };
   }
 }

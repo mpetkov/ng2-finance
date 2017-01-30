@@ -15,29 +15,32 @@ export class ChartApiService extends LoaderService {
   }
 
   load(stock:string) {
+    this.chartState.fetchLoader(true);
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.charts.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.chartState.fetchChartFulfilled(this.transform(data)),
-          error =>  console.log(error)
+          data => this.complete(data),
+          error => this.chartState.fetchError(error)
         );
     } else {
       this.get(Config.paths.charts)
         .subscribe(
-          data => this.chartState.fetchChartFulfilled(this.transform(data)),
-          error =>  console.log(error)
+          data => this.complete(data),
+          error => this.chartState.fetchError(error)
         );
     }
   }
 
+  private complete(data:any) {
+    this.chartState.fetchLoader(false);
+    this.chartState.fetchFulfilled(this.transform(data));
+  }
+
   private transform(rawData:any):any {
-    let data:any = {
-      info: {},
-      rows: []
-    };
+    let data:any = [];
+
     let chartData:any = _.get(rawData, 'chart.result[0]', {});
     if (chartData) {
-      data.info = chartData.meta || {};
       let items:any = {
         close: _.get(chartData, 'indicators.quote[0].close', []),
         high: _.get(chartData, 'indicators.quote[0].high', []),
@@ -48,7 +51,7 @@ export class ChartApiService extends LoaderService {
       };
 
       items.dates.forEach((value:number, index:number) => {
-        data.rows.push({
+        data.push({
           timestamp: value,
           date: new Date(value * 1000),
           close: _.get(items, 'close[' + index + ']', null),

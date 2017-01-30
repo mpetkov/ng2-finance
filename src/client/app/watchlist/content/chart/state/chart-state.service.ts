@@ -8,20 +8,38 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
 export class ChartStateService {
-  data$:Observable<any>;
-  selectedPoint$:Observable<any>;
+  point$:Observable<any>;
+  data$:Observable<any[]>;
+  loader$:Observable<boolean>;
+  error$:Observable<string>;
 
   constructor(private store$:Store<any>) {
+    this.point$ = store$.let(this.getPoint());
     this.data$ = store$.let(this.getData());
-    this.selectedPoint$ = store$.let(this.getSelectedPoint());
+    this.loader$ = store$.let(this.getLoader());
+    this.error$ = store$.let(this.getError());
   }
 
-  changeSelectedPoint(selectedPoint:any) {
-    this.store$.dispatch(ChartActions.changeSelectedPoint(selectedPoint));
+  selectPoint(point:any) {
+    this.store$.dispatch(ChartActions.selectPoint(point));
   }
 
-  fetchChartFulfilled(data:any[]) {
-    this.store$.dispatch(ChartActions.fetchChartFulfilled(data));
+  fetchFulfilled(data:any[]) {
+    this.store$.dispatch(ChartActions.fetchFulfilled(data));
+  }
+
+  fetchLoader(loader:boolean) {
+    this.store$.dispatch(ChartActions.fetchLoader(loader));
+  }
+
+  fetchError(error:string) {
+    this.store$.dispatch(ChartActions.fetchError(error));
+  }
+
+  private getPoint():any {
+    return (state$:any) => state$
+      .map((state:any) => state.chart.point)
+      .distinctUntilChanged();
   }
 
   private getData():any {
@@ -30,9 +48,15 @@ export class ChartStateService {
       .distinctUntilChanged();
   }
 
-  private getSelectedPoint():any {
+  private getLoader():any {
     return (state$:any) => state$
-      .map((state:any) => state.chart.selectedPoint)
+      .map((state:any) => state.chart.loader)
+      .distinctUntilChanged();
+  }
+
+  private getError():any {
+    return (state$:any) => state$
+      .map((state:any) => state.chart.error)
       .distinctUntilChanged();
   }
 }

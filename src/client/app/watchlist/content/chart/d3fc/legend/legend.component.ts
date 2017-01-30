@@ -38,7 +38,7 @@ export class LegendComponent {
         }]
       ]);
 
-    this.chartState.selectedPoint$
+    this.chartState.point$
       .subscribe(
         data => this.render(data)
       );

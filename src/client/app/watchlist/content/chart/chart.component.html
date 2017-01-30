@@ -7,5 +7,10 @@
   </h4>
 </div>
 <div class="mdl-card__supporting-text">
-  <mp-d3fc></mp-d3fc>
+  <mp-notification *ngIf="notificationType > 0"
+                   [type]="notificationType"
+                   [value]="notification"></mp-notification>
+  <span *ngIf="notificationType === 0">
+    <mp-d3fc></mp-d3fc>
+  </span>
 </div>
