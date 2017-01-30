@@ -20,8 +20,8 @@ export class ChartStateService {
     this.error$ = store$.let(this.getError());
   }
 
-  selectPoint(point:any) {
-    this.store$.dispatch(ChartActions.selectPoint(point));
+  changePoint(point:any) {
+    this.store$.dispatch(ChartActions.changePoint(point));
   }
 
   fetchFulfilled(data:any[]) {

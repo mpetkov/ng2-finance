@@ -7,7 +7,7 @@ const initialState:ChartStateInterface = new ChartInitialState() as ChartStateIn
 export const chartReducer:ActionReducer<ChartStateInterface> =
   (state:ChartStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
-    case ChartActions.SELECT_POINT:
+    case ChartActions.CHANGE_POINT:
       return state.set('point', action.payload);
     case ChartActions.FETCH_FULFILLED:
       return state.set('data', action.payload);

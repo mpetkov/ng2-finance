@@ -28,10 +28,10 @@ export class ChartCrosshairService {
         this.chartTooltipsService.addXTooltip(sel);
       })
       .on('trackingmove', (crosshairData:any) => {
-        this.chartState.selectPoint(crosshairData[0].datum);
+        this.chartState.changePoint(crosshairData[0].datum);
       })
       .on('trackingend', () => {
-        this.chartState.selectPoint(data[data.length - 1]);
+        this.chartState.changePoint(data[data.length - 1]);
       });
   }
 

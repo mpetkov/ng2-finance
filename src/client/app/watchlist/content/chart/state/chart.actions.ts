@@ -4,11 +4,11 @@ export class ChartActions {
   static FETCH_FULFILLED = 'WATCHLIST:CHART:FETCH_FULFILLED';
   static FETCH_LOADER = 'WATCHLIST:CHART:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:CHART:FETCH_ERROR';
-  static SELECT_POINT = 'WATCHLIST:CHART:SELECT_POINT';
+  static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';
 
-  static selectPoint(point:any):Action {
+  static changePoint(point:any):Action {
     return {
-      type: this.SELECT_POINT,
+      type: this.CHANGE_POINT,
       payload: point
     };
   }

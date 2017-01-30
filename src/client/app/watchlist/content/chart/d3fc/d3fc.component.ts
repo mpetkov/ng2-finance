@@ -84,7 +84,7 @@ export class D3fcComponent implements AfterViewInit {
       .call(chart);
 
     this.chartVolumeService.render(data, chart.xScale());
-    this.chartState.selectPoint(data[data.length - 1]);
+    this.chartState.changePoint(data[data.length - 1]);
     this.applyPostRenderChanges();
   }
 
