@@ -1,1 +1,1 @@
-export { ConfigInterface } from '../../src/client/app/shared/config';
+export { ConfigInterface } from '../../src/client/app/core/config';

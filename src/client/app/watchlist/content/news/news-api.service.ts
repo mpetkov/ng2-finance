@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {
   Config,
   LoaderService
-} from '../../../shared/index';
+} from '../../../core/index';
 import { NewsStateService } from './state/index';
 declare let moment:any;
 

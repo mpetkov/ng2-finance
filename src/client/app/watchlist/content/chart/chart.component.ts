@@ -1,9 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation
+} from '@angular/core';
 import { ChartApiService } from './chart-api.service';
 import { ChartStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
-import { Config, ChartRangesInterface } from '../../../shared/index';
+import {
+  Config,
+  ChartRangesInterface
+} from '../../../core/index';
 import * as _ from 'lodash';
 
 @Component({

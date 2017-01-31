@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {
   Config,
   LoaderService
-} from '../../../shared/index';
+} from '../../../core/index';
 import { FavoritesStateService } from '../favorites/state/index';
 import { SearchStateService } from './state/index';
 

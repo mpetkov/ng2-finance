@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import {
   Config,
   LoaderService
-} from '../../../shared/index';
+} from '../../../core/index';
 import { ChartStateService } from './state/index';
 
 @Injectable()
