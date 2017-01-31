@@ -19,6 +19,7 @@ export class ChartComponent {
   ranges:ChartRangesInterface[] = Config.chartRanges;
   notification:string;
   notificationType:NotificationTypeEnum;
+  rangeIndex:number;
   private symbol:string;
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
@@ -65,7 +66,7 @@ export class ChartComponent {
     if (rangeIndex === -1) {
       rangeIndex = 0;
     }
-
+    this.rangeIndex = rangeIndex;
     this.range = this.ranges[rangeIndex];
     this.loadChartData();
   }
