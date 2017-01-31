@@ -1,52 +1,33 @@
-import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChartOptionsService } from '../services/chart-options.service';
 import { ChartStateService } from '../../state/index';
-
-declare let fc:any;
-declare let d3:any;
 
 @Component({
   moduleId: module.id,
   selector: 'mp-legend',
-  template: '',
-  styleUrls: ['legend.component.css'],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: 'legend.component.html',
+  styleUrls: ['legend.component.css']
 })
 
 export class LegendComponent {
+  items:any[] = [];
   private legend:any;
 
   constructor(private chartOptionsService:ChartOptionsService,
-              private chartState:ChartStateService,
-              private elementRef:ElementRef) {
-    this.legend = fc.chart.legend()
-      .items([
-        ['Open', (d:any) => {
-          return this.chartOptionsService.options.priceFormat(d.open);
-        }],
-        ['Close', (d:any) => {
-          return this.chartOptionsService.options.priceFormat(d.close);
-        }],
-        ['Low', (d:any) => {
-          return this.chartOptionsService.options.priceFormat(d.low);
-        }],
-        ['High', (d:any) => {
-          return this.chartOptionsService.options.priceFormat(d.high);
-        }],
-        ['Vol', (d:any) => {
-          return this.chartOptionsService.options.volumeFormat(d.volume);
-        }]
-      ]);
-
+              private chartState:ChartStateService) {
     this.chartState.point$
       .subscribe(
-        data => this.render(data)
+        data => this.updateItems(data)
       );
   }
 
-  private render(datapoint:any) {
-    d3.select(this.elementRef.nativeElement)
-      .data([datapoint])
-      .call(this.legend);
+  private updateItems(data:any) {
+    this.items = [
+      {label: 'Open', value: this.chartOptionsService.options.priceFormat(data.open)},
+      {label: 'Close', value: this.chartOptionsService.options.priceFormat(data.close)},
+      {label: 'Low', value: this.chartOptionsService.options.priceFormat(data.low)},
+      {label: 'High', value: this.chartOptionsService.options.priceFormat(data.high)},
+      {label: 'Vol', value: this.chartOptionsService.options.volumeFormat(data.volume)}
+    ];
   }
 }

@@ -1,19 +1,29 @@
-.legend {
-  position: absolute;
-  border-color: #e5e5e5;
-  background: rgba(255, 255, 255, 0.85);
-  margin: 10px 0 0 10px;
-  font-size: 0.9rem;
-  th {
-    padding: 2px 5px 2px 10px;
-    text-align: right;
-    color: #999;
-  }
+:host {
+  .mdl-grid {
+    position: absolute;
+    border: #e5e5e5 1px solid;
+    background: rgba(255, 255, 255, 0.85);
+    margin: 10px 0 0 10px;
+    padding: 0;
+    .mdl-cell {
+      margin: 0;
+      width: auto;
+    }
 
-  td {
-    padding: 2px 10px 2px 5px;
-    color: black;
-    font-weight: 500;
-    width: 50%;
+    .mdl-cell:first-child {
+      .mdl-list {
+        .mdl-list__item {
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .mdl-list {
+      .mdl-list__item {
+        font-size: 0.9rem;
+        padding: 5px;
+        min-height: inherit;
+      }
+    }
   }
 }
