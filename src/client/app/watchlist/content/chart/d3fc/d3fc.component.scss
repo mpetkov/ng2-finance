@@ -6,6 +6,16 @@ $gray: #444;
   height: calc(100% - 30px);
   overflow: visible !important;
 
+  .mp-svg-red {
+    fill: rgba(250, 0, 39, 0.2);
+    stroke: rgba(250, 0, 39, 0.2);
+  }
+
+  .mp-svg-green {
+    fill: rgba(0, 205, 122, 0.2);
+    stroke: rgba(0, 205, 122, 0.2);
+  }
+
   svg {
     overflow: visible;
     display: block;
@@ -20,14 +30,17 @@ $gray: #444;
     stroke: $blue;
   }
 
+  .bar>path {
+    fill-opacity: 1;
+  }
+
   .x-axis text {
     font-weight: bold;
   }
 
   .background {
-    opacity: 0.7;
-    stroke: #FFF;
-    fill: #FFF;
+    stroke: none;
+    fill: none;
   }
 
   .plot-area {

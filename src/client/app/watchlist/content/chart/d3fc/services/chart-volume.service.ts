@@ -43,8 +43,8 @@ export class ChartVolumeService {
       })
       .decorate((sel:any) => {
         sel.select('path')
-          .style('stroke', (d:any) => {
-            return d.close > d.open ? 'red' : 'green';
+          .attr('class', (d:any) => {
+            return d.close <= d.open ? 'mp-svg-red' : 'mp-svg-green';
           });
       });
 
