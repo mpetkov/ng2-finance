@@ -4,6 +4,7 @@ import { ChartStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { Config, ChartRangesInterface } from '../../../shared/index';
+import * as _ from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -15,15 +16,20 @@ import { Config, ChartRangesInterface } from '../../../shared/index';
 
 export class ChartComponent {
   stock:any = {};
-  chartRanges:ChartRangesInterface[] = Config.chartRanges;
+  ranges:ChartRangesInterface[] = Config.chartRanges;
   notification:string;
   notificationType:NotificationTypeEnum;
   private symbol:string;
+  private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
               private watchlistState:WatchlistStateService) {
     watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
+    );
+
+    chartState.range$.subscribe(
+      range => this.updateRange(range)
     );
 
     watchlistState.stock$.subscribe(
@@ -44,12 +50,30 @@ export class ChartComponent {
   }
 
   tabChanged(index:number) {
-    console.log(range);
+    if(this.ranges[index]) {
+      this.chartState.changeRange(this.ranges[index].id);
+    }
   }
 
   private updateSymbol(symbol:string) {
     this.symbol = symbol;
-    this.chartApiService.load(symbol);
+    this.loadChartData();
+  }
+
+  private updateRange(range:string) {
+    let rangeIndex:number = _.findIndex(this.ranges, ['id', range]);
+    if (rangeIndex === -1) {
+      rangeIndex = 0;
+    }
+
+    this.range = this.ranges[rangeIndex];
+    this.loadChartData();
+  }
+
+  private loadChartData() {
+    if (this.symbol && this.range) {
+      this.chartApiService.load(this.symbol, this.range.id, this.range.interval);
+    }
   }
 
   private validateChartData(data:any[]) {

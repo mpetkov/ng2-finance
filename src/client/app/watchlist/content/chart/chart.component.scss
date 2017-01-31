@@ -9,7 +9,10 @@
     padding: 0;
     height: calc(100% - 44px);
     width: 100%;
-    position: relative;
+
+    .mp-container {
+      position: relative;
+    }
 
     .mdl-tabs__tab-bar {
       height: auto;
