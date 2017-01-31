@@ -6,7 +6,7 @@ export class ChartOptionsService {
     this.options = {
       yTicks: 8,
       xTicks: 4,
-      yAxisWidth: 50,
+      yAxisWidth: 55,
       xAxisHeight: 20,
       calloutLeftMargin: 8,
       calloutHeight: 16,
