@@ -10,7 +10,7 @@ export interface ChartStateInterface extends Map<string,any> {
 
 export const ChartInitialState = Record({
   point: {},
-  range: '1d',
+  range: '3mo',
   data: [],
   loader: false,
   error: null
