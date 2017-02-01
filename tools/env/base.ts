@@ -1,6 +1,12 @@
 import { ConfigInterface } from './config.interface';
 
 const BaseConfig: ConfigInterface = {
+  notifications: {
+    noData: 'No results found',
+    noStock: 'Please select a stock symbol',
+    search: 'Type a company name or stock symbol',
+    noFavorites: 'Your favorites is empty'
+  },
   chartRanges: [
     {id: '1d', text: '1d', interval: '1m'},
     {id: '5d', text: '1w', interval: '5m'},

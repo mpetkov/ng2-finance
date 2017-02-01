@@ -86,9 +86,9 @@ export class ChartComponent {
   private validateChartData(data:any[]) {
     if (data.length === 0) {
       if (this.symbol) {
-        this.updateNotification(NotificationTypeEnum.Notification, 'No results found');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
-        this.updateNotification(NotificationTypeEnum.Notification, 'Please select a stock symbol');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     }
   }

@@ -1,5 +1,6 @@
 import { Component, Renderer, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
+import { Config } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
 
@@ -56,7 +57,7 @@ export class EditComponent implements OnDestroy {
     event.stopPropagation();
     this.deleted.push(symbol);
     if (this.deleted.length === this.favorites.length) {
-      this.notification = 'Your favorites is now empty';
+      this.notification = Config.notifications.noFavorites;
     }
     this.destroyListener();
   }

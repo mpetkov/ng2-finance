@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Config } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { SearchApiService } from './search-api.service';
 import { SearchStateService } from './state/search-state.service';
@@ -69,9 +70,9 @@ export class SearchComponent {
   private updateStocks(data:any[]) {
     if (data.length === 0) {
       if (this.search) {
-        this.updateNotification(NotificationTypeEnum.Notification, 'No results found');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
-        this.updateNotification(NotificationTypeEnum.Notification, 'Type a company name or stock symbol');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.search);
       }
     }
 
