@@ -1,9 +1,10 @@
-import { Map, Record } from 'immutable';
+import { Record } from 'immutable';
+import {
+  CoreApiStateInterface,
+  CoreApiStateKeys
+} from '../../../../core/index';
 
-export interface NewsStateInterface extends Map<string,any> {
-  data?:any[];
-  loader?:boolean;
-  error?:string;
+export interface NewsStateInterface extends CoreApiStateInterface {
 }
 
 export const NewsInitialState = Record({
@@ -11,3 +12,6 @@ export const NewsInitialState = Record({
   loader: false,
   error: null
 });
+
+export class NewsStateKeys extends CoreApiStateKeys {
+}
