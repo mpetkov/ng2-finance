@@ -13,3 +13,7 @@ export interface SidebarStateInterface extends Map<string,any> {
 export const SidebarInitialState = Record({
   type: SidebarTypeEnum.List
 });
+
+export class SidebarStateKeys {
+  static Type = 'type';
+}

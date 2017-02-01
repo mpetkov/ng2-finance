@@ -1,29 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { CoreStateService } from '../../../core/index';
 import {
   SidebarTypeEnum,
-  SidebarActions
+  SidebarActions,
+  SidebarStateKeys
 } from './index';
 import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
-export class SidebarStateService {
+export class SidebarStateService extends CoreStateService {
   type$:Observable<SidebarTypeEnum>;
 
-  constructor(private store$:Store<any>) {
-    this.type$ = store$.let(this.getType());
+  constructor(public store$:Store<any>) {
+    super(store$);
+    this.type$ = store$.let(this.getState('sidebar', SidebarStateKeys.Type));
   }
 
   changeType(type:SidebarTypeEnum) {
     this.store$.dispatch(SidebarActions.changeType(type));
-  }
-
-  private getType():any {
-    return (state$:any) => state$
-      .map((state:any) => state.sidebar.type)
-      .distinctUntilChanged();
   }
 }
