@@ -1,17 +1,23 @@
-import { Map, Record } from 'immutable';
+import { Record } from 'immutable';
+import {
+  CoreApiStateInterface,
+  CoreApiStateKeys
+} from '../../../../core/index';
 
-export interface FavoritesStateInterface extends Map<string,any> {
+export interface FavoritesStateInterface extends CoreApiStateInterface {
   symbols?:string[];
-  data?:any[];
-  loader?:boolean;
-  error?:string;
   order?:string[];
 }
 
 export const FavoritesInitialState = Record({
   symbols: ['YHOO', 'AAPL', 'GOOG', 'ADS'],
+  order: [],
   data: [],
   loader: false,
-  error: null,
-  order: []
+  error: null
 });
+
+export class FavoritesStateKeys extends CoreApiStateKeys {
+  static Symbols = 'symbols';
+  static Order = 'order';
+}
