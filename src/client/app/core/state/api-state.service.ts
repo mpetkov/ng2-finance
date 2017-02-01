@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CoreApiStateKeys } from './api.state';
+import { CoreStateService } from "./state.service";
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
-export class CoreApiStateService {
+export class CoreApiStateService extends CoreStateService {
   data$:Observable<any[]>;
   loader$:Observable<boolean>;
   error$:Observable<string>;
@@ -15,6 +16,7 @@ export class CoreApiStateService {
   constructor(protected store$:Store<any>,
               protected stateName:string,
               private actions:any) {
+    super(store$);
     this.data$ = store$.let(this.getState(stateName, CoreApiStateKeys.Data));
     this.loader$ = store$.let(this.getState(stateName, CoreApiStateKeys.Loader));
     this.error$ = store$.let(this.getState(stateName, CoreApiStateKeys.Error));
@@ -30,11 +32,5 @@ export class CoreApiStateService {
 
   fetchError(error:string) {
     this.store$.dispatch(this.actions.fetchError(error));
-  }
-
-  protected getState(stateName:string, key:string):any {
-    return (state$:any) => state$
-      .map((state:any) => state[stateName][key])
-      .distinctUntilChanged();
   }
 }
