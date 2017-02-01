@@ -2,13 +2,11 @@ import {
   ActionReducer,
   Action
 } from '@ngrx/store';
-import {
-  ChartStateInterface,
-  ChartInitialState
-} from './chart.state';
+import { ChartInitialState } from './chart.state';
 import {
   ChartActions,
-  ChartStateKeys
+  ChartStateKeys,
+  ChartStateInterface
 } from './index';
 
 const initialState:ChartStateInterface = new ChartInitialState() as ChartStateInterface;
