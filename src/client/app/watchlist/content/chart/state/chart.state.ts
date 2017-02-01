@@ -1,11 +1,12 @@
-import { Map, Record } from 'immutable';
+import { Record } from 'immutable';
+import {
+  CoreApiStateInterface,
+  CoreApiStateKeys
+} from '../../../../core/index';
 
-export interface ChartStateInterface extends Map<string,any> {
+export interface ChartStateInterface extends CoreApiStateInterface {
   point?:any;
   range?:string;
-  data?:any[];
-  loader?:boolean;
-  error?:string;
 }
 
 export const ChartInitialState = Record({
@@ -15,3 +16,9 @@ export const ChartInitialState = Record({
   loader: false,
   error: null
 });
+
+
+export class ChartStateKeys extends CoreApiStateKeys {
+  static Point = 'point';
+  static Range = 'range';
+}
