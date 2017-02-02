@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -10,6 +10,12 @@ import { Component, Input } from '@angular/core';
 export class NotificationComponent {
   @Input() type:NotificationTypeEnum;
   @Input() value:string;
+  @Input() button:NotificationButtonInterface;
+  @Output() action:EventEmitter<string> = new EventEmitter();
+
+  buttonClick() {
+    this.action.emit(this.button.action);
+  }
 }
 
 export enum NotificationTypeEnum {
@@ -17,4 +23,10 @@ export enum NotificationTypeEnum {
   Notification,
   Error,
   Loader
+}
+
+export interface NotificationButtonInterface {
+  icon?:string;
+  text?:string;
+  action?:string;
 }

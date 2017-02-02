@@ -1,8 +1,9 @@
 :host > span {
   margin: 10px 20px;
   display: block;
-
-  p {
-    text-align: center;
+  text-align: center;
+  button {
+    padding-left: 10px;
+    margin-top: 10px;
   }
 }
