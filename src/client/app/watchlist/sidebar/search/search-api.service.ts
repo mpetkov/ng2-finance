@@ -11,6 +11,7 @@ import { SearchStateService } from './state/index';
 @Injectable()
 export class SearchApiService extends LoaderService {
   private favorites:string[] = [];
+  private stock:string;
   constructor(public http:Http,
               private favoritesState:FavoritesStateService,
               private searchState:SearchStateService) {
@@ -21,6 +22,7 @@ export class SearchApiService extends LoaderService {
   }
 
   load(stock:string) {
+    this.stock = stock;
     this.searchState.fetchLoader(true);
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.search.replace('$stock', encodeURIComponent(stock))))
@@ -35,6 +37,10 @@ export class SearchApiService extends LoaderService {
           error => this.searchState.fetchError(error)
         );
     }
+  }
+
+  reload() {
+    this.load(this.stock);
   }
 
   private complete(data:any) {

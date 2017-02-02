@@ -10,12 +10,14 @@ declare let moment:any;
 
 @Injectable()
 export class NewsApiService extends LoaderService {
+  private stock:string;
   constructor(public http:Http,
               private newsState:NewsStateService) {
     super(http);
   }
 
   load(stock:string) {
+    this.stock = stock;
     this.newsState.fetchLoader(true);
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.news.replace('$stock', encodeURIComponent(stock))))
@@ -30,6 +32,9 @@ export class NewsApiService extends LoaderService {
           error => this.newsState.fetchError(error)
         );
     }
+  }
+  reload() {
+    this.load(this.stock);
   }
 
   private complete(data:any) {

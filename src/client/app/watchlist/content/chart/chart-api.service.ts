@@ -9,12 +9,14 @@ import { ChartStateService } from './state/index';
 
 @Injectable()
 export class ChartApiService extends LoaderService {
+  private params:any = {};
   constructor(public http:Http,
               private chartState:ChartStateService) {
     super(http);
   }
 
   load(stock:string, range:string, interval:string) {
+    this.params = {stock:stock, range:range, interval:interval};
     this.chartState.fetchLoader(true);
     if(Config.env === 'PROD') {
       let url:string = Config.paths.charts.replace('$stock', stock);
@@ -32,6 +34,10 @@ export class ChartApiService extends LoaderService {
           error => this.chartState.fetchError(error)
         );
     }
+  }
+
+  reload() {
+    this.load(this.params.stock, this.params.range, this.params.interval);
   }
 
   private complete(data:any) {

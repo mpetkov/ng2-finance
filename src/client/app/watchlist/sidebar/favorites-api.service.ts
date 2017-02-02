@@ -10,6 +10,7 @@ import { FavoritesStateService } from './favorites/state/index';
 @Injectable()
 export class FavoritesApiService extends LoaderService {
   private order:string[] = [];
+  private stocks:string[] = [];
   constructor(public http:Http,
               private favoritesState:FavoritesStateService) {
     super(http);
@@ -19,12 +20,17 @@ export class FavoritesApiService extends LoaderService {
   }
 
   load(stocks:string[]) {
+    this.stocks = stocks;
     this.favoritesState.fetchLoader(true);
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
         data => this.complete(data),
         error =>  this.favoritesState.fetchError(error)
       );
+  }
+
+  reload() {
+    this.load(this.stocks);
   }
 
   private complete(data:any) {
