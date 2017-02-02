@@ -32,6 +32,6 @@ export class LoaderService {
   }
 
   private handleError(error:any) {
-    return Observable.throw('Unable to load API.  Please try reloading the page.');
+    return Observable.throw('Yahoo\'s API was unable to load.');
   }
 }
