@@ -3,6 +3,7 @@ import { NewsApiService } from './news-api.service';
 import { NewsStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
+import { CoreApiNotification } from '../../../core/index';
 
 @Component({
   moduleId: module.id,
@@ -11,28 +12,20 @@ import { NotificationTypeEnum } from '../../../shared/index';
   styleUrls: ['news.component.css']
 })
 
-export class NewsComponent {
+export class NewsComponent extends CoreApiNotification {
   news:any[] = [];
-  notification:string;
-  notificationType:NotificationTypeEnum;
   private symbol:string;
   constructor(private newsState:NewsStateService,
               private watchlistState:WatchlistStateService,
               private newsApiService:NewsApiService) {
+    super(newsState, newsApiService);
+
     watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
     );
 
     newsState.data$.subscribe(
       news => this.updateNews(news)
-    );
-
-    newsState.loader$.subscribe(
-      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
-    );
-
-    newsState.error$.subscribe(
-      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     );
 
     this.updateNews([]);
@@ -52,10 +45,5 @@ export class NewsComponent {
     }
 
     this.news = data;
-  }
-
-  private updateNotification(type:NotificationTypeEnum, value:string = null) {
-    this.notificationType = type;
-    this.notification = value;
   }
 }

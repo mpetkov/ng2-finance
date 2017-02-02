@@ -16,21 +16,11 @@
 </div>
 <mp-notification *ngIf="notificationType !== 0"
                  [type]="notificationType"
-                 [value]="notification"></mp-notification>
+                 [value]="notification"
+                 [button]="button"
+                 (action)="notificationAction($event)"></mp-notification>
 <span *ngIf="notificationType === 0">
-  <div *ngIf="favorites?.length === 0"
-       class="mp-empty">
-    <p>Your favorites is empty!</p>
-    <button mdl-button
-            mdl-button-type="raised"
-            mdl-colored="primary"
-            mdl-ripple
-            (click)="add()">
-      <mdl-icon>add</mdl-icon> Add symbol
-    </button>
-  </div>
-  <ul *ngIf="favorites?.length !== 0"
-      class="mdl-navigation">
+  <ul class="mdl-navigation">
     <li *ngFor="let stock of favorites"
         class="mdl-navigation__link"
         [ngClass]="{active: (watchlistState.stockSymbol$ | async) === stock.symbol}"

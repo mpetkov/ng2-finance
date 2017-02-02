@@ -10,7 +10,9 @@
 </div>
 <mp-notification *ngIf="notificationType > 0"
                  [type]="notificationType"
-                 [value]="notification"></mp-notification>
+                 [value]="notification"
+                 [button]="button"
+                 (action)="notificationAction($event)"></mp-notification>
 <ul *ngIf="notificationType === 0"
     class="mdl-list mdl-navigation">
   <li *ngFor="let stock of stocks"

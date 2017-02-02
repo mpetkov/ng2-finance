@@ -4,7 +4,9 @@
 <div class="mdl-card__supporting-text">
   <mp-notification *ngIf="notificationType > 0"
                    [type]="notificationType"
-                   [value]="notification"></mp-notification>
+                   [value]="notification"
+                   [button]="button"
+                   (action)="notificationAction($event)"></mp-notification>
   <ul *ngIf="notificationType === 0"
       class="mdl-list">
     <li *ngFor="let article of news"

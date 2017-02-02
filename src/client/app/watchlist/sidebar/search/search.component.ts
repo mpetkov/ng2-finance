@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Config } from '../../../core/index';
+import {
+  Config,
+  CoreApiNotification
+} from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { SearchApiService } from './search-api.service';
 import { SearchStateService } from './state/search-state.service';
@@ -15,7 +18,7 @@ import { NotificationTypeEnum } from '../../../shared/index';
   providers: [SearchStateService, SearchApiService]
 })
 
-export class SearchComponent {
+export class SearchComponent extends CoreApiNotification {
   stocks:any[] = [];
   notification:string;
   notificationType:NotificationTypeEnum;
@@ -27,20 +30,14 @@ export class SearchComponent {
               private favoritesState:FavoritesStateService,
               private watchlistState:WatchlistStateService,
               private searchApiService:SearchApiService) {
+    super(searchState, searchApiService);
+
     searchState.data$.subscribe(
       data => this.updateStocks(data)
     );
 
     favoritesState.order$.subscribe(
       order => this.order = order
-    );
-
-    searchState.loader$.subscribe(
-      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
-    );
-
-    searchState.error$.subscribe(
-      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     );
 
     this.updateStocks([]);
@@ -77,10 +74,5 @@ export class SearchComponent {
     }
 
     this.stocks = data;
-  }
-
-  private updateNotification(type:NotificationTypeEnum, value:string = null) {
-    this.notificationType = type;
-    this.notification = value;
   }
 }

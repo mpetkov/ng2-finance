@@ -4,6 +4,8 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
+import { CoreApiNotification } from '../../../core/index';
+import { FavoritesApiService } from '../favorites-api.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -13,32 +15,25 @@ import * as _ from 'lodash';
   styleUrls: ['favorites.component.css']
 })
 
-export class FavoritesComponent {
+export class FavoritesComponent extends CoreApiNotification {
   @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
   favorites:any[] = [];
-  notification:string;
-  notificationType:NotificationTypeEnum;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
   private selected:string;
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
+              private favoritesApiService:FavoritesApiService,
               private sidebarState:SidebarStateService) {
+    super(favoritesState, favoritesApiService);
+
     watchlistState.stockSymbol$.subscribe(
       symbol => this.selected = symbol
     );
 
     favoritesState.data$.subscribe(
       data => this.updateFavorites(data)
-    );
-
-    favoritesState.loader$.subscribe(
-      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
-    );
-
-    favoritesState.error$.subscribe(
-      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     );
   }
 
@@ -64,18 +59,34 @@ export class FavoritesComponent {
     this.pillType = PillEnum[this.pillIndex];
   }
 
-  private updateNotification(type:NotificationTypeEnum, value:string = null) {
-    this.notificationType = type;
-    this.notification = value;
+  notificationAction(type:string) {
+    super.notificationAction(type);
+    if (type === FavoriteNotificationActions.Add) {
+      this.add();
+    }
   }
 
   private updateFavorites(data:any[]) {
     this.favorites = data;
     this.watchlistState.changeStock(_.find(data, ['symbol', this.selected]) || {});
+    if (data.length === 0) {
+      this.updateNotification(
+        NotificationTypeEnum.Notification,
+        'Your favorites is empty!',
+        {
+          icon: 'add',
+          text: 'Add symbol',
+          action: FavoriteNotificationActions.Add
+        });
+    }
   }
 }
 
 enum PillEnum {
   change,
   percentage
+}
+
+export class FavoriteNotificationActions {
+  static Add = 'add';
 }

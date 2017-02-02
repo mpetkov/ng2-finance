@@ -15,9 +15,11 @@
   </mdl-tabs>
   <div class="mp-container">
     <mp-notification *ngIf="notificationType > 0"
+                     class="mp-cover"
                      [type]="notificationType"
                      [value]="notification"
-                     class="mp-cover"></mp-notification>
+                     [button]="button"
+                     (action)="notificationAction($event)"></mp-notification>
     <mp-d3fc></mp-d3fc>
   </div>
 </div>

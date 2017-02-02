@@ -8,7 +8,8 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 import {
   Config,
-  ChartRangesInterface
+  ChartRangesInterface,
+  CoreApiNotification
 } from '../../../core/index';
 import * as _ from 'lodash';
 
@@ -20,17 +21,17 @@ import * as _ from 'lodash';
   encapsulation: ViewEncapsulation.None
 })
 
-export class ChartComponent {
+export class ChartComponent extends CoreApiNotification {
   stock:any = {};
   ranges:ChartRangesInterface[] = Config.chartRanges;
-  notification:string;
-  notificationType:NotificationTypeEnum;
   rangeIndex:number;
   private symbol:string;
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
               private watchlistState:WatchlistStateService) {
+    super(chartState, chartApiService);
+
     watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
     );
@@ -45,14 +46,6 @@ export class ChartComponent {
 
     chartState.data$.subscribe(
       data => this.validateChartData(data)
-    );
-
-    chartState.loader$.subscribe(
-      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
-    );
-
-    chartState.error$.subscribe(
-      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     );
   }
 
@@ -91,10 +84,5 @@ export class ChartComponent {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     }
-  }
-
-  private updateNotification(type:NotificationTypeEnum, value:string = null) {
-    this.notificationType = type;
-    this.notification = value;
   }
 }
