@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
-import { routes } from './app.routes';
+import { appRoutes } from './app.routes';
 
 import {
   stockReducer,
@@ -27,7 +27,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     StoreModule.provideStore({
       stock: stockReducer,
       favorites: favoritesReducer,

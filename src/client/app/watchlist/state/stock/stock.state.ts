@@ -6,6 +6,6 @@ export interface StockStateInterface extends Map<string,any> {
 }
 
 export const StockInitialState = Record({
-  symbol: 'AAPL',
+  symbol: null,
   data: {}
 });
