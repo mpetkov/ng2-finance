@@ -25,7 +25,7 @@ export class ChartComponent extends CoreApiNotification {
   stock:any = {};
   ranges:ChartRangesInterface[] = Config.chartRanges;
   rangeIndex:number;
-  private symbol:string;
+  symbol:string;
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
@@ -57,7 +57,11 @@ export class ChartComponent extends CoreApiNotification {
 
   private updateSymbol(symbol:string) {
     this.symbol = symbol;
-    this.loadChartData();
+    if (symbol) {
+      this.loadChartData();
+    } else {
+      this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
+    }
   }
 
   private updateRange(range:string) {
