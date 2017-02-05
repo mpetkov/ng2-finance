@@ -3,7 +3,11 @@
     height: calc(100% - 16px);
   }
 
-  .mdl-cell--3-col {
-    height: calc(50% - 16px);
+  .mp-info {
+    height: 333px;
+  }
+
+  .mp-news {
+    height: calc(100% - 32px - 333px);
   }
 }

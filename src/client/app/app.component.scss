@@ -76,18 +76,27 @@ input {
 }
 
 .mdl-card__supporting-text {
-  width: calc(100% - 32px);
-  height: calc(100% - 34px - 32px);
+  width: 100%;
+  height: calc(100% - 38px);
   color: black;
+  padding: 0;
 }
 
 .mdl-cell {
   float: left;
 }
 
+.mdl-grid {
+  padding: 0;
+}
+
 .mdl-list {
   padding: 0;
   margin: 0;
+  .mdl-list__item {
+    padding: 5px;
+    min-height: inherit;
+  }
   .mdl-list__item--two-line {
     border-bottom: 1px solid #dcdcdc;
     padding: 5px 10px;
