@@ -6,6 +6,7 @@ import { ChartApiService } from './chart-api.service';
 import { ChartStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
+import { AppStateService } from '../../../state/app-state.service';
 import {
   Config,
   ChartRangesInterface,
@@ -29,7 +30,8 @@ export class ChartComponent extends CoreApiNotification {
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
-              private watchlistState:WatchlistStateService) {
+              private watchlistState:WatchlistStateService,
+              private appState:AppStateService) {
     super(chartState, chartApiService);
 
     watchlistState.stockSymbol$.subscribe(
@@ -88,5 +90,7 @@ export class ChartComponent extends CoreApiNotification {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     }
+
+    this.appState.changePreloader(false);
   }
 }

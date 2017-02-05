@@ -1,13 +1,24 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
+import { AppStateService } from "./state/app-state.service";
 import './operators';
 
 @Component({
   moduleId: module.id,
   selector: 'mp-app',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: 'app.component.html'
 })
 
 export class AppComponent {
+  constructor(private appState:AppStateService) {
+    let preloaderDiv:Element = document.getElementsByClassName('mp-preloader')[0];
+
+    let sub = appState.preloader$.subscribe(
+      preloader => {
+        if (!preloader && preloaderDiv) {
+          preloaderDiv.classList.add('mp-loaded');
+          sub.unsubscribe();
+        }
+      }
+    );
+  }
 }

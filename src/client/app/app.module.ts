@@ -21,6 +21,9 @@ import {
   sidebarReducer
 } from './watchlist/sidebar/index';
 
+import { appReducer } from './state/index';
+import { AppStateService } from './state/app-state.service';
+
 import { SharedModule } from './shared/shared.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
 
@@ -30,6 +33,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     HttpModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
     StoreModule.provideStore({
+      app: appReducer,
       stock: stockReducer,
       favorites: favoritesReducer,
       sidebar: sidebarReducer,
@@ -42,12 +46,14 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     WatchlistModule
   ],
   declarations: [AppComponent],
-  providers: [{
-    provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  }],
+  providers: [
+    AppStateService,
+    {
+      provide: APP_BASE_HREF,
+      useValue: '<%= APP_BASE %>'
+    }
+  ],
   bootstrap: [AppComponent]
-
 })
 
 export class AppModule {
