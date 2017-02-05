@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import * as _ from 'lodash';
 import {
   Config,
   LoaderService
 } from '../../../core/index';
 import { ChartStateService } from './state/index';
+declare let _:any;
 
 @Injectable()
 export class ChartApiService extends LoaderService {

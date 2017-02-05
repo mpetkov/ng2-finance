@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import * as _ from 'lodash';
 import {
   Config,
   LoaderService
 } from '../../../core/index';
 import { NewsStateService } from './state/index';
 declare let moment:any;
+declare let _:any;
 
 @Injectable()
 export class NewsApiService extends LoaderService {

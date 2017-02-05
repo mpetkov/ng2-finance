@@ -6,7 +6,7 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { CoreApiNotification } from '../../../core/index';
 import { FavoritesApiService } from '../favorites-api.service';
-import * as _ from 'lodash';
+declare let _:any;
 
 @Component({
   moduleId: module.id,

@@ -22,6 +22,7 @@ export class ProjectConfig extends SeedConfig {
       ...this.NPM_DEPENDENCIES,
       {src: 'normalize-css/normalize.css', inject: true},
       {src: 'dragula/dist/dragula.min.css', inject: true},
+      {src: 'lodash/lodash.min.js', inject: true},
       {src: 'moment/min/moment.min.js', inject: true}
     ];
 
