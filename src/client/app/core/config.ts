@@ -11,6 +11,7 @@ export interface ConfigPathsInterface {
   proxy?: string;
   search?: string;
   stocks?: string;
+  info?: string;
 }
 
 export interface ChartRangesInterface {
