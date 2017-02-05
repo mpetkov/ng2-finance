@@ -10,7 +10,8 @@ import { appRoutes } from './app.routes';
 import {
   stockReducer,
   chartReducer,
-  newsReducer
+  newsReducer,
+  infoReducer
 } from './watchlist/index';
 
 
@@ -34,7 +35,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
       sidebar: sidebarReducer,
       search: searchReducer,
       chart: chartReducer,
-      news: newsReducer
+      news: newsReducer,
+      info: infoReducer
     }),
     SharedModule,
     WatchlistModule
