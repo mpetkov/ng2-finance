@@ -25,6 +25,7 @@ import { appReducer } from './state/index';
 import { AppStateService } from './state/app-state.service';
 
 import { SharedModule } from './shared/shared.module';
+import { HeaderModule } from './shared/header/header.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
       info: infoReducer
     }),
     SharedModule,
+    HeaderModule,
     WatchlistModule
   ],
   declarations: [AppComponent],

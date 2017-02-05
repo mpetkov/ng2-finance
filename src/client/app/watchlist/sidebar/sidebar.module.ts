@@ -11,12 +11,14 @@ import {
   FavoritesApiService
 } from './index';
 import { SharedModule } from '../../shared/shared.module';
+import { SearchBoxModule } from '../../shared/search-box/search-box.module';
 
 @NgModule({
   imports: [
     RouterModule,
     SharedModule,
-    DragulaModule
+    DragulaModule,
+    SearchBoxModule
   ],
   declarations: [
     SidebarComponent,
