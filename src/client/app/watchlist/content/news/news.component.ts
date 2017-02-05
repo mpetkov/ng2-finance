@@ -3,7 +3,10 @@ import { NewsApiService } from './news-api.service';
 import { NewsStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
-import { CoreApiNotification } from '../../../core/index';
+import {
+  CoreApiNotification,
+  Config
+} from '../../../core/index';
 
 @Component({
   moduleId: module.id,
@@ -30,6 +33,7 @@ export class NewsComponent extends CoreApiNotification {
 
     this.updateNews([]);
   }
+
   private updateSymbol(symbol:string) {
     this.symbol = symbol;
     this.newsApiService.load(symbol);
@@ -38,9 +42,9 @@ export class NewsComponent extends CoreApiNotification {
   private updateNews(data:any[]) {
     if (data.length === 0) {
       if (this.symbol) {
-        this.updateNotification(NotificationTypeEnum.Notification, 'No results found');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
-        this.updateNotification(NotificationTypeEnum.Notification, 'Please select a stock symbol');
+        this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     }
 
