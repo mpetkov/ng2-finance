@@ -1,6 +1,38 @@
 <div class="mdl-card__title mdl-card--border">
-  <h4>Info</h4>
+  <h4>Key Statistics</h4>
 </div>
 <div class="mdl-card__supporting-text">
-  Text!
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+      <mdl-list>
+        <mdl-list-item>
+          <mp-range [options]="dayOptions"></mp-range>
+        </mdl-list-item>
+
+        <mdl-list-item>
+          <mp-range [options]="yearOptions"></mp-range>
+        </mdl-list-item>
+      </mdl-list>
+    </div>
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
+      <mdl-list>
+        <mdl-list-item class="mp-text"
+                       *ngFor="let info of leftColumn">
+          <p>{{info.text}}</p>
+          <b>{{data[info.id] || 'N/A'}}</b>
+        </mdl-list-item>
+      </mdl-list>
+    </div>
+    <div class="mdl-cell mdl-cell--6-col">
+      <mdl-list>
+        <mdl-list-item class="mp-text"
+                       *ngFor="let info of rightColumn">
+          <p>{{info.text}}</p>
+          <b>{{data[info.id] || 'N/A'}}</b>
+        </mdl-list-item>
+      </mdl-list>
+    </div>
+  </div>
 </div>

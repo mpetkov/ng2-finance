@@ -1,0 +1,35 @@
+:host {
+  .mdl-card__supporting-text {
+    .mdl-grid {
+      .mdl-cell {
+        margin: 4px 8px;
+      }
+    }
+    .mdl-grid:first-child {
+      .mdl-cell {
+        margin-bottom: 0;
+      }
+    }
+    overflow: auto;
+    .mdl-list {
+      .mp-text {
+        border-bottom: 1px solid #dcdcdc;
+      }
+      .mdl-list__item {
+        p {
+          font-size: 0.9rem;
+          line-height: 18px;
+        }
+        b {
+          float: right;
+          margin-left: auto;
+          font-size: 0.9rem;
+        }
+      }
+
+      .mdl-list__item:last-child {
+        border: none;
+      }
+    }
+  }
+}
