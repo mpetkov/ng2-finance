@@ -19,7 +19,9 @@ const ProdConfig: ConfigInterface = {
     '&intl=us&lang=en-US&partner=none&region=US&site=finance&tz=America%2FChicago&ver=0.101.749&returnMeta=true&callback=quote',
     stocks: yqlUrl +
     '?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20($stocks)' +
-    '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+    '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+    info: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in' +
+    '%20(%22$stock%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
   }
 };
 

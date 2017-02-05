@@ -8,6 +8,7 @@ const DevConfig: ConfigInterface = {
     proxy: 'http://www.marinpetkov.com/proxy.php',
     search: './assets/json/search.json',
     stocks: './assets/json/stocks.json',
+    info: './assets/json/info.json'
   }
 };
 
