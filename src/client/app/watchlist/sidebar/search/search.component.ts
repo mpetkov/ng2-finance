@@ -8,6 +8,7 @@ import { SearchApiService } from './search-api.service';
 import { SearchStateService } from './state/search-state.service';
 import { FavoritesStateService } from '../favorites/state/favorites-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 
 @Component({
@@ -29,7 +30,8 @@ export class SearchComponent extends CoreApiNotification {
               private sidebarState:SidebarStateService,
               private favoritesState:FavoritesStateService,
               private watchlistState:WatchlistStateService,
-              private searchApiService:SearchApiService) {
+              private searchApiService:SearchApiService,
+              private headerState:HeaderStateService) {
     super(searchState, searchApiService);
 
     searchState.data$.subscribe(
@@ -40,16 +42,11 @@ export class SearchComponent extends CoreApiNotification {
       order => this.order = order
     );
 
-    this.updateStocks([]);
-  }
+    headerState.search$.subscribe(
+      search => this.updateSearch(search)
+    );
 
-  updateSearch(value:string) {
-    this.search = value;
-    if (value) {
-      this.searchApiService.load(value);
-    } else {
-      this.updateStocks([]);
-    }
+    this.updateStocks([]);
   }
 
   add(stock:any) {
@@ -60,8 +57,13 @@ export class SearchComponent extends CoreApiNotification {
     this.watchlistState.changeStock(stock);
   }
 
-  close() {
-    this.sidebarState.changeType(SidebarTypeEnum.List);
+  private updateSearch(value:string) {
+    this.search = value;
+    if (value) {
+      this.searchApiService.load(value);
+    } else {
+      this.updateStocks([]);
+    }
   }
 
   private updateStocks(data:any[]) {

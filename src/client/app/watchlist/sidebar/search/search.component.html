@@ -1,13 +1,3 @@
-<div class="mdl-card__title">
-  <mp-search-box class="mp-search-box"
-                 (changed)="updateSearch($event)"></mp-search-box>
-  <button class="pull-right"
-          mdl-button
-          (click)="close()"
-          mdl-button-type="icon">
-    <mdl-icon title="Go back to favorites">close</mdl-icon>
-  </button>
-</div>
 <mp-notification *ngIf="notificationType > 0"
                  [type]="notificationType"
                  [value]="notification"
@@ -24,4 +14,3 @@
      </span>
   </li>
 </ul>
-
