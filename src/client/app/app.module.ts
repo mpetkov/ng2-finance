@@ -22,7 +22,9 @@ import {
 } from './watchlist/sidebar/index';
 
 import { appReducer } from './state/index';
+import { headerReducer } from './shared/header/index';
 import { AppStateService } from './state/app-state.service';
+import { HeaderStateService } from './shared/header/state/header-state.service';
 
 import { SharedModule } from './shared/shared.module';
 import { HeaderModule } from './shared/header/header.module';
@@ -35,6 +37,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     RouterModule.forRoot(appRoutes, {useHash: true}),
     StoreModule.provideStore({
       app: appReducer,
+      header: headerReducer,
       stock: stockReducer,
       favorites: favoritesReducer,
       sidebar: sidebarReducer,
@@ -50,6 +53,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
   declarations: [AppComponent],
   providers: [
     AppStateService,
+    HeaderStateService,
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
