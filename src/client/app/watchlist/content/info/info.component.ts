@@ -54,15 +54,17 @@ export class InfoComponent extends CoreApiNotification {
       { text: 'Dividend', id: 'DividendShare' }
     ];
 
-    this.updateInfo([]);
+    this.updateInfo();
   }
 
   private updateSymbol(symbol:string) {
     this.symbol = symbol;
-    this.infoApiService.load(symbol);
+    if(symbol) {
+      this.infoApiService.load(symbol);
+    }
   }
 
-  private updateInfo(data:any) {
+  private updateInfo(data:any = null) {
     if (!data) {
       if (this.symbol) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);

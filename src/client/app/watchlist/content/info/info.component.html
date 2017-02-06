@@ -2,7 +2,13 @@
   <h4>Key Statistics</h4>
 </div>
 <div class="mdl-card__supporting-text">
-  <div class="mdl-grid">
+  <mp-notification *ngIf="notificationType > 0"
+                   [type]="notificationType"
+                   [value]="notification"
+                   [button]="button"
+                   (action)="notificationAction($event)"></mp-notification>
+  <div *ngIf="notificationType === 0"
+       class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col">
       <mdl-list>
         <mdl-list-item>
@@ -15,7 +21,8 @@
       </mdl-list>
     </div>
   </div>
-  <div class="mdl-grid">
+  <div *ngIf="notificationType === 0"
+       class="mdl-grid">
     <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
       <mdl-list>
         <mdl-list-item class="mp-text"
