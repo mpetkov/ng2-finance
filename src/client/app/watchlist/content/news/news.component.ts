@@ -36,7 +36,9 @@ export class NewsComponent extends CoreApiNotification {
 
   private updateSymbol(symbol:string) {
     this.symbol = symbol;
-    this.newsApiService.load(symbol);
+    if(symbol) {
+      this.newsApiService.load(symbol);
+    }
   }
 
   private updateNews(data:any[]) {
