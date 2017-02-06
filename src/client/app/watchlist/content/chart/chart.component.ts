@@ -12,7 +12,7 @@ import {
   ChartRangesInterface,
   CoreApiNotification
 } from '../../../core/index';
-import * as _ from 'lodash';
+declare let _:any;
 
 @Component({
   moduleId: module.id,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import * as _ from 'lodash';
 import {
   Config,
   LoaderService,
@@ -8,6 +7,7 @@ import {
 } from '../../../core/index';
 import { InfoStateService } from './state/index';
 declare let moment:any;
+declare let _:any;
 
 @Injectable()
 export class InfoApiService extends LoaderService {
