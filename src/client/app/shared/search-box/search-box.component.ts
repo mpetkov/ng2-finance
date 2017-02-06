@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  ViewChild,
+  Renderer
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
@@ -9,25 +17,42 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['search-box.component.css']
 })
 
-export class SearchBoxComponent implements OnChanges, AfterViewInit {
+export class SearchBoxComponent implements OnChanges {
   @Input() value:string;
+  @Input() active:boolean;
   @Output() changed:EventEmitter<string> = new EventEmitter();
+  @Output() activate:EventEmitter<boolean> = new EventEmitter();
   @ViewChild('input') input:any;
   formControl:FormControl = new FormControl();
+  private windowClickListener: Function;
 
-  constructor() {
+  constructor(private renderer:Renderer) {
     this.formControl.valueChanges
       .debounceTime(300)
       .subscribe(value => this.changed.emit(value));
   }
 
-  ngAfterViewInit() {
-    this.input.nativeElement.focus();
-  }
-
   ngOnChanges(changes:any) {
     if (changes.value) {
       this.formControl.setValue(this.value, {});
+    }
+
+    if (changes.active && this.active) {
+      this.input.nativeElement.focus();
+    }
+  }
+
+  activateInput() {
+    if(!this.windowClickListener) {
+      this.windowClickListener = this.renderer.listenGlobal('window', 'click',
+        (event:any) => {
+          if(!event.target.parentElement || event.target.parentElement.className.indexOf('mp-search-box') === -1) {
+            this.toggleActive(false);
+            this.formControl.setValue('', {});
+            this.destroyListener();
+          }
+        });
+      this.toggleActive(true);
     }
   }
 
@@ -35,5 +60,21 @@ export class SearchBoxComponent implements OnChanges, AfterViewInit {
     this.formControl.setValue('', {});
     this.changed.emit(null);
     this.input.nativeElement.focus();
+  }
+
+  ngOnDestroy() {
+    this.destroyListener();
+  }
+
+  private toggleActive(active:boolean) {
+    this.active = active;
+    this.activate.emit(active);
+  }
+
+  private destroyListener() {
+    if(this.windowClickListener) {
+      this.windowClickListener();
+      this.windowClickListener = null;
+    }
   }
 }
