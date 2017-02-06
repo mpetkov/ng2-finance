@@ -1,3 +1,6 @@
 <mdl-layout-header-row>
   <mdl-layout-title>Ng2 Finance</mdl-layout-title>
+  <mp-search-box [active]="active"
+                 (changed)="updateSearch($event)"
+                 (activate)="activateSearch($event)"></mp-search-box>
 </mdl-layout-header-row>
