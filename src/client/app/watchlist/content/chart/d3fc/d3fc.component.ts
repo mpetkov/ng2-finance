@@ -27,6 +27,7 @@ export class D3fcComponent implements AfterViewInit {
   private data:any;
   private container:any;
   private chart:any;
+  private smallView:boolean;
 
   constructor(public chartState:ChartStateService,
               private chartOptionsService:ChartOptionsService,
@@ -44,7 +45,7 @@ export class D3fcComponent implements AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResize(e:any) {
     if (this.data) {
-      this.render(this.data, this.container, this.chart);
+      this.redraw(this.data, this.container, this.chart);
     }
   }
 
@@ -53,32 +54,49 @@ export class D3fcComponent implements AfterViewInit {
       this.data = data;
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
-
-      this.chart = this.getChart(data);
-      let area:any = this.getArea(data, this.chart.yDomain()[0]);
-      let line:any = this.getLine();
-      let gridlines:any = this.getGridLines();
-      let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
-      let lastClose:any = this.chartTooltipsService.getLastClose();
-
-      this.chart.plotArea(fc.series.multi()
-        .series([gridlines, area, line, lastClose, crosshair])
-        .mapping((series:any) => {
-          switch (series) {
-            case lastClose:
-              return [data[data.length - 1]];
-            case crosshair:
-              return data.crosshair;
-            default:
-              return data;
-          }
-        }));
-
-      this.render(data, this.container, this.chart);
+      this.render(data);
+      this.redraw(data, this.container, this.chart);
     }
   }
 
-  private render(data:any, container:any, chart:any) {
+  private render(data:any) {
+    this.chart = this.getChart(data);
+    let area:any = this.getArea(data, this.chart.yDomain()[0]);
+    let line:any = this.getLine();
+    let gridlines:any = this.getGridLines();
+    let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
+    let lastClose:any = this.chartTooltipsService.getLastClose();
+
+    var items:any[] = [gridlines, area, line];
+    if(!this.smallView) {
+      items.push(lastClose, crosshair);
+    }
+
+    this.chart.plotArea(fc.series.multi()
+      .series(items)
+      .mapping((series:any) => {
+        switch (series) {
+          case lastClose:
+            return [data[data.length - 1]];
+          case crosshair:
+            return data.crosshair;
+          default:
+            return data;
+        }
+      }));
+  }
+
+  private redraw(data:any, container:any, chart:any) {
+    if (window.innerWidth < 420) {
+      if (!this.smallView) {
+        this.smallView = true;
+        this.render(data);
+      }
+    } else if (this.smallView) {
+      this.smallView = false;
+      this.render(data);
+    }
+
     container
       .datum(data)
       .call(chart);
@@ -91,7 +109,7 @@ export class D3fcComponent implements AfterViewInit {
   private applyPostRenderChanges() {
     d3.selectAll('.y-axis text')
       .style('text-anchor', 'end')
-      .attr('transform', 'translate(-3, -8)');
+      .attr('transform', 'translate(' + this.chartOptionsService.options.yAxisLeftMargin + ', -8)');
 
     d3.selectAll('.x-axis text')
       .attr('dy', undefined)

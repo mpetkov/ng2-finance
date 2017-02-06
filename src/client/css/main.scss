@@ -1,5 +1,10 @@
 body {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  min-width: 320px;
+}
+
+.mdl-layout__container {
+  min-width: 320px;
 }
 
 .pull-left {

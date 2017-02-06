@@ -1,4 +1,4 @@
-$sidebarWidth: 330px;
+$sidebarWidth: 320px;
 
 :host {
   .mdl-layout__drawer {
@@ -12,5 +12,15 @@ $sidebarWidth: 330px;
     margin-left: $sidebarWidth;
     height: 100%;
     padding: 5px;
+  }
+
+  @media (max-width: 720px) {
+    .mdl-layout__content {
+      margin-left: 0;
+    }
+
+    .mdl-layout__drawer {
+      transform: translateX(-$sidebarWidth);
+    }
   }
 }

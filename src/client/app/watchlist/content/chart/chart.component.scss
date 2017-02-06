@@ -25,4 +25,10 @@
       }
     }
   }
+
+  @media (max-width: 1200px) {
+    .mdl-tabs__tab {
+      padding: 0 8px;
+    }
+  }
 }

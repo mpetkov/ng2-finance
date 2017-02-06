@@ -32,4 +32,17 @@
       }
     }
   }
+
+
+  @media (max-width: 840px) {
+    .mdl-card__supporting-text {
+      .mdl-cell--6-col:first-child {
+        .mdl-list {
+          .mdl-list__item:last-child {
+            border-bottom: 1px solid #dcdcdc;
+          }
+        }
+      }
+    }
+  }
 }
