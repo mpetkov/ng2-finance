@@ -3,6 +3,7 @@ import { DragulaService } from 'ng2-dragula';
 import { Config } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 
 @Component({
   moduleId: module.id,
@@ -22,6 +23,7 @@ export class EditComponent implements OnDestroy {
 
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
+              private headerState:HeaderStateService,
               private renderer:Renderer,
               private dragulaService: DragulaService) {
     favoritesState.data$.subscribe(
@@ -78,7 +80,13 @@ export class EditComponent implements OnDestroy {
     if (this.deleted.length > 0) {
       this.favoritesState.delete(this.deleted);
     }
-    this.sidebarState.changeType(type);
+
+    if (type === SidebarTypeEnum.Add) {
+      this.headerState.changeSearchActive(true);
+    } else {
+      this.sidebarState.changeType(type);
+    }
+
     this.updateOrder();
   }
 

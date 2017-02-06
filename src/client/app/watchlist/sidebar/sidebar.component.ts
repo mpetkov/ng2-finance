@@ -1,10 +1,14 @@
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
-import { SidebarStateService } from './state/index';
+import {
+  SidebarStateService,
+  SidebarTypeEnum
+} from './state/index';
 import { FavoritesStateService } from './favorites/state/favorites-state.service';
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
+import { HeaderStateService } from '../../shared/header/state/header-state.service';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 
@@ -22,9 +26,14 @@ export class SidebarComponent implements OnDestroy {
               private route: ActivatedRoute,
               private favoritesState:FavoritesStateService,
               private favoritesApiService:FavoritesApiService,
-              private watchlistState:WatchlistStateService) {
+              private watchlistState:WatchlistStateService,
+              private headerState:HeaderStateService) {
     favoritesState.symbols$.subscribe(
       symbols => favoritesApiService.load(symbols)
+    );
+
+    headerState.searchActive$.subscribe(
+      searchActive => searchActive ? sidebarState.changeType(SidebarTypeEnum.Add) : sidebarState.changeType(SidebarTypeEnum.List)
     );
 
     route.params

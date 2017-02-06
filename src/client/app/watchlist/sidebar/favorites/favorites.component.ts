@@ -6,6 +6,7 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { CoreApiNotification } from '../../../core/index';
 import { FavoritesApiService } from '../favorites-api.service';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 declare let _:any;
 
 @Component({
@@ -25,7 +26,8 @@ export class FavoritesComponent extends CoreApiNotification {
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
               private favoritesApiService:FavoritesApiService,
-              private sidebarState:SidebarStateService) {
+              private sidebarState:SidebarStateService,
+              private headerState:HeaderStateService) {
     super(favoritesState, favoritesApiService);
 
     watchlistState.stockSymbol$.subscribe(
@@ -38,7 +40,7 @@ export class FavoritesComponent extends CoreApiNotification {
   }
 
   add() {
-    this.sidebarState.changeType(SidebarTypeEnum.Add);
+    this.headerState.changeSearchActive(true);
   }
 
   edit() {
