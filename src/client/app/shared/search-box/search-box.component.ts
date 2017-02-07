@@ -28,7 +28,7 @@ export class SearchBoxComponent implements OnChanges {
 
   constructor(private renderer:Renderer) {
     this.formControl.valueChanges
-      .debounceTime(300)
+      .debounceTime(500)
       .subscribe(value => this.changed.emit(value));
   }
 
