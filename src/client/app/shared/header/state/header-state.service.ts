@@ -12,11 +12,13 @@ import 'rxjs/add/operator/let';
 export class HeaderStateService extends CoreStateService {
   searchActive$:Observable<boolean>;
   search$:Observable<string>;
+  sidebar$:Observable<boolean>;
 
   constructor(public store$:Store<any>) {
     super(store$);
     this.searchActive$ = store$.let(this.getState('header', HeaderStateKeys.SearchActive));
     this.search$ = store$.let(this.getState('header', HeaderStateKeys.Search));
+    this.sidebar$ = store$.let(this.getState('header', HeaderStateKeys.Sidebar));
   }
 
   changeSearchActive(searchActive:boolean) {
@@ -25,5 +27,9 @@ export class HeaderStateService extends CoreStateService {
 
   changeSearch(search:string) {
     this.store$.dispatch(HeaderActions.changeSearch(search));
+  }
+
+  changeSidebar(sidebar:boolean) {
+    this.store$.dispatch(HeaderActions.changeSidebar(sidebar));
   }
 }

@@ -18,6 +18,8 @@ export const headerReducer:ActionReducer<HeaderStateInterface> =
       return state.set(HeaderStateKeys.SearchActive, action.payload);
     case HeaderActions.CHANGE_SEARCH:
       return state.set(HeaderStateKeys.Search, action.payload);
+    case HeaderActions.CHANGE_SIDEBAR:
+      return state.set(HeaderStateKeys.Sidebar, action.payload);
     default:
       return state;
   }
