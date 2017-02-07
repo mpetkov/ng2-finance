@@ -5,6 +5,13 @@
 .mdl-layout__header-row {
   height: 50px;
   padding-left: 10px;
+
+  .mp-close {
+    display: none;
+    font-size: 3rem;
+    margin-left: -10px;
+  }
+
   .mp-search-box {
     border: none !important;
     background: rgba(255, 255, 255, 0.16);
@@ -17,6 +24,12 @@
     input,
     input::-webkit-input-placeholder {
       color: rgba(255,255,255,0.7) !important;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .mp-close {
+      display: initial;
     }
   }
 }

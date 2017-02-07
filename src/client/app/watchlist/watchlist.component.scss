@@ -18,9 +18,12 @@ $sidebarWidth: 320px;
     .mdl-layout__content {
       margin-left: 0;
     }
-
     .mdl-layout__drawer {
-      transform: translateX(-$sidebarWidth);
+      width: 100%;
+    }
+
+    .mdl-layout__drawer.inactive {
+      transform: translateX(-100%);
     }
   }
 }

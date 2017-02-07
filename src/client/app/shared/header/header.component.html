@@ -1,4 +1,7 @@
 <mdl-layout-header-row>
+  <mdl-icon *ngIf="!sidebar"
+            class="mp-close"
+            (click)="showSidebar()">navigate_before</mdl-icon>
   <mdl-layout-title>Ng2 Finance</mdl-layout-title>
   <mp-search-box [active]="active"
                  (changed)="updateSearch($event)"

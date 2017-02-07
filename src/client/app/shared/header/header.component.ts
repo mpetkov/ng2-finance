@@ -11,10 +11,15 @@ import { HeaderStateService } from './state/header-state.service';
 
 export class HeaderComponent {
   active:boolean;
+  sidebar:boolean;
 
   constructor(private headerState:HeaderStateService) {
     headerState.searchActive$.subscribe(
       searchActive => this.active = searchActive
+    );
+
+    headerState.sidebar$.subscribe(
+      sidebar => this.sidebar = sidebar
     );
   }
 
@@ -24,5 +29,9 @@ export class HeaderComponent {
 
   activateSearch(active:boolean) {
     this.headerState.changeSearchActive(active);
+  }
+
+  showSidebar() {
+    this.headerState.changeSidebar(true);
   }
 }

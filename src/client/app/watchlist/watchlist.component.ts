@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderStateService } from '../shared/header/state/header-state.service';
 
 @Component({
   moduleId: module.id,
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 
 export class WatchlistComponent {
+  sidebar:boolean;
+  constructor(private headerState:HeaderStateService) {
+    headerState.sidebar$.subscribe(
+      sidebar => this.sidebar = sidebar
+    );
+  }
 }
