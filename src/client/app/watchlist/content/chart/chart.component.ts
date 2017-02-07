@@ -34,21 +34,21 @@ export class ChartComponent extends CoreApiNotification {
               private appState:AppStateService) {
     super(chartState, chartApiService);
 
-    watchlistState.stockSymbol$.subscribe(
+    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
-    );
+    ));
 
-    chartState.range$.subscribe(
+    this.subscriptions.push(chartState.range$.subscribe(
       range => this.updateRange(range)
-    );
+    ));
 
-    watchlistState.stock$.subscribe(
+    this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.stock = stock
-    );
+    ));
 
-    chartState.data$.subscribe(
+    this.subscriptions.push(chartState.data$.subscribe(
       data => this.validateChartData(data)
-    );
+    ));
   }
 
   tabChanged(index:number) {

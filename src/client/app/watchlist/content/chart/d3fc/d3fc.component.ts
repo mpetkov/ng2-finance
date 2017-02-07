@@ -4,6 +4,7 @@ import { ChartCrosshairService } from './services/chart-crosshair.service';
 import { ChartTooltipsService } from './services/chart-tooltips.service';
 import { ChartOptionsService } from './services/chart-options.service';
 import { ChartStateService } from '../state/index';
+import { Subscriptions } from '../../../../core/index';
 
 declare let fc:any;
 declare let d3:any;
@@ -22,7 +23,7 @@ declare let d3:any;
   ]
 })
 
-export class D3fcComponent implements AfterViewInit {
+export class D3fcComponent extends Subscriptions implements AfterViewInit {
   @ViewChild('svg') svg:any;
   private data:any;
   private container:any;
@@ -34,12 +35,13 @@ export class D3fcComponent implements AfterViewInit {
               private chartCrosshairService:ChartCrosshairService,
               private chartTooltipsService:ChartTooltipsService,
               private chartVolumeService:ChartVolumeService) {
+    super();
   }
 
   ngAfterViewInit() {
-    this.chartState.data$.subscribe(
+    this.subscriptions.push(this.chartState.data$.subscribe(
       data => this.init(data)
-    );
+    ));
   }
 
   @HostListener('window:resize', ['$event'])

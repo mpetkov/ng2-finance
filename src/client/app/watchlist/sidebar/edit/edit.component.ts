@@ -1,6 +1,6 @@
 import { Component, Renderer, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { Config } from '../../../core/index';
+import { Config, Subscriptions } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
@@ -13,7 +13,7 @@ import { HeaderStateService } from '../../../shared/header/state/header-state.se
   encapsulation: ViewEncapsulation.None
 })
 
-export class EditComponent implements OnDestroy {
+export class EditComponent extends Subscriptions implements OnDestroy {
   favorites:any[] = [];
   notification:string;
   selected:string;
@@ -26,9 +26,10 @@ export class EditComponent implements OnDestroy {
               private headerState:HeaderStateService,
               private renderer:Renderer,
               private dragulaService: DragulaService) {
-    favoritesState.data$.subscribe(
+    super();
+    this.subscriptions.push(favoritesState.data$.subscribe(
       data => this.favorites = data
-    );
+    ));
 
     dragulaService.setOptions(this.dragName, {
       moves: function (el:any, container:any, handle:any) {

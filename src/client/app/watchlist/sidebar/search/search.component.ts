@@ -34,17 +34,17 @@ export class SearchComponent extends CoreApiNotification {
               private headerState:HeaderStateService) {
     super(searchState, searchApiService);
 
-    searchState.data$.subscribe(
+    this.subscriptions.push(searchState.data$.subscribe(
       data => this.updateStocks(data)
-    );
+    ));
 
-    favoritesState.order$.subscribe(
+    this.subscriptions.push(favoritesState.order$.subscribe(
       order => this.order = order
-    );
+    ));
 
-    headerState.search$.subscribe(
+    this.subscriptions.push(headerState.search$.subscribe(
       search => this.updateSearch(search)
-    );
+    ));
 
     this.updateStocks([]);
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartOptionsService } from '../services/chart-options.service';
 import { ChartStateService } from '../../state/index';
+import { Subscriptions } from '../../../../../core/index';
 
 @Component({
   moduleId: module.id,
@@ -9,16 +10,17 @@ import { ChartStateService } from '../../state/index';
   styleUrls: ['legend.component.css']
 })
 
-export class LegendComponent {
+export class LegendComponent extends Subscriptions {
   items:any[] = [];
   private legend:any;
 
   constructor(private chartOptionsService:ChartOptionsService,
               private chartState:ChartStateService) {
-    this.chartState.point$
+    super();
+    this.subscriptions.push(this.chartState.point$
       .subscribe(
         data => this.updateItems(data)
-      );
+      ));
   }
 
   private updateItems(data:any) {

@@ -2,21 +2,23 @@ import {
   NotificationTypeEnum,
   NotificationButtonInterface
 } from '../shared/index';
+import { Subscriptions } from './subscriptions';
 
-export class CoreApiNotification {
+export class CoreApiNotification extends Subscriptions {
   notification:string;
   notificationType:NotificationTypeEnum;
   button:NotificationButtonInterface;
 
   constructor(private state:any,
               private apiService:any) {
-    state.loader$.subscribe(
+    super();
+    this.subscriptions.push(state.loader$.subscribe(
       (loader:boolean) => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
-    );
+    ));
 
-    state.error$.subscribe(
+    this.subscriptions.push(state.error$.subscribe(
       (error:string) => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
-    );
+    ));
   }
 
   protected notificationAction(type:string) {

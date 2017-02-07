@@ -30,13 +30,13 @@ export class FavoritesComponent extends CoreApiNotification {
               private headerState:HeaderStateService) {
     super(favoritesState, favoritesApiService);
 
-    watchlistState.stockSymbol$.subscribe(
+    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
       symbol => this.selected = symbol
-    );
+    ));
 
-    favoritesState.data$.subscribe(
+    this.subscriptions.push(favoritesState.data$.subscribe(
       data => this.updateFavorites(data)
-    );
+    ));
   }
 
   add() {

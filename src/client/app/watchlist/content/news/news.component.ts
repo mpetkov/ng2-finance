@@ -23,13 +23,13 @@ export class NewsComponent extends CoreApiNotification {
               private newsApiService:NewsApiService) {
     super(newsState, newsApiService);
 
-    watchlistState.stockSymbol$.subscribe(
+    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
-    );
+    ));
 
-    newsState.data$.subscribe(
+    this.subscriptions.push(newsState.data$.subscribe(
       news => this.updateNews(news)
-    );
+    ));
 
     this.updateNews([]);
   }

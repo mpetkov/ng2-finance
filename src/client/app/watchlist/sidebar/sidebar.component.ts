@@ -11,6 +11,7 @@ import { WatchlistStateService } from '../state/watchlist-state.service';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
+import { Subscriptions } from '../../core/subscriptions';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ import 'rxjs/add/operator/takeUntil';
   encapsulation: ViewEncapsulation.None
 })
 
-export class SidebarComponent implements OnDestroy {
+export class SidebarComponent extends Subscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
   constructor(public sidebarState:SidebarStateService,
               private route: ActivatedRoute,
@@ -28,13 +29,14 @@ export class SidebarComponent implements OnDestroy {
               private favoritesApiService:FavoritesApiService,
               private watchlistState:WatchlistStateService,
               private headerState:HeaderStateService) {
-    favoritesState.symbols$.subscribe(
+    super();
+    this.subscriptions.push(favoritesState.symbols$.subscribe(
       symbols => favoritesApiService.load(symbols)
-    );
+    ));
 
-    headerState.searchActive$.subscribe(
+    this.subscriptions.push(headerState.searchActive$.subscribe(
       searchActive => searchActive ? sidebarState.changeType(SidebarTypeEnum.Add) : sidebarState.changeType(SidebarTypeEnum.List)
-    );
+    ));
 
     route.params
       .takeUntil(this.ngOnDestroy$)

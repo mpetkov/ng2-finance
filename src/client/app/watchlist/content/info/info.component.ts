@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnDestroy
+} from '@angular/core';
 import { InfoApiService } from './info-api.service';
 import { InfoStateService } from './state/index';
 import { RangeOptionsInterface } from './index';
@@ -27,14 +30,13 @@ export class InfoComponent extends CoreApiNotification {
               private watchlistState:WatchlistStateService,
               private infoApiService:InfoApiService) {
     super(infoState, infoApiService);
-
-    watchlistState.stockSymbol$.subscribe(
+    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
       symbol => this.updateSymbol(symbol)
-    );
+    ));
 
-    infoState.data$.subscribe(
+    this.subscriptions.push(infoState.data$.subscribe(
       info => this.updateInfo(info)
-    );
+    ));
 
     this.leftColumn = [
       { text: 'Prev Close', id: 'PreviousClose' },
@@ -53,7 +55,6 @@ export class InfoComponent extends CoreApiNotification {
       { text: 'Avg Vol (3m)', id: 'AverageDailyVolume' },
       { text: 'Dividend', id: 'DividendShare' }
     ];
-
     this.updateInfo();
   }
 
