@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
-  LoaderService,
+  CoreApiResponseService,
   numberUnitFormat
 } from '../../../core/index';
 import { InfoStateService } from './state/index';
@@ -10,11 +10,11 @@ declare let moment:any;
 declare let _:any;
 
 @Injectable()
-export class InfoApiService extends LoaderService {
+export class InfoApiService extends CoreApiResponseService {
   private stock:string;
   constructor(public http:Http,
               private infoState:InfoStateService) {
-    super(http);
+    super(http, infoState);
   }
 
   load(stock:string) {
@@ -22,25 +22,24 @@ export class InfoApiService extends LoaderService {
     this.infoState.fetchLoader(true);
     this.get(Config.paths.info.replace('$stock', encodeURIComponent(stock)))
       .subscribe(
-        data => this.complete(data),
-        error => {this.infoState.fetchError(error)}
+        data => this.complete(this.transform(data)),
+        () => this.failed()
       );
   }
   reload() {
     this.load(this.stock);
   }
 
-  private complete(data:any) {
-    this.errorCount = 0;
-    this.infoState.fetchFulfilled(this.transform(data));
-    this.infoState.fetchLoader(false);
-  }
+  private transform(rawData:any):any {
+    let data:any[] = [];
+    let info:any = _.get(rawData, 'query.results.quote');
+    if (info) {
+      info.Volume = numberUnitFormat(info.Volume, 2);
+      info.AverageDailyVolume = numberUnitFormat(info.AverageDailyVolume, 2);
+      data.push(info);
+    }
 
-  private transform(data:any):any {
-    let info:any = _.get(data, 'query.results.quote', {});
-    info.Volume = numberUnitFormat(info.Volume, 2);
-    info.AverageDailyVolume = numberUnitFormat(info.AverageDailyVolume, 2);
-    return info;
+    return data;
   }
 
   private convertDate(date:number):string {

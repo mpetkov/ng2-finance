@@ -35,7 +35,7 @@ export class InfoComponent extends CoreApiNotification {
     ));
 
     this.subscriptions.push(infoState.data$.subscribe(
-      info => this.updateInfo(info)
+      info => this.updateInfo(info[0])
     ));
 
     this.leftColumn = [

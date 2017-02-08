@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
-  LoaderService
+  CoreApiResponseService
 } from '../../../core/index';
 import { NewsStateService } from './state/index';
 declare let moment:any;
 declare let _:any;
 
 @Injectable()
-export class NewsApiService extends LoaderService {
+export class NewsApiService extends CoreApiResponseService {
   private stock:string;
   constructor(public http:Http,
               private newsState:NewsStateService) {
-    super(http);
+    super(http, newsState);
   }
 
   load(stock:string) {
@@ -22,25 +22,19 @@ export class NewsApiService extends LoaderService {
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.news.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.complete(data),
-          error => this.newsState.fetchError(error)
+          data => this.complete(this.transform(data)),
+          () => this.failed()
         );
     } else {
       this.get(Config.paths.news)
         .subscribe(
-          data => this.complete(data),
-          error => this.newsState.fetchError(error)
+          data => this.complete(this.transform(data)),
+          () => this.failed()
         );
     }
   }
   reload() {
     this.load(this.stock);
-  }
-
-  private complete(data:any) {
-    this.errorCount = 0;
-    this.newsState.fetchFulfilled(this.transform(data));
-    this.newsState.fetchLoader(false);
   }
 
   private transform(data:any):any[] {

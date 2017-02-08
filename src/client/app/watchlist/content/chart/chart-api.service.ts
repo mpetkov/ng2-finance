@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
-  LoaderService
+  CoreApiResponseService,
+  LoaderDataTypeEnum
 } from '../../../core/index';
 import { ChartStateService } from './state/index';
 declare let _:any;
 
 @Injectable()
-export class ChartApiService extends LoaderService {
+export class ChartApiService extends CoreApiResponseService {
   private params:any = {};
   constructor(public http:Http,
               private chartState:ChartStateService) {
-    super(http);
+    super(http, chartState);
   }
 
   load(stock:string, range:string, interval:string) {
@@ -40,11 +41,6 @@ export class ChartApiService extends LoaderService {
     this.load(this.params.stock, this.params.range, this.params.interval);
   }
 
-  private complete(data:any) {
-    this.errorCount = 0;
-    this.chartState.fetchFulfilled(this.transform(data));
-    this.chartState.fetchLoader(false);
-  }
 
   private transform(rawData:any):any {
     let data:any = [];

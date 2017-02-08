@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
-  LoaderService
+  CoreApiResponseService
 } from '../../../core/index';
 import { FavoritesStateService } from '../favorites/state/index';
 import { SearchStateService } from './state/index';
 declare let _:any;
 
 @Injectable()
-export class SearchApiService extends LoaderService {
+export class SearchApiService extends CoreApiResponseService {
   private favorites:string[] = [];
   private stock:string;
   constructor(public http:Http,
               private favoritesState:FavoritesStateService,
               private searchState:SearchStateService) {
-    super(http);
+    super(http, searchState);
     this.favoritesState.symbols$.subscribe(
       symbols => this.favorites = symbols
     );
@@ -27,26 +27,20 @@ export class SearchApiService extends LoaderService {
     if(Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.search.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
-          data => this.complete(data),
-          error => this.searchState.fetchError(error)
+          data => this.complete(this.transform(data)),
+          () => this.failed()
         );
     } else {
       this.get(Config.paths.search)
         .subscribe(
-          data => this.complete(data),
-          error => this.searchState.fetchError(error)
+          data => this.complete(this.transform(data)),
+          () => this.failed()
         );
     }
   }
 
   reload() {
     this.load(this.stock);
-  }
-
-  private complete(data:any) {
-    this.errorCount = 0;
-    this.searchState.fetchFulfilled(this.transform(data));
-    this.searchState.fetchLoader(false);
   }
 
   private transform(data:any):any[] {

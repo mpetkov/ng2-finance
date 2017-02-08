@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
-  LoaderService
+  CoreApiResponseService
 } from '../../core/index';
 import { FavoritesStateService } from './favorites/state/index';
 declare let _:any;
 
 @Injectable()
-export class FavoritesApiService extends LoaderService {
+export class FavoritesApiService extends CoreApiResponseService {
   private order:string[] = [];
   private stocks:string[] = [];
   constructor(public http:Http,
               private favoritesState:FavoritesStateService) {
-    super(http);
+    super(http, favoritesState);
     favoritesState.order$.subscribe(
       order => this.order = order
     );
@@ -24,19 +24,13 @@ export class FavoritesApiService extends LoaderService {
     this.favoritesState.fetchLoader(true);
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
-        data => this.complete(data),
-        error =>  this.favoritesState.fetchError(error)
+        data => this.complete(this.transform(data)),
+        () => this.failed()
       );
   }
 
   reload() {
     this.load(this.stocks);
-  }
-
-  private complete(data:any) {
-    this.errorCount = 0;
-    this.favoritesState.fetchFulfilled(this.transform(data));
-    this.favoritesState.fetchLoader(false);
   }
 
   private transform(data:any) {
