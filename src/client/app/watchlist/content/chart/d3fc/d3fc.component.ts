@@ -57,7 +57,9 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
       this.render(data);
-      this.redraw(data, this.container, this.chart);
+      setTimeout(() => {
+        this.redraw(data, this.container, this.chart);
+      },0);
     }
   }
 
