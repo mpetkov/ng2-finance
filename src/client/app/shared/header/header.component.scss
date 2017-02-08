@@ -9,7 +9,7 @@
   .mp-arrow {
     display: none;
     font-size: 2.5rem;
-    margin-left: -10px;
+    margin-left: -5px;
   }
 
   .mp-close,
@@ -47,6 +47,12 @@
 
 @media (max-width: 720px) {
   .mdl-layout__header-row {
+    .mdl-layout-title  {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      left: 0;
+    }
 
     .mp-arrow,
     .mp-search {
