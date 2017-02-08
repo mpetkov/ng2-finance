@@ -26,6 +26,12 @@
     }
   }
 
+  @media (min-width: 1100px) and (max-height: 575px) {
+    .mdl-cell--9-col {
+      height: calc(575px - 25px - 50px);
+    }
+  }
+
   @media (max-width: 1100px) {
     .mdl-cell--9-col {
       width: calc(100% - 16px);
