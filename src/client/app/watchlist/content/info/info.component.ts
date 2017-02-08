@@ -73,12 +73,15 @@ export class InfoComponent extends CoreApiNotification {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     } else {
+      let activeStart:number = Math.min(data.Open, data.LastTradePriceOnly);
+      let activeEnd:number = Math.max(data.Open, data.LastTradePriceOnly);
+
       this.dayOptions = {
         text: 'Day\'s Range',
         start: data.DaysLow,
         end: data.DaysHigh,
-        activeStart: data.PreviousClose,
-        activeEnd: data.Open,
+        activeStart: activeStart,
+        activeEnd: activeEnd,
         active: data.LastTradePriceOnly
       };
 
@@ -86,8 +89,8 @@ export class InfoComponent extends CoreApiNotification {
         text: '52 Week Range',
         start: data.YearLow,
         end: data.YearHigh,
-        activeStart: data.PreviousClose,
-        activeEnd: data.Open,
+        activeStart: activeStart,
+        activeEnd: activeEnd,
         active: data.LastTradePriceOnly
       };
     }
