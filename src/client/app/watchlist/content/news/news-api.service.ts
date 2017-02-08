@@ -38,8 +38,9 @@ export class NewsApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.newsState.fetchLoader(false);
+    this.errorCount = 0;
     this.newsState.fetchFulfilled(this.transform(data));
+    this.newsState.fetchLoader(false);
   }
 
   private transform(data:any):any[] {

@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { ErrorInterface } from '../../../../core/index';
 
 export class SearchActions {
   static FETCH_FULFILLED = 'WATCHLIST:SEARCH:FETCH_FULFILLED';
@@ -19,7 +20,7 @@ export class SearchActions {
     };
   }
 
-  static fetchError(error:string):Action {
+  static fetchError(error:ErrorInterface):Action {
     return {
       type: this.FETCH_ERROR,
       payload: error

@@ -34,8 +34,9 @@ export class FavoritesApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.favoritesState.fetchLoader(false);
+    this.errorCount = 0;
     this.favoritesState.fetchFulfilled(this.transform(data));
+    this.favoritesState.fetchLoader(false);
   }
 
   private transform(data:any) {

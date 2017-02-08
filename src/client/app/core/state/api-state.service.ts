@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CoreApiStateKeys } from './api.state';
+import { CoreApiStateKeys, ErrorInterface } from './api.state';
 import { CoreStateService } from "./state.service";
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/map';
@@ -11,7 +11,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class CoreApiStateService extends CoreStateService {
   data$:Observable<any[]>;
   loader$:Observable<boolean>;
-  error$:Observable<string>;
+  error$:Observable<ErrorInterface>;
 
   constructor(protected store$:Store<any>,
               protected stateName:string,
@@ -30,7 +30,7 @@ export class CoreApiStateService extends CoreStateService {
     this.store$.dispatch(this.actions.fetchLoader(loader));
   }
 
-  fetchError(error:string) {
+  fetchError(error:ErrorInterface) {
     this.store$.dispatch(this.actions.fetchError(error));
   }
 }

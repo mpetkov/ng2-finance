@@ -31,8 +31,9 @@ export class InfoApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.infoState.fetchLoader(false);
+    this.errorCount = 0;
     this.infoState.fetchFulfilled(this.transform(data));
+    this.infoState.fetchLoader(false);
   }
 
   private transform(data:any):any {

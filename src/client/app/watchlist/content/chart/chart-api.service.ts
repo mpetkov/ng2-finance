@@ -41,8 +41,9 @@ export class ChartApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.chartState.fetchLoader(false);
+    this.errorCount = 0;
     this.chartState.fetchFulfilled(this.transform(data));
+    this.chartState.fetchLoader(false);
   }
 
   private transform(rawData:any):any {

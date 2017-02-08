@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { ErrorInterface } from '../../../../core/index';
 
 export class ChartActions {
   static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';
@@ -35,7 +36,7 @@ export class ChartActions {
     };
   }
 
-  static fetchError(error:string):Action {
+  static fetchError(error:ErrorInterface):Action {
     return {
       type: this.FETCH_ERROR,
       payload: error

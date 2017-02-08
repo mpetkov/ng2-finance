@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { ErrorInterface } from '../../../../core/index';
 
 export class FavoritesActions {
   static DELETE = 'WATCHLIST:FAVORITES:DELETE';
@@ -43,7 +44,7 @@ export class FavoritesActions {
     };
   }
 
-  static fetchError(error:string):Action {
+  static fetchError(error:ErrorInterface):Action {
     return {
       type: this.FETCH_ERROR,
       payload: error

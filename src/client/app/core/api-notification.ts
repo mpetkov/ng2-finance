@@ -13,11 +13,11 @@ export class CoreApiNotification extends Subscriptions {
               private apiService:any) {
     super();
     this.subscriptions.push(state.loader$.subscribe(
-      (loader:boolean) => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
+      loader => this.updateNotification(loader ? NotificationTypeEnum.Loader : NotificationTypeEnum.None)
     ));
 
     this.subscriptions.push(state.error$.subscribe(
-      (error:string) => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
+      error => this.updateNotification(error ? NotificationTypeEnum.Error : NotificationTypeEnum.None, error)
     ));
   }
 
@@ -27,10 +27,10 @@ export class CoreApiNotification extends Subscriptions {
     }
   }
 
-  protected updateNotification(type:NotificationTypeEnum, value:string = null, button:NotificationButtonInterface = null) {
+  protected updateNotification(type:NotificationTypeEnum, value:any = null, button:NotificationButtonInterface = null) {
     this.notificationType = type;
-    this.notification = value;
     if (type === NotificationTypeEnum.Error) {
+      this.notification = value.value;
       this.button = {
         icon: 'refresh',
         text: 'Try Again',
@@ -38,6 +38,7 @@ export class CoreApiNotification extends Subscriptions {
       };
     } else {
       this.button = button;
+      this.notification = value;
     }
   }
 }

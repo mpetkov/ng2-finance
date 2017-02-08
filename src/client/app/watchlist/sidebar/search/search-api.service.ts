@@ -44,8 +44,9 @@ export class SearchApiService extends LoaderService {
   }
 
   private complete(data:any) {
-    this.searchState.fetchLoader(false);
+    this.errorCount = 0;
     this.searchState.fetchFulfilled(this.transform(data));
+    this.searchState.fetchLoader(false);
   }
 
   private transform(data:any):any[] {
