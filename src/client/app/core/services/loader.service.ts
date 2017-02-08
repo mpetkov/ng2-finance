@@ -13,7 +13,6 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class LoaderService {
-  protected errorCount:number = 0;
   private options:RequestOptions;
   constructor(protected http:Http) {
     this.options = new RequestOptions({
@@ -21,28 +20,53 @@ export class LoaderService {
     });
   }
 
-  get(url:string):Observable<string[]> {
+  get(url:string, type:LoaderDataTypeEnum = LoaderDataTypeEnum.JSON):Observable<string[]> {
     return this.http.get(url)
-      .map((res:Response) => res.json())
-      .catch(() => this.handleError());
+      .map((res:Response) => this.getResponse(res, type))
+      .catch((error) => this.handleError(error));
   }
 
   post(url:string, params:any):Observable<string[]> {
     return this.http.post(url, params, this.options)
       .map((res:Response) => res.json())
-      .catch(() => this.handleError());
+      .catch((error) => this.handleError(error));
   }
 
-  private handleError() {
-    this.errorCount++;
-    let error:string = 'Yahoo\'s API was unable to load.';
-    if (this.errorCount > 3) {
-      error = 'Yahoo\'s API failed multiple times.  Please wait a minute before trying again.';
+  private getResponse(response:Response, type:LoaderDataTypeEnum) {
+    switch (type) {
+      case LoaderDataTypeEnum.CSV:
+        return this.transformCsv(response.text());
+        break;
+      default:
+        return response.json();
     }
-    return Observable.throw(<ErrorInterface>{
-      value: error,
-      date: Date.now(),
-      count: this.errorCount
-    });
   }
+
+  private handleError(error:any) {
+    let errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    return Observable.throw(errMsg);
+  }
+
+  private transformCsv(csv:string):any[] {
+    let lines:string[] = csv.split(/\r\n|\n/);
+    let headers:string[] = lines[0].split(',');
+    let content:string[];
+    var data:any[] = [];
+
+    for(let i:number = 1; i < lines.length; i++) {
+      content = lines[i].split(',');
+      if(content.length === headers.length) {
+        data.push(content);
+      }
+    }
+
+    return data;
+  }
+}
+
+
+export enum LoaderDataTypeEnum {
+  JSON,
+  CSV
 }
