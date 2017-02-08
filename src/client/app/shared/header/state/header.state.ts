@@ -9,7 +9,7 @@ export interface HeaderStateInterface extends Map<string,any> {
 export const HeaderInitialState = Record({
   searchActive: false,
   search: null,
-  sidebar: false
+  sidebar: true
 });
 
 export class HeaderStateKeys {
