@@ -107,3 +107,8 @@ $gray: #444;
     stroke-opacity: 0;
   }
 }
+
+
+.mp-chart.small {
+  width: calc(100% - 16px);
+}

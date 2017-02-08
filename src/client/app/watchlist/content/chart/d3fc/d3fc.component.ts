@@ -25,10 +25,10 @@ declare let d3:any;
 
 export class D3fcComponent extends Subscriptions implements AfterViewInit {
   @ViewChild('svg') svg:any;
+  smallView:boolean;
   private data:any;
   private container:any;
   private chart:any;
-  private smallView:boolean;
 
   constructor(public chartState:ChartStateService,
               private chartOptionsService:ChartOptionsService,
@@ -94,10 +94,14 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     if (window.innerWidth < 420) {
       if (!this.smallView) {
         this.smallView = true;
+        this.chartOptionsService.options.yAxisWidth = 0;
+        this.chartOptionsService.options.yAxisLeftMargin = 3;
         this.render(data);
       }
     } else if (this.smallView) {
       this.smallView = false;
+      this.chartOptionsService.options.yAxisWidth = 55;
+      this.chartOptionsService.options.yAxisLeftMargin = -3;
       this.render(data);
     }
 
