@@ -38,7 +38,9 @@ export class SearchBoxComponent implements OnChanges {
     }
 
     if (changes.active && this.active) {
-      this.input.nativeElement.focus();
+      setTimeout(() => {
+        this.input.nativeElement.focus();
+      },0);
     }
   }
 
