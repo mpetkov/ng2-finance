@@ -20,7 +20,7 @@ export class InfoApiService extends LoaderService {
   load(stock:string) {
     this.stock = stock;
     this.infoState.fetchLoader(true);
-    this.get(Config.paths.info)
+    this.get(Config.paths.info.replace('$stock', encodeURIComponent(stock)))
       .subscribe(
         data => this.complete(data),
         error => {this.infoState.fetchError(error)}
