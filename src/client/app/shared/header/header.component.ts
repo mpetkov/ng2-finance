@@ -12,10 +12,11 @@ import { HeaderStateService } from './state/header-state.service';
 export class HeaderComponent {
   active:boolean;
   sidebar:boolean;
+  private searchFromContent:boolean;
 
   constructor(private headerState:HeaderStateService) {
     headerState.searchActive$.subscribe(
-      searchActive => this.active = searchActive
+      searchActive => this.searchActiveChange(searchActive)
     );
 
     headerState.sidebar$.subscribe(
@@ -33,5 +34,23 @@ export class HeaderComponent {
 
   showSidebar() {
     this.headerState.changeSidebar(true);
+  }
+
+  toggleSearch(active:boolean) {
+    this.headerState.changeSearchActive(active);
+  }
+
+  private searchActiveChange(searchActive:boolean) {
+    this.active = searchActive;
+
+    if (searchActive && !this.sidebar) {
+      this.searchFromContent = true;
+      this.headerState.changeSidebar(true);
+    } else if(!searchActive && this.searchFromContent) {
+      this.searchFromContent = false;
+      if(this.sidebar) {
+        this.headerState.changeSidebar(false);
+      }
+    }
   }
 }

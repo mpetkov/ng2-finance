@@ -24,7 +24,7 @@
     <li *ngFor="let stock of favorites"
         class="mdl-navigation__link"
         [ngClass]="{active: (watchlistState.stockSymbol$ | async) === stock.symbol}"
-        [routerLink]="['/watchlist', stock.symbol]">
+        (click)="select(stock.symbol)">
       <div class="pull-left text">
         <p><b>{{stock.symbol}}</b></p>
         <p class="mp-small-font truncate">{{stock.name}}</p>

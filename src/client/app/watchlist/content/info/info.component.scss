@@ -2,12 +2,7 @@
   .mdl-card__supporting-text {
     .mdl-grid {
       .mdl-cell {
-        margin: 4px 8px;
-      }
-    }
-    .mdl-grid:first-child {
-      .mdl-cell {
-        margin-bottom: 0;
+        margin: 0 8px;
       }
     }
     overflow: auto;

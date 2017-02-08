@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MdlMenuComponent } from 'angular2-mdl';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { FavoritesStateService } from './state/favorites-state.service';
@@ -22,12 +23,14 @@ export class FavoritesComponent extends CoreApiNotification {
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
   private selected:string;
+  private sidebar:boolean;
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
               private favoritesApiService:FavoritesApiService,
               private sidebarState:SidebarStateService,
-              private headerState:HeaderStateService) {
+              private headerState:HeaderStateService,
+              private router:Router) {
     super(favoritesState, favoritesApiService);
 
     this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
@@ -36,6 +39,10 @@ export class FavoritesComponent extends CoreApiNotification {
 
     this.subscriptions.push(favoritesState.data$.subscribe(
       data => this.updateFavorites(data)
+    ));
+
+    this.subscriptions.push(headerState.sidebar$.subscribe(
+      sidebar => this.sidebar = sidebar
     ));
   }
 
@@ -47,9 +54,12 @@ export class FavoritesComponent extends CoreApiNotification {
     this.sidebarState.changeType(SidebarTypeEnum.Edit);
   }
 
-  select(stock:any) {
-    this.watchlistState.changeStock(stock);
-    this.watchlistState.changeStockSymbol(stock.symbol);
+  select(symbol:string) {
+    if (this.sidebar) {
+      this.headerState.changeSidebar(false);
+    }
+
+    this.router.navigate(['/watchlist', symbol]);
   }
 
   togglePill() {

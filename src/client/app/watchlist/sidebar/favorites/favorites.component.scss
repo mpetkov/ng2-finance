@@ -34,4 +34,13 @@
       margin-top: 10px;
     }
   }
+
+
+
+  @media (max-width: 720px) {
+    .mdl-navigation__link:hover,
+    .mdl-navigation__link.active {
+      background: white;
+    }
+  }
 }
