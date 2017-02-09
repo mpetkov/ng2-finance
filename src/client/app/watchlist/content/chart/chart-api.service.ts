@@ -47,15 +47,19 @@ export class ChartApiService extends CoreApiResponseService {
     let data:any[] = [];
     if (rawData) {
       let timestamp:number;
+      let ratio:number;
+      let close:number;
       rawData.forEach((row:string[]) => {
         timestamp = moment(row[0], 'YYYY-MM-DD').unix();
+        close = Number(row[4]);
+        ratio = Number(row[6])/close;
         data.push({
           timestamp: timestamp,
           date: new Date(timestamp * 1000),
-          close: Number(row[4]),
-          high: Number(row[2]),
-          low: Number(row[3]),
-          open: Number(row[1]),
+          close: Number(row[4])*ratio,
+          high: Number(row[2])*ratio,
+          low: Number(row[3])*ratio,
+          open: Number(row[1])*ratio,
           volume: Number(row[5])
         });
       });
