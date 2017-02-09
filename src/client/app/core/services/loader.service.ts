@@ -26,9 +26,9 @@ export class LoaderService {
       .catch((error) => this.handleError(error));
   }
 
-  post(url:string, params:any):Observable<string[]> {
+  post(url:string, params:any, type:LoaderDataTypeEnum = LoaderDataTypeEnum.JSON):Observable<string[]> {
     return this.http.post(url, params, this.options)
-      .map((res:Response) => res.json())
+      .map((res:Response) => this.getResponse(res, type))
       .catch((error) => this.handleError(error));
   }
 
