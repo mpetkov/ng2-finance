@@ -17,7 +17,12 @@ export interface ConfigPathsInterface {
 export interface ChartRangesInterface {
   id?: string;
   text?: string;
-  interval?: string;
+  interval?: ChartRangesIntervalInterface;
+}
+
+export interface ChartRangesIntervalInterface {
+  value?: Number;
+  type?: string;
 }
 
 export interface NotificationsInterface {

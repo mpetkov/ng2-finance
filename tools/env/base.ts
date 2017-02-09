@@ -8,13 +8,13 @@ const BaseConfig: ConfigInterface = {
     noFavorites: 'Your favorites is empty'
   },
   chartRanges: [
-    {id: '1d', text: '1d', interval: '1m'},
-    {id: '5d', text: '1w', interval: '5m'},
-    {id: '3mo', text: '3m', interval: '1d'},
-    {id: '6mo', text: '6m', interval: '1d'},
-    {id: '1y', text: '1y', interval: '1d'},
-    {id: '5y', text: '5y', interval: '1wk'},
-    {id: 'max', text: 'max', interval: '1mo'}
+    {id: '5d', text: '1w', interval: {value:8, type:'days'}},
+    {id: '1mo', text: '1m', interval: {value:1, type:'months'}},
+    {id: '3mo', text: '3m', interval: {value:3, type:'months'}},
+    {id: '6mo', text: '6m', interval: {value:6, type:'months'}},
+    {id: '1y', text: '1y', interval: {value:1, type:'years'}},
+    {id: '5y', text: '5y', interval: {value:5, type:'years'}},
+    {id: 'max', text: 'max', interval: {value:100, type:'years'}}
   ]
 };
 

@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 import {
   Config,
   CoreApiResponseService,
-  LoaderDataTypeEnum
+  LoaderDataTypeEnum,
+  ChartRangesIntervalInterface
 } from '../../../core/index';
 import { ChartStateService } from './state/index';
 declare let _:any;
@@ -22,13 +23,20 @@ export class ChartApiService extends CoreApiResponseService {
     this.chartState.fetchLoader(true);
 
     let url:string = Config.paths.charts.replace('$stock', stock);
-    url = url.replace('$range', range);
-    url = url.replace('$interval', interval);
-    this.get(Config.paths.charts, LoaderDataTypeEnum.CSV)
-      .subscribe(
-        data => this.complete(this.transform(data)),
-        () => this.failed()
-      );
+    url = url.replace('$range', this.getDateRange(interval));
+    if(Config.env === 'PROD') {
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url), LoaderDataTypeEnum.CSV)
+        .subscribe(
+          data => this.complete(this.transform(data)),
+          () => this.failed()
+        );
+    } else {
+      this.get(url, LoaderDataTypeEnum.CSV)
+        .subscribe(
+          data => this.complete(this.transform(data)),
+          () => this.failed()
+        );
+    }
   }
 
   reload() {
@@ -53,5 +61,10 @@ export class ChartApiService extends CoreApiResponseService {
       });
     }
     return data;
+  }
+
+  private getDateRange(interval:ChartRangesIntervalInterface):string {
+    let previousDate:any = moment().subtract(interval.value, interval.type);
+    return 'a=' + previousDate.month() + '&b=' + previousDate.format('DD') + '&c=' + previousDate.format('YYYY');
   }
 }
