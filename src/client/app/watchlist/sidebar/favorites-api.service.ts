@@ -40,16 +40,17 @@ export class FavoritesApiService extends CoreApiResponseService {
     }
 
     let favorites:any[] = stocks.map((quote:any) => {
-      let change:number = parseFloat(quote.Change) || 0.00;
+      let change:number = Number(quote.Change) || 0.00;
       let index:number = this.order.indexOf(quote.symbol);
       if(index < 0) {
         index = 999;
       }
+
       return {
         symbol: quote.symbol,
         name: quote.Name,
         order: index,
-        price: parseFloat(quote.LastTradePriceOnly).toLocaleString(undefined, {
+        price: Number(quote.LastTradePriceOnly).toLocaleString(undefined, {
           maximumFractionDigits: 2,
           minimumFractionDigits: 2
         }),
@@ -62,7 +63,7 @@ export class FavoritesApiService extends CoreApiResponseService {
   }
 
   private calculateChangePercent(change:number, price:string):string {
-    return this.getPlusSign(change) + (change / (parseFloat(price) - change) * 100).toFixed(2) + '%';
+    return this.getPlusSign(change) + (change / (Number(price) - change) * 100).toFixed(2) + '%';
   }
 
   private getPlusSign(change:number):string {
