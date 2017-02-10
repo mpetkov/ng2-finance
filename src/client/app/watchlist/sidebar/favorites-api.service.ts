@@ -21,7 +21,7 @@ export class FavoritesApiService extends CoreApiResponseService {
 
   load(stocks:string[]) {
     this.stocks = stocks;
-    this.favoritesState.fetchLoader(true);
+    this.toggleLoader(true);
     this.get(Config.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
       .subscribe(
         data => this.complete(this.transform(data)),
