@@ -16,7 +16,7 @@
         <div class="mdl-list__item-primary-content">
           <div class="mdl-list__item-sub-title" [innerHTML]="article.source"></div>
           <div class="mp-main mdl-color-text--black">
-            <b>{{article.title}}</b>
+            <b [innerHTML]="article.title"></b>
           </div>
           <img *ngIf="article.image"
                [src]="article.image">
