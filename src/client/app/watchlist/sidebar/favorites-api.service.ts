@@ -50,7 +50,8 @@ export class FavoritesApiService extends CoreApiResponseService {
         symbol: quote.symbol,
         name: quote.Name,
         order: index,
-        price: Number(quote.LastTradePriceOnly).toLocaleString(undefined, {
+        price: Number(quote.LastTradePriceOnly),
+        priceDisplay: Number(quote.LastTradePriceOnly).toLocaleString(undefined, {
           maximumFractionDigits: 2,
           minimumFractionDigits: 2
         }),

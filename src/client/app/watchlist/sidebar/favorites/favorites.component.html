@@ -31,7 +31,10 @@
       </div>
 
       <div class="prices">
-        <b class="pull-left">{{favorite.priceDisplay}}</b>
+        <b class="pull-left">
+          <span class="mp-transition mp-highlight"
+                [ngClass]="(watchlistState.highlights$ | async)[favorite.symbol]?.price">{{favorite.priceDisplay}}</span>
+        </b>
         <div class="pill pull-left"
              [ngClass]="favorite.change >= 0 ? 'mdl-color--green-A700' : 'mdl-color--red'"
              (click)="togglePill()">

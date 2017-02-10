@@ -7,6 +7,7 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { CoreApiNotification } from '../../../core/index';
 import { FavoritesApiService } from '../favorites-api.service';
+import { FavoritesHighlightService } from './favorites-highlight.service';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 declare let _:any;
 
@@ -14,7 +15,8 @@ declare let _:any;
   moduleId: module.id,
   selector: 'mp-favorites',
   templateUrl: 'favorites.component.html',
-  styleUrls: ['favorites.component.css']
+  styleUrls: ['favorites.component.css'],
+  providers: [FavoritesHighlightService]
 })
 
 export class FavoritesComponent extends CoreApiNotification {
@@ -25,10 +27,12 @@ export class FavoritesComponent extends CoreApiNotification {
   private pillIndex:number = PillEnum.change;
   private sidebar:boolean;
   private refreshTimeout:any;
+  private lastLoadedData:any = {};
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
               private favoritesApiService:FavoritesApiService,
+              private favoritesHighlightService:FavoritesHighlightService,
               private sidebarState:SidebarStateService,
               private headerState:HeaderStateService,
               private router:Router) {
@@ -81,6 +85,13 @@ export class FavoritesComponent extends CoreApiNotification {
 
   private updateFavorites(data:any[]) {
     this.favoritesData = data;
+    this.watchlistState.changeHighlights(this.favoritesHighlightService.getHighlights(data, this.lastLoadedData));
+    this.lastLoadedData = this.favoritesHighlightService.getLastLoadedData(data);
+
+    setTimeout(() => {
+      this.watchlistState.changeHighlights({});
+    },500);
+
     this.watchlistState.changeStockData(_.find(data, ['symbol', this.stock]) || {});
     if (data.length === 0) {
       this.updateNotification(

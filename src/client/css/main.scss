@@ -129,6 +129,10 @@ input {
   transition: all 0.3s;
 }
 
+.mp-highlight {
+  padding: 4px;
+}
+
 .slide-fade.hide {
   opacity: 0 !important;
   height: 0 !important;

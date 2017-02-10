@@ -5,6 +5,7 @@ export class WatchlistActions {
   static CHANGE_STOCK = 'WATCHLIST:CHANGE_STOCK';
   static DELETE_FAVORITES = 'WATCHLIST:DELETE_FAVORITES';
   static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
+  static CHANGE_HIGHLIGHTS = 'WATCHLIST:CHANGE_HIGHLIGHTS';
 
   static changeStockData(data:any):Action {
     return {
@@ -31,6 +32,13 @@ export class WatchlistActions {
     return {
       type: this.DELETE_FAVORITES,
       payload: favorites
+    };
+  }
+
+  static changeHighlights(highlights:any):Action {
+    return {
+      type: WatchlistActions.CHANGE_HIGHLIGHTS,
+      payload: highlights
     };
   }
 }

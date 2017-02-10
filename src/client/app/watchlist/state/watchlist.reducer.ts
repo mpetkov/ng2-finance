@@ -20,6 +20,8 @@ export const watchlistReducer:ActionReducer<WatchlistStateInterface> = (state:Wa
       );
     case WatchlistActions.ADD_FAVORITE:
       return state.set(WatchlistStateKeys.Favorites, [action.payload, ...state.favorites]);
+    case WatchlistActions.CHANGE_HIGHLIGHTS:
+      return state.set(WatchlistStateKeys.Highlights, action.payload);
     default:
       return state;
   }

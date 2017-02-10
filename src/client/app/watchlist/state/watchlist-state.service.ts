@@ -13,12 +13,14 @@ export class WatchlistStateService extends CoreStateService {
   stockData$:Observable<any>;
   stock$:Observable<string>;
   favorites$:Observable<string[]>;
+  highlights$:Observable<any>;
 
   constructor(protected store$:Store<any>) {
     super(store$);
     this.stockData$ = store$.let(this.getState('watchlist', WatchlistStateKeys.StockData));
     this.stock$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Stock));
     this.favorites$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Favorites));
+    this.highlights$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Highlights));
   }
 
   changeStockData(data:any) {
@@ -35,5 +37,9 @@ export class WatchlistStateService extends CoreStateService {
 
   deleteFavorites(favorites:string[]) {
     this.store$.dispatch(WatchlistActions.deleteFavorites(favorites));
+  }
+
+  changeHighlights(highlights:any) {
+    this.store$.dispatch(WatchlistActions.changeHighlights(highlights));
   }
 }
