@@ -12,6 +12,8 @@ export class ChartOptionsService {
       calloutLeftMargin: 8,
       calloutHeight: 16,
       dateFormat: d3.time.format('%b%e \'%y'),
+      dayFormat: d3.time.format('%a %I:%M%p'),
+      timeFormat: d3.time.format('%I:%M%p'),
       priceFormat: d3.format('.2f'),
       volumeFormat: function (value:number) {
         let prefix:any = d3.formatPrefix(value);
@@ -21,6 +23,16 @@ export class ChartOptionsService {
 
     this.options.calloutWidth = this.options.yAxisWidth - this.options.calloutLeftMargin;
     this.options.calloutPathData = this.getCalloutPathData(this.options.calloutWidth, this.options.calloutHeight);
+  }
+
+  getDateFormat(range:string) {
+    if(range === '1d') {
+      return this.options.timeFormat;
+    } else if(range === '5d') {
+      return this.options.dayFormat;
+    } else {
+      return this.options.dateFormat;
+    }
   }
 
   private getCalloutPathData(width:number, height:number):any[] {

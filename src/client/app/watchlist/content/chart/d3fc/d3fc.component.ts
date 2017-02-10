@@ -29,6 +29,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   private data:any;
   private container:any;
   private chart:any;
+  private range:string;
 
   constructor(public chartState:ChartStateService,
               private chartOptionsService:ChartOptionsService,
@@ -36,6 +37,10 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
               private chartTooltipsService:ChartTooltipsService,
               private chartVolumeService:ChartVolumeService) {
     super();
+
+    this.subscriptions.push(chartState.range$.subscribe(
+      range => this.range = range
+    ));
   }
 
   ngAfterViewInit() {
@@ -137,7 +142,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     return fc.chart.linearTimeSeries()
       .xDomain(fc.util.extent(data, 'date'))
       .yDomain(fc.util.extent(data, ['open', 'close']))
-      .xTickFormat(this.chartOptionsService.options.dateFormat)
+      .xTickFormat(this.chartOptionsService.getDateFormat(this.range))
       .yTickFormat(this.chartOptionsService.options.priceFormat)
       .yTicks(this.chartOptionsService.options.yTicks)
       .yNice(this.chartOptionsService.options.yTicks)
