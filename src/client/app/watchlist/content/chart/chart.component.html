@@ -2,7 +2,10 @@
   <h4 *ngIf="!stockData.symbol">Chart</h4>
   <h4 *ngIf="stockData.symbol">
     <span>{{stockData.name}} ({{stockData.symbol}})</span>
-    <b class="mp-price">{{stockData.price}}</b>
+    <b class="mp-price">
+      <span class="mp-transition mp-highlight"
+            [ngClass]="(watchlistState.highlights$ | async)[stockData.symbol]?.price">{{stockData.priceDisplay}}</span>
+    </b>
     <span [ngClass]="stockData.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stockData.change}} ({{stockData.percentage}})</span>
   </h4>
   <button *ngIf="!favorite && stock"
