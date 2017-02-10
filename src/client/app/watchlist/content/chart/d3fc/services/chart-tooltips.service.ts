@@ -18,6 +18,22 @@ export class ChartTooltipsService {
       .decorate((sel:any) => {
         this.addYTooltip(sel);
         sel.enter().classed('close', true);
+
+        sel.attr('transform', function (d:any) {
+            let transform:string;
+            if (d3.select('.line')) {
+              let y:string = d3.select('.line').attr('d').match(/[^,]*$/)[0];
+              if (y) {
+                transform = 'translate(0, ' + y + ')';
+              }
+            }
+
+            if (transform) {
+              return transform;
+            } else {
+              return this.getAttribute('transform');
+            }
+          });
       });
   }
 
