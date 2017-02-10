@@ -5,6 +5,22 @@
     <b class="mp-price">{{stockData.price}}</b>
     <span [ngClass]="stockData.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stockData.change}} ({{stockData.percentage}})</span>
   </h4>
+  <button *ngIf="!favorite && stock"
+          mdl-button
+          mdl-button-type="icon"
+          class="pull-right"
+          (click)="toggleFavorite(true)">
+    <mdl-icon title="Add to Favorites">star_bordered</mdl-icon>
+  </button>
+
+  <button *ngIf="favorite && stock"
+          mdl-button
+          mdl-button-type="icon"
+          class="pull-right"
+          (click)="toggleFavorite(false)">
+    <mdl-icon title="Remove from Favorites"
+              class="mdl-color-text--amber">star</mdl-icon>
+  </button>
 </div>
 <div class="mdl-card__supporting-text">
   <mdl-tabs *ngIf="stock"

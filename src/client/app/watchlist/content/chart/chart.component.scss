@@ -1,7 +1,16 @@
 .mp-chart {
-  h4 {
-    .mp-price {
-      margin: 0 5px;
+  .mdl-card__title {
+    height: 38px;
+    h4 {
+      .mp-price {
+        margin: 0 5px;
+      }
+    }
+
+    .mp-favorite {
+      .material-icons {
+        position: absolute;
+      }
     }
   }
 

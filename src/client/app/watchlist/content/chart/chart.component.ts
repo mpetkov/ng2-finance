@@ -27,6 +27,8 @@ export class ChartComponent extends CoreApiNotification {
   stock:string;
   ranges:ChartRangesInterface[] = Config.chartRanges;
   rangeIndex:number;
+  favorite:boolean;
+  private favorites:string[] = [];
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
@@ -40,6 +42,10 @@ export class ChartComponent extends CoreApiNotification {
 
     this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.updateStock(stock)
+    ));
+
+    this.subscriptions.push(watchlistState.favorites$.subscribe(
+      favorites => this.updateFavorites(favorites)
     ));
 
     this.subscriptions.push(chartState.range$.subscribe(
@@ -57,8 +63,22 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
+  toggleFavorite(favorite:boolean) {
+    if (favorite) {
+      this.watchlistState.addFavorite(this.stock);
+    } else {
+      this.watchlistState.deleteFavorites([this.stock]);
+    }
+  }
+
+  private updateFavorites(favorites:string[]) {
+    this.favorites = favorites;
+    this.favorite = this.favorites.indexOf(this.stock) !== -1;
+  }
+
   private updateStock(stock:string) {
     this.stock = stock;
+    this.favorite = this.favorites.indexOf(this.stock) !== -1;
     if (stock) {
       this.loadChartData();
     } else {
