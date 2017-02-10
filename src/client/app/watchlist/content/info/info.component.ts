@@ -26,12 +26,18 @@ export class InfoComponent extends CoreApiNotification {
   dayOptions:RangeOptionsInterface = {};
   yearOptions:RangeOptionsInterface = {};
   private stock:string;
+  private loadedInfo:boolean;
+
   constructor(private infoState:InfoStateService,
               private watchlistState:WatchlistStateService,
               private infoApiService:InfoApiService) {
     super(infoState, infoApiService);
     this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.updateStock(stock)
+    ));
+
+    this.subscriptions.push(watchlistState.stockData$.subscribe(
+      stockData => this.updateStockData(stockData)
     ));
 
     this.subscriptions.push(infoState.data$.subscribe(
@@ -61,7 +67,14 @@ export class InfoComponent extends CoreApiNotification {
   private updateStock(stock:string) {
     this.stock = stock;
     if(stock) {
+      this.loadedInfo = false;
       this.infoApiService.load(stock);
+    }
+  }
+
+  private updateStockData(stockData:any) {
+    if (this.loadedInfo) {
+      this.updateData(stockData.price);
     }
   }
 
@@ -73,28 +86,39 @@ export class InfoComponent extends CoreApiNotification {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
       }
     } else {
-      let activeStart:number = Math.min(data.Open, data.LastTradePriceOnly);
-      let activeEnd:number = Math.max(data.Open, data.LastTradePriceOnly);
+      this.data = data;
+      this.updateData();
+      this.loadedInfo = true;
+    }
+  }
 
-      this.dayOptions = {
-        text: 'Day\'s Range',
-        start: data.DaysLow,
-        end: data.DaysHigh,
-        activeStart: activeStart,
-        activeEnd: activeEnd,
-        active: data.LastTradePriceOnly
-      };
-
-      this.yearOptions = {
-        text: '52 Week Range',
-        start: data.YearLow,
-        end: data.YearHigh,
-        activeStart: activeStart,
-        activeEnd: activeEnd,
-        active: data.LastTradePriceOnly
-      };
+  private updateData(price:number = null) {
+    if (price === null) {
+      price = this.data.LastTradePriceOnly;
     }
 
-    this.data = data;
+    let activeStart:number = Math.min(this.data.Open, price);
+    let activeEnd:number = Math.max(this.data.Open, price);
+
+    this.data.DaysLow =  Math.min(this.data.DaysLow, price);
+    this.data.DaysHigh =  Math.max(this.data.DaysHigh, price);
+
+    this.dayOptions = {
+      text: 'Day\'s Range',
+      start: this.data.DaysLow,
+      end: this.data.DaysHigh,
+      activeStart: activeStart,
+      activeEnd: activeEnd,
+      active: price
+    };
+
+    this.yearOptions = {
+      text: '52 Week Range',
+      start: this.data.YearLow,
+      end: this.data.YearHigh,
+      activeStart: activeStart,
+      activeEnd: activeEnd,
+      active: price
+    };
   }
 }
