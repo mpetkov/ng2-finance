@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdlMenuComponent } from 'angular2-mdl';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
@@ -19,7 +19,7 @@ declare let _:any;
   providers: [FavoritesHighlightService]
 })
 
-export class FavoritesComponent extends CoreApiNotification {
+export class FavoritesComponent extends CoreApiNotification implements OnDestroy {
   @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
   favoritesData:any[] = [];
   stock:string;
@@ -83,6 +83,10 @@ export class FavoritesComponent extends CoreApiNotification {
     }
   }
 
+  ngOnDestroy() {
+    this.cancelTimeout();
+  }
+
   private updateFavorites(data:any[]) {
     this.favoritesData = data;
     this.watchlistState.changeHighlights(this.favoritesHighlightService.getHighlights(data, this.lastLoadedData));
@@ -112,11 +116,14 @@ export class FavoritesComponent extends CoreApiNotification {
     this.watchlistState.changeStockData(_.find(this.favoritesData, ['symbol', stock]) || {});
   }
 
-  private startRefresh() {
+  private cancelTimeout() {
     if (this.refreshTimeout) {
       clearTimeout(this.refreshTimeout);
     }
+  }
 
+  private startRefresh() {
+    this.cancelTimeout();
     this.refreshTimeout = setTimeout(() => {
       this.favoritesApiService.disableLoader = true;
       this.favoritesApiService.reload();
