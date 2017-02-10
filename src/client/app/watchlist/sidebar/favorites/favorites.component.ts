@@ -24,6 +24,7 @@ export class FavoritesComponent extends CoreApiNotification {
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
   private sidebar:boolean;
+  private refreshTimeout:any;
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
@@ -90,7 +91,20 @@ export class FavoritesComponent extends CoreApiNotification {
           text: 'Add symbol',
           action: FavoriteNotificationActions.Add
         });
+    } else {
+      this.startRefresh();
     }
+  }
+
+  private startRefresh() {
+    if (this.refreshTimeout) {
+      clearTimeout(this.refreshTimeout);
+    }
+
+    this.refreshTimeout = setTimeout(() => {
+      this.favoritesApiService.disableLoader = true;
+      this.favoritesApiService.reload();
+    }, 10000);
   }
 }
 
