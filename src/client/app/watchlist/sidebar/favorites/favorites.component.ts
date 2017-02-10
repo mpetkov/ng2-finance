@@ -39,7 +39,7 @@ export class FavoritesComponent extends CoreApiNotification {
     super(favoritesState, favoritesApiService);
 
     this.subscriptions.push(watchlistState.stock$.subscribe(
-      stock => this.stock = stock
+      stock => this.changeStock(stock)
     ));
 
     this.subscriptions.push(favoritesState.data$.subscribe(
@@ -105,6 +105,11 @@ export class FavoritesComponent extends CoreApiNotification {
     } else {
       this.startRefresh();
     }
+  }
+
+  private changeStock(stock:string) {
+    this.stock = stock;
+    this.watchlistState.changeStockData(_.find(this.favoritesData, ['symbol', stock]) || {});
   }
 
   private startRefresh() {
