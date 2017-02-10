@@ -28,7 +28,9 @@ export class ChartCrosshairService {
         this.chartTooltipsService.addXTooltip(sel);
       })
       .on('trackingmove', (crosshairData:any) => {
-        this.chartState.changePoint(crosshairData[0].datum);
+        if (crosshairData[0]) {
+          this.chartState.changePoint(crosshairData[0].datum);
+        }
       })
       .on('trackingend', () => {
         this.chartState.changePoint(data[data.length - 1]);
