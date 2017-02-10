@@ -23,10 +23,10 @@ declare let _:any;
 })
 
 export class ChartComponent extends CoreApiNotification {
-  stock:any = {};
+  stockData:any = {};
+  stock:string;
   ranges:ChartRangesInterface[] = Config.chartRanges;
   rangeIndex:number;
-  symbol:string;
   private range:ChartRangesInterface;
   constructor(private chartState:ChartStateService,
               private chartApiService:ChartApiService,
@@ -34,16 +34,16 @@ export class ChartComponent extends CoreApiNotification {
               private appState:AppStateService) {
     super(chartState, chartApiService);
 
-    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
-      symbol => this.updateSymbol(symbol)
+    this.subscriptions.push(watchlistState.stockData$.subscribe(
+      stockData => this.stockData = stockData
+    ));
+
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.updateStock(stock)
     ));
 
     this.subscriptions.push(chartState.range$.subscribe(
       range => this.updateRange(range)
-    ));
-
-    this.subscriptions.push(watchlistState.stock$.subscribe(
-      stock => this.stock = stock
     ));
 
     this.subscriptions.push(chartState.data$.subscribe(
@@ -57,9 +57,9 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
-  private updateSymbol(symbol:string) {
-    this.symbol = symbol;
-    if (symbol) {
+  private updateStock(stock:string) {
+    this.stock = stock;
+    if (stock) {
       this.loadChartData();
     } else {
       this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
@@ -77,14 +77,14 @@ export class ChartComponent extends CoreApiNotification {
   }
 
   private loadChartData() {
-    if (this.symbol && this.range) {
-      this.chartApiService.load(this.symbol, this.range.id, this.range.interval);
+    if (this.stock && this.range) {
+      this.chartApiService.load(this.stock, this.range.id, this.range.interval);
     }
   }
 
   private validateChartData(data:any[]) {
     if (data.length === 0) {
-      if (this.symbol) {
+      if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);

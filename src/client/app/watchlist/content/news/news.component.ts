@@ -17,14 +17,14 @@ import {
 
 export class NewsComponent extends CoreApiNotification {
   news:any[] = [];
-  private symbol:string;
+  private stock:string;
   constructor(private newsState:NewsStateService,
               private watchlistState:WatchlistStateService,
               private newsApiService:NewsApiService) {
     super(newsState, newsApiService);
 
-    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
-      symbol => this.updateSymbol(symbol)
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.updateStock(stock)
     ));
 
     this.subscriptions.push(newsState.data$.subscribe(
@@ -34,16 +34,16 @@ export class NewsComponent extends CoreApiNotification {
     this.updateNews([]);
   }
 
-  private updateSymbol(symbol:string) {
-    this.symbol = symbol;
-    if(symbol) {
-      this.newsApiService.load(symbol);
+  private updateStock(stock:string) {
+    this.stock = stock;
+    if(stock) {
+      this.newsApiService.load(stock);
     }
   }
 
   private updateNews(data:any[]) {
     if (data.length === 0) {
-      if (this.symbol) {
+      if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);

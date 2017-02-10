@@ -20,9 +20,9 @@ declare let _:any;
 export class FavoritesComponent extends CoreApiNotification {
   @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
   favorites:any[] = [];
+  stock:string;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
-  private selected:string;
   private sidebar:boolean;
 
   constructor(public watchlistState:WatchlistStateService,
@@ -33,8 +33,8 @@ export class FavoritesComponent extends CoreApiNotification {
               private router:Router) {
     super(favoritesState, favoritesApiService);
 
-    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
-      symbol => this.selected = symbol
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.stock = stock
     ));
 
     this.subscriptions.push(favoritesState.data$.subscribe(
@@ -54,12 +54,12 @@ export class FavoritesComponent extends CoreApiNotification {
     this.sidebarState.changeType(SidebarTypeEnum.Edit);
   }
 
-  select(symbol:string) {
+  select(stock:string) {
     if (this.sidebar) {
       this.headerState.changeSidebar(false);
     }
 
-    this.router.navigate(['/watchlist', symbol]);
+    this.router.navigate(['/watchlist', stock]);
   }
 
   togglePill() {
@@ -80,7 +80,7 @@ export class FavoritesComponent extends CoreApiNotification {
 
   private updateFavorites(data:any[]) {
     this.favorites = data;
-    this.watchlistState.changeStock(_.find(data, ['symbol', this.selected]) || {});
+    this.watchlistState.changeStockData(_.find(data, ['symbol', this.stock]) || {});
     if (data.length === 0) {
       this.updateNotification(
         NotificationTypeEnum.Notification,

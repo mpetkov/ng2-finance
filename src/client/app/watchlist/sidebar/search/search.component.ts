@@ -54,7 +54,7 @@ export class SearchComponent extends CoreApiNotification {
     this.favoritesState.changeOrder(this.order);
     this.favoritesState.add(stock.symbol);
     this.sidebarState.changeType(SidebarTypeEnum.List);
-    this.watchlistState.changeStock(stock);
+    this.watchlistState.changeStockData(stock);
   }
 
   private updateSearch(value:string) {

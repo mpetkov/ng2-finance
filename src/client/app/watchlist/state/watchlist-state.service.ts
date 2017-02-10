@@ -1,38 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { StockActions } from './index';
+import { CoreStateService } from '../../core/index';
+import {
+  WatchlistActions,
+  WatchlistStateKeys
+} from './index';
 import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 @Injectable()
-export class WatchlistStateService {
-  stock$:Observable<any>;
-  stockSymbol$:Observable<string>;
+export class WatchlistStateService extends CoreStateService {
+  stockData$:Observable<any>;
+  stock$:Observable<string>;
 
-  constructor(private store$:Store<any>) {
-    this.stock$ = store$.let(this.getStock());
-    this.stockSymbol$ = store$.let(this.getStockSymbol());
+  constructor(protected store$:Store<any>) {
+    super(store$);
+    this.stockData$ = store$.let(this.getState('watchlist', WatchlistStateKeys.StockData));
+    this.stock$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Stock));
   }
 
-  changeStock(stock:any) {
-    this.store$.dispatch(StockActions.changeData(stock));
+  changeStockData(data:any) {
+    this.store$.dispatch(WatchlistActions.changeStockData(data));
   }
 
-  changeStockSymbol(symbol:string) {
-    this.store$.dispatch(StockActions.change(symbol));
-  }
-
-  private getStock():any {
-    return (state$:any) => state$
-      .map((state:any) => state.stock.data)
-      .distinctUntilChanged();
-  }
-
-  private getStockSymbol():any {
-    return (state$:any) => state$
-      .map((state:any) => state.stock.symbol)
-      .distinctUntilChanged();
+  changeStock(stock:string) {
+    this.store$.dispatch(WatchlistActions.changeStock(stock));
   }
 }

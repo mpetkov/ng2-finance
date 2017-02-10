@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
 import {
-  stockReducer,
+  watchlistReducer,
   chartReducer,
   newsReducer,
   infoReducer
@@ -38,7 +38,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     StoreModule.provideStore({
       app: appReducer,
       header: headerReducer,
-      stock: stockReducer,
+      watchlist: watchlistReducer,
       favorites: favoritesReducer,
       sidebar: sidebarReducer,
       search: searchReducer,

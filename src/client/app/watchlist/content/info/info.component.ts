@@ -25,13 +25,13 @@ export class InfoComponent extends CoreApiNotification {
   rightColumn:any[] = [];
   dayOptions:RangeOptionsInterface = {};
   yearOptions:RangeOptionsInterface = {};
-  private symbol:string;
+  private stock:string;
   constructor(private infoState:InfoStateService,
               private watchlistState:WatchlistStateService,
               private infoApiService:InfoApiService) {
     super(infoState, infoApiService);
-    this.subscriptions.push(watchlistState.stockSymbol$.subscribe(
-      symbol => this.updateSymbol(symbol)
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.updateStock(stock)
     ));
 
     this.subscriptions.push(infoState.data$.subscribe(
@@ -58,16 +58,16 @@ export class InfoComponent extends CoreApiNotification {
     this.updateInfo();
   }
 
-  private updateSymbol(symbol:string) {
-    this.symbol = symbol;
-    if(symbol) {
-      this.infoApiService.load(symbol);
+  private updateStock(stock:string) {
+    this.stock = stock;
+    if(stock) {
+      this.infoApiService.load(stock);
     }
   }
 
   private updateInfo(data:any = null) {
     if (!data) {
-      if (this.symbol) {
+      if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
       } else {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noStock);
