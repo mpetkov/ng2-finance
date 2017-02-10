@@ -14,6 +14,12 @@ export const watchlistReducer:ActionReducer<WatchlistStateInterface> = (state:Wa
       return state.set(WatchlistStateKeys.Stock, action.payload);
     case WatchlistActions.CHANGE_STOCK_DATA:
       return state.set(WatchlistStateKeys.StockData, action.payload);
+    case WatchlistActions.DELETE_FAVORITES:
+      return state.set(WatchlistStateKeys.Favorites, state.favorites.filter(
+        (symbol:string) => action.payload.indexOf(symbol) === -1)
+      );
+    case WatchlistActions.ADD_FAVORITE:
+      return state.set(WatchlistStateKeys.Favorites, [action.payload, ...state.favorites]);
     default:
       return state;
   }

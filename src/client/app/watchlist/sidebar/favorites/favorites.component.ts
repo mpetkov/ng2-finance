@@ -19,7 +19,7 @@ declare let _:any;
 
 export class FavoritesComponent extends CoreApiNotification {
   @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
-  favorites:any[] = [];
+  favoritesData:any[] = [];
   stock:string;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
@@ -79,7 +79,7 @@ export class FavoritesComponent extends CoreApiNotification {
   }
 
   private updateFavorites(data:any[]) {
-    this.favorites = data;
+    this.favoritesData = data;
     this.watchlistState.changeStockData(_.find(data, ['symbol', this.stock]) || {});
     if (data.length === 0) {
       this.updateNotification(

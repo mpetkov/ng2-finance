@@ -5,12 +5,10 @@ import {
 } from '../../../../core/index';
 
 export interface FavoritesStateInterface extends CoreApiStateInterface {
-  symbols?:string[];
   order?:string[];
 }
 
 export const FavoritesInitialState = Record({
-  symbols: ['YHOO', 'AAPL', 'GOOG', 'ADS'],
   order: [],
   data: [],
   loader: false,
@@ -18,6 +16,5 @@ export const FavoritesInitialState = Record({
 });
 
 export class FavoritesStateKeys extends CoreApiStateKeys {
-  static Symbols = 'symbols';
   static Order = 'order';
 }

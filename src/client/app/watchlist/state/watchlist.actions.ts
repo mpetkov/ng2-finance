@@ -3,6 +3,8 @@ import { Action } from '@ngrx/store';
 export class WatchlistActions {
   static CHANGE_STOCK_DATA = 'WATCHLIST:CHANGE_STOCK_DATA';
   static CHANGE_STOCK = 'WATCHLIST:CHANGE_STOCK';
+  static DELETE_FAVORITES = 'WATCHLIST:DELETE_FAVORITES';
+  static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
 
   static changeStockData(data:any):Action {
     return {
@@ -15,6 +17,20 @@ export class WatchlistActions {
     return {
       type: WatchlistActions.CHANGE_STOCK,
       payload: stock
+    };
+  }
+
+  static addFavorite(favorite:string):Action {
+    return {
+      type: this.ADD_FAVORITE,
+      payload: favorite
+    };
+  }
+
+  static deleteFavorites(favorites:string[]):Action {
+    return {
+      type: this.DELETE_FAVORITES,
+      payload: favorites
     };
   }
 }

@@ -20,7 +20,7 @@
     class="mdl-navigation"
     [dragula]="dragName"
     [dragulaModel]="favorites">
-  <li *ngFor="let stock of favorites"
+  <li *ngFor="let stock of favoritesData"
       class="mdl-navigation__link slide-fade mp-edit-item"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete mdl-color--red"

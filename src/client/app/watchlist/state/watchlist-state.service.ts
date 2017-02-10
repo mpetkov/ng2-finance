@@ -12,11 +12,13 @@ import 'rxjs/add/operator/let';
 export class WatchlistStateService extends CoreStateService {
   stockData$:Observable<any>;
   stock$:Observable<string>;
+  favorites$:Observable<string[]>;
 
   constructor(protected store$:Store<any>) {
     super(store$);
     this.stockData$ = store$.let(this.getState('watchlist', WatchlistStateKeys.StockData));
     this.stock$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Stock));
+    this.favorites$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Favorites));
   }
 
   changeStockData(data:any) {
@@ -25,5 +27,13 @@ export class WatchlistStateService extends CoreStateService {
 
   changeStock(stock:string) {
     this.store$.dispatch(WatchlistActions.changeStock(stock));
+  }
+
+  addFavorite(favorite:string) {
+    this.store$.dispatch(WatchlistActions.addFavorite(favorite));
+  }
+
+  deleteFavorites(favorites:string[]) {
+    this.store$.dispatch(WatchlistActions.deleteFavorites(favorites));
   }
 }

@@ -4,6 +4,7 @@ import { Config, Subscriptions } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,7 @@ import { HeaderStateService } from '../../../shared/header/state/header-state.se
 })
 
 export class EditComponent extends Subscriptions implements OnDestroy {
-  favorites:any[] = [];
+  favoritesData:any[] = [];
   notification:string;
   selected:string;
   deleted:string[] = [];
@@ -24,11 +25,12 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
               private headerState:HeaderStateService,
+              private watchlistState:WatchlistStateService,
               private renderer:Renderer,
               private dragulaService: DragulaService) {
     super();
     this.subscriptions.push(favoritesState.data$.subscribe(
-      data => this.favorites = data
+      data => this.favoritesData = data
     ));
 
     dragulaService.setOptions(this.dragName, {
@@ -59,7 +61,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   delete(symbol:string, event:any) {
     event.stopPropagation();
     this.deleted.push(symbol);
-    if (this.deleted.length === this.favorites.length) {
+    if (this.deleted.length === this.favoritesData.length) {
       this.notification = Config.notifications.noFavorites;
     }
     this.destroyListener();
@@ -79,7 +81,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
 
   private closeScreen(type:SidebarTypeEnum) {
     if (this.deleted.length > 0) {
-      this.favoritesState.delete(this.deleted);
+      this.watchlistState.deleteFavorites(this.deleted);
     }
 
     if (type === SidebarTypeEnum.Add) {
@@ -93,7 +95,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
 
   private updateOrder() {
     let order:string[] = [];
-    this.favorites.forEach((item:any) => {
+    this.favoritesData.forEach((item:any) => {
       if (this.deleted.indexOf(item.symbol) === -1) {
         order.push(item.symbol);
       }

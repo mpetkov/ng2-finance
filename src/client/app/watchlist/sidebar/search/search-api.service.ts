@@ -4,8 +4,8 @@ import {
   Config,
   CoreApiResponseService
 } from '../../../core/index';
-import { FavoritesStateService } from '../favorites/state/index';
 import { SearchStateService } from './state/index';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
 declare let _:any;
 
 @Injectable()
@@ -13,11 +13,11 @@ export class SearchApiService extends CoreApiResponseService {
   private favorites:string[] = [];
   private stock:string;
   constructor(public http:Http,
-              private favoritesState:FavoritesStateService,
+              private watchlistState:WatchlistStateService,
               private searchState:SearchStateService) {
     super(http, searchState);
-    this.favoritesState.symbols$.subscribe(
-      symbols => this.favorites = symbols
+    this.watchlistState.favorites$.subscribe(
+      favorites => this.favorites = favorites
     );
   }
 

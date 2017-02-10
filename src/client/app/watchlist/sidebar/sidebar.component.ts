@@ -5,7 +5,6 @@ import {
   SidebarStateService,
   SidebarTypeEnum
 } from './state/index';
-import { FavoritesStateService } from './favorites/state/favorites-state.service';
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
@@ -25,13 +24,12 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
   constructor(public sidebarState:SidebarStateService,
               private route: ActivatedRoute,
-              private favoritesState:FavoritesStateService,
               private favoritesApiService:FavoritesApiService,
               private watchlistState:WatchlistStateService,
               private headerState:HeaderStateService) {
     super();
-    this.subscriptions.push(favoritesState.symbols$.subscribe(
-      symbols => favoritesApiService.load(symbols)
+    this.subscriptions.push(watchlistState.favorites$.subscribe(
+      favorites => favoritesApiService.load(favorites)
     ));
 
     this.subscriptions.push(headerState.searchActive$.subscribe(
@@ -42,7 +40,7 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
       .takeUntil(this.ngOnDestroy$)
       .pluck('id')
       .distinctUntilChanged()
-      .subscribe((id: string) => watchlistState.changeStockSymbol(id));
+      .subscribe((id: string) => watchlistState.changeStock(id));
   }
 
   ngOnDestroy() {
