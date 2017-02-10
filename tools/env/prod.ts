@@ -5,7 +5,8 @@ const yqlUrl:string = 'https://query.yahooapis.com/v1/public/yql';
 const ProdConfig: ConfigInterface = {
   env: 'PROD',
   paths: {
-    charts: 'https://ichart.finance.yahoo.com/table.csv?s=$stock&$range&g=d&ignore=.csv',
+    charts: 'https://query1.finance.yahoo.com/v7/finance/chart/$stock?range=$range&interval=$interval&indicators=quote&' +
+    'includeTimestamps=true&includePrePost=false&corsDomain=finance.yahoo.com',
     news: 'https://query1.finance.yahoo.com/v2/finance/news?lang=en-US&region=US&symbols=$stock&corsDomain=finance.yahoo.com',
     proxy: 'http://www.marinpetkov.com/proxy.php',
     search: 'https://finance.yahoo.com/_finance_doubledown/api/resource/searchassist;gossipConfig=%7B%22isJSONP%22%3A' +

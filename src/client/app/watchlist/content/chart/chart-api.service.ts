@@ -3,12 +3,10 @@ import { Http } from '@angular/http';
 import {
   Config,
   CoreApiResponseService,
-  LoaderDataTypeEnum,
-  ChartRangesIntervalInterface
+  LoaderDataTypeEnum
 } from '../../../core/index';
 import { ChartStateService } from './state/index';
 declare let _:any;
-declare let moment:any;
 
 @Injectable()
 export class ChartApiService extends CoreApiResponseService {
@@ -23,15 +21,17 @@ export class ChartApiService extends CoreApiResponseService {
     this.chartState.fetchLoader(true);
 
     let url:string = Config.paths.charts.replace('$stock', stock);
-    url = url.replace('$range', this.getDateRange(interval));
+    url = url.replace('$range', range);
+    url = url.replace('$interval', interval);
+
     if(Config.env === 'PROD') {
-      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url), LoaderDataTypeEnum.CSV)
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
         );
     } else {
-      this.get(url, LoaderDataTypeEnum.CSV)
+      this.get(url)
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
@@ -43,32 +43,36 @@ export class ChartApiService extends CoreApiResponseService {
     this.load(this.params.stock, this.params.range, this.params.interval);
   }
 
-  private transform(rawData:any):any[] {
-    let data:any[] = [];
-    if (rawData) {
-      let timestamp:number;
-      let ratio:number;
+  private transform(rawData:any):any {
+    let data:any = [];
+
+    let chartData:any = _.get(rawData, 'chart.result[0]', {});
+    if (chartData) {
+      let items:any = {
+        close: _.get(chartData, 'indicators.quote[0].close', []),
+        high: _.get(chartData, 'indicators.quote[0].high', []),
+        low: _.get(chartData, 'indicators.quote[0].low', []),
+        open: _.get(chartData, 'indicators.quote[0].open', []),
+        volume: _.get(chartData, 'indicators.quote[0].volume', []),
+        dates: chartData.timestamp || []
+      };
       let close:number;
-      rawData.forEach((row:string[]) => {
-        timestamp = moment(row[0], 'YYYY-MM-DD').unix();
-        close = Number(row[4]);
-        ratio = Number(row[6])/close;
-        data.push({
-          timestamp: timestamp,
-          date: new Date(timestamp * 1000),
-          close: Number(row[4])*ratio,
-          high: Number(row[2])*ratio,
-          low: Number(row[3])*ratio,
-          open: Number(row[1])*ratio,
-          volume: Number(row[5])
-        });
+      items.dates.forEach((value:number, index:number) => {
+        close = _.get(items, 'close[' + index + ']', null);
+        if (close) {
+          data.push({
+            timestamp: value,
+            date: new Date(value * 1000),
+            close: close,
+            high: _.get(items, 'high[' + index + ']', null),
+            low: _.get(items, 'low[' + index + ']', null),
+            open: _.get(items, 'open[' + index + ']', null),
+            volume: _.get(items, 'volume[' + index + ']', null),
+          });
+        }
       });
     }
-    return data;
-  }
 
-  private getDateRange(interval:ChartRangesIntervalInterface):string {
-    let previousDate:any = moment().subtract(interval.value, interval.type);
-    return 'a=' + previousDate.month() + '&b=' + previousDate.format('DD') + '&c=' + previousDate.format('YYYY');
+    return data;
   }
 }
