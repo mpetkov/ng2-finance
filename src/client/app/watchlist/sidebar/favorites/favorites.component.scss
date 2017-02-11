@@ -1,3 +1,5 @@
+@import '../../../../scss/variables';
+
 :host {
   .mdl-navigation__link {
     cursor: pointer;
@@ -26,7 +28,7 @@
 
   .mdl-navigation__link:hover,
   .mdl-navigation__link.active {
-    background: #f3f9fe;
+    background: $color-hover;
   }
 
   .mp-empty {

@@ -1,3 +1,5 @@
+@import '../../../../scss/variables';
+
 .mp-edit {
   .mdl-card__title {
     h4 {
@@ -33,7 +35,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    padding: 5px 10px;
+    padding: $padding-item;
     height: 40px;
   }
 
@@ -41,7 +43,6 @@
     background: white;
     width: calc(100% - 20px);
     left: 0;
-    transition: 0.3s ease-out;
   }
 
   .tab.active {

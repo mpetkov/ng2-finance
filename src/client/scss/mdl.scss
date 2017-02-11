@@ -1,0 +1,68 @@
+@import './variables';
+
+.mdl-layout__container {
+  min-width: $min-width;
+}
+
+.mdl-menu {
+  padding: 0;
+  min-width: unset;
+
+  .mdl-menu__item {
+    height: $height-item;
+    line-height: $height-item;
+  }
+}
+
+.mdl-card__title {
+  padding: $padding;
+  border-bottom: $border;
+  display: flex;
+  h4 {
+    line-height: 1.1;
+  }
+}
+
+.mdl-card__supporting-text {
+  width: 100%;
+  height: calc(100% - 38px);
+  color: black;
+  padding: 0;
+}
+
+.mdl-cell {
+  float: left;
+}
+
+.mdl-grid {
+  padding: 0;
+}
+
+.mdl-list {
+  padding: 0;
+  margin: 0;
+  .mdl-list__item {
+    padding: 5px;
+    min-height: inherit;
+  }
+  .mdl-list__item--two-line {
+    border-bottom: $border;
+    padding: $padding-item;
+    height: auto;
+    cursor: pointer;
+    .mdl-list__item-primary-content {
+      height: auto;
+      .mdl-list__item-sub-title {
+        font-size: $font-size-small;
+        .material-icons {
+          font-size: $font-size-medium;
+          margin-top: 1px;
+        }
+      }
+    }
+  }
+
+  .mdl-list__item--two-line:hover {
+    background: $color-hover;
+  }
+}

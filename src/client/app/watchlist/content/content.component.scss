@@ -1,6 +1,10 @@
+@import '../../../scss/variables';
+$dimension-full: calc(100% - #{$padding-panel});
+$dimension-partial: calc(100% - #{$padding-panel} - #{$padding-panel} - 333px);
+
 :host {
   .mdl-cell--9-col {
-    height: calc(100% - 16px);
+    height: $dimension-full;
     min-height: 350px;
   }
 
@@ -13,12 +17,12 @@
   }
 
   .mp-news {
-    height: calc(100% - 32px - 333px);
+    height: $dimension-partial;
   }
 
   @media (max-width: 1600px) {
     .mdl-cell--9-col {
-      width: calc(100% - 32px - 300px);
+      width: calc(100% - #{$padding-panel} - #{$padding-panel} - 300px);
     }
 
     .mdl-cell--3-col {
@@ -34,19 +38,19 @@
 
   @media (max-width: 1100px) {
     .mdl-cell--9-col {
-      width: calc(100% - 16px);
-      height: calc(100% - 32px - 333px);
+      width: $dimension-full;
+      height: $dimension-partial;
     }
 
     .mdl-cell--3-col {
-      width: calc(50% - 16px);
+      width: calc(50% - #{$padding-panel});
       height: 333px;
     }
   }
 
   @media (max-width: 980px) {
     .mdl-cell--3-col {
-      width: calc(100% - 16px);
+      width: $dimension-full;
       height: auto;
     }
   }

@@ -1,3 +1,5 @@
+@import '../../../scss/variables';
+
 .mp-sidebar {
   height: 100%;
 
@@ -15,10 +17,10 @@
     height: calc(100% - 45px);
     overflow: auto;
     .mdl-navigation__link {
-      border-bottom: 1px solid #dcdcdc;
+      border-bottom: $border;
       height: 40px;
       line-height: 40px;
-      padding: 5px 10px;
+      padding: $padding-item;
       color: #000;
       position: relative;
     }

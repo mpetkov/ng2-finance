@@ -1,10 +1,12 @@
+@import '../../../../../scss/variables';
+
 :host {
   width: 100%;
   margin-top: 15px;
   p {
     text-align: center;
     margin-top: 5px;
-    font-size: 0.9rem;
+    font-size: $font-size-small;
   }
   .bar {
     width: 100%;

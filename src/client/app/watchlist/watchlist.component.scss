@@ -1,15 +1,15 @@
-$sidebarWidth: 320px;
+@import '../../scss/variables';
 
 :host {
   .mdl-layout__drawer {
     transform: translateX(0);
-    width: $sidebarWidth;
+    width: $min-width;
     background: white;
     overflow: hidden;
   }
 
   .mdl-layout__content {
-    margin-left: $sidebarWidth;
+    margin-left: $min-width;
     height: 100%;
     padding: 5px;
   }
