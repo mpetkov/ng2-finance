@@ -1,5 +1,11 @@
-import { Map, Record } from 'immutable';
-import { localStorageAdapter } from '../../core/index';
+import {
+  Map,
+  Record
+} from 'immutable';
+import {
+  localStorageAdapter,
+  Types
+} from '../../core/index';
 
 export interface WatchlistStateInterface extends Map<string,any> {
   stock?:string;
@@ -18,6 +24,6 @@ export class WatchlistStateKeys {
 export const WatchlistInitialState = Record({
   stock: null,
   stockData: {},
-  favorites: localStorageAdapter.getItem(WatchlistStateKeys.Favorites) || ['AAPL', 'GOOG', 'FB'],
+  favorites: localStorageAdapter.getItem(WatchlistStateKeys.Favorites, Types.Array) || ['AAPL', 'GOOG', 'FB'],
   highlights: {}
 });

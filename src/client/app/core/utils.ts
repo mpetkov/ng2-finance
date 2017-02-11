@@ -8,12 +8,22 @@ export function numberUnitFormat(value:number, decimal:number = 0):string {
     : Math.abs(Number(value));
 }
 
+export function typeChecker(obj):string {
+  return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+}
+
 export const localStorageAdapter = {
-  getItem(key: string): any {
-    return JSON.parse(localStorage.getItem(key));
+  getItem(key: string, type:string): any {
+    let value:any = JSON.parse(localStorage.getItem(key));
+    return (typeChecker(value) === type) ? value : null;
   },
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 };
+
+export class Types {
+  static String = 'string';
+  static Array = 'array';
+}
