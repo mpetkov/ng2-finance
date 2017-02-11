@@ -9,14 +9,10 @@ declare let _:any;
 
 @Injectable()
 export class FavoritesApiService extends CoreApiResponseService {
-  private order:string[] = [];
   private stocks:string[] = [];
   constructor(public http:Http,
               private favoritesState:FavoritesStateService) {
     super(http, favoritesState);
-    favoritesState.order$.subscribe(
-      order => this.order = order
-    );
   }
 
   load(stocks:string[]) {
@@ -39,17 +35,11 @@ export class FavoritesApiService extends CoreApiResponseService {
       stocks = [stocks];
     }
 
-    let favorites:any[] = stocks.map((quote:any) => {
+    return stocks.map((quote:any) => {
       let change:number = Number(quote.Change) || 0.00;
-      let index:number = this.order.indexOf(quote.symbol);
-      if(index < 0) {
-        index = 999;
-      }
-
       return {
         symbol: quote.symbol,
         name: quote.Name,
-        order: index,
         price: Number(quote.LastTradePriceOnly),
         priceDisplay: Number(quote.LastTradePriceOnly).toLocaleString(undefined, {
           maximumFractionDigits: 2,
@@ -59,8 +49,6 @@ export class FavoritesApiService extends CoreApiResponseService {
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       };
     });
-
-    return _.sortBy(favorites, ['order']);
   }
 
   private calculateChangePercent(change:number, price:string):string {
