@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   Config,
   CoreApiNotification
@@ -31,7 +32,8 @@ export class SearchComponent extends CoreApiNotification {
               private favoritesState:FavoritesStateService,
               private watchlistState:WatchlistStateService,
               private searchApiService:SearchApiService,
-              private headerState:HeaderStateService) {
+              private headerState:HeaderStateService,
+              private router:Router) {
     super(searchState, searchApiService);
 
     this.subscriptions.push(searchState.data$.subscribe(
@@ -54,7 +56,7 @@ export class SearchComponent extends CoreApiNotification {
     this.favoritesState.changeOrder(this.order);
     this.watchlistState.addFavorite(stock.symbol);
     this.sidebarState.changeType(SidebarTypeEnum.List);
-    this.watchlistState.changeStockData(stock);
+    this.router.navigate(['/watchlist', stock.symbol]);
   }
 
   private updateSearch(value:string) {
