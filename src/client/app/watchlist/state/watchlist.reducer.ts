@@ -19,7 +19,11 @@ export const watchlistReducer:ActionReducer<WatchlistStateInterface> = (state:Wa
         (symbol:string) => action.payload.indexOf(symbol) === -1)
       );
     case WatchlistActions.ADD_FAVORITE:
-      return state.set(WatchlistStateKeys.Favorites, [action.payload, ...state.favorites]);
+      if(state.favorites.indexOf(action.payload) === -1) {
+        return state.set(WatchlistStateKeys.Favorites, [action.payload, ...state.favorites]);
+      } else {
+        return state;
+      }
     case WatchlistActions.CHANGE_HIGHLIGHTS:
       return state.set(WatchlistStateKeys.Highlights, action.payload);
     default:
