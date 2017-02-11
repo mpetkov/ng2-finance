@@ -153,6 +153,13 @@ input {
   white-space: nowrap;
 }
 
+button {
+  span,
+  .material-icons {
+    pointer-events: none;
+  }
+}
+
 .mp-cover {
   position: absolute;
   width: 100%;

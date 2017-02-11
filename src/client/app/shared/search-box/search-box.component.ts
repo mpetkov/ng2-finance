@@ -49,7 +49,9 @@ export class SearchBoxComponent implements OnChanges {
     if(!this.windowClickListener) {
       this.windowClickListener = this.renderer.listenGlobal('window', 'click',
         (event:any) => {
-          if(!event.target.parentElement || event.target.parentElement.className.indexOf('mp-search-box') === -1) {
+          if(!event.target.parentElement ||
+            (event.target.parentElement.className.indexOf('mp-search-box') === -1 &&
+            event.target.className.indexOf('mdl-button') === -1)) {
             this.toggleActive(false);
             this.formControl.setValue('', {});
             this.destroyListener();
