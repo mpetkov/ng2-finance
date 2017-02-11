@@ -16,12 +16,14 @@
 <mp-notification *ngIf="notification"
                  [type]="1"
                  [value]="notification"></mp-notification>
-<ul *ngIf="!notification"
+<ul #list
+    *ngIf="!notification"
     class="mdl-navigation"
     [dragula]="dragName"
     [dragulaModel]="favorites">
   <li *ngFor="let stock of favoritesData"
       class="mdl-navigation__link slide-fade mp-edit-item"
+      [id]="stock.symbol"
       [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
     <div class="delete mdl-color--red"
          title="Confirm delete"

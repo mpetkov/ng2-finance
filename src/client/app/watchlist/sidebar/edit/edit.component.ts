@@ -1,4 +1,4 @@
-import { Component, Renderer, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, Renderer, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { Config, Subscriptions } from '../../../core/index';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
@@ -15,6 +15,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 })
 
 export class EditComponent extends Subscriptions implements OnDestroy {
+  @ViewChild('list') list:ElementRef;
   favoritesData:any[] = [];
   notification:string;
   selected:string;
@@ -81,6 +82,8 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   }
 
   private closeScreen(type:SidebarTypeEnum) {
+    this.favoritesState.changeOrder(this.updateOrder(this.list.nativeElement, this.deleted));
+
     if (this.deleted.length > 0) {
       this.watchlistState.deleteFavorites(this.deleted);
     }
@@ -90,17 +93,19 @@ export class EditComponent extends Subscriptions implements OnDestroy {
     } else {
       this.sidebarState.changeType(type);
     }
-
-    this.updateOrder();
   }
 
-  private updateOrder() {
+  private updateOrder(list:Element, deleted:string[]):string[] {
     let order:string[] = [];
-    this.favoritesData.forEach((item:any) => {
-      if (this.deleted.indexOf(item.symbol) === -1) {
-        order.push(item.symbol);
+    if (list) {
+      let children:any = list.getElementsByTagName('li');
+      for (let i:number = 0; i < children.length; i++) {
+        if (deleted.indexOf(children[i].id) === -1) {
+          order.push(children[i].id);
+        }
       }
-    });
-    this.favoritesState.changeOrder(order);
+      children = null;
+    }
+    return order;
   }
 }
