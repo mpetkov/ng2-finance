@@ -51,6 +51,14 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     this.subscriptions.push(chartState.range$.subscribe(
       range => this.range = range
     ));
+
+    d3.selection.prototype.moveToFront = function () {
+      return this.each(function () {
+        this.parentNode.appendChild(this);
+      });
+    };
+
+    this.updateSettings();
   }
 
   ngAfterViewInit() {
@@ -106,17 +114,8 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   private redraw(data:ChartDataInterface[], container:any, chart:any) {
-    if (window.innerWidth < 420) {
-      if (!this.smallView) {
-        this.smallView = true;
-        this.chartOptionsService.options.yAxisWidth = 0;
-        this.chartOptionsService.options.yAxisLeftMargin = 3;
-        this.render(data);
-      }
-    } else if (this.smallView) {
-      this.smallView = false;
-      this.chartOptionsService.options.yAxisWidth = 55;
-      this.chartOptionsService.options.yAxisLeftMargin = -3;
+    let render:boolean = this.updateSettings();
+    if (render) {
       this.render(data);
     }
 
@@ -129,6 +128,27 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     this.applyPostRenderChanges();
   }
 
+  private updateSettings() {
+    let render:boolean = false;
+    if (window.innerWidth < 420) {
+      if (!this.smallView) {
+        this.smallView = true;
+        this.chartOptionsService.options.yAxisWidth = 0;
+        this.chartOptionsService.options.yAxisLeftMargin = 3;
+        this.chartOptionsService.options.xTicks = 3;
+        render = true;
+      }
+    } else if (this.smallView) {
+      this.smallView = false;
+      this.chartOptionsService.options.yAxisWidth = 55;
+      this.chartOptionsService.options.yAxisLeftMargin = -3;
+      this.chartOptionsService.options.xTicks = 4;
+      render = true;
+    }
+
+    return render;
+  }
+
   private applyPostRenderChanges() {
     d3.selectAll('.y-axis text')
       .style('text-anchor', 'end')
@@ -139,13 +159,9 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       .style({'text-anchor': 'start', 'dominant-baseline': 'central'})
       .attr('transform', 'translate(3, -' + (this.chartOptionsService.options.xAxisHeight / 2 + 3) + ' )');
 
-    d3.selection.prototype.moveToFront = function () {
-      return this.each(function () {
-        this.parentNode.appendChild(this);
-      });
-    };
-
-    d3.select('.plot-area').moveToFront();
+    if (!this.smallView) {
+      d3.select('.plot-area').moveToFront();
+    }
   }
 
   private getChart(data:ChartDataInterface[]):any {
