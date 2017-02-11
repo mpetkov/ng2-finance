@@ -7,8 +7,9 @@ import {
 } from './state/index';
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
+import { WatchlistStateKeys } from '../state/watchlist.state';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
-import { Subscriptions } from '../../core/subscriptions';
+import { Subscriptions, localStorageAdapter } from '../../core/index';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 
@@ -22,6 +23,8 @@ import 'rxjs/add/operator/takeUntil';
 
 export class SidebarComponent extends Subscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
+  private favorites:string[] = [];
+  private stock:string;
   constructor(public sidebarState:SidebarStateService,
               private route: ActivatedRoute,
               private favoritesApiService:FavoritesApiService,
@@ -29,7 +32,11 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
               private headerState:HeaderStateService) {
     super();
     this.subscriptions.push(watchlistState.favorites$.subscribe(
-      favorites => favoritesApiService.load(favorites)
+      favorites => this.updateFavorites(favorites)
+    ));
+
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.updateStock(stock)
     ));
 
     this.subscriptions.push(headerState.searchActive$.subscribe(
@@ -46,5 +53,27 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   ngOnDestroy() {
     super.ngOnDestroy();
     this.ngOnDestroy$.next(true);
+  }
+
+  private updateFavorites(favorites:string[]) {
+    localStorageAdapter.setItem(WatchlistStateKeys.Favorites, favorites);
+    this.favorites = favorites.slice();
+    this.loadFavoritesData();
+  }
+
+  private updateStock(stock:string) {
+    this.stock = stock;
+    if (this.favorites.indexOf(this.stock) === -1) {
+      this.loadFavoritesData();
+    }
+  }
+
+  private loadFavoritesData() {
+    if (this.stock) {
+      if (this.favorites.indexOf(this.stock) === -1) {
+        this.favorites.push(this.stock);
+      }
+    }
+    this.favoritesApiService.load(this.favorites)
   }
 }

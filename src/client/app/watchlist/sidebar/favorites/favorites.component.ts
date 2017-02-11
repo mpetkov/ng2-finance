@@ -28,6 +28,8 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
   private sidebar:boolean;
   private refreshTimeout:any;
   private lastLoadedData:any = {};
+  private favorites:string[] = [];
+  private data:any[] = [];
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
@@ -37,6 +39,10 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
               private headerState:HeaderStateService,
               private router:Router) {
     super(favoritesState, favoritesApiService);
+
+    this.subscriptions.push(watchlistState.favorites$.subscribe(
+      favorites => this.favorites = favorites
+    ));
 
     this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.changeStock(stock)
@@ -89,7 +95,10 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
   }
 
   private updateFavorites(data:any[]) {
-    this.favoritesData = data;
+    this.data = data;
+    this.favoritesData = data.filter((item:any) => {
+      return this.favorites.indexOf(item.symbol) !== -1;
+    });
     this.watchlistState.changeHighlights(this.favoritesHighlightService.getHighlights(data, this.lastLoadedData));
     this.lastLoadedData = this.favoritesHighlightService.getLastLoadedData(data);
 
@@ -114,7 +123,7 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
 
   private changeStock(stock:string) {
     this.stock = stock;
-    this.watchlistState.changeStockData(_.find(this.favoritesData, ['symbol', stock]) || {});
+    this.watchlistState.changeStockData(_.find(this.data, ['symbol', stock]) || {});
   }
 
   private cancelTimeout() {

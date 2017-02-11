@@ -2,8 +2,9 @@
   .mdl-card__title {
     height: 38px;
     h4 {
+      span:first-child,
       .mp-price {
-        margin: 0 5px;
+        margin-right: 5px;
       }
     }
 

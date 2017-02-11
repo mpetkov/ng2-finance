@@ -22,6 +22,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   deleted:string[] = [];
   dragName:string = 'editDrag';
   private windowClickListener: Function;
+  private favorites:string[] = [];
 
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
@@ -30,8 +31,14 @@ export class EditComponent extends Subscriptions implements OnDestroy {
               private renderer:Renderer,
               private dragulaService: DragulaService) {
     super();
+    this.subscriptions.push(watchlistState.favorites$.subscribe(
+      favorites => this.favorites = favorites
+    ));
+
     this.subscriptions.push(favoritesState.data$.subscribe(
-      data => this.favoritesData = data
+      data => this.favoritesData = data.filter((item:any) => {
+        return this.favorites.indexOf(item.symbol) !== -1;
+      })
     ));
 
     dragulaService.setOptions(this.dragName, {
