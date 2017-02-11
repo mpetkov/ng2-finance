@@ -3,14 +3,15 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ChartApiService } from './chart-api.service';
-import { ChartStateService } from './state/index';
+import { ChartStateService, ChartStateKeys } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { AppStateService } from '../../../state/app-state.service';
 import {
   Config,
   ChartRangesInterface,
-  CoreApiNotification
+  CoreApiNotification,
+  localStorageAdapter
 } from '../../../core/index';
 declare let _:any;
 
@@ -87,6 +88,7 @@ export class ChartComponent extends CoreApiNotification {
   }
 
   private updateRange(range:string) {
+    localStorageAdapter.setItem(ChartStateKeys.Range, range);
     let rangeIndex:number = _.findIndex(this.ranges, ['id', range]);
     if (rangeIndex === -1) {
       rangeIndex = 0;

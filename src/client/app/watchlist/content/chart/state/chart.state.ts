@@ -1,7 +1,8 @@
 import { Record } from 'immutable';
 import {
   CoreApiStateInterface,
-  CoreApiStateKeys
+  CoreApiStateKeys,
+  localStorageAdapter
 } from '../../../../core/index';
 
 export interface ChartStateInterface extends CoreApiStateInterface {
@@ -9,16 +10,15 @@ export interface ChartStateInterface extends CoreApiStateInterface {
   range?:string;
 }
 
-export const ChartInitialState = Record({
-  point: {},
-  range: '3mo',
-  data: [],
-  loader: false,
-  error: null
-});
-
-
 export class ChartStateKeys extends CoreApiStateKeys {
   static Point = 'point';
   static Range = 'range';
 }
+
+export const ChartInitialState = Record({
+  point: {},
+  range: localStorageAdapter.getItem(ChartStateKeys.Range) || '3mo',
+  data: [],
+  loader: false,
+  error: null
+});
