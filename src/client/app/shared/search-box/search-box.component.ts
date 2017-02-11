@@ -10,7 +10,9 @@ import {
   OnDestroy
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   moduleId: module.id,
@@ -27,9 +29,11 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
   @ViewChild('input') input:ElementRef;
   formControl:FormControl = new FormControl();
   private windowClickListener: Function;
+  private ngOnDestroy$ = new Subject<boolean>();
 
   constructor(private renderer:Renderer) {
     this.formControl.valueChanges
+      .takeUntil(this.ngOnDestroy$)
       .debounceTime(500)
       .subscribe(value => this.changed.emit(value));
   }
@@ -69,6 +73,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.ngOnDestroy$.next(true);
     this.destroyListener();
   }
 

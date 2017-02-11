@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { HeaderStateService } from './state/header-state.service';
+import { Subscriptions } from '../../core/subscriptions';
 
 @Component({
   moduleId: module.id,
@@ -9,19 +10,20 @@ import { HeaderStateService } from './state/header-state.service';
   encapsulation: ViewEncapsulation.None
 })
 
-export class HeaderComponent {
+export class HeaderComponent extends Subscriptions {
   active:boolean;
   sidebar:boolean;
   private searchFromContent:boolean;
 
   constructor(private headerState:HeaderStateService) {
-    headerState.searchActive$.subscribe(
+    super();
+    this.subscriptions.push(headerState.searchActive$.subscribe(
       searchActive => this.searchActiveChange(searchActive)
-    );
+    ));
 
-    headerState.sidebar$.subscribe(
+    this.subscriptions.push(headerState.sidebar$.subscribe(
       sidebar => this.sidebar = sidebar
-    );
+    ));
   }
 
   updateSearch(value:string) {
