@@ -36,9 +36,9 @@ export class ChartComponent extends CoreApiNotification {
   favorite:boolean;
   private favorites:string[] = [];
   private range:ChartRangesInterface;
-  constructor(private chartState:ChartStateService,
+  constructor(public watchlistState:WatchlistStateService,
+              private chartState:ChartStateService,
               private chartApiService:ChartApiService,
-              private watchlistState:WatchlistStateService,
               private appState:AppStateService) {
     super(chartState, chartApiService);
 

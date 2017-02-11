@@ -6,7 +6,8 @@ import {
   OnChanges,
   ViewChild,
   Renderer,
-  ElementRef
+  ElementRef,
+  OnDestroy
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
@@ -18,7 +19,7 @@ import 'rxjs/add/operator/debounceTime';
   styleUrls: ['search-box.component.css']
 })
 
-export class SearchBoxComponent implements OnChanges {
+export class SearchBoxComponent implements OnChanges, OnDestroy {
   @Input() value:string;
   @Input() active:boolean;
   @Output() changed:EventEmitter<string> = new EventEmitter();

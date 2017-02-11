@@ -18,12 +18,12 @@ import { StockDataInterface } from '../../state/watchlist.state';
 export class EditComponent extends Subscriptions implements OnDestroy {
   @ViewChild('list') list:ElementRef;
   favoritesData:StockDataInterface[] = [];
+  favorites:string[] = [];
   notification:string;
   selected:string;
   deleted:string[] = [];
   dragName:string = 'editDrag';
   private windowClickListener: Function;
-  private favorites:string[] = [];
 
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,

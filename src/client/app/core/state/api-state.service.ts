@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { CoreApiStateKeys, ErrorInterface } from './api.state';
-import { CoreStateService } from "./state.service";
+import { CoreStateService } from './state.service';
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';

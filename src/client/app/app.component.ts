@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppStateService } from "./state/app-state.service";
+import { AppStateService } from './state/app-state.service';
 import './operators';
 
 @Component({

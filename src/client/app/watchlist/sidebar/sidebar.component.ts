@@ -74,6 +74,6 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
         this.favorites.push(this.stock);
       }
     }
-    this.favoritesApiService.load(this.favorites)
+    this.favoritesApiService.load(this.favorites);
   }
 }

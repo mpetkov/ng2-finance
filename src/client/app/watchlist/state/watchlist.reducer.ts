@@ -8,7 +8,8 @@ import {
 
 const initialState:WatchlistStateInterface = new WatchlistInitialState() as WatchlistStateInterface;
 
-export const watchlistReducer:ActionReducer<WatchlistStateInterface> = (state:WatchlistStateInterface = initialState, action:Action = null) => {
+export const watchlistReducer:ActionReducer<WatchlistStateInterface> =
+  (state:WatchlistStateInterface = initialState, action:Action = null) => {
   switch (action.type) {
     case WatchlistActions.CHANGE_STOCK:
       return state.set(WatchlistStateKeys.Stock, action.payload);

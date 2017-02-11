@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges
+} from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +11,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['range.component.css']
 })
 
-export class RangeComponent {
+export class RangeComponent implements OnChanges {
   @Input() options:RangeOptionsInterface = {};
   position:RangePositionInterface = {};
 
