@@ -26,12 +26,13 @@ export class InfoApiService extends CoreApiResponseService {
         () => this.failed()
       );
   }
+
   reload() {
     this.load(this.stock);
   }
 
-  private transform(rawData:any):any {
-    let data:any[] = [];
+  private transform(rawData:any):InfoDataInterface[] {
+    let data:InfoDataInterface[] = [];
     let info:any = _.get(rawData, 'query.results.quote');
     if (info) {
       info.Volume = numberUnitFormat(info.Volume, 2);
@@ -45,4 +46,20 @@ export class InfoApiService extends CoreApiResponseService {
   private convertDate(date:number):string {
     return moment(date*1000).format('ddd, MMM Do YYYY h:mm A');
   }
+}
+
+export interface InfoDataInterface {
+  PreviousClose?:number;
+  DaysLow?:number;
+  YearLow?:number;
+  MarketCapitalization?:string;
+  OneyrTargetPrice?:number;
+  EarningsShare?:string;
+  Open?:number;
+  DaysHigh?:number;
+  YearHigh?:number;
+  Volume?:string;
+  AverageDailyVolume?:string;
+  DividendShare?:string;
+  LastTradePriceOnly?:number;
 }

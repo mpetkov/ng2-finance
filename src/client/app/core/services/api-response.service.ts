@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoaderService } from './loader.service';
+import {
+  CoreApiStateService,
+  ErrorInterface
+} from '../state/index';
 
 @Injectable()
 export class CoreApiResponseService extends LoaderService {
   disableLoader:boolean;
   protected errorCount:number = 0;
   constructor(protected http:Http,
-              protected state:any) {
+              protected state:CoreApiStateService) {
     super(http);
   }
 
@@ -39,9 +43,9 @@ export class CoreApiResponseService extends LoaderService {
         }
       }
 
-      this.state.fetchError({
+      this.state.fetchError(<ErrorInterface>{
         value: error,
-        date: Date.now(),
+        date: String(Date.now()),
         count: this.errorCount
       });
     }

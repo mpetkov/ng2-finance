@@ -3,13 +3,14 @@ import {
   NotificationButtonInterface
 } from '../shared/index';
 import { Subscriptions } from './subscriptions';
+import { CoreApiStateService } from './state/api-state.service';
 
 export class CoreApiNotification extends Subscriptions {
   notification:string;
   notificationType:NotificationTypeEnum;
   button:NotificationButtonInterface;
 
-  constructor(private state:any,
+  constructor(private state:CoreApiStateService,
               private apiService:any) {
     super();
     this.subscriptions.push(state.loader$.subscribe(

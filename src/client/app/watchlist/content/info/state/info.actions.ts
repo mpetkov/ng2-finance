@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 import { ErrorInterface } from '../../../../core/index';
+import { InfoDataInterface } from '../info-api.service';
 
 export class InfoActions {
   static FETCH_FULFILLED = 'WATCHLIST:INFO:FETCH_FULFILLED';
   static FETCH_LOADER = 'WATCHLIST:INFO:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:INFO:FETCH_ERROR';
 
-  static fetchFulfilled(data:any[]):Action {
+  static fetchFulfilled(data:InfoDataInterface[]):Action {
     return {
       type: this.FETCH_FULFILLED,
       payload: data

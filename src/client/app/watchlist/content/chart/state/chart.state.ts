@@ -6,8 +6,18 @@ import {
   Types
 } from '../../../../core/index';
 
+export interface ChartDataInterface {
+  timestamp?:number;
+  date?:Date;
+  close?:number;
+  high?:number;
+  low?:number;
+  open?:number;
+  volume?:number;
+}
+
 export interface ChartStateInterface extends CoreApiStateInterface {
-  point?:any;
+  point?:ChartDataInterface;
   range?:string;
 }
 

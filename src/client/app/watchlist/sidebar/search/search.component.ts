@@ -9,6 +9,7 @@ import { SearchApiService } from './search-api.service';
 import { SearchStateService } from './state/search-state.service';
 import { FavoritesStateService } from '../favorites/state/favorites-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist.state';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 
@@ -21,7 +22,7 @@ import { NotificationTypeEnum } from '../../../shared/index';
 })
 
 export class SearchComponent extends CoreApiNotification {
-  stocks:any[] = [];
+  stocks:StockDataInterface[] = [];
   notification:string;
   notificationType:NotificationTypeEnum;
   private search:string;
@@ -51,7 +52,7 @@ export class SearchComponent extends CoreApiNotification {
     this.updateStocks([]);
   }
 
-  add(stock:any) {
+  add(stock:StockDataInterface) {
     this.order.unshift(stock.symbol);
     this.favoritesState.changeOrder(this.order);
     this.watchlistState.addFavorite(stock.symbol);
@@ -68,7 +69,7 @@ export class SearchComponent extends CoreApiNotification {
     }
   }
 
-  private updateStocks(data:any[]) {
+  private updateStocks(data:StockDataInterface[]) {
     if (data.length === 0) {
       if (this.search) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);

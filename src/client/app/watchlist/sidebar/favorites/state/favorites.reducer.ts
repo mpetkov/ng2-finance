@@ -8,6 +8,7 @@ import {
   FavoritesStateKeys,
   FavoritesStateInterface
 } from './index';
+import { StockDataInterface } from '../../../state/watchlist.state';
 declare let _:any;
 
 const initialState:FavoritesStateInterface = new FavoritesInitialState() as FavoritesStateInterface;
@@ -20,7 +21,7 @@ export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
     case FavoritesActions.SORT_DATA:
       return state.set(FavoritesStateKeys.Data, sortData(state.data, state.order));
     case FavoritesActions.FETCH_FULFILLED:
-      return state.set(FavoritesStateKeys.Data, sortData(action.payload, state.get(FavoritesStateKeys.Order)));
+      return state.set(FavoritesStateKeys.Data, sortData(action.payload, state.order));
     case FavoritesActions.FETCH_LOADER:
       return state.set(FavoritesStateKeys.Loader, action.payload);
     case FavoritesActions.FETCH_ERROR:
@@ -31,8 +32,8 @@ export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
 };
 
 
-function sortData(data:any[], order:string[]):any[] {
-  data = data.map((item:any) => {
+function sortData(data:StockDataInterface[], order:string[]):StockDataInterface[] {
+  data = data.map((item:StockDataInterface) => {
     let index:number = order.indexOf(item.symbol);
     if(index < 0) {
       index = 999;

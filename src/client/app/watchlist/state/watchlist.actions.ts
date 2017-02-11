@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { StockDataInterface } from './watchlist.state';
 
 export class WatchlistActions {
   static CHANGE_STOCK_DATA = 'WATCHLIST:CHANGE_STOCK_DATA';
@@ -7,7 +8,7 @@ export class WatchlistActions {
   static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
   static CHANGE_HIGHLIGHTS = 'WATCHLIST:CHANGE_HIGHLIGHTS';
 
-  static changeStockData(data:any):Action {
+  static changeStockData(data:StockDataInterface):Action {
     return {
       type: WatchlistActions.CHANGE_STOCK_DATA,
       payload: data

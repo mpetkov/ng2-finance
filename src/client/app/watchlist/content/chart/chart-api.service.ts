@@ -5,7 +5,11 @@ import {
   CoreApiResponseService,
   LoaderDataTypeEnum
 } from '../../../core/index';
-import { ChartStateService } from './state/index';
+import {
+  ChartStateService,
+  ChartDataInterface
+} from './state/index';
+
 declare let _:any;
 
 @Injectable()
@@ -43,8 +47,8 @@ export class ChartApiService extends CoreApiResponseService {
     this.load(this.params.stock, this.params.range, this.params.interval);
   }
 
-  private transform(rawData:any):any {
-    let data:any = [];
+  private transform(rawData:any):ChartDataInterface[] {
+    let data:ChartDataInterface[] = [];
 
     let chartData:any = _.get(rawData, 'chart.result[0]', {});
     if (chartData) {

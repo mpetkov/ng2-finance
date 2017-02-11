@@ -1,10 +1,11 @@
+import { StockDataInterface } from '../../state/watchlist.state';
 declare let _:any;
 
 export class FavoritesHighlightService {
-  getHighlights(stocks:any[], lastLoadedData:any):any {
+  getHighlights(stocks:StockDataInterface[], lastLoadedData:StockDataInterface):any {
     let data:any = {};
 
-    stocks.forEach((stock:any) => {
+    stocks.forEach((stock:StockDataInterface) => {
       data[stock.symbol] = {
         price: this.getHighlight(stock.price, _.get(lastLoadedData, stock.symbol + '.price'))
       };
@@ -13,10 +14,10 @@ export class FavoritesHighlightService {
     return data;
   }
 
-  getLastLoadedData(stocks:any[]):any {
+  getLastLoadedData(stocks:StockDataInterface[]):StockDataInterface {
     let data:any = {};
 
-    stocks.forEach((stock:any) => {
+    stocks.forEach((stock:StockDataInterface) => {
       data[stock.symbol] = {
         price: stock.price
       };

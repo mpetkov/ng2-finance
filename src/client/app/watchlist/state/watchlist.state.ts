@@ -7,9 +7,19 @@ import {
   Types
 } from '../../core/index';
 
+export interface StockDataInterface {
+  symbol?:string;
+  name?:string;
+  price?:number;
+  priceDisplay?:string;
+  change?:string;
+  percentage?:string;
+  index?:number;
+}
+
 export interface WatchlistStateInterface extends Map<string,any> {
   stock?:string;
-  stockData?:any;
+  stockData?:StockDataInterface;
   favorites?:string[];
   highlights?:any;
 }

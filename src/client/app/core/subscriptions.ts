@@ -1,16 +1,16 @@
 import { OnDestroy } from '@angular/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 export class Subscriptions implements OnDestroy {
-  subscriptions:any[];
+  subscriptions:ISubscription[];
 
   constructor() {
     this.subscriptions = [];
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((item:any) => {
+    this.subscriptions.forEach((item:ISubscription) => {
       item.unsubscribe();
-      item = null;
     });
 
     this.subscriptions.length = 0;

@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ErrorInterface } from '../../../../core/index';
+import { StockDataInterface } from '../../../state/watchlist.state';
 
 export class FavoritesActions {
   static CHANGE_ORDER = 'WATCHLIST:FAVORITES:CHANGE_ORDER';
@@ -22,7 +23,7 @@ export class FavoritesActions {
     };
   }
 
-  static fetchFulfilled(data:any[]):Action {
+  static fetchFulfilled(data:StockDataInterface[]):Action {
     return {
       type: this.FETCH_FULFILLED,
       payload: data

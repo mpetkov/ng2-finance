@@ -2,6 +2,7 @@ import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdlMenuComponent } from 'angular2-mdl';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist.state';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
@@ -21,7 +22,7 @@ declare let _:any;
 
 export class FavoritesComponent extends CoreApiNotification implements OnDestroy {
   @ViewChild('mdlMenu')mdlMenu:MdlMenuComponent;
-  favoritesData:any[] = [];
+  favoritesData:StockDataInterface[] = [];
   stock:string;
   pillType:string = PillEnum[PillEnum.change];
   private pillIndex:number = PillEnum.change;
@@ -29,7 +30,7 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
   private refreshTimeout:any;
   private lastLoadedData:any = {};
   private favorites:string[] = [];
-  private data:any[] = [];
+  private data:StockDataInterface[] = [];
 
   constructor(public watchlistState:WatchlistStateService,
               public favoritesState:FavoritesStateService,
@@ -96,9 +97,9 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
     this.cancelTimeout();
   }
 
-  private updateFavorites(data:any[]) {
+  private updateFavorites(data:StockDataInterface[]) {
     this.data = data;
-    this.favoritesData = data.filter((item:any) => {
+    this.favoritesData = data.filter((item:StockDataInterface) => {
       return this.favorites.indexOf(item.symbol) !== -1;
     });
     this.watchlistState.changeHighlights(this.favoritesHighlightService.getHighlights(data, this.lastLoadedData));

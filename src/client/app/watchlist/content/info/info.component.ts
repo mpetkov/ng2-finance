@@ -2,10 +2,14 @@ import {
   Component,
   OnDestroy
 } from '@angular/core';
-import { InfoApiService } from './info-api.service';
+import {
+  InfoApiService,
+  InfoDataInterface
+} from './info-api.service';
 import { InfoStateService } from './state/index';
 import { RangeOptionsInterface } from './index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist.state';
 import { NotificationTypeEnum } from '../../../shared/index';
 import {
   CoreApiNotification,
@@ -20,9 +24,9 @@ import {
 })
 
 export class InfoComponent extends CoreApiNotification {
-  data:any = {};
-  leftColumn:any[] = [];
-  rightColumn:any[] = [];
+  data:InfoDataInterface = {};
+  leftColumn:InfoListInterface[] = [];
+  rightColumn:InfoListInterface[] = [];
   dayOptions:RangeOptionsInterface = {};
   yearOptions:RangeOptionsInterface = {};
   private stock:string;
@@ -72,13 +76,13 @@ export class InfoComponent extends CoreApiNotification {
     }
   }
 
-  private updateStockData(stockData:any) {
+  private updateStockData(stockData:StockDataInterface) {
     if (this.loadedInfo) {
       this.updateData(stockData.price);
     }
   }
 
-  private updateInfo(data:any = null) {
+  private updateInfo(data:InfoDataInterface = null) {
     if (!data) {
       if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);
@@ -121,4 +125,10 @@ export class InfoComponent extends CoreApiNotification {
       active: price
     };
   }
+}
+
+
+export interface InfoListInterface {
+  id?:string;
+  text?:string;
 }

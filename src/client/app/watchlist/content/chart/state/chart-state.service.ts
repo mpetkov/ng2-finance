@@ -4,13 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { CoreApiStateService } from '../../../../core/index';
 import {
   ChartActions,
-  ChartStateKeys
+  ChartStateKeys,
+  ChartDataInterface
 } from './index';
 import 'rxjs/add/operator/let';
 
 @Injectable()
 export class ChartStateService extends CoreApiStateService {
-  point$:Observable<any>;
+  point$:Observable<ChartDataInterface>;
   range$:Observable<string>;
 
   constructor(public store$:Store<any>) {
@@ -19,7 +20,7 @@ export class ChartStateService extends CoreApiStateService {
     this.range$ = store$.let(this.getState(this.stateName, ChartStateKeys.Range));
   }
 
-  changePoint(point:any) {
+  changePoint(point:ChartDataInterface) {
     this.store$.dispatch(ChartActions.changePoint(point));
   }
 

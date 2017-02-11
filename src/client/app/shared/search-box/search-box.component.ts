@@ -5,7 +5,8 @@ import {
   EventEmitter,
   OnChanges,
   ViewChild,
-  Renderer
+  Renderer,
+  ElementRef
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
@@ -22,7 +23,7 @@ export class SearchBoxComponent implements OnChanges {
   @Input() active:boolean;
   @Output() changed:EventEmitter<string> = new EventEmitter();
   @Output() activate:EventEmitter<boolean> = new EventEmitter();
-  @ViewChild('input') input:any;
+  @ViewChild('input') input:ElementRef;
   formControl:FormControl = new FormControl();
   private windowClickListener: Function;
 

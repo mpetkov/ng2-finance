@@ -5,6 +5,7 @@ import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { FavoritesStateService } from '../favorites/state/index';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist.state';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 
 export class EditComponent extends Subscriptions implements OnDestroy {
   @ViewChild('list') list:ElementRef;
-  favoritesData:any[] = [];
+  favoritesData:StockDataInterface[] = [];
   notification:string;
   selected:string;
   deleted:string[] = [];
@@ -36,23 +37,23 @@ export class EditComponent extends Subscriptions implements OnDestroy {
     ));
 
     this.subscriptions.push(favoritesState.data$.subscribe(
-      data => this.favoritesData = data.filter((item:any) => {
+      data => this.favoritesData = data.filter((item:StockDataInterface) => {
         return this.favorites.indexOf(item.symbol) !== -1;
       })
     ));
 
     dragulaService.setOptions(this.dragName, {
-      moves: function (el:any, container:any, handle:any) {
+      moves: function (el:Element, container:Element, handle:Element) {
         return handle.className.indexOf('mp-drag') !== -1;
       }
     });
   }
 
-  showDelete(symbol:string, event:any) {
+  showDelete(symbol:string, event:Event) {
     event.stopPropagation();
     this.selected = symbol;
     this.windowClickListener = this.renderer.listenGlobal('window', 'click',
-      (event:any) => {
+      (event:Event) => {
         this.selected = null;
         this.destroyListener();
       });
@@ -66,7 +67,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
     this.closeScreen(SidebarTypeEnum.Add);
   }
 
-  delete(symbol:string, event:any) {
+  delete(symbol:string, event:Event) {
     event.stopPropagation();
     this.deleted.push(symbol);
     if (this.deleted.length === this.favoritesData.length) {

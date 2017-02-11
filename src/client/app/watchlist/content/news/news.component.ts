@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NewsApiService } from './news-api.service';
+import {
+  NewsApiService,
+  NewsDataInterface
+} from './news-api.service';
 import { NewsStateService } from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
@@ -16,7 +19,7 @@ import {
 })
 
 export class NewsComponent extends CoreApiNotification {
-  news:any[] = [];
+  news:NewsDataInterface[] = [];
   private stock:string;
   constructor(private newsState:NewsStateService,
               private watchlistState:WatchlistStateService,
@@ -41,7 +44,7 @@ export class NewsComponent extends CoreApiNotification {
     }
   }
 
-  private updateNews(data:any[]) {
+  private updateNews(data:NewsDataInterface[]) {
     if (data.length === 0) {
       if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);

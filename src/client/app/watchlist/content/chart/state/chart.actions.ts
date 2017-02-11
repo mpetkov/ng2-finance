@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ErrorInterface } from '../../../../core/index';
+import { ChartDataInterface } from './chart.state';
 
 export class ChartActions {
   static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';
@@ -8,7 +9,7 @@ export class ChartActions {
   static FETCH_LOADER = 'WATCHLIST:CHART:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:CHART:FETCH_ERROR';
 
-  static changePoint(point:any):Action {
+  static changePoint(point:ChartDataInterface):Action {
     return {
       type: this.CHANGE_POINT,
       payload: point
@@ -22,7 +23,7 @@ export class ChartActions {
     };
   }
 
-  static fetchFulfilled(data:any[]):Action {
+  static fetchFulfilled(data:ChartDataInterface[]):Action {
     return {
       type: this.FETCH_FULFILLED,
       payload: data

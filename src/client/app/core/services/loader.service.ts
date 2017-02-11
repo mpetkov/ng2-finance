@@ -33,13 +33,16 @@ export class LoaderService {
   }
 
   private getResponse(response:Response, type:LoaderDataTypeEnum) {
+    let result:any[];
     switch (type) {
       case LoaderDataTypeEnum.CSV:
-        return this.transformCsv(response.text());
+        result = this.transformCsv(response.text());
         break;
       default:
-        return response.json();
+        result = response.json();
     }
+
+    return result;
   }
 
   private handleError(error:any) {

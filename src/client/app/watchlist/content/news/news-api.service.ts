@@ -33,11 +33,12 @@ export class NewsApiService extends CoreApiResponseService {
         );
     }
   }
+
   reload() {
     this.load(this.stock);
   }
 
-  private transform(data:any):any[] {
+  private transform(data:any):NewsDataInterface[] {
     let news:any[] = _.get(data, 'Content.result', []);
     return news.map((item:any) => {
       return {
@@ -53,4 +54,12 @@ export class NewsApiService extends CoreApiResponseService {
   private convertDate(date:number):string {
     return moment(date*1000).format('ddd, MMM Do YYYY h:mm A');
   }
+}
+
+export interface NewsDataInterface {
+  source?:string;
+  date?:string;
+  title?:string;
+  url?:string;
+  image?:string;
 }

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { CoreStateService } from '../../core/index';
 import {
   WatchlistActions,
-  WatchlistStateKeys
+  WatchlistStateKeys,
+  StockDataInterface
 } from './index';
 import 'rxjs/add/operator/let';
 
 @Injectable()
 export class WatchlistStateService extends CoreStateService {
-  stockData$:Observable<any>;
+  stockData$:Observable<StockDataInterface>;
   stock$:Observable<string>;
   favorites$:Observable<string[]>;
   highlights$:Observable<any>;
@@ -23,7 +24,7 @@ export class WatchlistStateService extends CoreStateService {
     this.highlights$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Highlights));
   }
 
-  changeStockData(data:any) {
+  changeStockData(data:StockDataInterface) {
     this.store$.dispatch(WatchlistActions.changeStockData(data));
   }
 

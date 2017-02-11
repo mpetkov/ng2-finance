@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ChartOptionsService } from '../services/chart-options.service';
-import { ChartStateService } from '../../state/index';
+import {
+  ChartStateService,
+  ChartDataInterface
+} from '../../state/index';
 import { Subscriptions } from '../../../../../core/index';
 
 @Component({
@@ -11,8 +14,7 @@ import { Subscriptions } from '../../../../../core/index';
 })
 
 export class LegendComponent extends Subscriptions {
-  items:any[] = [];
-  private legend:any;
+  items:LegendInterface[] = [];
 
   constructor(private chartOptionsService:ChartOptionsService,
               private chartState:ChartStateService) {
@@ -23,7 +25,7 @@ export class LegendComponent extends Subscriptions {
       ));
   }
 
-  private updateItems(data:any) {
+  private updateItems(data:ChartDataInterface) {
     this.items = [
       {label: 'Open', value: this.chartOptionsService.options.priceFormat(data.open)},
       {label: 'Close', value: this.chartOptionsService.options.priceFormat(data.close)},
@@ -32,4 +34,9 @@ export class LegendComponent extends Subscriptions {
       {label: 'Vol', value: this.chartOptionsService.options.volumeFormat(data.volume)}
     ];
   }
+}
+
+export interface LegendInterface {
+  label?:string;
+  value?:string;
 }

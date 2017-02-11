@@ -3,7 +3,11 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ChartApiService } from './chart-api.service';
-import { ChartStateService, ChartStateKeys } from './state/index';
+import {
+  ChartStateService,
+  ChartStateKeys,
+  ChartDataInterface
+} from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 import { AppStateService } from '../../../state/app-state.service';
@@ -13,6 +17,7 @@ import {
   CoreApiNotification,
   localStorageAdapter
 } from '../../../core/index';
+import { StockDataInterface } from '../../state/watchlist.state';
 declare let _:any;
 
 @Component({
@@ -24,7 +29,7 @@ declare let _:any;
 })
 
 export class ChartComponent extends CoreApiNotification {
-  stockData:any = {};
+  stockData:StockDataInterface = {};
   stock:string;
   ranges:ChartRangesInterface[] = Config.chartRanges;
   rangeIndex:number;
@@ -104,7 +109,7 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
-  private validateChartData(data:any[]) {
+  private validateChartData(data:ChartDataInterface[]) {
     if (data.length === 0) {
       if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, Config.notifications.noData);

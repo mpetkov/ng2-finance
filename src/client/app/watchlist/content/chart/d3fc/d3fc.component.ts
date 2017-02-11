@@ -1,9 +1,19 @@
-import { Component, ViewEncapsulation, ViewChild, HostListener, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  ViewChild,
+  HostListener,
+  AfterViewInit,
+  ElementRef
+} from '@angular/core';
 import { ChartVolumeService } from './services/chart-volume.service';
 import { ChartCrosshairService } from './services/chart-crosshair.service';
 import { ChartTooltipsService } from './services/chart-tooltips.service';
 import { ChartOptionsService } from './services/chart-options.service';
-import { ChartStateService } from '../state/index';
+import {
+  ChartStateService,
+  ChartDataInterface
+} from '../state/index';
 import { Subscriptions } from '../../../../core/index';
 
 declare let fc:any;
@@ -24,9 +34,9 @@ declare let d3:any;
 })
 
 export class D3fcComponent extends Subscriptions implements AfterViewInit {
-  @ViewChild('svg') svg:any;
+  @ViewChild('svg') svg:ElementRef;
   smallView:boolean;
-  private data:any;
+  private data:ChartDataInterface[];
   private container:any;
   private chart:any;
   private range:string;
@@ -50,13 +60,13 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(e:any) {
+  onResize() {
     if (this.data) {
       this.redraw(this.data, this.container, this.chart);
     }
   }
 
-  private init(data:any) {
+  private init(data:ChartDataInterface[]) {
     if(data && data.length > 0) {
       this.data = data;
       this.container = d3.select(this.svg.nativeElement);
@@ -70,7 +80,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
 
   private render(data:any) {
     this.chart = this.getChart(data);
-    let area:any = this.getArea(data, this.chart.yDomain()[0]);
+    let area:any = this.getArea(this.chart.yDomain()[0]);
     let line:any = this.getLine();
     let gridlines:any = this.getGridLines();
     let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
@@ -95,7 +105,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       }));
   }
 
-  private redraw(data:any, container:any, chart:any) {
+  private redraw(data:ChartDataInterface[], container:any, chart:any) {
     if (window.innerWidth < 420) {
       if (!this.smallView) {
         this.smallView = true;
@@ -138,7 +148,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     d3.select('.plot-area').moveToFront();
   }
 
-  private getChart(data:any):any {
+  private getChart(data:ChartDataInterface[]):any {
     return fc.chart.linearTimeSeries()
       .xDomain(fc.util.extent(data, 'date'))
       .yDomain(fc.util.extent(data, ['open', 'close']))
@@ -152,7 +162,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       .xTicks(this.chartOptionsService.options.xTicks);
   }
 
-  private getArea(data:any, y0Value:number):any {
+  private getArea(y0Value:number):any {
     return fc.series.area()
       .y0Value(y0Value)
       .yValue((d:any) => {
