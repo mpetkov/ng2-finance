@@ -7,7 +7,8 @@
       <span class="mp-transition"
             [ngClass]="(watchlistState.highlights$ | async)[stockData.symbol]?.price">{{stockData.priceDisplay}}</span>
       </b>
-      <span [ngClass]="stockData.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stockData.change}} ({{stockData.percentage}})</span>
+      <span class="mp-change"
+            [ngClass]="stockData.change >= 0 ? 'mdl-color-text--green-A700' : 'mdl-color-text--red'">{{stockData.change}} ({{stockData.percentage}})</span>
     </span>
   </h4>
   <button *ngIf="!favorite && stock"
