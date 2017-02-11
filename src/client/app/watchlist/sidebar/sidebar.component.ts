@@ -7,8 +7,9 @@ import {
 } from './state/index';
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
+import { WatchlistStateKeys } from '../state/watchlist.state';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
-import { Subscriptions } from '../../core/subscriptions';
+import { Subscriptions, localStorageAdapter } from '../../core/index';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 
@@ -55,6 +56,7 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   }
 
   private updateFavorites(favorites:string[]) {
+    localStorageAdapter.setItem(WatchlistStateKeys.Favorites, favorites);
     this.favorites = favorites.slice();
     this.loadFavoritesData();
   }

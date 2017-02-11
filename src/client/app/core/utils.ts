@@ -7,3 +7,13 @@ export function numberUnitFormat(value:number, decimal:number = 0):string {
     ? Number(Math.abs(Number(value)) / 1.0e+3).toFixed(decimal) + 'K'
     : Math.abs(Number(value));
 }
+
+export const localStorageAdapter = {
+  getItem(key: string): any {
+    return JSON.parse(localStorage.getItem(key));
+  },
+
+  setItem(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
