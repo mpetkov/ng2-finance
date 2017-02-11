@@ -55,6 +55,8 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
     this.subscriptions.push(headerState.sidebar$.subscribe(
       sidebar => this.sidebar = sidebar
     ));
+
+    favoritesState.sortData();
   }
 
   add() {

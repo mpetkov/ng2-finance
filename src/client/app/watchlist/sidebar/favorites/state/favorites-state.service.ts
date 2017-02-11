@@ -20,4 +20,8 @@ export class FavoritesStateService extends CoreApiStateService {
   changeOrder(order:string[]) {
     this.store$.dispatch(FavoritesActions.changeOrder(order));
   }
+
+  sortData() {
+    this.store$.dispatch(FavoritesActions.sortData());
+  }
 }
