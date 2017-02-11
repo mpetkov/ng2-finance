@@ -44,8 +44,6 @@ export class SearchApiService extends CoreApiResponseService {
   }
 
   private transform(data:any):any[] {
-    return _.get(data, 'data.items', []).filter((item:any) => {
-      return this.favorites.indexOf(item.symbol) === -1;
-    });
+    return _.get(data, 'data.items', []);
   }
 }
