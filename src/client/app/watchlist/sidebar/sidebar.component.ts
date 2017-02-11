@@ -8,9 +8,9 @@ import {
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
+import { Subscriptions } from '../../core/subscriptions';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
-import { Subscriptions } from '../../core/subscriptions';
 
 @Component({
   moduleId: module.id,
@@ -44,6 +44,7 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
     this.ngOnDestroy$.next(true);
   }
 }

@@ -68,6 +68,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
     this.destroyListener();
     this.dragulaService.destroy(this.dragName);
   }

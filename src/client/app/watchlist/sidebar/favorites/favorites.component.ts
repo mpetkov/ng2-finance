@@ -84,6 +84,7 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
     this.cancelTimeout();
   }
 
