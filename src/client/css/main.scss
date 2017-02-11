@@ -160,13 +160,16 @@ button {
   }
 }
 
+.mp-preloader {
+  display: table;
+}
+
 .mp-cover {
   position: absolute;
   width: 100%;
   height: 100%;
   background: white;
   z-index: 1000;
-  display: table;
   h3 {
     margin: 10px;
   }
