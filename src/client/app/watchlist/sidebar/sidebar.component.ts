@@ -22,6 +22,8 @@ import 'rxjs/add/operator/takeUntil';
 
 export class SidebarComponent extends Subscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
+  private favorites:string[] = [];
+  private stock:string;
   constructor(public sidebarState:SidebarStateService,
               private route: ActivatedRoute,
               private favoritesApiService:FavoritesApiService,
@@ -29,7 +31,11 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
               private headerState:HeaderStateService) {
     super();
     this.subscriptions.push(watchlistState.favorites$.subscribe(
-      favorites => favoritesApiService.load(favorites)
+      favorites => this.updateFavorites(favorites)
+    ));
+
+    this.subscriptions.push(watchlistState.stock$.subscribe(
+      stock => this.updateStock(stock)
     ));
 
     this.subscriptions.push(headerState.searchActive$.subscribe(
@@ -46,5 +52,26 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   ngOnDestroy() {
     super.ngOnDestroy();
     this.ngOnDestroy$.next(true);
+  }
+
+  private updateFavorites(favorites:string[]) {
+    this.favorites = favorites.slice();
+    this.loadFavoritesData();
+  }
+
+  private updateStock(stock:string) {
+    this.stock = stock;
+    if (this.favorites.indexOf(this.stock) === -1) {
+      this.loadFavoritesData();
+    }
+  }
+
+  private loadFavoritesData() {
+    if (this.stock) {
+      if (this.favorites.indexOf(this.stock) === -1) {
+        this.favorites.push(this.stock);
+      }
+    }
+    this.favoritesApiService.load(this.favorites)
   }
 }
