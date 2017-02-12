@@ -90,7 +90,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   }
 
   private closeScreen(type:SidebarTypeEnum) {
-    this.favoritesState.changeOrder(this.updateOrder(this.list.nativeElement, this.deleted));
+    this.favoritesState.changeOrder(this.updateOrder(this.list, this.deleted));
 
     if (this.deleted.length > 0) {
       this.watchlistState.deleteFavorites(this.deleted);
@@ -103,10 +103,10 @@ export class EditComponent extends Subscriptions implements OnDestroy {
     }
   }
 
-  private updateOrder(list:Element, deleted:string[]):string[] {
+  private updateOrder(list:ElementRef, deleted:string[]):string[] {
     let order:string[] = [];
     if (list) {
-      let children:any = list.getElementsByTagName('li');
+      let children:any = list.nativeElement.getElementsByTagName('li');
       for (let i:number = 0; i < children.length; i++) {
         if (deleted.indexOf(children[i].id) === -1) {
           order.push(children[i].id);
