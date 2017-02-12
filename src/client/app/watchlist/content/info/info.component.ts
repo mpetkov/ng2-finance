@@ -99,7 +99,7 @@ export class InfoComponent extends CoreApiNotification {
   }
 
   private updateData() {
-    if (this.price === null) {
+    if (this.price === null || this.price === undefined) {
       this.price = this.data.LastTradePriceOnly;
     }
 
