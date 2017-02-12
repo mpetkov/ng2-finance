@@ -25,8 +25,8 @@ export class CoreApiResponseService extends LoaderService {
     this.disableLoader = false;
     if (data.length > 0) {
       this.errorCount = 0;
-      this.state.fetchFulfilled(data);
       this.toggleLoader(false);
+      this.state.fetchFulfilled(data);
     } else {
       this.failed('Yahoo\'s API didn\'t return any data.');
     }
