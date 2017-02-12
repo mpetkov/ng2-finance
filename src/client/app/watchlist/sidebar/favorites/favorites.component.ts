@@ -4,9 +4,13 @@ import { MdlMenuComponent } from 'angular2-mdl';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
 import { FavoritesStateService } from './state/favorites-state.service';
+import { FavoritesStateKeys } from './state/favorites.state';
 import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { NotificationTypeEnum } from '../../../shared/index';
-import { CoreApiNotification } from '../../../core/index';
+import {
+  CoreApiNotification,
+  localStorageAdapter
+} from '../../../core/index';
 import { FavoritesApiService } from '../favorites-api.service';
 import { FavoritesHighlightService } from './favorites-highlight.service';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
@@ -55,6 +59,10 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
 
     this.subscriptions.push(headerState.sidebar$.subscribe(
       sidebar => this.sidebar = sidebar
+    ));
+
+    this.subscriptions.push(favoritesState.order$.subscribe(
+      order => localStorageAdapter.setItem(FavoritesStateKeys.Order, order)
     ));
 
     favoritesState.sortData();
