@@ -110,7 +110,7 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
     },500);
 
     this.watchlistState.changeStockData(_.find(data, ['symbol', this.stock]) || {});
-    if (data.length === 0) {
+    if (this.favoritesData.length === 0) {
       this.updateNotification(
         NotificationTypeEnum.Notification,
         'Your favorites is empty!',
