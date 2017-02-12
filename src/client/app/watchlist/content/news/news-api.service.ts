@@ -19,14 +19,15 @@ export class NewsApiService extends CoreApiResponseService {
   load(stock:string) {
     this.stock = stock;
     this.newsState.fetchLoader(true);
+    let url:string = Config.paths.news.replace('$stock', encodeURIComponent(stock));
     if(Config.env === 'PROD') {
-      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.news.replace('$stock', encodeURIComponent(stock))))
+      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
         );
     } else {
-      this.get(Config.paths.news)
+      this.get(url)
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
