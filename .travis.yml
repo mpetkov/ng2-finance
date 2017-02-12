@@ -9,8 +9,7 @@ addons:
   firefox: "45.0"
 
 os:
-  - linux
-#  - osx
+  - osx
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
