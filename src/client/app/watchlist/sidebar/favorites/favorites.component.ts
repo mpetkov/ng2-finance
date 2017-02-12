@@ -76,6 +76,11 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
     this.sidebarState.changeType(SidebarTypeEnum.Edit);
   }
 
+  reload() {
+    this.cancelTimeout();
+    this.favoritesApiService.reload();
+  }
+
   select(stock:string) {
     if (this.sidebar) {
       this.headerState.changeSidebar(false);

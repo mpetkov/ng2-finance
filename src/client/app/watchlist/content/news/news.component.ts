@@ -38,6 +38,10 @@ export class NewsComponent extends CoreApiNotification {
     this.updateNews([]);
   }
 
+  reload() {
+    this.newsApiService.reload();
+  }
+
   private updateStock(stock:string) {
     this.stock = stock;
     if (stock) {

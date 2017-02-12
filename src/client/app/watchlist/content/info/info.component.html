@@ -1,5 +1,17 @@
 <div class="mdl-card__title mdl-card--border">
   <h4>Key Statistics</h4>
+  <button *ngIf="notificationType === 0"
+          class="pull-right"
+          mdl-button
+          #btn1="mdlButton"
+          (click)="mdlMenu.toggle($event, btn1)"
+          mdl-button-type="icon">
+    <mdl-icon title="More settings">more_vert</mdl-icon>
+  </button>
+  <mdl-menu #mdlMenu
+            mdl-menu-position="bottom-right">
+    <mdl-menu-item (click)="reload()">Reload</mdl-menu-item>
+  </mdl-menu>
 </div>
 <div class="mdl-card__supporting-text">
   <mp-notification *ngIf="notificationType > 0"

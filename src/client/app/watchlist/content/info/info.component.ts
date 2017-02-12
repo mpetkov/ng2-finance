@@ -69,6 +69,10 @@ export class InfoComponent extends CoreApiNotification {
     this.updateInfo();
   }
 
+  reload() {
+    this.infoApiService.reload();
+  }
+
   private updateStock(stock:string) {
     this.stock = stock;
     if (stock) {

@@ -13,6 +13,8 @@
                    *ngIf="favoritesData?.length !== 0">Edit List
     </mdl-menu-item>
     <mdl-menu-item (click)="add()">Add Symbol</mdl-menu-item>
+    <mdl-menu-item (click)="reload()"
+                   *ngIf="favoritesData?.length !== 0">Reload</mdl-menu-item>
   </mdl-menu>
 </div>
 <mp-notification *ngIf="notificationType !== 0"
