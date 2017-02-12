@@ -13,14 +13,14 @@ const initialState:SearchStateInterface = new SearchInitialState() as SearchStat
 
 export const searchReducer:ActionReducer<SearchStateInterface> =
   (state:SearchStateInterface = initialState, action:Action = null) => {
-  switch (action.type) {
-    case SearchActions.FETCH_FULFILLED:
-      return state.set(SearchStateKeys.Data, action.payload);
-    case SearchActions.FETCH_LOADER:
-      return state.set(SearchStateKeys.Loader, action.payload);
-    case SearchActions.FETCH_ERROR:
-      return state.set(SearchStateKeys.Error, action.payload);
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
+      case SearchActions.FETCH_FULFILLED:
+        return state.set(SearchStateKeys.Data, action.payload);
+      case SearchActions.FETCH_LOADER:
+        return state.set(SearchStateKeys.Loader, action.payload);
+      case SearchActions.FETCH_ERROR:
+        return state.set(SearchStateKeys.Error, action.payload);
+      default:
+        return state;
+    }
+  };

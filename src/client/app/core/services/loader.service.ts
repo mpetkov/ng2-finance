@@ -14,9 +14,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class LoaderService {
   private options:RequestOptions;
+
   constructor(protected http:Http) {
     this.options = new RequestOptions({
-      headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
+      headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
     });
   }
 
@@ -57,9 +58,9 @@ export class LoaderService {
     let content:string[];
     var data:any[] = [];
 
-    for(let i:number = 1; i < lines.length; i++) {
+    for (let i:number = 1; i < lines.length; i++) {
       content = lines[i].split(',');
-      if(content.length === headers.length) {
+      if (content.length === headers.length) {
         data.push(content);
       }
     }

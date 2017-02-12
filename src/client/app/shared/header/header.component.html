@@ -1,14 +1,17 @@
 <mdl-layout-header-row [ngClass]="{'mp-active-search':active}">
   <mdl-icon *ngIf="!sidebar"
             class="mp-arrow mp-hide-on-search"
-            (click)="showSidebar()">navigate_before</mdl-icon>
+            (click)="showSidebar()">navigate_before
+  </mdl-icon>
   <mdl-layout-title class="mp-hide-on-search">Ng2 Finance</mdl-layout-title>
   <mp-search-box class="mp-search-container"
                  [active]="active"
                  (changed)="updateSearch($event)"
                  (activate)="activateSearch($event)"></mp-search-box>
   <mdl-icon class="pull-right mp-search mp-hide-on-search"
-            (click)="toggleSearch(true)">search</mdl-icon>
+            (click)="toggleSearch(true)">search
+  </mdl-icon>
   <mdl-icon class="pull-right mp-close"
-            (click)="toggleSearch(false)">close</mdl-icon>
+            (click)="toggleSearch(false)">close
+  </mdl-icon>
 </mdl-layout-header-row>

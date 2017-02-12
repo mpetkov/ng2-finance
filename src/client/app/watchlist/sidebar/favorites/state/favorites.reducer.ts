@@ -15,27 +15,27 @@ const initialState:FavoritesStateInterface = new FavoritesInitialState() as Favo
 
 export const favoritesReducer:ActionReducer<FavoritesStateInterface> =
   (state:FavoritesStateInterface = initialState, action:Action = null) => {
-  switch (action.type) {
-    case FavoritesActions.CHANGE_ORDER:
-      return state.set(FavoritesStateKeys.Order,  action.payload);
-    case FavoritesActions.SORT_DATA:
-      return state.set(FavoritesStateKeys.Data, sortData(state.data, state.order));
-    case FavoritesActions.FETCH_FULFILLED:
-      return state.set(FavoritesStateKeys.Data, sortData(action.payload, state.order));
-    case FavoritesActions.FETCH_LOADER:
-      return state.set(FavoritesStateKeys.Loader, action.payload);
-    case FavoritesActions.FETCH_ERROR:
-      return state.set(FavoritesStateKeys.Error, action.payload);
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
+      case FavoritesActions.CHANGE_ORDER:
+        return state.set(FavoritesStateKeys.Order, action.payload);
+      case FavoritesActions.SORT_DATA:
+        return state.set(FavoritesStateKeys.Data, sortData(state.data, state.order));
+      case FavoritesActions.FETCH_FULFILLED:
+        return state.set(FavoritesStateKeys.Data, sortData(action.payload, state.order));
+      case FavoritesActions.FETCH_LOADER:
+        return state.set(FavoritesStateKeys.Loader, action.payload);
+      case FavoritesActions.FETCH_ERROR:
+        return state.set(FavoritesStateKeys.Error, action.payload);
+      default:
+        return state;
+    }
+  };
 
 
 function sortData(data:StockDataInterface[], order:string[]):StockDataInterface[] {
   data = data.map((item:StockDataInterface) => {
     let index:number = order.indexOf(item.symbol);
-    if(index < 0) {
+    if (index < 0) {
       index = 999;
     }
     item.index = index;

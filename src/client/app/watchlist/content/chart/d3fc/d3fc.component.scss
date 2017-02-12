@@ -30,7 +30,7 @@ $gray: #444;
     stroke: $blue;
   }
 
-  .bar>path {
+  .bar > path {
     fill-opacity: 1;
   }
 
@@ -107,7 +107,6 @@ $gray: #444;
     stroke-opacity: 0;
   }
 }
-
 
 .mp-chart.small {
   width: calc(100% - 16px);

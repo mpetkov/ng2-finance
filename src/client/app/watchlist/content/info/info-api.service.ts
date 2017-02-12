@@ -12,6 +12,7 @@ declare let _:any;
 @Injectable()
 export class InfoApiService extends CoreApiResponseService {
   private stock:string;
+
   constructor(public http:Http,
               private infoState:InfoStateService) {
     super(http, infoState);
@@ -44,7 +45,7 @@ export class InfoApiService extends CoreApiResponseService {
   }
 
   private convertDate(date:number):string {
-    return moment(date*1000).format('ddd, MMM Do YYYY h:mm A');
+    return moment(date * 1000).format('ddd, MMM Do YYYY h:mm A');
   }
 }
 

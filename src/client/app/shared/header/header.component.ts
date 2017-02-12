@@ -48,9 +48,9 @@ export class HeaderComponent extends Subscriptions {
     if (searchActive && !this.sidebar) {
       this.searchFromContent = true;
       this.headerState.changeSidebar(true);
-    } else if(!searchActive && this.searchFromContent) {
+    } else if (!searchActive && this.searchFromContent) {
       this.searchFromContent = false;
-      if(this.sidebar) {
+      if (this.sidebar) {
         this.headerState.changeSidebar(false);
       }
     }

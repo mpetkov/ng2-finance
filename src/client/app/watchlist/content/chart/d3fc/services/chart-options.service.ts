@@ -26,9 +26,9 @@ export class ChartOptionsService {
   }
 
   getDateFormat(range:string) {
-    if(range === '1d') {
+    if (range === '1d') {
       return this.options.timeFormat;
-    } else if(range === '5d') {
+    } else if (range === '5d') {
       return this.options.dayFormat;
     } else {
       return this.options.dateFormat;

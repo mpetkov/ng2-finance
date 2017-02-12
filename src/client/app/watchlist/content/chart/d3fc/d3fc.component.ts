@@ -75,14 +75,14 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   private init(data:ChartDataInterface[]) {
-    if(data && data.length > 0) {
+    if (data && data.length > 0) {
       this.data = data;
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
       this.render(data);
       setTimeout(() => {
         this.redraw(data, this.container, this.chart);
-      },0);
+      }, 0);
     }
   }
 
@@ -95,7 +95,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     let lastClose:any = this.chartTooltipsService.getLastClose();
 
     var items:any[] = [gridlines, area, line];
-    if(!this.smallView) {
+    if (!this.smallView) {
       items.push(lastClose, crosshair);
     }
 

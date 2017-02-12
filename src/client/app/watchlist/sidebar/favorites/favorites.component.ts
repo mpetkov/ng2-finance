@@ -115,7 +115,7 @@ export class FavoritesComponent extends CoreApiNotification implements OnDestroy
 
     setTimeout(() => {
       this.watchlistState.changeHighlights({});
-    },500);
+    }, 500);
 
     this.watchlistState.changeStockData(_.find(data, ['symbol', this.stock]) || {});
     if (this.favoritesData.length === 0) {

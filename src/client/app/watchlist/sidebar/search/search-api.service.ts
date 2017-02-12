@@ -12,6 +12,7 @@ declare let _:any;
 export class SearchApiService extends CoreApiResponseService {
   private favorites:string[] = [];
   private stock:string;
+
   constructor(public http:Http,
               private watchlistState:WatchlistStateService,
               private searchState:SearchStateService) {
@@ -24,7 +25,7 @@ export class SearchApiService extends CoreApiResponseService {
   load(stock:string) {
     this.stock = stock;
     this.searchState.fetchLoader(true);
-    if(Config.env === 'PROD') {
+    if (Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(Config.paths.search.replace('$stock', encodeURIComponent(stock))))
         .subscribe(
           data => this.complete(this.transform(data)),

@@ -27,4 +27,4 @@ export interface NotificationsInterface {
   noFavorites?: string;
 }
 
-export const Config: any = JSON.parse('<%= ENV_CONFIG %>');
+export const Config:any = JSON.parse('<%= ENV_CONFIG %>');

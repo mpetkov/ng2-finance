@@ -11,6 +11,7 @@ declare let _:any;
 @Injectable()
 export class NewsApiService extends CoreApiResponseService {
   private stock:string;
+
   constructor(public http:Http,
               private newsState:NewsStateService) {
     super(http, newsState);
@@ -20,7 +21,7 @@ export class NewsApiService extends CoreApiResponseService {
     this.stock = stock;
     this.newsState.fetchLoader(true);
     let url:string = Config.paths.news.replace('$stock', encodeURIComponent(stock));
-    if(Config.env === 'PROD') {
+    if (Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
@@ -53,7 +54,7 @@ export class NewsApiService extends CoreApiResponseService {
   }
 
   private convertDate(date:number):string {
-    return moment(date*1000).format('ddd, MMM Do YYYY h:mm A');
+    return moment(date * 1000).format('ddd, MMM Do YYYY h:mm A');
   }
 }
 

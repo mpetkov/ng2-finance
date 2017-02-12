@@ -21,6 +21,7 @@ import {
 export class NewsComponent extends CoreApiNotification {
   news:NewsDataInterface[] = [];
   private stock:string;
+
   constructor(private newsState:NewsStateService,
               private watchlistState:WatchlistStateService,
               private newsApiService:NewsApiService) {
@@ -39,7 +40,7 @@ export class NewsComponent extends CoreApiNotification {
 
   private updateStock(stock:string) {
     this.stock = stock;
-    if(stock) {
+    if (stock) {
       this.newsApiService.load(stock);
     }
   }

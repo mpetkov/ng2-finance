@@ -28,7 +28,7 @@
     .material-icons,
     input,
     input::-webkit-input-placeholder {
-      color: rgba(255,255,255,0.7) !important;
+      color: rgba(255, 255, 255, 0.7) !important;
     }
   }
 }
@@ -44,10 +44,9 @@
   margin-right: 15px;
 }
 
-
 @media (max-width: 720px) {
   .mdl-layout__header-row {
-    .mdl-layout-title  {
+    .mdl-layout-title {
       position: absolute;
       text-align: center;
       width: 100%;

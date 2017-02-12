@@ -13,14 +13,14 @@ const initialState:InfoStateInterface = new InfoInitialState() as InfoStateInter
 
 export const infoReducer:ActionReducer<InfoStateInterface> =
   (state:InfoStateInterface = initialState, action:Action = null) => {
-  switch (action.type) {
-    case InfoActions.FETCH_FULFILLED:
-      return state.set(InfoStateKeys.Data, action.payload);
-    case InfoActions.FETCH_LOADER:
-      return state.set(InfoStateKeys.Loader, action.payload);
-    case InfoActions.FETCH_ERROR:
-      return state.set(InfoStateKeys.Error, action.payload);
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
+      case InfoActions.FETCH_FULFILLED:
+        return state.set(InfoStateKeys.Data, action.payload);
+      case InfoActions.FETCH_LOADER:
+        return state.set(InfoStateKeys.Loader, action.payload);
+      case InfoActions.FETCH_ERROR:
+        return state.set(InfoStateKeys.Error, action.payload);
+      default:
+        return state;
+    }
+  };

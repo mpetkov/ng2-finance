@@ -10,6 +10,7 @@ declare let _:any;
 @Injectable()
 export class FavoritesApiService extends CoreApiResponseService {
   private stocks:string[] = [];
+
   constructor(public http:Http,
               private favoritesState:FavoritesStateService) {
     super(http, favoritesState);

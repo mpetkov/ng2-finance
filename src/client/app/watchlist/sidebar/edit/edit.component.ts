@@ -23,14 +23,14 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   selected:string;
   deleted:string[] = [];
   dragName:string = 'editDrag';
-  private windowClickListener: Function;
+  private windowClickListener:Function;
 
   constructor(private favoritesState:FavoritesStateService,
               private sidebarState:SidebarStateService,
               private headerState:HeaderStateService,
               private watchlistState:WatchlistStateService,
               private renderer:Renderer,
-              private dragulaService: DragulaService) {
+              private dragulaService:DragulaService) {
     super();
     this.subscriptions.push(watchlistState.favorites$.subscribe(
       favorites => this.favorites = favorites
@@ -83,7 +83,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   }
 
   private destroyListener() {
-    if(this.windowClickListener) {
+    if (this.windowClickListener) {
       this.windowClickListener();
       this.windowClickListener = null;
     }

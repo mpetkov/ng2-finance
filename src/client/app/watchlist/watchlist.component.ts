@@ -11,6 +11,7 @@ import { Subscriptions } from '../core/subscriptions';
 
 export class WatchlistComponent extends Subscriptions {
   sidebar:boolean;
+
   constructor(private headerState:HeaderStateService) {
     super();
     this.subscriptions.push(headerState.sidebar$.subscribe(

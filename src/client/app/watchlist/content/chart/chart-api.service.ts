@@ -15,20 +15,21 @@ declare let _:any;
 @Injectable()
 export class ChartApiService extends CoreApiResponseService {
   private params:any = {};
+
   constructor(public http:Http,
               private chartState:ChartStateService) {
     super(http, chartState);
   }
 
   load(stock:string, range:string, interval:string) {
-    this.params = {stock:stock, range:range, interval:interval};
+    this.params = {stock: stock, range: range, interval: interval};
     this.chartState.fetchLoader(true);
 
     let url:string = Config.paths.charts.replace('$stock', stock);
     url = url.replace('$range', range);
     url = url.replace('$interval', interval);
 
-    if(Config.env === 'PROD') {
+    if (Config.env === 'PROD') {
       this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),

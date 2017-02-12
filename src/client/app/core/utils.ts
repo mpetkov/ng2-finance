@@ -13,12 +13,12 @@ export function typeChecker(obj:any):string {
 }
 
 export const localStorageAdapter = {
-  getItem(key: string, type:string): any {
+  getItem(key:string, type:string): any {
     let value:any = JSON.parse(localStorage.getItem(key));
     return (typeChecker(value) === type) ? value : null;
   },
 
-  setItem(key: string, value: any): void {
+  setItem(key:string, value:any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 };

@@ -10,6 +10,7 @@ import {
 export class CoreApiResponseService extends LoaderService {
   disableLoader:boolean;
   protected errorCount:number = 0;
+
   constructor(protected http:Http,
               protected state:CoreApiStateService) {
     super(http);

@@ -28,7 +28,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
   @Output() activate:EventEmitter<boolean> = new EventEmitter();
   @ViewChild('input') input:ElementRef;
   formControl:FormControl = new FormControl();
-  private windowClickListener: Function;
+  private windowClickListener:Function;
   private ngOnDestroy$ = new Subject<boolean>();
 
   constructor(private renderer:Renderer) {
@@ -46,15 +46,15 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
     if (changes.active && this.active) {
       setTimeout(() => {
         this.input.nativeElement.focus();
-      },0);
+      }, 0);
     }
   }
 
   activateInput() {
-    if(!this.windowClickListener) {
+    if (!this.windowClickListener) {
       this.windowClickListener = this.renderer.listenGlobal('window', 'click',
         (event:any) => {
-          if(!event.target.parentElement ||
+          if (!event.target.parentElement ||
             (event.target.parentElement.className.indexOf('mp-search-box') === -1 &&
             event.target.className.indexOf('mdl-button') === -1)) {
             this.toggleActive(false);
@@ -83,7 +83,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
   }
 
   private destroyListener() {
-    if(this.windowClickListener) {
+    if (this.windowClickListener) {
       this.windowClickListener();
       this.windowClickListener = null;
     }

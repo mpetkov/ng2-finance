@@ -34,13 +34,16 @@
          [ngClass]="{active: selected === stock.symbol}">
       <mdl-icon class="pull-left mdl-color-text--red"
                 title="Delete symbol from favorites"
-                (click)="showDelete(stock.symbol, $event)">remove_circle</mdl-icon>
+                (click)="showDelete(stock.symbol, $event)">remove_circle
+      </mdl-icon>
       <div class="text">
         <p><b>{{stock.symbol}}</b></p>
+
         <p class="mp-small-font truncate">{{stock.name}}</p>
       </div>
       <mdl-icon class="pull-right mp-drag mdl-color-text--grey-400"
-                title="Drag to re-order">menu</mdl-icon>
+                title="Drag to re-order">menu
+      </mdl-icon>
     </div>
   </li>
 </ul>

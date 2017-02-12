@@ -50,28 +50,28 @@ export class InfoComponent extends CoreApiNotification {
     ));
 
     this.leftColumn = [
-      { text: 'Prev Close', id: 'PreviousClose' },
-      { text: 'Low', id: 'DaysLow' },
-      { text: '52wk Low', id: 'YearLow' },
-      { text: 'Mkt Cap', id: 'MarketCapitalization' },
-      { text: '1Y Target', id: 'OneyrTargetPrice' },
-      { text: 'EPS', id: 'EarningsShare' }
+      {text: 'Prev Close', id: 'PreviousClose'},
+      {text: 'Low', id: 'DaysLow'},
+      {text: '52wk Low', id: 'YearLow'},
+      {text: 'Mkt Cap', id: 'MarketCapitalization'},
+      {text: '1Y Target', id: 'OneyrTargetPrice'},
+      {text: 'EPS', id: 'EarningsShare'}
     ];
 
     this.rightColumn = [
-      { text: 'Open', id: 'Open' },
-      { text: 'High', id: 'DaysHigh' },
-      { text: '52wk High', id: 'YearHigh' },
-      { text: 'Volume', id: 'Volume' },
-      { text: 'Avg Vol (3m)', id: 'AverageDailyVolume' },
-      { text: 'Dividend', id: 'DividendShare' }
+      {text: 'Open', id: 'Open'},
+      {text: 'High', id: 'DaysHigh'},
+      {text: '52wk High', id: 'YearHigh'},
+      {text: 'Volume', id: 'Volume'},
+      {text: 'Avg Vol (3m)', id: 'AverageDailyVolume'},
+      {text: 'Dividend', id: 'DividendShare'}
     ];
     this.updateInfo();
   }
 
   private updateStock(stock:string) {
     this.stock = stock;
-    if(stock) {
+    if (stock) {
       this.loadedInfo = false;
       this.infoApiService.load(stock);
     }
@@ -106,10 +106,10 @@ export class InfoComponent extends CoreApiNotification {
     let activeStart:number = Math.min(this.data.Open, this.price);
     let activeEnd:number = Math.max(this.data.Open, this.price);
 
-    this.data.DaysLow =  Math.min(this.data.DaysLow, this.price);
-    this.data.DaysHigh =  Math.max(this.data.DaysHigh, this.price);
-    this.data.YearLow =  Math.min(this.data.YearLow, this.price);
-    this.data.YearHigh =  Math.max(this.data.YearHigh, this.price);
+    this.data.DaysLow = Math.min(this.data.DaysLow, this.price);
+    this.data.DaysHigh = Math.max(this.data.DaysHigh, this.price);
+    this.data.YearLow = Math.min(this.data.YearLow, this.price);
+    this.data.YearHigh = Math.max(this.data.YearHigh, this.price);
 
     this.dayOptions = {
       text: 'Day\'s Range',

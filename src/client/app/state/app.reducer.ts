@@ -13,10 +13,10 @@ const initialState:AppStateInterface = new AppInitialState() as AppStateInterfac
 
 export const appReducer:ActionReducer<AppStateInterface> =
   (state:AppStateInterface = initialState, action:Action = null) => {
-  switch (action.type) {
-    case AppActions.CHANGE_PRELOADER:
-      return state.set(AppStateKeys.Preloader, action.payload);
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
+      case AppActions.CHANGE_PRELOADER:
+        return state.set(AppStateKeys.Preloader, action.payload);
+      default:
+        return state;
+    }
+  };

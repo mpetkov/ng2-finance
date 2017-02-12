@@ -36,6 +36,7 @@ export class ChartComponent extends CoreApiNotification {
   favorite:boolean;
   private favorites:string[] = [];
   private range:ChartRangesInterface;
+
   constructor(public watchlistState:WatchlistStateService,
               private chartState:ChartStateService,
               private chartApiService:ChartApiService,
@@ -64,7 +65,7 @@ export class ChartComponent extends CoreApiNotification {
   }
 
   tabChanged(index:number) {
-    if(this.ranges[index]) {
+    if (this.ranges[index]) {
       this.chartState.changeRange(this.ranges[index].id);
     }
   }

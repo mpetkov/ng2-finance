@@ -25,8 +25,9 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
   private favorites:string[] = [];
   private stock:string;
+
   constructor(public sidebarState:SidebarStateService,
-              private route: ActivatedRoute,
+              private route:ActivatedRoute,
               private favoritesApiService:FavoritesApiService,
               private watchlistState:WatchlistStateService,
               private headerState:HeaderStateService) {
@@ -47,7 +48,7 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
       .takeUntil(this.ngOnDestroy$)
       .pluck('id')
       .distinctUntilChanged()
-      .subscribe((id: string) => watchlistState.changeStock(id));
+      .subscribe((id:string) => watchlistState.changeStock(id));
   }
 
   ngOnDestroy() {
