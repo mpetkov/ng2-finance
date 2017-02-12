@@ -31,6 +31,7 @@ export class InfoComponent extends CoreApiNotification {
   yearOptions:RangeOptionsInterface = {};
   private stock:string;
   private loadedInfo:boolean;
+  private price:number;
 
   constructor(private infoState:InfoStateService,
               private watchlistState:WatchlistStateService,
@@ -77,8 +78,9 @@ export class InfoComponent extends CoreApiNotification {
   }
 
   private updateStockData(stockData:StockDataInterface) {
+    this.price = stockData.price;
     if (this.loadedInfo) {
-      this.updateData(stockData.price);
+      this.updateData();
     }
   }
 
@@ -96,16 +98,18 @@ export class InfoComponent extends CoreApiNotification {
     }
   }
 
-  private updateData(price:number = null) {
-    if (price === null) {
-      price = this.data.LastTradePriceOnly;
+  private updateData() {
+    if (this.price === null) {
+      this.price = this.data.LastTradePriceOnly;
     }
 
-    let activeStart:number = Math.min(this.data.Open, price);
-    let activeEnd:number = Math.max(this.data.Open, price);
+    let activeStart:number = Math.min(this.data.Open, this.price);
+    let activeEnd:number = Math.max(this.data.Open, this.price);
 
-    this.data.DaysLow =  Math.min(this.data.DaysLow, price);
-    this.data.DaysHigh =  Math.max(this.data.DaysHigh, price);
+    this.data.DaysLow =  Math.min(this.data.DaysLow, this.price);
+    this.data.DaysHigh =  Math.max(this.data.DaysHigh, this.price);
+    this.data.YearLow =  Math.min(this.data.YearLow, this.price);
+    this.data.YearHigh =  Math.max(this.data.YearHigh, this.price);
 
     this.dayOptions = {
       text: 'Day\'s Range',
@@ -113,7 +117,7 @@ export class InfoComponent extends CoreApiNotification {
       end: this.data.DaysHigh,
       activeStart: activeStart,
       activeEnd: activeEnd,
-      active: price
+      active: this.price
     };
 
     this.yearOptions = {
@@ -122,7 +126,7 @@ export class InfoComponent extends CoreApiNotification {
       end: this.data.YearHigh,
       activeStart: activeStart,
       activeEnd: activeEnd,
-      active: price
+      active: this.price
     };
   }
 }
