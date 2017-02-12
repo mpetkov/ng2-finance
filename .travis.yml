@@ -9,7 +9,7 @@ addons:
   firefox: "45.0"
 
 os:
-  - osx
+  - linux
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
@@ -41,4 +41,4 @@ cache:
   directories: node_modules
 
 script:
-  - npm run tests.all && npm run build.prod
+  - npm run tests.all
