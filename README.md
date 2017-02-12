@@ -1,7 +1,6 @@
 # NG2 Finance
 
 [![Build Status](https://travis-ci.org/mpetkov/ng2-finance.svg?branch=master)](https://travis-ci.org/mpetkov/ng2-finance)
-[![Coverage Status](https://img.shields.io/coveralls/mpetkov/ng2-finance/master.svg)](https://coveralls.io/github/mpetkov/ng2-finance?branch=master)
 [![Dependencies Status](https://david-dm.org/mpetkov/ng2-finance/status.svg)](https://david-dm.org/mpetkov/ng2-finance)
 [![DevDependencies Status](https://david-dm.org/mpetkov/ng2-finance/dev-status.svg)](https://david-dm.org/mpetkov/ng2-finance?type=dev)
 
