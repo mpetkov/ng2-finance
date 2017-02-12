@@ -46,6 +46,11 @@ module.exports = function (config) {
       // Angular itself
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
+      { pattern: 'node_modules/@ngrx/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/angular2-mdl/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/ng2-dragula/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/dragula/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/immutable/**/*.js', included: false, watched: false },
 
       { pattern: 'dist/dev/**/*.js', included: false, watched: true },
       { pattern: 'dist/dev/**/*.html', included: false, watched: true, served: true },

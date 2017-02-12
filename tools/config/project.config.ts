@@ -27,8 +27,7 @@ export class ProjectConfig extends SeedConfig {
       {src: 'css-layout/src/Layout.js', inject: true},
       {src: 'd3/d3.min.js', inject: true},
       {src: 'd3fc/dist/d3fc.min.js', inject: true},
-      {src: 'd3fc/dist/d3fc.min.css', inject: true},
-      {src: 'lodash/lodash.min.js', inject: true}
+      {src: 'd3fc/dist/d3fc.min.css', inject: true}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
@@ -62,25 +61,22 @@ export class ProjectConfig extends SeedConfig {
 
     this.addPackageBundles({
       name: '@ngrx/core',
-      path: 'node_modules/@ngrx/core/bundles/core.umd.js',
       packageMeta: {
-        main: 'index.js',
+        main: 'bundles/core.umd.js',
         defaultExtension: 'js'
       }
     });
 
     this.addPackageBundles({
       name: '@ngrx/store',
-      path: 'node_modules/@ngrx/store/bundles/store.umd.js',
       packageMeta: {
-        main: 'index.js',
+        main: 'bundles/store.umd.js',
         defaultExtension: 'js'
       }
     });
 
     this.addPackageBundles({
       name: 'immutable',
-      path: 'node_modules/immutable/dist/immutable.js',
       packageMeta: {
         main: 'dist/immutable.js',
         defaultExtension: 'js'
@@ -105,5 +101,4 @@ export class ProjectConfig extends SeedConfig {
       }
     });
   }
-
 }
