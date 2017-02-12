@@ -23,7 +23,12 @@ export class ProjectConfig extends SeedConfig {
       {src: 'normalize-css/normalize.css', inject: true},
       {src: 'dragula/dist/dragula.min.css', inject: true},
       {src: 'lodash/lodash.min.js', inject: true},
-      {src: 'moment/min/moment.min.js', inject: true}
+      {src: 'moment/min/moment.min.js', inject: true},
+      {src: 'css-layout/src/Layout.js', inject: true},
+      {src: 'd3/d3.min.js', inject: true},
+      {src: 'd3fc/dist/d3fc.min.js', inject: true},
+      {src: 'd3fc/dist/d3fc.min.css', inject: true},
+      {src: 'lodash/lodash.min.js', inject: true}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
