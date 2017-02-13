@@ -21,3 +21,20 @@
 .mp-cover.mp-loaded {
   display: none;
 }
+
+.mp-fallback {
+  display: none;
+  z-index: 1001;
+  h4 {
+    font-size: 1.75rem;
+  }
+}
+
+.old-ie .mp-fallback {
+  display: table;
+}
+
+.ie-7 .mp-fallback {
+  display: inline;
+  padding-top: 50px;
+}

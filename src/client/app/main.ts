@@ -7,5 +7,18 @@ if (String('<%= BUILD_TYPE %>') === 'prod') {
   enableProdMode();
 }
 
+function detectIE() {
+  var ua = window.navigator.userAgent;
+  if (ua.indexOf('MSIE ') > 0 || ua.indexOf('Trident/') > 0 || ua.indexOf('Edge/') > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+if (detectIE()) {
+  document.body.classList.add('old-ie');
+} else {
+  platformBrowserDynamic().bootstrapModule(AppModule);
+}
+

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 8 ]>    <html class="old-ie ie-7"> <![endif]-->
+<!--[if (IE 9)|(IE 8) ]>    <html class="old-ie" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +25,17 @@
   <!-- endinject -->
 </head>
 <body>
+  <!--[if lt IE 10]><!-->
+  <div class="mp-cover mp-fallback mdl-color--primary mdl-color-text--white">
+    <div class="mp-cell">
+      <h3>Your browser is not supported!</h3>
+      <h4>Please try one of these browsers:</h4>
+      <h4>Chrome or Firefox</h4>
+    </div>
+  </div>
+  <!--<![endif]-->
+
+  <!--[if gt IE 9]><!-->
   <div class="mp-cover mp-preloader mdl-color--primary mdl-color-text--white">
     <div class="mp-cell">
       <h3>Ng2 Finance</h3>
@@ -62,6 +75,6 @@
     });
   </script>
   <% } %>
-
+  <!--<![endif]-->
 </body>
 </html>

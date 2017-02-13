@@ -26,8 +26,23 @@
   .mp-search-box.inactive {
     background: rgba(255, 255, 255, 0.16);
     .material-icons,
-    input,
+    input {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
     input::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    input::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    input:-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    input:-moz-placeholder {
       color: rgba(255, 255, 255, 0.7) !important;
     }
   }
