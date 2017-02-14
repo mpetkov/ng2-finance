@@ -69,8 +69,19 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
+    this.resize();
+  }
+
+  @HostListener('window:orientationchange', ['$event'])
+  onOrientationChange() {
+    this.resize();
+  }
+
+  private resize() {
     if (this.data) {
-      this.redraw(this.data, this.container, this.chart);
+      setTimeout(() => {
+        this.redraw(this.data, this.container, this.chart);
+      }, 0);
     }
   }
 
@@ -136,6 +147,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
         this.chartOptionsService.options.yAxisWidth = 0;
         this.chartOptionsService.options.yAxisLeftMargin = 3;
         this.chartOptionsService.options.xTicks = 3;
+        this.chartOptionsService.options.yTicks = 3;
         render = true;
       }
     } else if (this.smallView) {
@@ -143,6 +155,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       this.chartOptionsService.options.yAxisWidth = 55;
       this.chartOptionsService.options.yAxisLeftMargin = -3;
       this.chartOptionsService.options.xTicks = 4;
+      this.chartOptionsService.options.yTicks = 8;
       render = true;
     }
 

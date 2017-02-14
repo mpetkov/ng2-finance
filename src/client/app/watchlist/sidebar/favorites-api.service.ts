@@ -42,10 +42,7 @@ export class FavoritesApiService extends CoreApiResponseService {
         symbol: quote.symbol,
         name: quote.Name,
         price: Number(quote.LastTradePriceOnly),
-        priceDisplay: Number(quote.LastTradePriceOnly).toLocaleString(undefined, {
-          maximumFractionDigits: 2,
-          minimumFractionDigits: 2
-        }),
+        priceDisplay: Number(quote.LastTradePriceOnly).toFixed(2),
         change: this.getPlusSign(change) + change.toFixed(2),
         percentage: this.calculateChangePercent(change, quote.LastTradePriceOnly)
       };

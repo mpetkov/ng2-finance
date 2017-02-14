@@ -58,7 +58,7 @@ function transformPath() {
     } else {
       slice_after = 3;
     }
-    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = '.' + Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }

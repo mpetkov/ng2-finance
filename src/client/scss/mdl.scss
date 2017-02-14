@@ -68,3 +68,9 @@
     background: $color-hover;
   }
 }
+
+.mobile {
+  .mdl-button:hover {
+    background-color: inherit;
+  }
+}

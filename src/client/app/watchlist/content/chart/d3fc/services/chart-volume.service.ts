@@ -18,7 +18,7 @@ export class ChartVolumeService {
       })
       .layout({
         position: 'absolute',
-        top: 150,
+        top: 100,
         bottom: this.chartOptionsService.options.xAxisHeight,
         right: this.chartOptionsService.options.yAxisWidth,
         left: 0
