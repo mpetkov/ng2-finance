@@ -2,13 +2,13 @@ version: '2'
 
 services:
 
-  angular-seed:
+  ng2-finance:
     build:
       context: .
-      dockerfile: ./.docker/angular-seed.development.dockerfile
+      dockerfile: ./.docker/ng2-finance.development.dockerfile
     command: npm start
-    container_name: angular-seed-start
-    image: angular-seed
+    container_name: ng2-finance-start
+    image: ng2-finance
     networks:
       - dev-network
     ports:
