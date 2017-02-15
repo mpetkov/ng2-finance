@@ -42,3 +42,5 @@ cache:
 
 script:
   - npm run test
+after_success:
+    - cat ./coverage_js/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js

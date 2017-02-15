@@ -577,7 +577,9 @@ export class SeedConfig {
         dir: this.COVERAGE_DIR + '/',
         reporters: [
           { type: 'json', subdir: '.', file: 'coverage-final.json' },
-          { type: 'html', subdir: '.' }
+          { type: 'html', subdir: '.' },
+          { type: 'lcov', subdir: 'report-lcov' },
+          { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' }
         ]
       },
       remapIstanbulReporter: {
