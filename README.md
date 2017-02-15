@@ -1,6 +1,8 @@
 # NG2 Finance
 
 [![Build Status](https://travis-ci.org/mpetkov/ng2-finance.svg?branch=master)](https://travis-ci.org/mpetkov/ng2-finance)
+[![Coverage Status](https://coveralls.io/repos/github/mpetkov/ng2-finance/badge.svg?branch=master)](https://coveralls.io/github/mpetkov/ng2-finance?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Dependencies Status](https://david-dm.org/mpetkov/ng2-finance/status.svg)](https://david-dm.org/mpetkov/ng2-finance)
 [![DevDependencies Status](https://david-dm.org/mpetkov/ng2-finance/dev-status.svg)](https://david-dm.org/mpetkov/ng2-finance?type=dev)
 
@@ -19,6 +21,15 @@ Finance dashboard using Yahoo's public APIs.
 * Stock data refreshes every 15 seconds in the background.
 * Settings are saved to local storage.
 * Fully responsive.
+* Continuous integration and code coverage with Travis CI and Coveralls.
+
+# Todo List
+
+- [ ] 100% code coverage
+- [ ] Convert to React
+- [ ] Add advanced chart options
+- [ ] Add a way to view more info about a stock
+- [ ] Create a markets overview page that displays movers, gainers, loser, etc
 
 # Quick Start
 
@@ -97,4 +108,6 @@ $ npm run e2e.live
 
 The MIT License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+# Acknowledgments
+
+* [mgechev](https://github.com/mgechev) for creating the excellent [angular-seed](https://github.com/mgechev/angular-seed) project
