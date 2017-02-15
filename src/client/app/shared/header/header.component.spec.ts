@@ -5,45 +5,48 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { MdlModule } from 'angular2-mdl';
 import {
-  AppComponent,
-  appReducer,
-  AppStateService
+  HeaderComponent,
+  headerReducer,
+  HeaderStateService
 } from './index';
 
-@Component({selector: 'mp-header', template: ''})
-class HeaderComponent {}
+@Component({selector: 'mp-search-box', template: ''})
+class SearchBoxComponent {
+  @Input() value:string;
+  @Input() active:boolean;
+}
 
 export function main() {
-  describe('AppComponent', () => {
-    let fixture:ComponentFixture<AppComponent>;
-    let component:AppComponent;
+  describe('HeaderComponent', () => {
+    let fixture:ComponentFixture<HeaderComponent>;
+    let component:HeaderComponent;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [
-          RouterTestingModule,
+          CommonModule,
           MdlModule,
           StoreModule.provideStore({
-            app: appReducer
+            header: headerReducer
           })
         ],
         declarations: [
-          AppComponent,
-          HeaderComponent
+          HeaderComponent,
+          SearchBoxComponent
         ],
         providers: [
-          AppStateService
+          HeaderStateService
         ]
       }).compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(AppComponent);
+      fixture = TestBed.createComponent(HeaderComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     });

@@ -38,6 +38,12 @@ module.exports = function (config) {
       'node_modules/zone.js/dist/proxy.js',
       'node_modules/zone.js/dist/jasmine-patch.js',
 
+
+      'node_modules/css-layout/src/Layout.js',
+      'node_modules/d3/d3.min.js',
+      'node_modules/d3fc/dist/d3fc.min.js',
+      'node_modules/lodash/lodash.min.js',
+
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },

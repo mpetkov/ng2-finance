@@ -5,45 +5,42 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { MdlModule } from 'angular2-mdl';
 import {
-  AppComponent,
-  appReducer,
-  AppStateService
-} from './index';
-
-@Component({selector: 'mp-header', template: ''})
-class HeaderComponent {}
+  LegendComponent,
+  ChartStateService,
+  chartReducer,
+  ChartOptionsService
+} from '../../index';
 
 export function main() {
-  describe('AppComponent', () => {
-    let fixture:ComponentFixture<AppComponent>;
-    let component:AppComponent;
+  describe('LegendComponent', () => {
+    let fixture:ComponentFixture<LegendComponent>;
+    let component:LegendComponent;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [
-          RouterTestingModule,
+          CommonModule,
           MdlModule,
           StoreModule.provideStore({
-            app: appReducer
+            chart: chartReducer
           })
         ],
         declarations: [
-          AppComponent,
-          HeaderComponent
+          LegendComponent
         ],
         providers: [
-          AppStateService
+          ChartOptionsService,
+          ChartStateService
         ]
       }).compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(AppComponent);
+      fixture = TestBed.createComponent(LegendComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     });

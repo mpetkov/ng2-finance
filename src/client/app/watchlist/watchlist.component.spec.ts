@@ -5,45 +5,47 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { MdlModule } from 'angular2-mdl';
+import { WatchlistComponent } from './index';
 import {
-  AppComponent,
-  appReducer,
-  AppStateService
-} from './index';
+  HeaderStateService,
+  headerReducer
+} from '../index';
 
-@Component({selector: 'mp-header', template: ''})
-class HeaderComponent {}
+@Component({selector: 'mp-content', template: ''})
+class ContentComponent {}
+
+@Component({selector: 'mp-sidebar', template: ''})
+class SidebarComponent {}
 
 export function main() {
-  describe('AppComponent', () => {
-    let fixture:ComponentFixture<AppComponent>;
-    let component:AppComponent;
+  describe('WatchlistComponent', () => {
+    let fixture:ComponentFixture<WatchlistComponent>;
+    let component:WatchlistComponent;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [
-          RouterTestingModule,
-          MdlModule,
+          CommonModule,
           StoreModule.provideStore({
-            app: appReducer
+            header: headerReducer
           })
         ],
         declarations: [
-          AppComponent,
-          HeaderComponent
+          WatchlistComponent,
+          ContentComponent,
+          SidebarComponent
         ],
         providers: [
-          AppStateService
+          HeaderStateService
         ]
       }).compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(AppComponent);
+      fixture = TestBed.createComponent(WatchlistComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
     });
