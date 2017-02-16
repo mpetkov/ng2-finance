@@ -99,29 +99,34 @@ export function main() {
     it('should call HeaderStateService#changeSidebar() when arrow button is clicked', () => {
       fixture.nativeElement.querySelector('.mp-arrow').click();
       expect(headerState.changeSidebar).toHaveBeenCalledTimes(1);
+      expect(headerState.changeSidebar).toHaveBeenCalledWith(true);
     });
 
     it('should call HeaderStateService#changeSearchActive() when search button is clicked', () => {
       fixture.nativeElement.querySelector('.mp-search').click();
       expect(headerState.changeSearchActive).toHaveBeenCalledTimes(1);
+      expect(headerState.changeSearchActive).toHaveBeenCalledWith(true);
     });
 
     it('should call HeaderStateService#changeSearchActive() when close button is clicked', () => {
       fixture.nativeElement.querySelector('.mp-close').click();
       expect(headerState.changeSearchActive).toHaveBeenCalledTimes(1);
+      expect(headerState.changeSearchActive).toHaveBeenCalledWith(false);
     });
 
     it('should call HeaderStateService#changeSearch() when updateSearch() is called', () => {
-      component.updateSearch('');
+      component.updateSearch('search');
       expect(headerState.changeSearch).toHaveBeenCalledTimes(1);
+      expect(headerState.changeSearch).toHaveBeenCalledWith('search');
     });
 
     it('should call HeaderStateService#changeSearchActive() when activateSearch() is called', () => {
       component.activateSearch(true);
       expect(headerState.changeSearchActive).toHaveBeenCalledTimes(1);
+      expect(headerState.changeSearchActive).toHaveBeenCalledWith(true);
     });
 
-    it('should call HeaderStateService#changeSidebar() when search box is activated and deactivates', () => {
+    it('should call HeaderStateService#changeSidebar() when search box is activated and deactivated', () => {
       headerState.searchActive$.next(true);
       fixture.detectChanges();
       expect(headerState.changeSidebar).toHaveBeenCalledTimes(1);
