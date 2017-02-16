@@ -32,7 +32,8 @@ declare let d3:any;
     ChartCrosshairService,
     ChartOptionsService,
     ChartTooltipsService,
-    ChartVolumeService
+    ChartVolumeService,
+    TimeoutService
   ]
 })
 
