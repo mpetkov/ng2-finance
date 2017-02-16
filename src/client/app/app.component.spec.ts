@@ -11,9 +11,9 @@ import { StoreModule } from '@ngrx/store';
 import { MdlModule } from 'angular2-mdl';
 import {
   AppComponent,
-  appReducer,
-  AppStateService
+  appReducer
 } from './index';
+import { AppStateService } from './state/app-state.service';
 
 @Component({selector: 'mp-header', template: ''})
 class HeaderComponent {}

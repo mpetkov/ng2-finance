@@ -16,10 +16,10 @@ import {
   NotificationButtonInterface,
   NotificationTypeEnum,
   ChartApiService,
-  ChartStateService,
-  AppStateService
+  ChartStateService
 } from '../../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { AppStateService } from '../../../state/app-state.service';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
