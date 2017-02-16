@@ -7,7 +7,7 @@ import {
 } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {
   D3fcComponent,
   chartReducer,
@@ -17,6 +17,7 @@ import {
   ChartTooltipsService,
   ChartVolumeService
 } from '../index';
+import { TimeoutService } from '../../../../core/index';
 
 @Component({selector: 'mp-legend', template: ''})
 class LegendComponent {}
@@ -25,21 +26,36 @@ export function main() {
   describe('D3fcComponent', () => {
     let fixture:ComponentFixture<D3fcComponent>;
     let component:D3fcComponent;
+    let chartState:any;
+    let timeoutServiceMock:any;
 
     beforeEach(async(() => {
+      chartState = jasmine.createSpyObj('chartStateService', [
+        'changePoint'
+      ]);
+
+      chartState.range$ = new BehaviorSubject<any>('3mo');
+      chartState.data$ = new BehaviorSubject<any>([]);
+
+      timeoutServiceMock = jasmine.createSpyObj('timeoutService', [
+        'set'
+      ]);
+
+      timeoutServiceMock.set = (callback:Function, time:number):void => {
+        callback();
+      };
+
       TestBed.configureTestingModule({
         imports: [
-          CommonModule,
-          StoreModule.provideStore({
-            chart: chartReducer
-          })
+          CommonModule
         ],
         declarations: [
           D3fcComponent,
           LegendComponent
         ],
         providers: [
-          ChartStateService,
+          {provide: ChartStateService, useValue: chartState},
+          {provide: TimeoutService, useValue: timeoutServiceMock},
           ChartCrosshairService,
           ChartOptionsService,
           ChartTooltipsService,
@@ -56,6 +72,55 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should have a LegendComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-legend')).not.toBe(null);
+    });
+
+    it('should initialize property `smallView` with boolean value `false`', () => {
+      expect(component.smallView).toBe(false);
+    });
+
+    it('should add css class `small` to svg when smallView is changed to true', () => {
+      let element:any = fixture.nativeElement.querySelector('svg');
+      expect(element.classList).not.toContain('small');
+
+      component.smallView = true;
+      fixture.detectChanges();
+      expect(element.classList).toContain('small');
+
+      component.smallView = false;
+      fixture.detectChanges();
+      expect(element.classList).not.toContain('small');
+    });
+
+    it('should add css class `small` to svg when window is resized to small width', () => {
+      let element:any = fixture.nativeElement.querySelector('svg');
+      expect(element.classList).not.toContain('small');
+
+      component.onResize({currentTarget:{innerWidth:400}});
+      fixture.detectChanges();
+      expect(element.classList).not.toContain('small');
+
+      chartState.data$.next([{
+        date: new Date(),
+        open: 10,
+        close: 12,
+        low: 9,
+        high: 20,
+        volume: 2000,
+      }]);
+      fixture.detectChanges();
+      expect(element.classList).toContain('small');
+
+      component.onResize({currentTarget:{innerWidth:400}});
+      fixture.detectChanges();
+      expect(element.classList).toContain('small');
+
+      component.onOrientationChange({currentTarget:{innerWidth:600}});
+      fixture.detectChanges();
+      expect(element.classList).not.toContain('small');
     });
   });
 }

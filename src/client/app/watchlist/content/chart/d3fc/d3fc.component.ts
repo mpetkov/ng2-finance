@@ -14,7 +14,10 @@ import {
   ChartStateService,
   ChartDataInterface
 } from '../state/index';
-import { Subscriptions } from '../../../../core/index';
+import {
+  Subscriptions,
+  TimeoutService
+} from '../../../../core/index';
 
 declare let fc:any;
 declare let d3:any;
@@ -35,17 +38,19 @@ declare let d3:any;
 
 export class D3fcComponent extends Subscriptions implements AfterViewInit {
   @ViewChild('svg') svg:ElementRef;
-  smallView:boolean;
+  smallView:boolean = false;
   private data:ChartDataInterface[];
   private container:any;
   private chart:any;
   private range:string;
+  private windowWidth:number = window.innerWidth;
 
   constructor(public chartState:ChartStateService,
               private chartOptionsService:ChartOptionsService,
               private chartCrosshairService:ChartCrosshairService,
               private chartTooltipsService:ChartTooltipsService,
-              private chartVolumeService:ChartVolumeService) {
+              private chartVolumeService:ChartVolumeService,
+              private timeoutService:TimeoutService) {
     super();
 
     this.subscriptions.push(chartState.range$.subscribe(
@@ -68,18 +73,19 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.resize();
+  onResize(event:any) {
+    this.resize(event.currentTarget.innerWidth);
   }
 
   @HostListener('window:orientationchange', ['$event'])
-  onOrientationChange() {
-    this.resize();
+  onOrientationChange(event:any) {
+    this.resize(event.currentTarget.innerWidth);
   }
 
-  private resize() {
+  private resize(windowWidth:number) {
+    this.windowWidth = windowWidth;
     if (this.data) {
-      setTimeout(() => {
+      this.timeoutService.set(() => {
         this.redraw(this.data, this.container, this.chart);
       }, 0);
     }
@@ -91,7 +97,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
       this.render(data);
-      setTimeout(() => {
+      this.timeoutService.set(() => {
         this.redraw(data, this.container, this.chart);
       }, 0);
     }
@@ -141,7 +147,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
 
   private updateSettings() {
     let render:boolean = false;
-    if (window.innerWidth < 420) {
+    if (this.windowWidth < 420) {
       if (!this.smallView) {
         this.smallView = true;
         this.chartOptionsService.options.yAxisWidth = 0;
