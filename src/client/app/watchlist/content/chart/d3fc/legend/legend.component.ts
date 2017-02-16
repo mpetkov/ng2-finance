@@ -26,13 +26,17 @@ export class LegendComponent extends Subscriptions {
   }
 
   private updateItems(data:ChartDataInterface) {
-    this.items = [
-      {label: 'Open', value: this.chartOptionsService.options.priceFormat(data.open)},
-      {label: 'Close', value: this.chartOptionsService.options.priceFormat(data.close)},
-      {label: 'Low', value: this.chartOptionsService.options.priceFormat(data.low)},
-      {label: 'High', value: this.chartOptionsService.options.priceFormat(data.high)},
-      {label: 'Vol', value: this.chartOptionsService.options.volumeFormat(data.volume)}
-    ];
+    if (data) {
+      this.items = [
+        {label: 'Open', value: this.chartOptionsService.options.priceFormat(data.open)},
+        {label: 'Close', value: this.chartOptionsService.options.priceFormat(data.close)},
+        {label: 'Low', value: this.chartOptionsService.options.priceFormat(data.low)},
+        {label: 'High', value: this.chartOptionsService.options.priceFormat(data.high)},
+        {label: 'Vol', value: this.chartOptionsService.options.volumeFormat(data.volume)}
+      ];
+    } else {
+      this.items = [];
+    }
   }
 }
 
