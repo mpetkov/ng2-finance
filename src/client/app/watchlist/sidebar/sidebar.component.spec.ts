@@ -8,18 +8,14 @@ import {
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {
-  SidebarComponent,
-  sidebarReducer,
-  FavoritesApiService,
-  SidebarStateService
-} from './index';
-import {
-  watchlistReducer,
   HeaderStateService,
-  headerReducer
+  SidebarComponent,
+  FavoritesApiService,
+  SidebarStateService,
+  SidebarTypeEnum
 } from '../../index';
 import { WatchlistStateService } from '../state/watchlist-state.service';
 
@@ -38,20 +34,40 @@ export function main() {
     let component:SidebarComponent;
     let api:any;
     let loadSubject:Subject<any>;
+    let sidebarState:any;
+    let watchlistState:any;
+    let headerState:any;
+    let params: Subject<any>;
 
     beforeEach(async(() => {
       loadSubject = new Subject<any>();
       api = jasmine.createSpyObj('api', ['load']);
       api.load.and.callFake(() => loadSubject);
 
+      sidebarState = jasmine.createSpyObj('sidebarStateService', [
+        'changeType'
+      ]);
+
+      sidebarState.type$ = new BehaviorSubject<any>(SidebarTypeEnum.List);
+
+      watchlistState = jasmine.createSpyObj('watchlistStateService', [
+        'changeStock'
+      ]);
+
+      watchlistState.favorites$ = new BehaviorSubject<any>([]);
+      watchlistState.stock$ = new BehaviorSubject<any>(null);
+
+      headerState = jasmine.createSpyObj('headerStateService', [
+        'changeSearchActive'
+      ]);
+
+      headerState.searchActive$ = new BehaviorSubject<any>(false);
+
+      params = new Subject<any>();
+
       TestBed.configureTestingModule({
         imports: [
-          CommonModule,
-          StoreModule.provideStore({
-            watchlist: watchlistReducer,
-            header: headerReducer,
-            sidebar: sidebarReducer
-          })
+          CommonModule
         ],
         declarations: [
           SidebarComponent,
@@ -61,10 +77,10 @@ export function main() {
         ],
         providers: [
           {provide: FavoritesApiService, useValue: api},
-          SidebarStateService,
-          WatchlistStateService,
-          HeaderStateService,
-          {provide: ActivatedRoute, useValue: {params: new Subject<any>()}}
+          {provide: SidebarStateService, useValue: sidebarState},
+          {provide: WatchlistStateService, useValue: watchlistState},
+          {provide: HeaderStateService, useValue: headerState},
+          {provide: ActivatedRoute, useValue: {params: params}}
         ]
       }).compileComponents();
     }));
@@ -77,6 +93,69 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should render correct component based on the type', () => {
+      expect(fixture.nativeElement.querySelector('mp-favorites')).not.toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-edit')).toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-search')).toBe(null);
+
+      sidebarState.type$.next(SidebarTypeEnum.Edit);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('mp-favorites')).toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-edit')).not.toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-search')).toBe(null);
+
+      sidebarState.type$.next(SidebarTypeEnum.Add);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('mp-favorites')).toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-edit')).toBe(null);
+      expect(fixture.nativeElement.querySelector('mp-search')).not.toBe(null);
+    });
+
+    it('should call SidebarStateService#changeType() when searchActive is changed', () => {
+      expect(sidebarState.changeType).toHaveBeenCalledTimes(1);
+
+      headerState.searchActive$.next(true);
+      expect(sidebarState.changeType).toHaveBeenCalledTimes(2);
+      expect(sidebarState.changeType).toHaveBeenCalledWith(SidebarTypeEnum.List);
+
+      headerState.searchActive$.next(false);
+      expect(sidebarState.changeType).toHaveBeenCalledTimes(3);
+      expect(sidebarState.changeType).toHaveBeenCalledWith(SidebarTypeEnum.Add);
+    });
+
+    it('should call WatchlistStateService#changeStock() when route is changed', () => {
+      params.next({id: 'test'});
+      expect(watchlistState.changeStock).toHaveBeenCalledTimes(1);
+      expect(watchlistState.changeStock).toHaveBeenCalledWith('test');
+    });
+
+    it('should call FavoritesApiService#load() when stock is changed', () => {
+      expect(api.load).toHaveBeenCalledTimes(2);
+
+      watchlistState.stock$.next('AAPL');
+      expect(api.load).toHaveBeenCalledTimes(3);
+      expect(api.load).toHaveBeenCalledWith(['AAPL']);
+
+      watchlistState.stock$.next('AAPL');
+      expect(api.load).toHaveBeenCalledTimes(3);
+    });
+
+    it('should call FavoritesApiService#load() when favorites is changed', () => {
+      expect(api.load).toHaveBeenCalledTimes(2);
+
+      watchlistState.stock$.next('AAPL');
+      expect(api.load).toHaveBeenCalledTimes(3);
+      expect(api.load).toHaveBeenCalledWith(['AAPL']);
+
+      watchlistState.favorites$.next(['FB']);
+      expect(api.load).toHaveBeenCalledTimes(4);
+      expect(api.load).toHaveBeenCalledWith(['FB','AAPL']);
+
+      watchlistState.favorites$.next(['AAPL']);
+      expect(api.load).toHaveBeenCalledTimes(5);
+      expect(api.load).toHaveBeenCalledWith(['AAPL']);
     });
   });
 }
