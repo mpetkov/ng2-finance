@@ -23,7 +23,7 @@
     width: 300px;
   }
 
-  .mp-search-box.inactive {
+  .mp-search-box.mp-inactive {
     background: rgba(255, 255, 255, 0.16);
     .material-icons,
     input {
@@ -75,7 +75,7 @@
       display: flex;
     }
 
-    .mp-search-box.inactive {
+    .mp-search-box.mp-inactive {
       display: none;
     }
   }
