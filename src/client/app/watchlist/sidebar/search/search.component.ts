@@ -17,8 +17,7 @@ import { NotificationTypeEnum } from '../../../shared/index';
   moduleId: module.id,
   selector: 'mp-search',
   templateUrl: 'search.component.html',
-  styleUrls: ['search.component.css'],
-  providers: [SearchStateService, SearchApiService]
+  styleUrls: ['search.component.css']
 })
 
 export class SearchComponent extends CoreApiNotification {

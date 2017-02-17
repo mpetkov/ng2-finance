@@ -5,24 +5,24 @@ import {
   SidebarComponent,
   EditComponent,
   FavoritesComponent,
-  SearchComponent,
   SidebarStateService,
   FavoritesStateService,
   FavoritesApiService
 } from './index';
 import { SharedModule } from '../../shared/shared.module';
+import { SearchModule } from './search/search.module';
 
 @NgModule({
   imports: [
     RouterModule,
     SharedModule,
+    SearchModule,
     DragulaModule
   ],
   declarations: [
     SidebarComponent,
     EditComponent,
-    FavoritesComponent,
-    SearchComponent
+    FavoritesComponent
   ],
   exports: [
     SidebarComponent

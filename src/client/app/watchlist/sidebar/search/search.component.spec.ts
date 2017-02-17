@@ -5,25 +5,24 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { StoreModule } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import {
   SearchComponent,
-  searchReducer,
-  favoritesReducer,
   SearchStateService,
   SidebarStateService,
   FavoritesStateService,
   SearchApiService,
-  headerReducer,
-  watchlistReducer,
   HeaderStateService,
   NotificationButtonInterface,
-  NotificationTypeEnum
+  NotificationTypeEnum,
+  SidebarTypeEnum
 } from '../../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 
@@ -39,26 +38,39 @@ export function main() {
     let fixture:ComponentFixture<SearchComponent>;
     let component:SearchComponent;
     let api:any;
-    let getSubject:Subject<any>;
-    let postSubject:Subject<any>;
+    let loadSubject:Subject<any>;
+    let searchState:any;
+    let sidebarState:any;
+    let favoritesState:any;
+    let watchlistState:any;
+    let headerState:any;
+    let router:any;
 
     beforeEach(async(() => {
-      getSubject = new Subject<any>();
-      postSubject = new Subject<any>();
-      api = jasmine.createSpyObj('api', ['get', 'post']);
-      api.get.and.callFake(() => getSubject);
-      api.post.and.callFake(() => postSubject);
+      loadSubject = new Subject<any>();
+      api = jasmine.createSpyObj('api', ['load']);
+      api.load.and.callFake(() => loadSubject);
+
+      searchState = jasmine.createSpyObj('searchStateService', ['fetchFulfilled']);
+      searchState.data$ = new BehaviorSubject<any>([]);
+      searchState.loader$ = new BehaviorSubject<any>(false);
+      searchState.error$ = new BehaviorSubject<any>(null);
+
+      sidebarState = jasmine.createSpyObj('sidebarStateService', ['changeType']);
+
+      favoritesState = jasmine.createSpyObj('favoritesStateService', ['changeOrder']);
+      favoritesState.order$ = new BehaviorSubject<any>([]);
+
+      watchlistState = jasmine.createSpyObj('watchlistStateService', ['addFavorite']);
+
+      headerState = jasmine.createSpyObj('headerStateService', ['changeSearch']);
+      headerState.search$ = new BehaviorSubject<any>(null);
+
+      router = jasmine.createSpyObj('router', ['navigate']);
 
       TestBed.configureTestingModule({
         imports: [
-          CommonModule,
-          HttpModule,
-          StoreModule.provideStore({
-            search: searchReducer,
-            favorites: favoritesReducer,
-            header: headerReducer,
-            watchlist: watchlistReducer
-          })
+          CommonModule
         ],
         declarations: [
           SearchComponent,
@@ -66,12 +78,12 @@ export function main() {
         ],
         providers: [
           {provide: SearchApiService, useValue: api},
-          SearchStateService,
-          SidebarStateService,
-          FavoritesStateService,
-          WatchlistStateService,
-          HeaderStateService,
-          {provide: Router, useValue: jasmine.createSpyObj('router', ['navigate'])}
+          {provide: SearchStateService, useValue: searchState},
+          {provide: SidebarStateService, useValue: sidebarState},
+          {provide: FavoritesStateService, useValue: favoritesState},
+          {provide: WatchlistStateService, useValue: watchlistState},
+          {provide: HeaderStateService, useValue: headerState},
+          {provide: Router, useValue: router}
         ]
       }).compileComponents();
     }));
@@ -84,6 +96,57 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should have a NotificationComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-notification')).not.toBe(null);
+    });
+
+    it('should show the search list when stocks are present', () => {
+      expect(fixture.nativeElement.querySelector('ul')).toBeNull();
+
+      headerState.search$.next('search');
+      searchState.data$.next([]);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('ul')).toBeNull();
+
+      searchState.data$.next([{symbol:'symbol'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelectorAll('li').length).toBe(1);
+    });
+
+    it('should display the stock info correctly when stock is present', () => {
+      searchState.data$.next([{symbol:'symbol', name:'name', typeDisp:'typeDisp', exchDisp:'exchDisp'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('.mdl-color-text--black').textContent).toBe('symbol - name');
+      expect(fixture.nativeElement.querySelector('.mdl-list__item-sub-title').textContent).toBe('typeDisp - exchDisp');
+    });
+
+    it('should call a bunch of events when list item is clicked', () => {
+      searchState.data$.next([{symbol:'symbol'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('li').click();
+      expect(favoritesState.changeOrder).toHaveBeenCalledTimes(1);
+      expect(favoritesState.changeOrder).toHaveBeenCalledWith(['symbol']);
+
+      expect(watchlistState.addFavorite).toHaveBeenCalledTimes(1);
+      expect(watchlistState.addFavorite).toHaveBeenCalledWith('symbol');
+
+      expect(sidebarState.changeType).toHaveBeenCalledTimes(1);
+      expect(sidebarState.changeType).toHaveBeenCalledWith(SidebarTypeEnum.List);
+
+      expect(router.navigate).toHaveBeenCalledTimes(1);
+      expect(router.navigate).toHaveBeenCalledWith(['/watchlist', 'symbol']);
+    });
+
+    it('should call SearchApiService#load() when search is updated', () => {
+      headerState.search$.next('search');
+      expect(api.load).toHaveBeenCalledTimes(1);
+      expect(api.load).toHaveBeenCalledWith('search');
     });
   });
 }
