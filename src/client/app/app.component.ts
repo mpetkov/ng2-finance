@@ -8,13 +8,14 @@ import { AppStateService } from './state/app-state.service';
 })
 
 export class AppComponent {
+  preloaderDiv:any;
   constructor(private appState:AppStateService) {
-    let preloaderDiv:Element = document.getElementsByClassName('mp-preloader')[0];
+    this.preloaderDiv = document.getElementsByClassName('mp-preloader')[0];
 
     let sub = appState.preloader$.subscribe(
       preloader => {
-        if (!preloader && preloaderDiv) {
-          preloaderDiv.classList.add('mp-loaded');
+        if (!preloader && this.preloaderDiv) {
+          this.preloaderDiv.className += ' mp-loaded';
           sub.unsubscribe();
         }
       }
