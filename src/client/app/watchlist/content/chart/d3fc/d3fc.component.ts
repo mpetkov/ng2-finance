@@ -14,10 +14,7 @@ import {
   ChartStateService,
   ChartDataInterface
 } from '../state/index';
-import {
-  Subscriptions,
-  TimeoutService
-} from '../../../../core/index';
+import { Subscriptions } from '../../../../core/index';
 
 declare let fc:any;
 declare let d3:any;
@@ -32,8 +29,7 @@ declare let d3:any;
     ChartCrosshairService,
     ChartOptionsService,
     ChartTooltipsService,
-    ChartVolumeService,
-    TimeoutService
+    ChartVolumeService
   ]
 })
 
@@ -50,8 +46,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
               private chartOptionsService:ChartOptionsService,
               private chartCrosshairService:ChartCrosshairService,
               private chartTooltipsService:ChartTooltipsService,
-              private chartVolumeService:ChartVolumeService,
-              private timeoutService:TimeoutService) {
+              private chartVolumeService:ChartVolumeService) {
     super();
 
     this.subscriptions.push(chartState.range$.subscribe(
@@ -86,9 +81,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   private resize(windowWidth:number) {
     this.windowWidth = windowWidth;
     if (this.data) {
-      this.timeoutService.set(() => {
-        this.redraw(this.data, this.container, this.chart);
-      }, 0);
+      this.redraw(this.data, this.container, this.chart);
     }
   }
 
@@ -98,9 +91,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       this.container = d3.select(this.svg.nativeElement);
       this.chartVolumeService.init(data, this.container);
       this.render(data);
-      this.timeoutService.set(() => {
-        this.redraw(data, this.container, this.chart);
-      }, 0);
+      this.redraw(data, this.container, this.chart);
     }
   }
 

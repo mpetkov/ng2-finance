@@ -17,7 +17,6 @@ import {
   ChartTooltipsService,
   ChartVolumeService
 } from '../index';
-import { TimeoutService } from '../../../../core/index';
 
 @Component({selector: 'mp-legend', template: ''})
 class LegendComponent {}
@@ -27,7 +26,6 @@ export function main() {
     let fixture:ComponentFixture<D3fcComponent>;
     let component:D3fcComponent;
     let chartState:any;
-    let timeoutServiceMock:any;
 
     beforeEach(async(() => {
       chartState = jasmine.createSpyObj('chartStateService', [
@@ -36,14 +34,6 @@ export function main() {
 
       chartState.range$ = new BehaviorSubject<any>('3mo');
       chartState.data$ = new BehaviorSubject<any>([]);
-
-      timeoutServiceMock = jasmine.createSpyObj('timeoutService', [
-        'set'
-      ]);
-
-      timeoutServiceMock.set = (callback:Function, time:number):void => {
-        callback();
-      };
 
       TestBed.configureTestingModule({
         imports: [
@@ -55,7 +45,6 @@ export function main() {
         ],
         providers: [
           {provide: ChartStateService, useValue: chartState},
-          {provide: TimeoutService, useValue: timeoutServiceMock},
           ChartCrosshairService,
           ChartOptionsService,
           ChartTooltipsService,
