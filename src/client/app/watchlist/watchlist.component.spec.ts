@@ -7,11 +7,10 @@ import {
 } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { WatchlistComponent } from './index';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {
-  HeaderStateService,
-  headerReducer
+  WatchlistComponent,
+  HeaderStateService
 } from '../index';
 
 @Component({selector: 'mp-content', template: ''})
@@ -24,14 +23,18 @@ export function main() {
   describe('WatchlistComponent', () => {
     let fixture:ComponentFixture<WatchlistComponent>;
     let component:WatchlistComponent;
+    let headerState:any;
 
     beforeEach(async(() => {
+      headerState = jasmine.createSpyObj('headerStateService', [
+        'changeSidebar'
+      ]);
+
+      headerState.sidebar$ = new BehaviorSubject<any>(true);
+
       TestBed.configureTestingModule({
         imports: [
-          CommonModule,
-          StoreModule.provideStore({
-            header: headerReducer
-          })
+          CommonModule
         ],
         declarations: [
           WatchlistComponent,
@@ -39,7 +42,7 @@ export function main() {
           SidebarComponent
         ],
         providers: [
-          HeaderStateService
+          {provide: HeaderStateService, useValue: headerState}
         ]
       }).compileComponents();
     }));
@@ -52,6 +55,27 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should have a ContentComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-content')).not.toBe(null);
+    });
+
+    it('should have a SidebarComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-sidebar')).not.toBe(null);
+    });
+
+    it('should initialize property `sidebar` with boolean value `true`', () => {
+      expect(component.sidebar).toBe(true);
+    });
+
+    it('should add css class `mp-inactive` to `mdl-layout__drawer` when sidebar is false', () => {
+      let element:any = fixture.nativeElement.querySelector('.mdl-layout__drawer');
+      expect(element.classList).not.toContain('mp-inactive');
+
+      headerState.sidebar$.next(false);
+      fixture.detectChanges();
+      expect(element.classList).toContain('mp-inactive');
     });
   });
 }
