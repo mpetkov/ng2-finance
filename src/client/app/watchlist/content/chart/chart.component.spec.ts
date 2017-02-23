@@ -6,13 +6,11 @@ import {
 } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdlModule } from 'angular2-mdl';
 import {
   ChartComponent,
-  chartReducer,
-  watchlistReducer,
   NotificationButtonInterface,
   NotificationTypeEnum,
   ChartApiService,
@@ -38,22 +36,44 @@ export function main() {
     let api:any;
     let getSubject:Subject<any>;
     let postSubject:Subject<any>;
+    let chartState:any;
+    let watchlistState:any;
+    let appState:any;
 
     beforeEach(async(() => {
       getSubject = new Subject<any>();
       postSubject = new Subject<any>();
-      api = jasmine.createSpyObj('api', ['get', 'post']);
+      api = jasmine.createSpyObj('api', ['get', 'post', 'load']);
       api.get.and.callFake(() => getSubject);
       api.post.and.callFake(() => postSubject);
+
+      chartState = jasmine.createSpyObj('chartState', [
+        'changeRange'
+      ]);
+
+      chartState.range$ = new BehaviorSubject<any>('3mo');
+      chartState.data$ = new BehaviorSubject<any>([]);
+      chartState.loader$ = new BehaviorSubject<any>(false);
+      chartState.error$ = new BehaviorSubject<any>(null);
+
+      watchlistState = jasmine.createSpyObj('watchlistState', [
+        'addFavorite',
+        'deleteFavorites'
+      ]);
+
+      watchlistState.stockData$ = new BehaviorSubject<any>({});
+      watchlistState.stock$ = new BehaviorSubject<any>(null);
+      watchlistState.favorites$ = new BehaviorSubject<any>(['AAPL', 'GOOG', 'FB']);
+      watchlistState.highlights$ = new BehaviorSubject<any>({});
+
+      appState = jasmine.createSpyObj('appState', [
+        'changePreloader'
+      ]);
 
       TestBed.configureTestingModule({
         imports: [
           CommonModule,
-          MdlModule,
-          StoreModule.provideStore({
-            chart: chartReducer,
-            watchlist: watchlistReducer
-          })
+          MdlModule
         ],
         declarations: [
           ChartComponent,
@@ -62,9 +82,9 @@ export function main() {
         ],
         providers: [
           {provide: ChartApiService, useValue: api},
-          ChartStateService,
-          WatchlistStateService,
-          AppStateService
+          {provide: ChartStateService, useValue: chartState},
+          {provide: WatchlistStateService, useValue: watchlistState},
+          {provide: AppStateService, useValue: appState}
         ]
       }).compileComponents();
     }));
@@ -77,6 +97,144 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should have a NotificationComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-notification')).not.toBe(null);
+    });
+
+    it('should have a D3fcComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-d3fc')).not.toBe(null);
+    });
+
+    it('should have a title `Chart` if no stock data is available', () => {
+      expect(fixture.nativeElement.querySelector('h4').textContent).toBe('Chart');
+
+      watchlistState.stockData$.next({symbol: 'AAPL'});
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('h4').textContent).not.toBe('Chart');
+      expect(fixture.nativeElement.querySelector('h4').innerHTML).toContain('AAPL');
+    });
+
+    it('should toggle css class between green and red for `mp-change` span tag when the change value is negative or positive', () => {
+      watchlistState.stockData$.next({symbol: 'AAPL', change: -10});
+      fixture.detectChanges();
+      let positiveColor:string = 'mdl-color-text--green-A700';
+      let negativeColor:string = 'mdl-color-text--red';
+
+      let element:any = fixture.nativeElement.querySelector('.mp-change');
+      expect(element.classList).not.toContain(positiveColor);
+      expect(element.classList).toContain(negativeColor);
+
+      watchlistState.stockData$.next({symbol: 'AAPL', change: 10});
+      fixture.detectChanges();
+      expect(element.classList).toContain(positiveColor);
+      expect(element.classList).not.toContain(negativeColor);
+    });
+
+    it('should apply a highlight css class for `mp-transition` span tag when the highlight is set', () => {
+      watchlistState.stockData$.next({symbol: 'AAPL'});
+      fixture.detectChanges();
+
+      let positiveColor:string = 'mdl-color--green-A100';
+      let negativeColor:string = 'mdl-color--red-100';
+      let element:any = fixture.nativeElement.querySelector('.mp-transition');
+
+      expect(element.classList).not.toContain(positiveColor);
+      expect(element.classList).not.toContain(negativeColor);
+
+      watchlistState.highlights$.next({AAPL:{price:positiveColor}});
+      fixture.detectChanges();
+      expect(element.classList).toContain(positiveColor);
+      expect(element.classList).not.toContain(negativeColor);
+
+      watchlistState.highlights$.next({AAPL:{price:negativeColor}});
+      fixture.detectChanges();
+      expect(element.classList).not.toContain(positiveColor);
+      expect(element.classList).toContain(negativeColor);
+    });
+
+    it('should show the favorite icon button when stock is present', () => {
+      expect(fixture.nativeElement.querySelector('button')).toBeNull();
+
+      watchlistState.stock$.next('ADS');
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('mdl-icon').textContent).toBe('star_bordered');
+    });
+
+    it('should show the tabs when stock is present', () => {
+      expect(fixture.nativeElement.querySelector('mdl-tabs')).toBeNull();
+
+      watchlistState.stock$.next('AAPL');
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('mdl-tabs')).not.toBeNull();
+      expect(fixture.nativeElement.querySelectorAll('.mdl-tabs__tab').length).toBe(7);
+    });
+
+    it('should call ChartStateService#changeRange() when a tab is clicked', () => {
+      watchlistState.stock$.next('AAPL');
+      fixture.detectChanges();
+      fixture.nativeElement.querySelectorAll('.mdl-tabs__tab')[0].click();
+      expect(chartState.changeRange).toHaveBeenCalledTimes(1);
+      expect(chartState.changeRange).toHaveBeenCalledWith('1d');
+    });
+
+    it('should call ChartStateService#changeRange() when tabChanged() is called', () => {
+      component.tabChanged(20);
+      expect(chartState.changeRange).toHaveBeenCalledTimes(0);
+
+      component.tabChanged(0);
+      expect(chartState.changeRange).toHaveBeenCalledTimes(1);
+      expect(chartState.changeRange).toHaveBeenCalledWith('1d');
+    });
+
+    it('should call WatchlistStateService#addFavorite() or deleteFavorites() when the favorite button is toggled', () => {
+      watchlistState.stock$.next('ADS');
+      fixture.detectChanges();
+      fixture.nativeElement.querySelector('button').click();
+      expect(watchlistState.addFavorite).toHaveBeenCalledTimes(1);
+      expect(watchlistState.addFavorite).toHaveBeenCalledWith('ADS');
+      expect(watchlistState.deleteFavorites).toHaveBeenCalledTimes(0);
+
+      watchlistState.favorites$.next(['ADS']);
+      fixture.detectChanges();
+      fixture.nativeElement.querySelector('button').click();
+      expect(watchlistState.addFavorite).toHaveBeenCalledTimes(1);
+      expect(watchlistState.deleteFavorites).toHaveBeenCalledTimes(1);
+      expect(watchlistState.deleteFavorites).toHaveBeenCalledWith(['ADS']);
+    });
+
+    it('should change `rangeIndex` to 0 if an invalid range is passed', () => {
+      expect(component.rangeIndex).toBeUndefined();
+
+      chartState.range$.next('5d');
+      fixture.detectChanges();
+      setTimeout(() => {
+        expect(component.rangeIndex).toBe(1);
+      }, 0);
+
+
+      chartState.range$.next('test');
+      fixture.detectChanges();
+      setTimeout(() => {
+        expect(component.rangeIndex).toBe(0);
+      }, 0);
+    });
+
+    it('should change `notification` to have the correct message when there is no data', () => {
+      component.notification = null;
+      chartState.data$.next([{}]);
+      fixture.detectChanges();
+      expect(component.notification).toBeNull();
+
+      chartState.data$.next([]);
+      fixture.detectChanges();
+      expect(component.notification).toBe('Please select a stock symbol');
+
+      watchlistState.stock$.next('test');
+      chartState.data$.next([]);
+      fixture.detectChanges();
+      expect(component.notification).toBe('No results found');
     });
   });
 }

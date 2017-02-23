@@ -99,9 +99,12 @@ export class ChartComponent extends CoreApiNotification {
     if (rangeIndex === -1) {
       rangeIndex = 0;
     }
-    this.rangeIndex = rangeIndex;
-    this.range = this.ranges[rangeIndex];
-    this.loadChartData();
+
+    setTimeout(() => {
+      this.rangeIndex = rangeIndex;
+      this.range = this.ranges[rangeIndex];
+      this.loadChartData();
+    }, 0);
   }
 
   private loadChartData() {
