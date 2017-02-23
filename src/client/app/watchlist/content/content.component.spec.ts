@@ -42,5 +42,17 @@ export function main() {
     it('should create', () => {
       expect(component).toBeTruthy();
     });
+
+    it('should have a ChartComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-chart')).not.toBeNull();
+    });
+
+    it('should have a InfoComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-info')).not.toBeNull();
+    });
+
+    it('should have a NewsComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-news')).not.toBeNull();
+    });
   });
 }
