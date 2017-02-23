@@ -25,8 +25,22 @@ import {
 
 export class InfoComponent extends CoreApiNotification {
   data:InfoDataInterface = {};
-  leftColumn:InfoListInterface[] = [];
-  rightColumn:InfoListInterface[] = [];
+  leftColumn:InfoListInterface[] = [
+    {text: 'Prev Close', id: 'PreviousClose'},
+    {text: 'Low', id: 'DaysLow'},
+    {text: '52wk Low', id: 'YearLow'},
+    {text: 'Mkt Cap', id: 'MarketCapitalization'},
+    {text: '1Y Target', id: 'OneyrTargetPrice'},
+    {text: 'EPS', id: 'EarningsShare'}
+  ];
+  rightColumn:InfoListInterface[] = [
+    {text: 'Open', id: 'Open'},
+    {text: 'High', id: 'DaysHigh'},
+    {text: '52wk High', id: 'YearHigh'},
+    {text: 'Volume', id: 'Volume'},
+    {text: 'Avg Vol (3m)', id: 'AverageDailyVolume'},
+    {text: 'Dividend', id: 'DividendShare'}
+  ];
   dayOptions:RangeOptionsInterface = {};
   yearOptions:RangeOptionsInterface = {};
   private stock:string;
@@ -49,23 +63,6 @@ export class InfoComponent extends CoreApiNotification {
       info => this.updateInfo(info[0])
     ));
 
-    this.leftColumn = [
-      {text: 'Prev Close', id: 'PreviousClose'},
-      {text: 'Low', id: 'DaysLow'},
-      {text: '52wk Low', id: 'YearLow'},
-      {text: 'Mkt Cap', id: 'MarketCapitalization'},
-      {text: '1Y Target', id: 'OneyrTargetPrice'},
-      {text: 'EPS', id: 'EarningsShare'}
-    ];
-
-    this.rightColumn = [
-      {text: 'Open', id: 'Open'},
-      {text: 'High', id: 'DaysHigh'},
-      {text: '52wk High', id: 'YearHigh'},
-      {text: 'Volume', id: 'Volume'},
-      {text: 'Avg Vol (3m)', id: 'AverageDailyVolume'},
-      {text: 'Dividend', id: 'DividendShare'}
-    ];
     this.updateInfo();
   }
 
@@ -107,31 +104,10 @@ export class InfoComponent extends CoreApiNotification {
       this.price = this.data.LastTradePriceOnly;
     }
 
-    let activeStart:number = Math.min(this.data.Open, this.price);
-    let activeEnd:number = Math.max(this.data.Open, this.price);
-
-    this.data.DaysLow = Math.min(this.data.DaysLow, this.price);
-    this.data.DaysHigh = Math.max(this.data.DaysHigh, this.price);
-    this.data.YearLow = Math.min(this.data.YearLow, this.price);
-    this.data.YearHigh = Math.max(this.data.YearHigh, this.price);
-
-    this.dayOptions = {
-      text: 'Day\'s Range',
-      start: this.data.DaysLow,
-      end: this.data.DaysHigh,
-      activeStart: activeStart,
-      activeEnd: activeEnd,
-      active: this.price
-    };
-
-    this.yearOptions = {
-      text: '52 Week Range',
-      start: this.data.YearLow,
-      end: this.data.YearHigh,
-      activeStart: activeStart,
-      activeEnd: activeEnd,
-      active: this.price
-    };
+    this.data = this.infoApiService.getDataWithUpdatedPrice(this.data, this.price);
+    this.dayOptions = this.infoApiService.getDayOptions(this.data, this.price);
+    this.yearOptions = this.infoApiService.getDayOptions(this.data, this.price);
+    this.yearOptions = this.infoApiService.getYearOptions(this.data, this.price);
   }
 }
 

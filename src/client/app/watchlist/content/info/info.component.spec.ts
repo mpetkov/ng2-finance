@@ -7,14 +7,11 @@ import {
 } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdlModule } from 'angular2-mdl';
 import {
   InfoComponent,
   RangeOptionsInterface,
-  infoReducer,
-  watchlistReducer,
   NotificationButtonInterface,
   NotificationTypeEnum,
   InfoApiService,
@@ -39,21 +36,37 @@ export function main() {
     let fixture:ComponentFixture<InfoComponent>;
     let component:InfoComponent;
     let api:any;
-    let getSubject:Subject<any>;
+    let infoState:any;
+    let watchlistState:any;
 
     beforeEach(async(() => {
-      getSubject = new Subject<any>();
-      api = jasmine.createSpyObj('api', ['get']);
-      api.get.and.callFake(() => getSubject);
+      api = jasmine.createSpyObj('api', [
+        'load',
+        'reload',
+        'getDataWithUpdatedPrice',
+        'getDayOptions',
+        'getYearOptions'
+      ]);
+
+      infoState = jasmine.createSpyObj('infoStateService', [
+        'fetchFulfilled'
+      ]);
+
+      infoState.data$ = new BehaviorSubject<any>([]);
+      infoState.loader$ = new BehaviorSubject<any>(false);
+      infoState.error$ = new BehaviorSubject<any>(null);
+
+      watchlistState = jasmine.createSpyObj('watchlistStateService', [
+        'changeStock'
+      ]);
+
+      watchlistState.stock$ = new BehaviorSubject<any>(null);
+      watchlistState.stockData$ = new BehaviorSubject<any>({});
 
       TestBed.configureTestingModule({
         imports: [
           CommonModule,
-          MdlModule,
-          StoreModule.provideStore({
-            watchlist: watchlistReducer,
-            info: infoReducer
-          })
+          MdlModule
         ],
         declarations: [
           InfoComponent,
@@ -62,8 +75,8 @@ export function main() {
         ],
         providers: [
           {provide: InfoApiService, useValue: api},
-          InfoStateService,
-          WatchlistStateService
+          {provide: InfoStateService, useValue: infoState},
+          {provide: WatchlistStateService, useValue: watchlistState}
         ]
       }).compileComponents();
     }));
@@ -76,6 +89,76 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should have a NotificationComponent', () => {
+      expect(fixture.nativeElement.querySelector('mp-notification')).not.toBeNull();
+    });
+
+    it('should have a RangeComponent if notification type is set to 0', () => {
+      expect(fixture.nativeElement.querySelector('mp-range')).toBeNull();
+
+      component.notificationType = 0;
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('mp-range')).not.toBeNull();
+    });
+
+    it('should have a title', () => {
+      expect(fixture.nativeElement.querySelector('h4').textContent).toBe('Key Statistics');
+    });
+
+    it('should show the more settings icon when the notification type is set to 0', () => {
+      expect(fixture.nativeElement.querySelector('.mp-settings')).toBeNull();
+
+      component.notificationType = 0;
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('.mp-settings')).not.toBeNull();
+    });
+
+    it('should show the content grid when the notification type is set to 0', () => {
+      expect(fixture.nativeElement.querySelector('.mdl-grid')).toBeNull();
+
+      component.notificationType = 0;
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('.mdl-grid')).not.toBeNull();
+      expect(fixture.nativeElement.querySelectorAll('.mdl-grid').length).toBe(2);
+    });
+
+    it('should call InfoApiService#load() when reload menu item is clicked', () => {
+      watchlistState.stock$.next('test');
+      component.notificationType = 0;
+      fixture.detectChanges();
+      fixture.nativeElement.querySelector('.mdl-menu__item').click();
+      expect(api.load).toHaveBeenCalledTimes(1);
+      expect(api.load).toHaveBeenCalledWith('test');
+    });
+
+    it('should change `notification` to have the correct message when there is no data', () => {
+      component.notification = null;
+      infoState.data$.next([{}]);
+      fixture.detectChanges();
+      expect(component.notification).toBeNull();
+
+      infoState.data$.next([]);
+      fixture.detectChanges();
+      expect(component.notification).toBe('Please select a stock symbol');
+
+      watchlistState.stock$.next('test');
+      infoState.data$.next([]);
+      fixture.detectChanges();
+      expect(component.notification).toBe('No results found');
+    });
+
+    it('should call InfoApiService#getDataWithUpdatedPrice() when stock data is updated and info has already been loaded', () => {
+      watchlistState.stockData$.next({price:100});
+      fixture.detectChanges();
+      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledTimes(0);
+
+      infoState.data$.next([{}]);
+      watchlistState.stockData$.next({price:200});
+      fixture.detectChanges();
+      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledTimes(2);
+      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledWith(undefined, 200);
     });
   });
 }

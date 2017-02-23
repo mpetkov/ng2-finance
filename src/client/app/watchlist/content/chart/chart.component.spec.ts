@@ -6,7 +6,6 @@ import {
 } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdlModule } from 'angular2-mdl';
 import {
@@ -34,18 +33,12 @@ export function main() {
     let fixture:ComponentFixture<ChartComponent>;
     let component:ChartComponent;
     let api:any;
-    let getSubject:Subject<any>;
-    let postSubject:Subject<any>;
     let chartState:any;
     let watchlistState:any;
     let appState:any;
 
-    beforeEach(async(() => {
-      getSubject = new Subject<any>();
-      postSubject = new Subject<any>();
-      api = jasmine.createSpyObj('api', ['get', 'post', 'load']);
-      api.get.and.callFake(() => getSubject);
-      api.post.and.callFake(() => postSubject);
+    beforeEach(async(() => {;
+      api = jasmine.createSpyObj('api', ['load']);
 
       chartState = jasmine.createSpyObj('chartState', [
         'changeRange'
