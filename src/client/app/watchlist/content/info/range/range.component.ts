@@ -15,11 +15,9 @@ export class RangeComponent implements OnChanges {
   @Input() options:RangeOptionsInterface = {};
   position:RangePositionInterface = {};
 
-  ngOnChanges(changes:any) {
-    if (changes.options) {
-      if (this.options) {
-        this.position = this.getPosition(this.options);
-      }
+  ngOnChanges() {
+    if (this.options) {
+      this.position = this.getPosition(this.options);
     }
   }
 
