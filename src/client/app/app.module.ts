@@ -29,6 +29,8 @@ import { HeaderStateService } from './shared/header/state/header-state.service';
 import { SharedModule } from './shared/shared.module';
 import { HeaderModule } from './shared/header/header.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
+import { AppActions } from './state/app.actions';
+import { HeaderActions } from './shared/header/state/header.actions';
 
 @NgModule({
   imports: [
@@ -53,7 +55,9 @@ import { WatchlistModule } from './watchlist/watchlist.module';
   declarations: [AppComponent],
   providers: [
     AppStateService,
+    AppActions,
     HeaderStateService,
+    HeaderActions,
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'

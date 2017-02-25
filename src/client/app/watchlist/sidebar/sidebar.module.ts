@@ -5,7 +5,9 @@ import {
   EditComponent,
   FavoritesComponent,
   SidebarStateService,
+  SidebarActions,
   FavoritesStateService,
+  FavoritesActions,
   FavoritesApiService
 } from './index';
 import { SharedModule } from '../../shared/shared.module';
@@ -28,7 +30,9 @@ import { EditModule } from './edit/edit.module';
   ],
   providers: [
     SidebarStateService,
+    SidebarActions,
     FavoritesStateService,
+    FavoritesActions,
     FavoritesApiService
   ]
 })

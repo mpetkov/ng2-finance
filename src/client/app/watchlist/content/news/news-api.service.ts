@@ -4,7 +4,10 @@ import {
   Config,
   CoreApiResponseService
 } from '../../../core/index';
-import { NewsStateService } from './state/index';
+import {
+  NewsStateService,
+  NewsDataInterface
+} from './state/index';
 declare let moment:any;
 declare let _:any;
 
@@ -56,12 +59,4 @@ export class NewsApiService extends CoreApiResponseService {
   private convertDate(date:number):string {
     return moment(date * 1000).format('ddd, MMM Do YYYY h:mm A');
   }
-}
-
-export interface NewsDataInterface {
-  source?:string;
-  date?:string;
-  title?:string;
-  url?:string;
-  image?:string;
 }

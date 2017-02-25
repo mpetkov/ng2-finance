@@ -15,3 +15,11 @@ export const NewsInitialState = Record({
 
 export class NewsStateKeys extends CoreApiStateKeys {
 }
+
+export interface NewsDataInterface {
+  source?:string;
+  date?:string;
+  title?:string;
+  url?:string;
+  image?:string;
+}

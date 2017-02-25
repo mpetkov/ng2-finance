@@ -6,6 +6,7 @@ import {
   SearchApiService
 } from './index';
 import { SharedModule } from '../../../shared/shared.module';
+import { SearchActions } from './state/search.actions';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SharedModule } from '../../../shared/shared.module';
   ],
   providers: [
     SearchStateService,
+    SearchActions,
     SearchApiService
   ]
 })

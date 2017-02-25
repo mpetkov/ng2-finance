@@ -13,12 +13,13 @@ import 'rxjs/add/operator/let';
 export class SidebarStateService extends CoreStateService {
   type$:Observable<SidebarTypeEnum>;
 
-  constructor(public store$:Store<any>) {
+  constructor(public store$:Store<any>,
+              public actions: SidebarActions) {
     super(store$);
     this.type$ = store$.let(this.getState('sidebar', SidebarStateKeys.Type));
   }
 
   changeType(type:SidebarTypeEnum) {
-    this.store$.dispatch(SidebarActions.changeType(type));
+    this.store$.dispatch(this.actions.changeType(type));
   }
 }

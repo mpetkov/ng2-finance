@@ -7,6 +7,7 @@ import {
   LegendComponent
 } from './index';
 import { SharedModule } from '../../../shared/shared.module';
+import { ChartActions } from './state/chart.actions';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SharedModule } from '../../../shared/shared.module';
   ],
   providers: [
     ChartApiService,
-    ChartStateService
+    ChartStateService,
+    ChartActions
   ]
 })
 export class ChartModule {

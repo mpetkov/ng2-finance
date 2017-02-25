@@ -1,5 +1,4 @@
 /* tslint:disable:no-unused-variable */
-
 import {
   async,
   ComponentFixture,
@@ -11,7 +10,6 @@ import { MdlModule } from 'angular2-mdl';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {
   HeaderComponent,
-  headerReducer,
   HeaderStateService
 } from './index';
 

@@ -15,18 +15,22 @@ import {
   FavoritesComponent,
   favoritesReducer,
   SidebarStateService,
+  SidebarActions,
   FavoritesStateService,
+  FavoritesActions,
   FavoritesApiService,
   FavoritesHighlightService
 } from '../index';
 import {
   watchlistReducer,
   HeaderStateService,
+  HeaderActions,
   headerReducer,
   NotificationButtonInterface,
   NotificationTypeEnum
 } from '../../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { WatchlistActions } from '../../state/watchlist.actions';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
@@ -64,10 +68,14 @@ export function main() {
         providers: [
           {provide: FavoritesApiService, useValue: api},
           WatchlistStateService,
+          WatchlistActions,
           FavoritesStateService,
+          FavoritesActions,
           FavoritesHighlightService,
           SidebarStateService,
+          SidebarActions,
           HeaderStateService,
+          HeaderActions,
           {provide: Router, useValue: jasmine.createSpyObj('router', ['navigate'])}
         ]
       }).compileComponents();

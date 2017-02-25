@@ -9,6 +9,7 @@ import {
 import { ContentModule } from './content/content.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { WatchlistStateService } from './state/watchlist-state.service';
+import { WatchlistActions } from './state/watchlist.actions';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { WatchlistStateService } from './state/watchlist-state.service';
     WatchlistComponent
   ],
   providers: [
-    WatchlistStateService
+    WatchlistStateService,
+    WatchlistActions
   ]
 })
 export class WatchlistModule {

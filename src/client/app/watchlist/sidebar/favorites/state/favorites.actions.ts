@@ -9,37 +9,37 @@ export class FavoritesActions {
   static FETCH_LOADER = 'WATCHLIST:FAVORITES:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:FAVORITES:FETCH_ERROR';
 
-  static changeOrder(order:string[]):Action {
+  changeOrder(order:string[]):Action {
     return {
-      type: this.CHANGE_ORDER,
+      type: FavoritesActions.CHANGE_ORDER,
       payload: order
     };
   }
 
-  static sortData():Action {
+  sortData():Action {
     return {
-      type: this.SORT_DATA,
+      type: FavoritesActions.SORT_DATA,
       payload: null
     };
   }
 
-  static fetchFulfilled(data:StockDataInterface[]):Action {
+  fetchFulfilled(data:StockDataInterface[]):Action {
     return {
-      type: this.FETCH_FULFILLED,
+      type: FavoritesActions.FETCH_FULFILLED,
       payload: data
     };
   }
 
-  static fetchLoader(loader:boolean):Action {
+  fetchLoader(loader:boolean):Action {
     return {
-      type: this.FETCH_LOADER,
+      type: FavoritesActions.FETCH_LOADER,
       payload: loader
     };
   }
 
-  static fetchError(error:ErrorInterface):Action {
+  fetchError(error:ErrorInterface):Action {
     return {
-      type: this.FETCH_ERROR,
+      type: FavoritesActions.FETCH_ERROR,
       payload: error
     };
   }

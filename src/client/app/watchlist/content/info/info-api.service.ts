@@ -5,7 +5,10 @@ import {
   CoreApiResponseService,
   numberUnitFormat
 } from '../../../core/index';
-import { InfoStateService,  } from './state/index';
+import {
+  InfoStateService,
+  InfoDataInterface
+} from './state/index';
 import { RangeOptionsInterface } from './range/range.component';
 declare let moment:any;
 declare let _:any;
@@ -80,20 +83,4 @@ export class InfoApiService extends CoreApiResponseService {
   private convertDate(date:number):string {
     return moment(date * 1000).format('ddd, MMM Do YYYY h:mm A');
   }
-}
-
-export interface InfoDataInterface {
-  PreviousClose?:number;
-  DaysLow?:number;
-  YearLow?:number;
-  MarketCapitalization?:string;
-  OneyrTargetPrice?:number;
-  EarningsShare?:string;
-  Open?:number;
-  DaysHigh?:number;
-  YearHigh?:number;
-  Volume?:string;
-  AverageDailyVolume?:string;
-  DividendShare?:string;
-  LastTradePriceOnly?:number;
 }

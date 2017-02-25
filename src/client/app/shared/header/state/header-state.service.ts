@@ -14,7 +14,8 @@ export class HeaderStateService extends CoreStateService {
   search$:Observable<string>;
   sidebar$:Observable<boolean>;
 
-  constructor(public store$:Store<any>) {
+  constructor(public store$:Store<any>,
+              private actions: HeaderActions) {
     super(store$);
     this.searchActive$ = store$.let(this.getState('header', HeaderStateKeys.SearchActive));
     this.search$ = store$.let(this.getState('header', HeaderStateKeys.Search));
@@ -22,14 +23,14 @@ export class HeaderStateService extends CoreStateService {
   }
 
   changeSearchActive(searchActive:boolean) {
-    this.store$.dispatch(HeaderActions.changeSearchActive(searchActive));
+    this.store$.dispatch(this.actions.changeSearchActive(searchActive));
   }
 
   changeSearch(search:string) {
-    this.store$.dispatch(HeaderActions.changeSearch(search));
+    this.store$.dispatch(this.actions.changeSearch(search));
   }
 
   changeSidebar(sidebar:boolean) {
-    this.store$.dispatch(HeaderActions.changeSidebar(sidebar));
+    this.store$.dispatch(this.actions.changeSidebar(sidebar));
   }
 }

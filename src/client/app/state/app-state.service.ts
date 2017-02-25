@@ -12,12 +12,13 @@ import 'rxjs/add/operator/let';
 export class AppStateService extends CoreStateService {
   preloader$:Observable<boolean>;
 
-  constructor(public store$:Store<any>) {
+  constructor(public store$:Store<any>,
+              private actions: AppActions) {
     super(store$);
     this.preloader$ = store$.let(this.getState('app', AppStateKeys.Preloader));
   }
 
   changePreloader(preloader:boolean) {
-    this.store$.dispatch(AppActions.changePreloader(preloader));
+    this.store$.dispatch(this.actions.changePreloader(preloader));
   }
 }

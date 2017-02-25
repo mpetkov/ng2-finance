@@ -6,6 +6,7 @@ import {
   InfoStateService,
   RangeComponent
 } from './index';
+import { InfoActions } from './state/info.actions';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {
   ],
   providers: [
     InfoApiService,
-    InfoStateService
+    InfoStateService,
+    InfoActions
   ]
 })
 export class InfoModule {

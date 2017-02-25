@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { NewsApiService } from './news-api.service';
 import {
-  NewsApiService,
+  NewsStateService,
   NewsDataInterface
-} from './news-api.service';
-import { NewsStateService } from './state/index';
+} from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { NotificationTypeEnum } from '../../../shared/index';
 import {

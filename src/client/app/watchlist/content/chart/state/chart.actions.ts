@@ -9,37 +9,37 @@ export class ChartActions {
   static FETCH_LOADER = 'WATCHLIST:CHART:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:CHART:FETCH_ERROR';
 
-  static changePoint(point:ChartDataInterface):Action {
+  changePoint(point:ChartDataInterface):Action {
     return {
-      type: this.CHANGE_POINT,
+      type: ChartActions.CHANGE_POINT,
       payload: point
     };
   }
 
-  static changeRange(range:string):Action {
+  changeRange(range:string):Action {
     return {
-      type: this.CHANGE_RANGE,
+      type: ChartActions.CHANGE_RANGE,
       payload: range
     };
   }
 
-  static fetchFulfilled(data:ChartDataInterface[]):Action {
+  fetchFulfilled(data:ChartDataInterface[]):Action {
     return {
-      type: this.FETCH_FULFILLED,
+      type: ChartActions.FETCH_FULFILLED,
       payload: data
     };
   }
 
-  static fetchLoader(loader:boolean):Action {
+  fetchLoader(loader:boolean):Action {
     return {
-      type: this.FETCH_LOADER,
+      type: ChartActions.FETCH_LOADER,
       payload: loader
     };
   }
 
-  static fetchError(error:ErrorInterface):Action {
+  fetchError(error:ErrorInterface):Action {
     return {
-      type: this.FETCH_ERROR,
+      type: ChartActions.FETCH_ERROR,
       payload: error
     };
   }

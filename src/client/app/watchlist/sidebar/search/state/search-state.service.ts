@@ -5,7 +5,8 @@ import { SearchActions } from './index';
 
 @Injectable()
 export class SearchStateService extends CoreApiStateService {
-  constructor(public store$:Store<any>) {
-    super(store$, 'search', SearchActions);
+  constructor(public store$:Store<any>,
+              public actions: SearchActions) {
+    super(store$, 'search', actions);
   }
 }

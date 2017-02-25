@@ -8,35 +8,35 @@ export class WatchlistActions {
   static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
   static CHANGE_HIGHLIGHTS = 'WATCHLIST:CHANGE_HIGHLIGHTS';
 
-  static changeStockData(data:StockDataInterface):Action {
+  changeStockData(data:StockDataInterface):Action {
     return {
       type: WatchlistActions.CHANGE_STOCK_DATA,
       payload: data
     };
   }
 
-  static changeStock(stock:string):Action {
+  changeStock(stock:string):Action {
     return {
       type: WatchlistActions.CHANGE_STOCK,
       payload: stock
     };
   }
 
-  static addFavorite(favorite:string):Action {
+  addFavorite(favorite:string):Action {
     return {
-      type: this.ADD_FAVORITE,
+      type: WatchlistActions.ADD_FAVORITE,
       payload: favorite
     };
   }
 
-  static deleteFavorites(favorites:string[]):Action {
+  deleteFavorites(favorites:string[]):Action {
     return {
-      type: this.DELETE_FAVORITES,
+      type: WatchlistActions.DELETE_FAVORITES,
       payload: favorites
     };
   }
 
-  static changeHighlights(highlights:any):Action {
+  changeHighlights(highlights:any):Action {
     return {
       type: WatchlistActions.CHANGE_HIGHLIGHTS,
       payload: highlights

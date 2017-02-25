@@ -2,11 +2,11 @@ import {
   Component,
   OnDestroy
 } from '@angular/core';
+import { InfoApiService } from './info-api.service';
 import {
-  InfoApiService,
+  InfoStateService,
   InfoDataInterface
-} from './info-api.service';
-import { InfoStateService } from './state/index';
+} from './state/index';
 import { RangeOptionsInterface } from './index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';

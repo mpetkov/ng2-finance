@@ -15,7 +15,7 @@ export class CoreApiStateService extends CoreStateService {
 
   constructor(protected store$:Store<any>,
               protected stateName:string,
-              private actions:any) {
+              protected actions:any) {
     super(store$);
     this.data$ = store$.let(this.getState(stateName, CoreApiStateKeys.Data));
     this.loader$ = store$.let(this.getState(stateName, CoreApiStateKeys.Loader));

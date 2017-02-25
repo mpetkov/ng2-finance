@@ -5,6 +5,7 @@ import {
   NewsStateService
 } from './index';
 import { SharedModule } from '../../../shared/shared.module';
+import { NewsActions } from './state/news.actions';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { SharedModule } from '../../../shared/shared.module';
   ],
   providers: [
     NewsApiService,
-    NewsStateService
+    NewsStateService,
+    NewsActions
   ]
 })
 export class NewsModule {

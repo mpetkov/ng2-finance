@@ -5,7 +5,8 @@ import { CoreApiStateService } from '../../../../core/index';
 
 @Injectable()
 export class NewsStateService extends CoreApiStateService {
-  constructor(public store$:Store<any>) {
-    super(store$, 'news', NewsActions);
+  constructor(public store$:Store<any>,
+              public actions: NewsActions) {
+    super(store$, 'news', actions);
   }
 }

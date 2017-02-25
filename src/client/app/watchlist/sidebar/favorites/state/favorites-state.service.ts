@@ -12,16 +12,17 @@ import 'rxjs/add/operator/let';
 export class FavoritesStateService extends CoreApiStateService {
   order$:Observable<string[]>;
 
-  constructor(public store$:Store<any>) {
-    super(store$, 'favorites', FavoritesActions);
+  constructor(public store$:Store<any>,
+              public actions: FavoritesActions) {
+    super(store$, 'favorites', actions);
     this.order$ = store$.let(this.getState(this.stateName, FavoritesStateKeys.Order));
   }
 
   changeOrder(order:string[]) {
-    this.store$.dispatch(FavoritesActions.changeOrder(order));
+    this.store$.dispatch(this.actions.changeOrder(order));
   }
 
   sortData() {
-    this.store$.dispatch(FavoritesActions.sortData());
+    this.store$.dispatch(this.actions.sortData());
   }
 }

@@ -5,23 +5,23 @@ export class HeaderActions {
   static CHANGE_SEARCH = 'HEADER:CHANGE_SEARCH';
   static CHANGE_SIDEBAR = 'HEADER:CHANGE_SIDEBAR';
 
-  static changeSearchActive(searchActive:boolean):Action {
+  changeSearchActive(searchActive:boolean):Action {
     return {
-      type: this.ACTIVATE_SEARCH,
+      type: HeaderActions.ACTIVATE_SEARCH,
       payload: searchActive
     };
   }
 
-  static changeSearch(search:string):Action {
+  changeSearch(search:string):Action {
     return {
-      type: this.CHANGE_SEARCH,
+      type: HeaderActions.CHANGE_SEARCH,
       payload: search
     };
   }
 
-  static changeSidebar(sidebar:boolean):Action {
+  changeSidebar(sidebar:boolean):Action {
     return {
-      type: this.CHANGE_SIDEBAR,
+      type: HeaderActions.CHANGE_SIDEBAR,
       payload: sidebar
     };
   }

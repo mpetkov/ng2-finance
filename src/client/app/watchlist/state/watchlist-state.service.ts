@@ -16,7 +16,8 @@ export class WatchlistStateService extends CoreStateService {
   favorites$:Observable<string[]>;
   highlights$:Observable<any>;
 
-  constructor(protected store$:Store<any>) {
+  constructor(protected store$:Store<any>,
+              private actions:WatchlistActions) {
     super(store$);
     this.stockData$ = store$.let(this.getState('watchlist', WatchlistStateKeys.StockData));
     this.stock$ = store$.let(this.getState('watchlist', WatchlistStateKeys.Stock));
@@ -25,22 +26,22 @@ export class WatchlistStateService extends CoreStateService {
   }
 
   changeStockData(data:StockDataInterface) {
-    this.store$.dispatch(WatchlistActions.changeStockData(data));
+    this.store$.dispatch(this.actions.changeStockData(data));
   }
 
   changeStock(stock:string) {
-    this.store$.dispatch(WatchlistActions.changeStock(stock));
+    this.store$.dispatch(this.actions.changeStock(stock));
   }
 
   addFavorite(favorite:string) {
-    this.store$.dispatch(WatchlistActions.addFavorite(favorite));
+    this.store$.dispatch(this.actions.addFavorite(favorite));
   }
 
   deleteFavorites(favorites:string[]) {
-    this.store$.dispatch(WatchlistActions.deleteFavorites(favorites));
+    this.store$.dispatch(this.actions.deleteFavorites(favorites));
   }
 
   changeHighlights(highlights:any) {
-    this.store$.dispatch(WatchlistActions.changeHighlights(highlights));
+    this.store$.dispatch(this.actions.changeHighlights(highlights));
   }
 }
