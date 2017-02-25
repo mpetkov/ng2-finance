@@ -54,7 +54,7 @@ input {
   margin-left: auto;
 }
 
-.truncate {
+.mp-truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -68,7 +68,7 @@ input {
   padding: 4px;
 }
 
-.mp-slide-fade.hide {
+.mp-slide-fade.mp-hide {
   opacity: 0 !important;
   height: 0 !important;
   padding: 0 !important;

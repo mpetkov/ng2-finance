@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DragulaModule } from 'ng2-dragula';
 import {
   SidebarComponent,
   EditComponent,
@@ -11,17 +10,17 @@ import {
 } from './index';
 import { SharedModule } from '../../shared/shared.module';
 import { SearchModule } from './search/search.module';
+import { EditModule } from './edit/edit.module';
 
 @NgModule({
   imports: [
     RouterModule,
     SharedModule,
     SearchModule,
-    DragulaModule
+    EditModule
   ],
   declarations: [
     SidebarComponent,
-    EditComponent,
     FavoritesComponent
   ],
   exports: [

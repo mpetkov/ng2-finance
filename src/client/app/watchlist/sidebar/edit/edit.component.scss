@@ -24,12 +24,12 @@
     cursor: move;
   }
 
-  .text {
+  .mp-text {
     padding: 0 35px;
   }
 
-  .tab,
-  .delete {
+  .mp-tab,
+  .mp-delete {
     position: absolute;
     right: 0;
     top: 0;
@@ -37,17 +37,17 @@
     height: 40px;
   }
 
-  .tab {
+  .mp-tab {
     background: white;
     width: calc(100% - 20px);
     left: 0;
   }
 
-  .tab.active {
+  .mp-tab.mp-active {
     transform: translateX(-59px);
   }
 
-  .delete {
+  .mp-delete {
     color: white;
     font-weight: 500;
     cursor: pointer;

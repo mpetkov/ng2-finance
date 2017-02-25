@@ -1,11 +1,12 @@
 <div class="mp-edit mdl-card__title">
   <button mdl-button
+          class="mp-add"
           (click)="add()"
           mdl-button-type="icon">
     <mdl-icon title="Add symbol">add</mdl-icon>
   </button>
   <h4>Edit</h4>
-  <button class="pull-right"
+  <button class="pull-right mp-close"
           mdl-button
           (click)="close()"
           mdl-button-type="icon">
@@ -24,22 +25,22 @@
   <li *ngFor="let stock of favoritesData"
       class="mdl-navigation__link mp-slide-fade mp-transition mp-edit-item"
       [id]="stock.symbol"
-      [ngClass]="{hide: deleted?.indexOf(stock.symbol) !== -1}">
-    <div class="delete mdl-color--red"
+      [ngClass]="{'mp-hide': deleted?.indexOf(stock.symbol) !== -1}">
+    <div class="mp-delete mdl-color--red"
          title="Confirm delete"
          (click)="delete(stock.symbol, $event)">
       Delete
     </div>
-    <div class="tab mp-transition"
-         [ngClass]="{active: selected === stock.symbol}">
-      <mdl-icon class="pull-left mdl-color-text--red"
+    <div class="mp-tab mp-transition"
+         [ngClass]="{'mp-active': selected === stock.symbol}">
+      <mdl-icon class="mp-remove pull-left mdl-color-text--red"
                 title="Delete symbol from favorites"
                 (click)="showDelete(stock.symbol, $event)">remove_circle
       </mdl-icon>
-      <div class="text">
+      <div class="mp-text">
         <p><b>{{stock.symbol}}</b></p>
 
-        <p class="mp-small-font truncate">{{stock.name}}</p>
+        <p class="mp-small-font mp-truncate">{{stock.name}}</p>
       </div>
       <mdl-icon class="pull-right mp-drag mdl-color-text--grey-400"
                 title="Drag to re-order">menu

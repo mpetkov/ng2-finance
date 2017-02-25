@@ -6,6 +6,7 @@ import { FavoritesStateService } from '../favorites/state/index';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
+import { EditService } from './edit.service';
 
 @Component({
   moduleId: module.id,
@@ -29,6 +30,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
               private sidebarState:SidebarStateService,
               private headerState:HeaderStateService,
               private watchlistState:WatchlistStateService,
+              private editService:EditService,
               private renderer:Renderer,
               private dragulaService:DragulaService) {
     super();
@@ -42,11 +44,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
       })
     ));
 
-    dragulaService.setOptions(this.dragName, {
-      moves: function (el:Element, container:Element, handle:Element) {
-        return handle.className.indexOf('mp-drag') !== -1;
-      }
-    });
+    dragulaService.setOptions(this.dragName, editService.getDragOptions());
   }
 
   showDelete(symbol:string, event:Event) {
@@ -90,7 +88,7 @@ export class EditComponent extends Subscriptions implements OnDestroy {
   }
 
   private closeScreen(type:SidebarTypeEnum) {
-    this.favoritesState.changeOrder(this.updateOrder(this.list, this.deleted));
+    this.favoritesState.changeOrder(this.editService.getOrder(this.list, this.deleted));
 
     if (this.deleted.length > 0) {
       this.watchlistState.deleteFavorites(this.deleted);
@@ -101,19 +99,5 @@ export class EditComponent extends Subscriptions implements OnDestroy {
     } else {
       this.sidebarState.changeType(type);
     }
-  }
-
-  private updateOrder(list:ElementRef, deleted:string[]):string[] {
-    let order:string[] = [];
-    if (list) {
-      let children:any = list.nativeElement.getElementsByTagName('li');
-      for (let i:number = 0; i < children.length; i++) {
-        if (deleted.indexOf(children[i].id) === -1) {
-          order.push(children[i].id);
-        }
-      }
-      children = null;
-    }
-    return order;
   }
 }

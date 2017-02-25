@@ -26,12 +26,12 @@
   <ul class="mdl-navigation">
     <li *ngFor="let favorite of favoritesData"
         class="mdl-navigation__link"
-        [ngClass]="{active: stock === favorite.symbol}"
+        [ngClass]="{'mp-active': stock === favorite.symbol}"
         (click)="select(favorite.symbol)">
       <div class="pull-left text">
         <p><b>{{favorite.symbol}}</b></p>
 
-        <p class="mp-small-font truncate">{{favorite.name}}</p>
+        <p class="mp-small-font mp-truncate">{{favorite.name}}</p>
       </div>
 
       <div class="prices">
