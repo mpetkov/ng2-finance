@@ -8,7 +8,7 @@
          (focus)="activateInput()"
          [formControl]="formControl">
   <mdl-icon class="mp-clear mdl-color-text--grey-700"
-            [ngClass]="{active: formControl.value}"
+            *ngIf="formControl?.value"
             title="Clear"
             (click)="clear()">cancel
   </mdl-icon>
