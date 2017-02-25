@@ -7,7 +7,10 @@ import {
 } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
-import { NotificationComponent } from './index';
+import {
+  NotificationComponent,
+  NotificationTypeEnum
+} from './index';
 
 export function main() {
   describe('NotificationComponent', () => {
@@ -34,6 +37,51 @@ export function main() {
 
     it('should create', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should show a notification when type is Notification', () => {
+      expect(fixture.nativeElement.querySelector('b')).toBeNull();
+
+      component.type = NotificationTypeEnum.Notification;
+      component.value = 'notification';
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('b').textContent).toBe('notification');
+    });
+
+    it('should show an error when type is Error', () => {
+      expect(fixture.nativeElement.querySelector('b')).toBeNull();
+
+      component.type = NotificationTypeEnum.Error;
+      component.value = 'error';
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('p').classList).toContain('mdl-color-text--red');
+      expect(fixture.nativeElement.querySelector('b').textContent).toBe('error');
+    });
+
+    it('should show an loader when type is Loader', () => {
+      expect(fixture.nativeElement.querySelector('.mp-loader')).toBeNull();
+
+      component.type = NotificationTypeEnum.Loader;
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('.mp-loader')).not.toBeNull();
+    });
+
+    it('should show a button when button options are present', () => {
+      expect(fixture.nativeElement.querySelector('button')).toBeNull();
+
+      component.button = {};
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('button')).not.toBeNull();
+    });
+
+    it('should call action#emit() when button is clicked', () => {
+      spyOn(component.action, 'emit');
+
+      component.button = {action:'action'};
+      fixture.detectChanges();
+      fixture.nativeElement.querySelector('button').click();
+      expect(component.action.emit).toHaveBeenCalledTimes(1);
+      expect(component.action.emit).toHaveBeenCalledWith('action');
     });
   });
 }
