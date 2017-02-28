@@ -12,14 +12,14 @@ import {
 const initialState:HeaderStateInterface = new HeaderInitialState() as HeaderStateInterface;
 
 export const headerReducer:ActionReducer<HeaderStateInterface> =
-  (state:HeaderStateInterface = initialState, action:Action = null) => {
-    switch (action.type) {
+  (state:HeaderStateInterface = initialState, {payload, type}: Action) => {
+    switch (type) {
       case HeaderActions.ACTIVATE_SEARCH:
-        return state.set(HeaderStateKeys.SearchActive, action.payload);
+        return state.set(HeaderStateKeys.SearchActive, payload);
       case HeaderActions.CHANGE_SEARCH:
-        return state.set(HeaderStateKeys.Search, action.payload);
+        return state.set(HeaderStateKeys.Search, payload);
       case HeaderActions.CHANGE_SIDEBAR:
-        return state.set(HeaderStateKeys.Sidebar, action.payload);
+        return state.set(HeaderStateKeys.Sidebar, payload);
       default:
         return state;
     }
