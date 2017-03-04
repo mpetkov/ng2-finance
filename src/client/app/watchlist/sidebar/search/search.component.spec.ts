@@ -124,7 +124,7 @@ export function main() {
       expect(fixture.nativeElement.querySelector('.mdl-list__item-sub-title').textContent).toBe('typeDisp - exchDisp');
     });
 
-    it('should call a bunch of events when list item is clicked', () => {
+    it('should call FavoritesStateService#changeOrder() when list item is clicked', () => {
       searchState.data$.next([{symbol:'symbol'}]);
       searchState.loader$.next(false);
       fixture.detectChanges();
@@ -132,13 +132,34 @@ export function main() {
       fixture.nativeElement.querySelector('li').click();
       expect(favoritesState.changeOrder).toHaveBeenCalledTimes(1);
       expect(favoritesState.changeOrder).toHaveBeenCalledWith(['symbol']);
+    });
 
+    it('should call WatchlistStateService#addFavorite() when list item is clicked', () => {
+      searchState.data$.next([{symbol:'symbol'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('li').click();
       expect(watchlistState.addFavorite).toHaveBeenCalledTimes(1);
       expect(watchlistState.addFavorite).toHaveBeenCalledWith('symbol');
+    });
 
+    it('should call SidebarStateService#changeType() when list item is clicked', () => {
+      searchState.data$.next([{symbol:'symbol'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('li').click();
       expect(sidebarState.changeType).toHaveBeenCalledTimes(1);
       expect(sidebarState.changeType).toHaveBeenCalledWith(SidebarTypeEnum.List);
+    });
 
+    it('should call Router#navigate() when list item is clicked', () => {
+      searchState.data$.next([{symbol:'symbol'}]);
+      searchState.loader$.next(false);
+      fixture.detectChanges();
+
+      fixture.nativeElement.querySelector('li').click();
       expect(router.navigate).toHaveBeenCalledTimes(1);
       expect(router.navigate).toHaveBeenCalledWith(['/watchlist', 'symbol']);
     });
