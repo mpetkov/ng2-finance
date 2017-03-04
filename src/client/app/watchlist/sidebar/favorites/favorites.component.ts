@@ -20,8 +20,7 @@ declare let _:any;
   moduleId: module.id,
   selector: 'mp-favorites',
   templateUrl: 'favorites.component.html',
-  styleUrls: ['favorites.component.css'],
-  providers: [FavoritesHighlightService]
+  styleUrls: ['favorites.component.css']
 })
 
 export class FavoritesComponent extends CoreApiNotification implements OnDestroy {

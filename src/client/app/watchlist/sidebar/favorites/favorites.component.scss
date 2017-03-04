@@ -4,7 +4,7 @@
   .mdl-navigation__link {
     cursor: pointer;
 
-    .prices {
+    .mp-prices {
       position: absolute;
       right: 10px;
       b {
@@ -12,11 +12,11 @@
       }
     }
 
-    .text {
+    .mp-text {
       width: 130px;
     }
 
-    .pill {
+    .mp-pill {
       height: 30px;
       width: 80px;
       line-height: 30px;

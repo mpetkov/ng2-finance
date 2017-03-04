@@ -13,17 +13,18 @@ import {
 import { SharedModule } from '../../shared/shared.module';
 import { SearchModule } from './search/search.module';
 import { EditModule } from './edit/edit.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
 @NgModule({
   imports: [
     RouterModule,
     SharedModule,
     SearchModule,
-    EditModule
+    EditModule,
+    FavoritesModule
   ],
   declarations: [
-    SidebarComponent,
-    FavoritesComponent
+    SidebarComponent
   ],
   exports: [
     SidebarComponent
