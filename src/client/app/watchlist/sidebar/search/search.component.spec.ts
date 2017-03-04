@@ -12,7 +12,6 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
 import {
   SearchComponent,
   SearchStateService,
@@ -38,7 +37,6 @@ export function main() {
     let fixture:ComponentFixture<SearchComponent>;
     let component:SearchComponent;
     let api:any;
-    let loadSubject:Subject<any>;
     let searchState:any;
     let sidebarState:any;
     let favoritesState:any;
@@ -47,9 +45,7 @@ export function main() {
     let router:any;
 
     beforeEach(async(() => {
-      loadSubject = new Subject<any>();
       api = jasmine.createSpyObj('api', ['load']);
-      api.load.and.callFake(() => loadSubject);
 
       searchState = jasmine.createSpyObj('searchStateService', ['fetchFulfilled']);
       searchState.data$ = new BehaviorSubject<any>([]);

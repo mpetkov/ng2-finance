@@ -33,16 +33,13 @@ export function main() {
     let fixture:ComponentFixture<SidebarComponent>;
     let component:SidebarComponent;
     let api:any;
-    let loadSubject:Subject<any>;
     let sidebarState:any;
     let watchlistState:any;
     let headerState:any;
     let params: Subject<any>;
 
     beforeEach(async(() => {
-      loadSubject = new Subject<any>();
       api = jasmine.createSpyObj('api', ['load']);
-      api.load.and.callFake(() => loadSubject);
 
       sidebarState = jasmine.createSpyObj('sidebarStateService', [
         'changeType'
