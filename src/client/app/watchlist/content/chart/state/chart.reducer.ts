@@ -12,18 +12,18 @@ import {
 const initialState:ChartStateInterface = new ChartInitialState() as ChartStateInterface;
 
 export const chartReducer:ActionReducer<ChartStateInterface> =
-  (state:ChartStateInterface = initialState, action:Action = null) => {
-    switch (action.type) {
+  (state:ChartStateInterface = initialState, {payload, type}: Action) => {
+    switch (type) {
       case ChartActions.CHANGE_POINT:
-        return state.set(ChartStateKeys.Point, action.payload);
+        return state.set(ChartStateKeys.Point, payload);
       case ChartActions.CHANGE_RANGE:
-        return state.set(ChartStateKeys.Range, action.payload);
+        return state.set(ChartStateKeys.Range, payload);
       case ChartActions.FETCH_FULFILLED:
-        return state.set(ChartStateKeys.Data, action.payload);
+        return state.set(ChartStateKeys.Data, payload);
       case ChartActions.FETCH_LOADER:
-        return state.set(ChartStateKeys.Loader, action.payload);
+        return state.set(ChartStateKeys.Loader, payload);
       case ChartActions.FETCH_ERROR:
-        return state.set(ChartStateKeys.Error, action.payload);
+        return state.set(ChartStateKeys.Error, payload);
       default:
         return state;
     }
