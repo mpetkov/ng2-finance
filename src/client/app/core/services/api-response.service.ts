@@ -9,20 +9,20 @@ import {
 @Injectable()
 export class CoreApiResponseService extends LoaderService {
   disableLoader:boolean;
-  protected errorCount:number = 0;
+  errorCount:number = 0;
 
   constructor(protected http:Http,
               protected state:CoreApiStateService) {
     super(http);
   }
 
-  protected toggleLoader(loader:boolean) {
+  toggleLoader(loader:boolean) {
     if (!this.disableLoader) {
       this.state.fetchLoader(loader);
     }
   }
 
-  protected complete(data:any[]) {
+  complete(data:any[]) {
     this.disableLoader = false;
     if (data.length > 0) {
       this.errorCount = 0;
@@ -33,7 +33,7 @@ export class CoreApiResponseService extends LoaderService {
     }
   }
 
-  protected failed(error:string = null) {
+  failed(error:string = null) {
     if (!this.disableLoader) {
       this.errorCount++;
 
