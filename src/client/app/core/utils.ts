@@ -5,7 +5,7 @@ export function numberUnitFormat(value:number, decimal:number = 0):string {
     ? Number(Math.abs(Number(value)) / 1.0e+6).toFixed(decimal) + 'M'
     : Math.abs(Number(value)) >= 1.0e+3
     ? Number(Math.abs(Number(value)) / 1.0e+3).toFixed(decimal) + 'K'
-    : String(Math.abs(Number(value)));
+    : String(Math.abs(Number(value)).toFixed(decimal));
 }
 
 export function typeChecker(obj:any):string {
