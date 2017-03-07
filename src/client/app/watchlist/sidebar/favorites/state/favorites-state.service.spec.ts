@@ -32,8 +32,8 @@ export function main() {
     });
 
     function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-      let count = 0;
-      let state = null;
+      let count:number = 0;
+      let state:any = null;
 
       service[type + '$'].subscribe((value:any) => {
         count++;
@@ -64,8 +64,8 @@ export function main() {
     }
 
     it('should stream the current data from store', () => {
-      let count = 0;
-      let state = null;
+      let count:number = 0;
+      let state:any = null;
 
       service['data$'].subscribe((value:any) => {
         count++;
