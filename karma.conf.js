@@ -43,6 +43,7 @@ module.exports = function (config) {
       'node_modules/d3/d3.min.js',
       'node_modules/d3fc/dist/d3fc.min.js',
       'node_modules/lodash/lodash.min.js',
+      'node_modules/moment/min/moment.min.js',
 
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
