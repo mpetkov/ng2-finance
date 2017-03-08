@@ -15,7 +15,8 @@ import {
   NotificationButtonInterface,
   NotificationTypeEnum,
   InfoApiService,
-  InfoStateService
+  InfoStateService,
+  InfoService
 } from '../../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 
@@ -36,13 +37,17 @@ export function main() {
     let fixture:ComponentFixture<InfoComponent>;
     let component:InfoComponent;
     let api:any;
+    let infoService:any;
     let infoState:any;
     let watchlistState:any;
 
     beforeEach(async(() => {
       api = jasmine.createSpyObj('api', [
         'load',
-        'reload',
+        'reload'
+      ]);
+
+      infoService = jasmine.createSpyObj('infoService', [
         'getDataWithUpdatedPrice',
         'getDayOptions',
         'getYearOptions'
@@ -75,6 +80,7 @@ export function main() {
         ],
         providers: [
           {provide: InfoApiService, useValue: api},
+          {provide: InfoService, useValue: infoService},
           {provide: InfoStateService, useValue: infoState},
           {provide: WatchlistStateService, useValue: watchlistState}
         ]
@@ -149,16 +155,16 @@ export function main() {
       expect(component.notification).toBe('No results found');
     });
 
-    it('should call InfoApiService#getDataWithUpdatedPrice() when stock data is updated and info has already been loaded', () => {
+    it('should call InfoService#getDataWithUpdatedPrice() when stock data is updated and info has already been loaded', () => {
       watchlistState.stockData$.next({price:100});
       fixture.detectChanges();
-      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledTimes(0);
+      expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledTimes(0);
 
       infoState.data$.next([{}]);
       watchlistState.stockData$.next({price:200});
       fixture.detectChanges();
-      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledTimes(2);
-      expect(api.getDataWithUpdatedPrice).toHaveBeenCalledWith(undefined, 200);
+      expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledTimes(2);
+      expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledWith(undefined, 200);
     });
   });
 }

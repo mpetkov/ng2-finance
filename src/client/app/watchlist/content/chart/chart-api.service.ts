@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
+  ConfigInterface,
   CoreApiResponseService
 } from '../../../core/index';
 import {
@@ -20,16 +21,16 @@ export class ChartApiService extends CoreApiResponseService {
     super(http, chartState);
   }
 
-  load(stock:string, range:string, interval:string) {
+  load(stock:string, range:string, interval:string, config:ConfigInterface = Config) {
     this.params = {stock: stock, range: range, interval: interval};
-    this.chartState.fetchLoader(true);
+    this.toggleLoader(true);
 
-    let url:string = Config.paths.charts.replace('$stock', stock);
+    let url:string = config.paths.charts.replace('$stock', stock);
     url = url.replace('$range', range);
     url = url.replace('$interval', interval);
 
-    if (Config.env === 'PROD') {
-      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
+    if (config.env === 'PROD') {
+      this.post(config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()

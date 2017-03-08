@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
   Config,
+  ConfigInterface,
   CoreApiResponseService
 } from '../../../core/index';
 import {
@@ -20,12 +21,12 @@ export class NewsApiService extends CoreApiResponseService {
     super(http, newsState);
   }
 
-  load(stock:string) {
+  load(stock:string, config:ConfigInterface = Config) {
     this.stock = stock;
-    this.newsState.fetchLoader(true);
-    let url:string = Config.paths.news.replace('$stock', encodeURIComponent(stock));
-    if (Config.env === 'PROD') {
-      this.post(Config.paths.proxy, 'url=' + encodeURIComponent(url))
+    this.toggleLoader(true);
+    let url:string = config.paths.news.replace('$stock', encodeURIComponent(stock));
+    if (config.env === 'PROD') {
+      this.post(config.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
