@@ -11,6 +11,7 @@ import { MockBackend } from '@angular/http/testing';
 
 import { NewsApiService } from './news-api.service';
 import { NewsStateService } from './state/news-state.service';
+declare let moment:any;
 
 export function main() {
   describe('NewsApiService', () => {
@@ -99,14 +100,16 @@ export function main() {
       getSubject.next({Content:{result:[{provider_name:'a', provider_publish_time:1486859417, title:'a', url:'a', thumbnail:'a'}]}});
       service.load('a');
       expect(service.complete).toHaveBeenCalledTimes(1);
-      expect(service.complete).toHaveBeenCalledWith([{source: 'a', date: 'Sat, Feb 11th 2017 6:30 PM', title: 'a', url: 'a', image: 'a'}]);
+      expect(service.complete).toHaveBeenCalledWith(
+        [{source: 'a', date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'), title: 'a', url: 'a', image: 'a'}]);
     });
 
     it('should call complete() with transformed data with a completion of post() call', () => {
       postSubject.next({Content:{result:[{provider_name:'a', provider_publish_time:1486859417, title:'a', url:'a', thumbnail:'a'}]}});
       service.load('a', {env: 'PROD', paths:{proxy:'proxy',news:'url?stock=$stock'}});
       expect(service.complete).toHaveBeenCalledTimes(1);
-      expect(service.complete).toHaveBeenCalledWith([{source: 'a', date: 'Sat, Feb 11th 2017 6:30 PM', title: 'a', url: 'a', image: 'a'}]);
+      expect(service.complete).toHaveBeenCalledWith(
+        [{source: 'a', date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'), title: 'a', url: 'a', image: 'a'}]);
     });
 
 
