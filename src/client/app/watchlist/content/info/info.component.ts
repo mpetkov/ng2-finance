@@ -7,6 +7,7 @@ import {
   InfoStateService,
   InfoDataInterface
 } from './state/index';
+import { InfoService } from './info.service';
 import { RangeOptionsInterface } from './index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
@@ -49,7 +50,8 @@ export class InfoComponent extends CoreApiNotification {
 
   constructor(private infoState:InfoStateService,
               private watchlistState:WatchlistStateService,
-              private infoApiService:InfoApiService) {
+              private infoApiService:InfoApiService,
+              private infoService:InfoService) {
     super(infoState, infoApiService);
     this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.updateStock(stock)
@@ -104,10 +106,10 @@ export class InfoComponent extends CoreApiNotification {
       this.price = this.data.LastTradePriceOnly;
     }
 
-    this.data = this.infoApiService.getDataWithUpdatedPrice(this.data, this.price);
-    this.dayOptions = this.infoApiService.getDayOptions(this.data, this.price);
-    this.yearOptions = this.infoApiService.getDayOptions(this.data, this.price);
-    this.yearOptions = this.infoApiService.getYearOptions(this.data, this.price);
+    this.data = this.infoService.getDataWithUpdatedPrice(this.data, this.price);
+    this.dayOptions = this.infoService.getDayOptions(this.data, this.price);
+    this.yearOptions = this.infoService.getDayOptions(this.data, this.price);
+    this.yearOptions = this.infoService.getYearOptions(this.data, this.price);
   }
 }
 

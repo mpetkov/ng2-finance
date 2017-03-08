@@ -3,6 +3,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import {
   InfoComponent,
   InfoApiService,
+  InfoService,
   InfoStateService,
   RangeComponent
 } from './index';
@@ -21,6 +22,7 @@ import { InfoActions } from './state/info.actions';
   ],
   providers: [
     InfoApiService,
+    InfoService,
     InfoStateService,
     InfoActions
   ]
