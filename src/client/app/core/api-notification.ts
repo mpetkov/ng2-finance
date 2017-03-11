@@ -22,13 +22,13 @@ export class CoreApiNotification extends Subscriptions {
     ));
   }
 
-  protected notificationAction(type:string) {
+  notificationAction(type:string) {
     if (type === NotificationActions.Reload) {
       this.apiService.reload();
     }
   }
 
-  protected updateNotification(type:NotificationTypeEnum, value:any = null, button:NotificationButtonInterface = null) {
+  updateNotification(type:NotificationTypeEnum, value:any = null, button:NotificationButtonInterface = null) {
     this.notificationType = type;
     if (type === NotificationTypeEnum.Error) {
       this.notification = value.value;
