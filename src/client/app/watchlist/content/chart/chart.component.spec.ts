@@ -37,7 +37,7 @@ export function main() {
     let watchlistState:any;
     let appState:any;
 
-    beforeEach(async(() => {;
+    beforeEach(async(() => {
       api = jasmine.createSpyObj('api', ['load']);
 
       chartState = jasmine.createSpyObj('chartState', [
