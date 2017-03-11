@@ -333,17 +333,6 @@ export class SeedConfig {
   APP_ASSETS: InjectableDependency[] = [];
 
   /**
-   * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
-   * @return {InjectableDependency[]}
-   */
-  private get _APP_ASSETS(): InjectableDependency[] {
-    return [
-      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
-      ...this.APP_ASSETS,
-    ];
-  }
-
-  /**
    * The list of editor temporary files to ignore in watcher and asset builder.
    * @type {string[]}
    */
@@ -426,39 +415,39 @@ export class SeedConfig {
     },
     packages: {
       '@angular/common': {
-        main: 'index.js',
+        main: 'bundles/common.umd.js',
         defaultExtension: 'js'
       },
       '@angular/compiler': {
-        main: 'index.js',
+        main: 'bundles/compiler.umd.js',
         defaultExtension: 'js'
       },
       '@angular/core/testing': {
-        main: 'index.js',
+        main: 'bundles/core-testing.umd.js',
         defaultExtension: 'js'
       },
       '@angular/core': {
-        main: 'index.js',
+        main: 'bundles/core.umd.js',
         defaultExtension: 'js'
       },
       '@angular/forms': {
-        main: 'index.js',
+        main: 'bundles/forms.umd.js',
         defaultExtension: 'js'
       },
       '@angular/http': {
-        main: 'index.js',
+        main: 'bundles/http.umd.js',
         defaultExtension: 'js'
       },
       '@angular/platform-browser': {
-        main: 'index.js',
+        main: 'bundles/platform-browser.umd.js',
         defaultExtension: 'js'
       },
       '@angular/platform-browser-dynamic': {
-        main: 'index.js',
+        main: 'bundles/platform-browser-dynamic.umd.js',
         defaultExtension: 'js'
       },
       '@angular/router': {
-        main: 'index.js',
+        main: 'bundles/router.umd.js',
         defaultExtension: 'js'
       },
       'rxjs': {
@@ -502,6 +491,24 @@ export class SeedConfig {
    * @type {any}
    */
   PLUGIN_CONFIGS: any = {};
+
+  /**
+   * Generates the query string which should be appended to the end of the URLs in dev mode.
+   */
+  QUERY_STRING_GENERATOR = () => {
+    return Date.now().toString();
+  }
+
+  /**
+   * Returns the array of injectable dependencies (the list of local files to be injected in the `index.html`).
+   * @return {InjectableDependency[]}
+   */
+  private get _APP_ASSETS(): InjectableDependency[] {
+    return [
+      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+      ...this.APP_ASSETS,
+    ];
+  }
 
   /**
    * Returns the configuration object for NPM module configurations.
