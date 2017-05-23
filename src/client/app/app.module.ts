@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, combineReducers } from '@ngrx/store';
+import { compose } from '@ngrx/core';
+
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
@@ -32,22 +34,28 @@ import { WatchlistModule } from './watchlist/watchlist.module';
 import { AppActions } from './state/app.actions';
 import { HeaderActions } from './shared/header/state/header.actions';
 
+export function rootReducer(state: any, action: any) {
+  const reducer = compose(combineReducers)({
+    app: appReducer,
+    header: headerReducer,
+    watchlist: watchlistReducer,
+    favorites: favoritesReducer,
+    sidebar: sidebarReducer,
+    search: searchReducer,
+    chart: chartReducer,
+    news: newsReducer,
+    info: infoReducer
+  });
+
+  return reducer(state, action);
+}
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
-    StoreModule.provideStore({
-      app: appReducer,
-      header: headerReducer,
-      watchlist: watchlistReducer,
-      favorites: favoritesReducer,
-      sidebar: sidebarReducer,
-      search: searchReducer,
-      chart: chartReducer,
-      news: newsReducer,
-      info: infoReducer
-    }),
+    StoreModule.provideStore(rootReducer),
     SharedModule,
     HeaderModule,
     WatchlistModule
