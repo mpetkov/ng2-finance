@@ -1,47 +1,20 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "sourceMap": true,
     "declaration": false,
-    "removeComments": true,
-    "noLib": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015"],
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true,
+    "target": "es5",
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules"
+      "node_modules/@types"
     ],
-    "types": [
-      "node"
+    "lib": [
+      "es2016",
+      "dom"
     ]
-  },
-  "files": [
-    "gulpfile.ts",
-    "tools/manual_typings/seed/autoprefixer.d.ts",
-    "tools/manual_typings/seed/cssnano.d.ts",
-    "tools/manual_typings/seed/express-history-api-fallback.d.ts",
-    "tools/manual_typings/seed/istream.d.ts",
-    "tools/manual_typings/seed/karma.d.ts",
-    "tools/manual_typings/seed/merge-stream.d.ts",
-    "tools/manual_typings/seed/open.d.ts",
-    "tools/manual_typings/seed/operators.d.ts",
-    "tools/manual_typings/seed/slash.d.ts",
-    "tools/manual_typings/seed/systemjs-builder.d.ts",
-    "tools/manual_typings/seed/tildify.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src"
-  ],
-  "compileOnSave": false
+  }
 }
