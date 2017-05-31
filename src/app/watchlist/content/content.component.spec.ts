@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
 import {
   async,
   ComponentFixture,
@@ -17,42 +15,40 @@ class InfoComponent {}
 @Component({selector: 'mp-news', template: ''})
 class NewsComponent {}
 
-export function main() {
-  describe('ContentComponent', () => {
-    let fixture:ComponentFixture<ContentComponent>;
-    let component:ContentComponent;
+describe('ContentComponent', () => {
+  let fixture:ComponentFixture<ContentComponent>;
+  let component:ContentComponent;
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          ContentComponent,
-          ChartComponent,
-          InfoComponent,
-          NewsComponent
-        ]
-      }).compileComponents();
-    }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ContentComponent,
+        ChartComponent,
+        InfoComponent,
+        NewsComponent
+      ]
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-      fixture = TestBed.createComponent(ContentComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should have a ChartComponent', () => {
-      expect(fixture.nativeElement.querySelector('mp-chart')).not.toBeNull();
-    });
-
-    it('should have a InfoComponent', () => {
-      expect(fixture.nativeElement.querySelector('mp-info')).not.toBeNull();
-    });
-
-    it('should have a NewsComponent', () => {
-      expect(fixture.nativeElement.querySelector('mp-news')).not.toBeNull();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ContentComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-}
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should have a ChartComponent', () => {
+    expect(fixture.nativeElement.querySelector('mp-chart')).not.toBeNull();
+  });
+
+  it('should have a InfoComponent', () => {
+    expect(fixture.nativeElement.querySelector('mp-info')).not.toBeNull();
+  });
+
+  it('should have a NewsComponent', () => {
+    expect(fixture.nativeElement.querySelector('mp-news')).not.toBeNull();
+  });
+});

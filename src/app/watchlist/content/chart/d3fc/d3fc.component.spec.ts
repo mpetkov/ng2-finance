@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
 import {
   async,
   ComponentFixture,
@@ -21,95 +19,93 @@ import {
 @Component({selector: 'mp-legend', template: ''})
 class LegendComponent {}
 
-export function main() {
-  describe('D3fcComponent', () => {
-    let fixture:ComponentFixture<D3fcComponent>;
-    let component:D3fcComponent;
-    let chartState:any;
+describe('D3fcComponent', () => {
+  let fixture:ComponentFixture<D3fcComponent>;
+  let component:D3fcComponent;
+  let chartState:any;
 
-    beforeEach(async(() => {
-      chartState = jasmine.createSpyObj('chartStateService', [
-        'changePoint'
-      ]);
+  beforeEach(async(() => {
+    chartState = jasmine.createSpyObj('chartStateService', [
+      'changePoint'
+    ]);
 
-      chartState.range$ = new BehaviorSubject<any>('3mo');
-      chartState.data$ = new BehaviorSubject<any>([]);
+    chartState.range$ = new BehaviorSubject<any>('3mo');
+    chartState.data$ = new BehaviorSubject<any>([]);
 
-      TestBed.configureTestingModule({
-        imports: [
-          CommonModule
-        ],
-        declarations: [
-          D3fcComponent,
-          LegendComponent
-        ],
-        providers: [
-          {provide: ChartStateService, useValue: chartState},
-          ChartCrosshairService,
-          ChartOptionsService,
-          ChartTooltipsService,
-          ChartVolumeService
-        ]
-      }).compileComponents();
-    }));
+    TestBed.configureTestingModule({
+      imports: [
+        CommonModule
+      ],
+      declarations: [
+        D3fcComponent,
+        LegendComponent
+      ],
+      providers: [
+        {provide: ChartStateService, useValue: chartState},
+        ChartCrosshairService,
+        ChartOptionsService,
+        ChartTooltipsService,
+        ChartVolumeService
+      ]
+    }).compileComponents();
+  }));
 
-    beforeEach(() => {
-      fixture = TestBed.createComponent(D3fcComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should have a LegendComponent', () => {
-      expect(fixture.nativeElement.querySelector('mp-legend')).not.toBe(null);
-    });
-
-    it('should initialize property `smallView` with boolean value `false`', () => {
-      expect(component.smallView).toBe(false);
-    });
-
-    it('should add css class `small` to svg when smallView is changed to true', () => {
-      let element:any = fixture.nativeElement.querySelector('svg');
-      expect(element.classList).not.toContain('small');
-
-      component.smallView = true;
-      fixture.detectChanges();
-      expect(element.classList).toContain('small');
-
-      component.smallView = false;
-      fixture.detectChanges();
-      expect(element.classList).not.toContain('small');
-    });
-
-    it('should add css class `small` to svg when window is resized to small width', () => {
-      let element:any = fixture.nativeElement.querySelector('svg');
-      expect(element.classList).not.toContain('small');
-
-      component.onResize({currentTarget:{innerWidth:400}});
-      fixture.detectChanges();
-      expect(element.classList).not.toContain('small');
-
-      chartState.data$.next([{
-        date: new Date(),
-        open: 10,
-        close: 12,
-        low: 9,
-        high: 20,
-        volume: 2000,
-      }]);
-      fixture.detectChanges();
-      expect(element.classList).toContain('small');
-
-      component.onResize({currentTarget:{innerWidth:400}});
-      fixture.detectChanges();
-      expect(element.classList).toContain('small');
-
-      component.onOrientationChange({currentTarget:{innerWidth:600}});
-      fixture.detectChanges();
-      expect(element.classList).not.toContain('small');
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(D3fcComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
-}
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should have a LegendComponent', () => {
+    expect(fixture.nativeElement.querySelector('mp-legend')).not.toBe(null);
+  });
+
+  it('should initialize property `smallView` with boolean value `false`', () => {
+    expect(component.smallView).toBe(false);
+  });
+
+  it('should add css class `small` to svg when smallView is changed to true', () => {
+    let element:any = fixture.nativeElement.querySelector('svg');
+    expect(element.classList).not.toContain('small');
+
+    component.smallView = true;
+    fixture.detectChanges();
+    expect(element.classList).toContain('small');
+
+    component.smallView = false;
+    fixture.detectChanges();
+    expect(element.classList).not.toContain('small');
+  });
+
+  it('should add css class `small` to svg when window is resized to small width', () => {
+    let element:any = fixture.nativeElement.querySelector('svg');
+    expect(element.classList).not.toContain('small');
+
+    component.onResize({currentTarget:{innerWidth:400}});
+    fixture.detectChanges();
+    expect(element.classList).not.toContain('small');
+
+    chartState.data$.next([{
+      date: new Date(),
+      open: 10,
+      close: 12,
+      low: 9,
+      high: 20,
+      volume: 2000,
+    }]);
+    fixture.detectChanges();
+    expect(element.classList).toContain('small');
+
+    component.onResize({currentTarget:{innerWidth:400}});
+    fixture.detectChanges();
+    expect(element.classList).toContain('small');
+
+    component.onOrientationChange({currentTarget:{innerWidth:600}});
+    fixture.detectChanges();
+    expect(element.classList).not.toContain('small');
+  });
+});

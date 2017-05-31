@@ -28,11 +28,9 @@ export class FavoritesHighlightService {
 
   private getHighlight(value:number, prevValue:number):string {
     let highlight:string;
-
-    if (prevValue !== null && prevValue !== undefined && value !== prevValue) {
+    if (!isNaN(value) && !isNaN(prevValue) && value !== prevValue) {
       highlight = (value > prevValue) ? 'mdl-color--green-A100' : 'mdl-color--red-100';
     }
-
     return highlight;
   }
 }
