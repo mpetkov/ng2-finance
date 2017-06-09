@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {
-  CoreApiResponseService,
-  numberUnitFormat
-} from '../../../core/index';
-import {environment} from '../../../../environments/environment';
-import {
-  InfoStateService,
-  InfoDataInterface
-} from './state/index';
+import { environment } from '../../../../environments/environment';
+import { CoreApiResponseService } from '../../../core/services/api-response.service';
+import { numberUnitFormat } from '../../../core/utils';
+import { InfoStateService } from './state/info-state.service';
+import { InfoDataInterface } from './state/info.state';
 import {get} from 'lodash';
 
 @Injectable()

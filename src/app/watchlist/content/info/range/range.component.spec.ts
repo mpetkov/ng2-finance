@@ -7,7 +7,7 @@ import {
   Component,
   ViewChild
 } from '@angular/core';
-import { RangeComponent } from './index';
+import { RangeComponent } from './range.component';
 
 @Component({template: `<mp-range [options]="options"></mp-range>`})
 class TestComponent {

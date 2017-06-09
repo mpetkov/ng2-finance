@@ -1,10 +1,6 @@
 import { Record } from 'immutable';
-import {
-  CoreApiStateInterface,
-  CoreApiStateKeys,
-  localStorageAdapter,
-  Types
-} from '../../../../core/index';
+import { CoreApiStateInterface, CoreApiStateKeys } from '../../../../core/state/api.state';
+import { Types, localStorageAdapter } from '../../../../core/utils';
 
 export interface ChartDataInterface {
   timestamp?:number;

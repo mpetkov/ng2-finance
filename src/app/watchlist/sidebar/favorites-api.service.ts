@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {
-  CoreApiResponseService
-} from '../../core/index';
-import {environment} from '../../../environments/environment';
-import { FavoritesStateService } from './favorites/state/index';
-import {get} from 'lodash';
+import { environment } from '../../../environments/environment';
+import { CoreApiResponseService } from '../../core/services/api-response.service';
+import { FavoritesStateService } from './favorites/state/favorites-state.service';
+import { get } from 'lodash';
 
 @Injectable()
 export class FavoritesApiService extends CoreApiResponseService {

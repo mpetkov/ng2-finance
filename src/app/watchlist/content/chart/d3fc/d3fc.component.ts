@@ -10,11 +10,9 @@ import { ChartVolumeService } from './services/chart-volume.service';
 import { ChartCrosshairService } from './services/chart-crosshair.service';
 import { ChartTooltipsService } from './services/chart-tooltips.service';
 import { ChartOptionsService } from './services/chart-options.service';
-import {
-  ChartStateService,
-  ChartDataInterface
-} from '../state/index';
-import { Subscriptions } from '../../../../core/index';
+import { Subscriptions } from '../../../../core/subscriptions';
+import { ChartDataInterface } from '../state/chart.state';
+import { ChartStateService } from '../state/chart-state.service';
 
 declare let fc:any;
 declare let d3:any;

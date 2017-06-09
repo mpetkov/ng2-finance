@@ -2,12 +2,8 @@ import {
   ActionReducer,
   Action
 } from '@ngrx/store';
-import { SearchInitialState } from './search.state';
-import {
-  SearchActions,
-  SearchStateKeys,
-  SearchStateInterface
-} from './index';
+import { SearchInitialState, SearchStateInterface, SearchStateKeys } from './search.state';
+import { SearchActions } from './search.actions';
 
 const initialState:SearchStateInterface = new SearchInitialState() as SearchStateInterface;
 

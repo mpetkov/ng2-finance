@@ -1,10 +1,6 @@
-import {
-  NewsActions,
-  newsReducer,
-  NewsStateInterface,
-  NewsInitialState
-} from './index';
-
+import { NewsActions } from './news.actions';
+import { newsReducer } from './news.reducer';
+import { NewsStateInterface, NewsInitialState } from './news.state';
 describe('newsReducer', () => {
   let actions: NewsActions;
 

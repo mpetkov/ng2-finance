@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {CoreApiResponseService} from '../../../core/index';
-import {environment} from '../../../../environments/environment';
-import {
-  NewsStateService,
-  NewsDataInterface
-} from './state/index';
-import {get} from 'lodash';
+import { environment } from '../../../../environments/environment';
+import { CoreApiResponseService } from '../../../core/services/api-response.service';
+import { NewsStateService } from './state/news-state.service';
+import { NewsDataInterface } from './state/news.state';
+import { get } from 'lodash';
 import * as moment from 'moment'
 
 @Injectable()

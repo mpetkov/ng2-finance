@@ -8,14 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {
-  SidebarComponent,
-  FavoritesApiService,
-  SidebarStateService,
-  SidebarTypeEnum
-} from '../index';
 import { WatchlistStateService } from '../state/watchlist-state.service';
-import {HeaderStateService} from '../../shared/header/state/header-state.service';
+import { HeaderStateService } from '../../shared/header/state/header-state.service';
+import { SidebarComponent } from './sidebar.component';
+import { SidebarTypeEnum } from './state/sidebar.state';
+import { FavoritesApiService } from './favorites-api.service';
+import { SidebarStateService } from './state/sidebar-state.service';
 
 @Component({selector: 'mp-favorites', template: ''})
 class FavoritesComponent {}

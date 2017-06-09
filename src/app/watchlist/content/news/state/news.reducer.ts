@@ -2,12 +2,8 @@ import {
   ActionReducer,
   Action
 } from '@ngrx/store';
-import { NewsInitialState } from './news.state';
-import {
-  NewsActions,
-  NewsStateKeys,
-  NewsStateInterface
-} from './index';
+import { NewsInitialState, NewsStateInterface, NewsStateKeys } from './news.state';
+import { NewsActions } from './news.actions';
 
 const initialState:NewsStateInterface = new NewsInitialState() as NewsStateInterface;
 

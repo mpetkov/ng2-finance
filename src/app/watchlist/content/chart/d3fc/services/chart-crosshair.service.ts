@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ChartTooltipsService } from './chart-tooltips.service';
 import { ChartOptionsService } from './chart-options.service';
-import { ChartStateService } from '../../state/index';
+import { ChartStateService } from '../../state/chart-state.service';
 declare let fc:any;
 declare let d3:any;
 

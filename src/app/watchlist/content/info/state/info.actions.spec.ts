@@ -1,8 +1,6 @@
-import {
-  InfoActions,
-  InfoDataInterface
-} from './index';
 import { ErrorInterface } from '../../../../core/state/api.state';
+import { InfoActions } from './info.actions';
+import { InfoDataInterface } from './info.state';
 
 describe('InfoActions', () => {
   let actions: InfoActions;

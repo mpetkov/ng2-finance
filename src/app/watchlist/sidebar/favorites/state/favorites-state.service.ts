@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CoreApiStateService } from '../../../../core/index';
-import {
-  FavoritesActions,
-  FavoritesStateKeys
-} from './index';
+import { CoreApiStateService } from '../../../../core/state/api-state.service';
+import { FavoritesActions } from './favorites.actions';
+import { FavoritesStateKeys } from './favorites.state';
 import 'rxjs/add/operator/let';
 
 @Injectable()

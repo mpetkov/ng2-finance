@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ErrorInterface } from '../../../../core/state/api.state';
-import { NewsDataInterface } from './index';
+import { NewsDataInterface } from './news.state';
 
 export class NewsActions {
   static FETCH_FULFILLED = 'WATCHLIST:NEWS:FETCH_FULFILLED';

@@ -1,9 +1,6 @@
-import {
-  NotificationTypeEnum,
-  NotificationButtonInterface
-} from '../shared/index';
 import { Subscriptions } from './subscriptions';
 import { CoreApiStateService } from './state/api-state.service';
+import { NotificationButtonInterface, NotificationTypeEnum } from '../shared/notification/notification.component';
 
 export class CoreApiNotification extends Subscriptions {
   notification:string;

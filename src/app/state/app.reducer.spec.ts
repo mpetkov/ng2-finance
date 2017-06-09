@@ -1,10 +1,6 @@
-import {
-  AppActions,
-  appReducer,
-  AppStateInterface,
-  AppInitialState
-} from './index';
-
+import { AppActions } from './app.actions';
+import { AppStateInterface, AppInitialState } from './app.state';
+import { appReducer } from './app.reducer';
 describe('appReducer', () => {
   let actions: AppActions;
 

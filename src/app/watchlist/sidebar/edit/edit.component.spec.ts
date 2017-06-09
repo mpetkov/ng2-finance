@@ -11,18 +11,14 @@ import {
   DragulaService
 } from 'ng2-dragula';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import {
-  EditComponent,
-  SidebarStateService,
-  SidebarTypeEnum,
-  FavoritesStateService,
-  EditService
-} from '../index';
-
 import { WatchlistStateService } from '../../state/watchlist-state.service';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { EditComponent } from './edit.component';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { EditService } from './edit.service';
+import { SidebarTypeEnum } from '../state/sidebar.state';
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
   @Input() type:NotificationTypeEnum;

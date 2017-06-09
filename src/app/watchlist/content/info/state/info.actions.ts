@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { ErrorInterface } from '../../../../core/index';
-import { InfoDataInterface } from './index';
+import { InfoDataInterface } from './info.state';
+import { ErrorInterface } from '../../../../core/state/api.state';
 
 export class InfoActions {
   static FETCH_FULFILLED = 'WATCHLIST:INFO:FETCH_FULFILLED';

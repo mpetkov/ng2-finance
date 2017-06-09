@@ -1,8 +1,6 @@
-import {
-  ChartActions,
-  ChartDataInterface
-} from './index';
 import { ErrorInterface } from '../../../../core/state/api.state';
+import { ChartActions } from './chart.actions';
+import { ChartDataInterface } from './chart.state';
 
 describe('ChartActions', () => {
   let actions: ChartActions;

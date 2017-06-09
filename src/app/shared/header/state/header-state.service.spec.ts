@@ -1,12 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-
-import {
-  HeaderActions,
-  headerReducer,
-  HeaderStateService
-} from './index';
-
+import { HeaderActions } from './header.actions';
+import { HeaderStateService } from './header-state.service';
+import { headerReducer } from './header.reducer';
 describe('HeaderStateService', () => {
   let actions:any;
   let service:any;

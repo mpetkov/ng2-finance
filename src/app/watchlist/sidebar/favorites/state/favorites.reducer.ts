@@ -2,14 +2,10 @@ import {
   ActionReducer,
   Action
 } from '@ngrx/store';
-import { FavoritesInitialState } from './favorites.state';
-import {
-  FavoritesActions,
-  FavoritesStateKeys,
-  FavoritesStateInterface
-} from './index';
+import { FavoritesInitialState, FavoritesStateKeys, FavoritesStateInterface } from './favorites.state';
+import { FavoritesActions } from './favorites.actions';
 import { StockDataInterface } from '../../../state/watchlist.state';
-import {sortBy} from 'lodash';
+import { sortBy } from 'lodash';
 const initialState:FavoritesStateInterface = new FavoritesInitialState() as FavoritesStateInterface;
 
 export const favoritesReducer:ActionReducer<FavoritesStateInterface> =

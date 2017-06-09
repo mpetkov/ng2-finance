@@ -3,21 +3,16 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ChartApiService } from './chart-api.service';
-import {
-  ChartStateService,
-  ChartStateKeys,
-  ChartDataInterface
-} from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { NotificationTypeEnum } from '../../../shared/index';
 import { AppStateService } from '../../../state/app-state.service';
-import {
-  CoreApiNotification,
-  localStorageAdapter
-} from '../../../core/index';
 import { StockDataInterface } from '../../state/watchlist.state';
-import {environment} from '../../../../environments/environment';
-import {findIndex} from 'lodash';
+import { environment } from '../../../../environments/environment';
+import { findIndex } from 'lodash';
+import { CoreApiNotification } from '../../../core/api-notification';
+import { ChartStateService } from './state/chart-state.service';
+import { ChartStateKeys, ChartDataInterface } from './state/chart.state';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { localStorageAdapter } from '../../../core/utils';
 
 @Component({
   moduleId: module.id,

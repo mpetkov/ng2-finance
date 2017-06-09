@@ -1,13 +1,14 @@
 import { Component, Renderer, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { Subscriptions } from '../../../core/index';
-import {environment} from '../../../../environments/environment';
-import { SidebarStateService, SidebarTypeEnum } from '../state/index';
-import { FavoritesStateService } from '../favorites/state/index';
+import { environment } from '../../../../environments/environment';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
 import { EditService } from './edit.service';
+import { Subscriptions } from '../../../core/subscriptions';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { SidebarTypeEnum } from '../state/sidebar.state';
 
 @Component({
   moduleId: module.id,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { InfoActions } from './info.actions';
-import { CoreApiStateService } from '../../../../core/index';
+import { CoreApiStateService } from '../../../../core/state/api-state.service';
 
 @Injectable()
 export class InfoStateService extends CoreApiStateService {

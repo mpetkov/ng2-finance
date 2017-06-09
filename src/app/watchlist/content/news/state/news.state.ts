@@ -1,8 +1,5 @@
 import { Record } from 'immutable';
-import {
-  CoreApiStateInterface,
-  CoreApiStateKeys
-} from '../../../../core/index';
+import { CoreApiStateInterface, CoreApiStateKeys } from '../../../../core/state/api.state';
 
 export interface NewsStateInterface extends CoreApiStateInterface {
 }

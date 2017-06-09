@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-variable */
-
 import {
   async,
   ComponentFixture,
@@ -10,19 +8,16 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import {
-  FavoritesComponent,
-  SidebarStateService,
-  FavoritesStateService,
-  FavoritesApiService,
-  SidebarTypeEnum,
-  FavoriteNotificationActions
-} from '../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
-import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {FavoritesHighlightService} from './favorites-highlight.service';
+import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { FavoritesHighlightService } from './favorites-highlight.service';
+import { FavoritesComponent } from './favorites.component';
+import { FavoritesStateService } from './state/favorites-state.service';
+import { FavoritesApiService } from '../favorites-api.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { FavoriteNotificationActions } from './favorites.component';
+import { SidebarTypeEnum } from '../state/sidebar.state';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {

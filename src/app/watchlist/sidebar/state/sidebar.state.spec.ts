@@ -1,8 +1,5 @@
 import { Record } from 'immutable';
-import {
-  SidebarInitialState,
-  SidebarTypeEnum
-} from './index';
+import { SidebarInitialState, SidebarTypeEnum } from './sidebar.state';
 
 describe('SidebarInitialState', () => {
   let state:any;

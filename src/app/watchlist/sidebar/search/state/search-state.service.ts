@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CoreApiStateService } from '../../../../core/index';
-import { SearchActions } from './index';
+import { CoreApiStateService } from '../../../../core/state/api-state.service';
+import { SearchActions } from './search.actions';
 
 @Injectable()
 export class SearchStateService extends CoreApiStateService {

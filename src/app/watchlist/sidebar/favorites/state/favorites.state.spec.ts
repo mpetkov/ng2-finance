@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { FavoritesInitialState } from './index';
+import { FavoritesInitialState } from './favorites.state';
 
 describe('FavoritesInitialState', () => {
   let state:any;

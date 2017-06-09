@@ -1,11 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-
-import {
-  AppActions,
-  appReducer
-} from './index';
-import {AppStateService} from './app-state.service';
+import { AppStateService } from './app-state.service';
+import { AppActions } from './app.actions';
+import { appReducer } from './app.reducer';
 
 describe('AppStateService', () => {
   let actions:any;

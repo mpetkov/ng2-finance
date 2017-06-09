@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { NewsApiService } from './news-api.service';
-import {
-  NewsStateService,
-  NewsDataInterface
-} from './state/index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { NotificationTypeEnum } from '../../../shared/index';
-import { CoreApiNotification } from '../../../core/index';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { CoreApiNotification } from '../../../core/api-notification';
+import { NewsDataInterface } from './state/news.state';
+import { NewsStateService } from './state/news-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
 
 @Component({
   moduleId: module.id,

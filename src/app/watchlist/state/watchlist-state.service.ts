@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CoreStateService } from '../../core/index';
-import {
-  WatchlistActions,
-  WatchlistStateKeys,
-  StockDataInterface
-} from './index';
+import { CoreStateService } from '../../core/state/state.service';
+import { StockDataInterface, WatchlistStateKeys } from './watchlist.state';
+import { WatchlistActions } from './watchlist.actions';
 import 'rxjs/add/operator/let';
 
 @Injectable()

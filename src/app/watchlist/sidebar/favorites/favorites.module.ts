@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import {
-  FavoritesComponent,
-  FavoritesHighlightService
-} from './index';
 import { SharedModule } from '../../../shared/shared.module';
+import { FavoritesComponent } from './favorites.component';
+import { FavoritesHighlightService } from './favorites-highlight.service';
 
 @NgModule({
   imports: [

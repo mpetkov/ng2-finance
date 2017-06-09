@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CoreApiNotification} from '../../../core/index';
 import {environment} from '../../../../environments/environment';
-import { SidebarStateService, SidebarTypeEnum } from '../state/index';
 import { SearchApiService } from './search-api.service';
 import { SearchStateService } from './state/search-state.service';
 import { FavoritesStateService } from '../favorites/state/favorites-state.service';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
-import { NotificationTypeEnum } from '../../../shared/index';
+import { CoreApiNotification } from '../../../core/api-notification';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { SidebarTypeEnum } from '../state/sidebar.state';
 
 @Component({
   moduleId: module.id,

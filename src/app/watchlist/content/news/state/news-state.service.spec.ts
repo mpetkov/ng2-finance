@@ -1,12 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-
-import {
-  NewsActions,
-  newsReducer,
-  NewsStateService,
-  NewsDataInterface
-} from './index';
+import { NewsActions } from './news.actions';
+import { newsReducer } from './news.reducer';
+import { NewsStateService } from './news-state.service';
+import { NewsDataInterface } from './news.state';
 
 describe('NewsStateService', () => {
   let actions:any;

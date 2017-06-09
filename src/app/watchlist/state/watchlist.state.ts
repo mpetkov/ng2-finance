@@ -2,10 +2,7 @@ import {
   Map,
   Record
 } from 'immutable';
-import {
-  localStorageAdapter,
-  Types
-} from '../../core/index';
+import { localStorageAdapter, Types } from '../../core/utils';
 
 export interface StockDataInterface {
   symbol?:string;

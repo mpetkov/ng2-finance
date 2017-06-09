@@ -1,10 +1,6 @@
-import {
-  InfoActions,
-  infoReducer,
-  InfoStateInterface,
-  InfoInitialState
-} from './index';
-
+import { InfoActions } from './info.actions';
+import { infoReducer } from './info.reducer';
+import { InfoStateInterface, InfoInitialState } from './info.state';
 describe('infoReducer', () => {
   let actions: InfoActions;
 

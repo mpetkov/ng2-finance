@@ -7,10 +7,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {
-  HeaderComponent,
-  HeaderStateService
-} from './index';
+import { HeaderComponent } from './header.component';
+import { HeaderStateService } from './state/header-state.service';
 
 @Component({selector: 'mp-search-box', template: ''})
 class SearchBoxComponent {

@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { SearchInitialState } from './index';
+import { SearchInitialState } from './search.state';
 
 describe('SearchInitialState', () => {
   let state:any;

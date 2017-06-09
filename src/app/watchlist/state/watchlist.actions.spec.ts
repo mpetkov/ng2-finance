@@ -1,7 +1,5 @@
-import {
-  WatchlistActions,
-  StockDataInterface
-} from './index';
+import { WatchlistActions } from './watchlist.actions';
+import { StockDataInterface } from './watchlist.state';
 
 describe('WatchlistActions', () => {
   let actions: WatchlistActions;

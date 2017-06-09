@@ -1,4 +1,4 @@
-import { SearchActions } from './index';
+import { SearchActions } from './search.actions';
 import { ErrorInterface } from '../../../../core/state/api.state';
 
 describe('SearchActions', () => {

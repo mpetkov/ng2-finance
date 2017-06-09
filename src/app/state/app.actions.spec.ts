@@ -1,5 +1,4 @@
-import { AppActions } from './index';
-
+import { AppActions } from './app.actions';
 describe('AppActions', () => {
   let actions: AppActions;
 

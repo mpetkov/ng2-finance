@@ -1,15 +1,14 @@
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
-import {
-  SidebarStateService,
-  SidebarTypeEnum
-} from './state/index';
 import { FavoritesApiService } from './favorites-api.service';
 import { WatchlistStateService } from '../state/watchlist-state.service';
 import { WatchlistStateKeys } from '../state/watchlist.state';
 import { HeaderStateService } from '../../shared/header/state/header-state.service';
-import { Subscriptions, localStorageAdapter } from '../../core/index';
+import { Subscriptions } from '../../core/subscriptions';
+import { localStorageAdapter } from '../../core/utils';
+import { SidebarStateService } from './state/sidebar-state.service';
+import { SidebarTypeEnum } from './state/sidebar.state';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 

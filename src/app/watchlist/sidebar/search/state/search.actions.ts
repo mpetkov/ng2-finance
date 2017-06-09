@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ErrorInterface } from '../../../../core/index';
+import { ErrorInterface } from '../../../../core/state/api.state';
 
 export class SearchActions {
   static FETCH_FULFILLED = 'WATCHLIST:SEARCH:FETCH_FULFILLED';

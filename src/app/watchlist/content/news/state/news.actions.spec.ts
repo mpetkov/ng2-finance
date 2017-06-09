@@ -1,8 +1,6 @@
-import {
-  NewsActions,
-  NewsDataInterface
-} from './index';
 import { ErrorInterface } from '../../../../core/state/api.state';
+import { NewsActions } from './news.actions';
+import { NewsDataInterface } from './news.state';
 
 describe('NewsActions', () => {
   let actions: NewsActions;

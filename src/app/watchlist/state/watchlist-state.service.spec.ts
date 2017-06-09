@@ -1,12 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-
-import {
-  WatchlistActions,
-  watchlistReducer,
-  StockDataInterface
-} from './index';
 import { WatchlistStateService } from './watchlist-state.service';
+import { WatchlistActions } from './watchlist.actions';
+import { watchlistReducer } from './watchlist.reducer';
+import { StockDataInterface } from './watchlist.state';
 
 describe('WatchlistStateService', () => {
   let actions:any;

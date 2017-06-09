@@ -1,10 +1,7 @@
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CoreApiStateService } from './state/api-state.service';
-import {
-  CoreApiNotification,
-  NotificationActions
-} from './index';
-import { NotificationTypeEnum } from '../shared/index';
+import { CoreApiNotification, NotificationActions } from './api-notification';
+import { NotificationTypeEnum } from '../shared/notification/notification.component';
 
 describe('CoreApiNotification', () => {
   let coreApiNotification:CoreApiNotification;

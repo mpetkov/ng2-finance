@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CoreStateService } from '../core/index';
-import {
-  AppActions,
-  AppStateKeys
-} from './index';
+import { CoreStateService } from '../core/state/state.service';
+import { AppActions } from './app.actions';
+import { AppStateKeys } from './app.state';
 import 'rxjs/add/operator/let';
 
 @Injectable()

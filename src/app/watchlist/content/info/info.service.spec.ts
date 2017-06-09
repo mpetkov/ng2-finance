@@ -1,6 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { InfoService } from './index';
+import { InfoService } from './info.service';
 
 describe('InfoService', () => {
   let service:InfoService;

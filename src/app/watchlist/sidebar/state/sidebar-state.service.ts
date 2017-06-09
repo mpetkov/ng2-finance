@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { CoreStateService } from '../../../core/index';
-import {
-  SidebarTypeEnum,
-  SidebarActions,
-  SidebarStateKeys
-} from './index';
+import { CoreStateService } from '../../../core/state/state.service';
+import { SidebarActions } from './sidebar.actions';
+import { SidebarStateKeys, SidebarTypeEnum } from './sidebar.state';
 import 'rxjs/add/operator/let';
 
 @Injectable()

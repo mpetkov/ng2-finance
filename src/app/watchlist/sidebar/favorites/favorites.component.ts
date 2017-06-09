@@ -5,16 +5,15 @@ import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
 import { FavoritesStateService } from './state/favorites-state.service';
 import { FavoritesStateKeys } from './state/favorites.state';
-import { SidebarStateService, SidebarTypeEnum } from '../state/index';
-import { NotificationTypeEnum } from '../../../shared/index';
-import {
-  CoreApiNotification,
-  localStorageAdapter
-} from '../../../core/index';
 import { FavoritesApiService } from '../favorites-api.service';
 import { FavoritesHighlightService } from './favorites-highlight.service';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
-import {find} from 'lodash';
+import { localStorageAdapter } from '../../../core/utils';
+import { CoreApiNotification } from '../../../core/api-notification';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { SidebarTypeEnum } from '../state/sidebar.state';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { find } from 'lodash';
 
 @Component({
   moduleId: module.id,

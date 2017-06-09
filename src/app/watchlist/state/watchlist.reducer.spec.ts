@@ -1,9 +1,6 @@
-import {
-  WatchlistActions,
-  watchlistReducer,
-  WatchlistStateInterface,
-  WatchlistInitialState
-} from './index';
+import { WatchlistActions } from './watchlist.actions';
+import { watchlistReducer } from './watchlist.reducer';
+import { WatchlistStateInterface, WatchlistInitialState } from './watchlist.state';
 
 describe('watchlistReducer', () => {
   let actions: WatchlistActions;

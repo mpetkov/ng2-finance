@@ -1,5 +1,5 @@
 import { StockDataInterface } from '../../state/watchlist.state';
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 export class FavoritesHighlightService {
   getHighlights(stocks:StockDataInterface[], lastLoadedData:any):any {

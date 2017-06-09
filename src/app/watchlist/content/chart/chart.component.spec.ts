@@ -7,14 +7,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MdlModule } from 'angular2-mdl';
-import {
-  ChartComponent,
-  ChartApiService,
-  ChartStateService
-} from '../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { AppStateService } from '../../../state/app-state.service';
-import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { ChartComponent } from './chart.component';
+import { ChartApiService } from './chart-api.service';
+import { ChartStateService } from './state/chart-state.service';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {

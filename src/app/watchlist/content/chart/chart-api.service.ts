@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {
-  CoreApiResponseService
-} from '../../../core/index';
-import {environment} from '../../../../environments/environment';
-import {
-  ChartStateService,
-  ChartDataInterface
-} from './state/index';
-import {get} from 'lodash';
+import { environment } from '../../../../environments/environment';
+import { get } from 'lodash';
+import { CoreApiResponseService } from '../../../core/services/api-response.service';
+import { ChartStateService } from './state/chart-state.service';
+import { ChartDataInterface } from './state/chart.state';
 
 @Injectable()
 export class ChartApiService extends CoreApiResponseService {

@@ -2,13 +2,8 @@ import {
   ActionReducer,
   Action
 } from '@ngrx/store';
-import { AppInitialState } from './app.state';
-import {
-  AppActions,
-  AppStateKeys,
-  AppStateInterface
-} from './index';
-
+import { AppInitialState, AppStateInterface, AppStateKeys } from './app.state';
+import { AppActions } from './app.actions';
 const initialState:AppStateInterface = new AppInitialState() as AppStateInterface;
 
 export const appReducer:ActionReducer<AppStateInterface> =

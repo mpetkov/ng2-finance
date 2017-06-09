@@ -1,6 +1,6 @@
-import { FavoritesActions } from './index';
 import { ErrorInterface } from '../../../../core/state/api.state';
 import { StockDataInterface } from '../../../state/watchlist.state';
+import { FavoritesActions } from './favorites.actions';
 
 describe('FavoritesActions', () => {
   let actions: FavoritesActions;

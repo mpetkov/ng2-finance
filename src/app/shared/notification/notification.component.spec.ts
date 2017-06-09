@@ -5,10 +5,7 @@ import {
 } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
-import {
-  NotificationComponent,
-  NotificationTypeEnum
-} from './index';
+import { NotificationComponent, NotificationTypeEnum } from './notification.component';
 
 describe('NotificationComponent', () => {
   let fixture:ComponentFixture<NotificationComponent>;

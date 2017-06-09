@@ -4,7 +4,7 @@ import {
   TestBed
 } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { ContentComponent } from './index';
+import { ContentComponent } from './content.component';
 
 @Component({selector: 'mp-chart', template: ''})
 class ChartComponent {}

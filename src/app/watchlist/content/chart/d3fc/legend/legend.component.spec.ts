@@ -6,14 +6,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { MdlModule } from 'angular2-mdl';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {
-  LegendComponent,
-  ChartStateService,
-  chartReducer,
-  ChartOptionsService,
-  ChartDataInterface
-} from '../../index';
-
+import { LegendComponent } from './legend.component';
+import { ChartOptionsService } from '../services/chart-options.service';
+import { ChartStateService } from '../../state/chart-state.service';
+import { ChartDataInterface } from '../../state/chart.state';
 describe('LegendComponent', () => {
   let fixture:ComponentFixture<LegendComponent>;
   let component:LegendComponent;

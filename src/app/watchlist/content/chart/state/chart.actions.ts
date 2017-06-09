@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { ErrorInterface } from '../../../../core/index';
 import { ChartDataInterface } from './chart.state';
+import { ErrorInterface } from '../../../../core/state/api.state';
 
 export class ChartActions {
   static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';

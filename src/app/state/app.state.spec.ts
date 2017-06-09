@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { AppInitialState } from './index';
+import { AppInitialState } from './app.state';
 
 describe('AppInitialState', () => {
   let state:any;

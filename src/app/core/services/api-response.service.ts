@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoaderService } from './loader.service';
-import {
-  CoreApiStateService,
-  ErrorInterface
-} from '../state/index';
+import { CoreApiStateService } from '../state/api-state.service';
+import { ErrorInterface } from '../state/api.state';
 
 @Injectable()
 export class CoreApiResponseService extends LoaderService {

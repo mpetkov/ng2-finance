@@ -10,17 +10,15 @@ import {
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {
-  SearchComponent,
-  SearchStateService,
-  SidebarStateService,
-  FavoritesStateService,
-  SearchApiService,
-  SidebarTypeEnum
-} from '../../index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
-import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
+import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { SearchComponent } from './search.component';
+import { SearchApiService } from './search-api.service';
+import { SearchStateService } from './state/search-state.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { SidebarTypeEnum } from '../state/sidebar.state';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {

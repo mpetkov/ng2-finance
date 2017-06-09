@@ -3,19 +3,15 @@ import {
   OnDestroy
 } from '@angular/core';
 import { InfoApiService } from './info-api.service';
-import {
-  InfoStateService,
-  InfoDataInterface
-} from './state/index';
 import { InfoService } from './info.service';
-import { RangeOptionsInterface } from './index';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist.state';
-import { NotificationTypeEnum } from '../../../shared/index';
-import {
-  CoreApiNotification
-} from '../../../core/index';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { CoreApiNotification } from '../../../core/api-notification';
+import { InfoDataInterface } from './state/info.state';
+import { RangeOptionsInterface } from './range/range.component';
+import { InfoStateService } from './state/info-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
 
 @Component({
   moduleId: module.id,

@@ -1,10 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import { WatchlistInitialState } from './watchlist.state';
-import {
-  WatchlistActions,
-  WatchlistStateKeys,
-  WatchlistStateInterface
-} from './index';
+import { WatchlistInitialState, WatchlistStateInterface, WatchlistStateKeys } from './watchlist.state';
+import { WatchlistActions } from './watchlist.actions';
 
 const initialState:WatchlistStateInterface = new WatchlistInitialState() as WatchlistStateInterface;
 

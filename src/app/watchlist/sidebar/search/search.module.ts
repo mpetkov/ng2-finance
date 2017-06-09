@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  SearchComponent,
-  SearchStateService,
-  SearchApiService
-} from './index';
 import { SharedModule } from '../../../shared/shared.module';
 import { SearchActions } from './state/search.actions';
+import { SearchComponent } from './search.component';
+import { SearchStateService } from './state/search-state.service';
+import { SearchApiService } from './search-api.service';
 
 @NgModule({
   imports: [
