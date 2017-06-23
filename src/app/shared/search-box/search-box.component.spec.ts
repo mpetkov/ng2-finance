@@ -1,25 +1,24 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MdlModule } from 'angular2-mdl';
-import { SearchBoxComponent } from './search-box.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MdlModule} from 'angular2-mdl';
+import {SearchBoxComponent} from './search-box.component';
 
-@Component({template: `<mp-search-box
-          [active]="active"
-          [value]="value"></mp-search-box>`})
+@Component({
+  template: `
+    <mp-search-box
+      [active]="active"
+      [value]="value"></mp-search-box>`
+})
 class TestComponent {
   active: boolean;
   value: string;
 }
 
 describe('SearchBoxComponent', () => {
-  let fixture:ComponentFixture<SearchBoxComponent>;
-  let component:SearchBoxComponent;
+  let fixture: ComponentFixture<SearchBoxComponent>;
+  let component: SearchBoxComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,7 +45,7 @@ describe('SearchBoxComponent', () => {
   });
 
   it('should add css class `mp-inactive` to container when active is false', () => {
-    let element:any = fixture.nativeElement.querySelector('.mp-search-box');
+    const element: any = fixture.nativeElement.querySelector('.mp-search-box');
     expect(element.classList).toContain('mp-inactive');
 
     component.active = true;
@@ -98,8 +97,8 @@ describe('SearchBoxComponent', () => {
   it('should populate input with the passed value', () => {
     jasmine.clock().uninstall();
     jasmine.clock().install();
-    let fixtureTest:ComponentFixture<TestComponent>;
-    let componentTest:TestComponent;
+    let fixtureTest: ComponentFixture<TestComponent>;
+    let componentTest: TestComponent;
 
     fixtureTest = TestBed.createComponent(TestComponent);
     componentTest = fixtureTest.componentInstance;

@@ -1,27 +1,23 @@
-import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import {
-  Http,
-  BaseRequestOptions,
-  ConnectionBackend
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 
-import { InfoApiService } from './info-api.service';
-import { InfoStateService } from './state/info-state.service';
+import {InfoApiService} from './info-api.service';
+import {InfoStateService} from './state/info-state.service';
 
 describe('InfoApiService', () => {
-  let service:InfoApiService;
-  let getSubject:any;
-  let getSpy:any;
+  let service: InfoApiService;
+  let getSubject: any;
+  let getSpy: any;
 
   beforeEach(() => {
-    let infoStateService:any = jasmine.createSpyObj('infoStateService' ,[
+    const infoStateService: any = jasmine.createSpyObj('infoStateService', [
       'fetchLoader'
     ]);
     getSubject = new BehaviorSubject<any>([]);
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       providers: [
         InfoApiService,
         BaseRequestOptions,
@@ -56,7 +52,7 @@ describe('InfoApiService', () => {
     expect(service.get).toHaveBeenCalledWith('./assets/json/info/a.json');
   });
 
-    it('should call complete() with a successful completion of get() call', () => {
+  it('should call complete() with a successful completion of get() call', () => {
     service.load('');
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([]);
@@ -69,10 +65,16 @@ describe('InfoApiService', () => {
   });
 
   it('should call complete() with transformed data with a completion of get() call', () => {
-    getSubject.next({query:{results:{quote:{
-      Volume: 165656545,
-      AverageDailyVolume: 165656545
-    }}}});
+    getSubject.next({
+      query: {
+        results: {
+          quote: {
+            Volume: 165656545,
+            AverageDailyVolume: 165656545
+          }
+        }
+      }
+    });
     service.load('');
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([{

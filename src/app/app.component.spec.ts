@@ -1,29 +1,26 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component } from '@angular/core';
-import { MdlModule } from 'angular2-mdl';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {Component} from '@angular/core';
+import {MdlModule} from 'angular2-mdl';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {AppComponent} from './app.component';
-import {AppStateService} from './state/app-state.service';
+import {HeaderStateService} from './shared/header/state/header-state.service';
 
 @Component({selector: 'mp-header', template: ''})
-class HeaderComponent {}
+class HeaderComponent {
+}
 
 describe('AppComponent', () => {
-  let fixture:ComponentFixture<AppComponent>;
-  let component:AppComponent;
-  let appState:any;
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+  let headerState: any;
 
   beforeEach(async(() => {
-    appState = jasmine.createSpyObj('appStateService', [
+    headerState = jasmine.createSpyObj('headerStateService', [
       'changePreloader'
     ]);
 
-    appState.preloader$ = new BehaviorSubject<any>(true);
+    headerState.preloader$ = new BehaviorSubject<any>(true);
 
     TestBed.configureTestingModule({
       imports: [
@@ -35,7 +32,7 @@ describe('AppComponent', () => {
         HeaderComponent
       ],
       providers: [
-        {provide: AppStateService, useValue: appState}
+        {provide: HeaderStateService, useValue: headerState}
       ]
     }).compileComponents();
   }));
@@ -59,12 +56,11 @@ describe('AppComponent', () => {
   });
 
   it('should add css class `mp-loaded` to preloader when it is disabled', () => {
-    component.preloaderDiv = {className: ''};
     fixture.detectChanges();
-    expect(component.preloaderDiv.className).not.toContain('mp-loaded');
+    expect(document.body.className).not.toContain('mp-loaded');
 
-    appState.preloader$.next(false);
+    headerState.preloader$.next(false);
     fixture.detectChanges();
-    expect(component.preloaderDiv.className).toContain('mp-loaded');
+    expect(document.body.className).toContain('mp-loaded');
   });
 });

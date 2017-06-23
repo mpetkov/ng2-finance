@@ -1,15 +1,11 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
-import { NotificationComponent, NotificationTypeEnum } from './notification.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {CommonModule} from '@angular/common';
+import {MdlModule} from 'angular2-mdl';
+import {NotificationComponent, NotificationTypeEnum} from './notification.component';
 
 describe('NotificationComponent', () => {
-  let fixture:ComponentFixture<NotificationComponent>;
-  let component:NotificationComponent;
+  let fixture: ComponentFixture<NotificationComponent>;
+  let component: NotificationComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,7 +67,7 @@ describe('NotificationComponent', () => {
   it('should call action#emit() when button is clicked', () => {
     spyOn(component.action, 'emit');
 
-    component.button = {action:'action'};
+    component.button = {action: 'action'};
     fixture.detectChanges();
     fixture.nativeElement.querySelector('button').click();
     expect(component.action.emit).toHaveBeenCalledTimes(1);

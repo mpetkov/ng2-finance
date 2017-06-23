@@ -1,25 +1,22 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { D3fcComponent } from './d3fc.component';
-import { ChartStateService } from '../state/chart-state.service';
-import { ChartCrosshairService } from './services/chart-crosshair.service';
-import { ChartOptionsService } from './services/chart-options.service';
-import { ChartTooltipsService } from './services/chart-tooltips.service';
-import { ChartVolumeService } from './services/chart-volume.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {D3fcComponent} from './d3fc.component';
+import {ChartStateService} from '../state/chart-state.service';
+import {ChartCrosshairService} from './services/chart-crosshair.service';
+import {ChartOptionsService} from './services/chart-options.service';
+import {ChartTooltipsService} from './services/chart-tooltips.service';
+import {ChartVolumeService} from './services/chart-volume.service';
 
 @Component({selector: 'mp-legend', template: ''})
-class LegendComponent {}
+class LegendComponent {
+}
 
 describe('D3fcComponent', () => {
-  let fixture:ComponentFixture<D3fcComponent>;
-  let component:D3fcComponent;
-  let chartState:any;
+  let fixture: ComponentFixture<D3fcComponent>;
+  let component: D3fcComponent;
+  let chartState: any;
 
   beforeEach(async(() => {
     chartState = jasmine.createSpyObj('chartStateService', [
@@ -66,7 +63,7 @@ describe('D3fcComponent', () => {
   });
 
   it('should add css class `small` to svg when smallView is changed to true', () => {
-    let element:any = fixture.nativeElement.querySelector('svg');
+    const element: any = fixture.nativeElement.querySelector('svg');
     expect(element.classList).not.toContain('small');
 
     component.smallView = true;
@@ -79,10 +76,10 @@ describe('D3fcComponent', () => {
   });
 
   it('should add css class `small` to svg when window is resized to small width', () => {
-    let element:any = fixture.nativeElement.querySelector('svg');
+    const element: any = fixture.nativeElement.querySelector('svg');
     expect(element.classList).not.toContain('small');
 
-    component.onResize({currentTarget:{innerWidth:400}});
+    component.onResize({currentTarget: {innerWidth: 400}});
     fixture.detectChanges();
     expect(element.classList).not.toContain('small');
 
@@ -97,11 +94,11 @@ describe('D3fcComponent', () => {
     fixture.detectChanges();
     expect(element.classList).toContain('small');
 
-    component.onResize({currentTarget:{innerWidth:400}});
+    component.onResize({currentTarget: {innerWidth: 400}});
     fixture.detectChanges();
     expect(element.classList).toContain('small');
 
-    component.onOrientationChange({currentTarget:{innerWidth:600}});
+    component.onOrientationChange({currentTarget: {innerWidth: 600}});
     fixture.detectChanges();
     expect(element.classList).not.toContain('small');
   });

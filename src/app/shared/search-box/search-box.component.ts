@@ -1,44 +1,43 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ViewChild,
-  Renderer,
   ElementRef,
-  OnDestroy
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  Renderer,
+  ViewChild
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs/Subject';
+import {FormControl} from '@angular/forms';
+import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/takeUntil';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-search-box',
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss']
 })
 
 export class SearchBoxComponent implements OnChanges, OnDestroy {
-  @Input() value:string;
-  @Input() active:boolean;
-  @Output() changed:EventEmitter<string> = new EventEmitter();
-  @Output() activate:EventEmitter<boolean> = new EventEmitter();
-  @ViewChild('input') input:ElementRef;
-  formControl:FormControl = new FormControl();
-  private windowClickListener:Function;
+  @Input() value: string;
+  @Input() active: boolean;
+  @Output() changed: EventEmitter<string> = new EventEmitter();
+  @Output() activate: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('input') input: ElementRef;
+  formControl: FormControl = new FormControl();
+  private windowClickListener: Function;
   private ngOnDestroy$ = new Subject<boolean>();
 
-  constructor(private renderer:Renderer) {
+  constructor(private renderer: Renderer) {
     this.formControl.valueChanges
       .takeUntil(this.ngOnDestroy$)
       .debounceTime(500)
       .subscribe(value => this.changed.emit(value));
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.value) {
       this.formControl.setValue(this.value, {});
     }
@@ -53,7 +52,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
   activateInput() {
     if (!this.windowClickListener) {
       this.windowClickListener = this.renderer.listenGlobal('window', 'click',
-        (event:any) => {
+        (event: any) => {
           if (!event.target.parentElement ||
             (event.target.parentElement.className.indexOf('mp-search-box') === -1 &&
             event.target.className.indexOf('mdl-button') === -1)) {
@@ -77,7 +76,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
     this.destroyListener();
   }
 
-  private toggleActive(active:boolean) {
+  private toggleActive(active: boolean) {
     this.active = active;
     this.activate.emit(active);
   }

@@ -1,15 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { HeaderActions } from './header.actions';
-import { HeaderStateService } from './header-state.service';
-import { headerReducer } from './header.reducer';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {HeaderActions} from './header-actions';
+import {HeaderStateService} from './header-state.service';
+import {headerReducer} from './header-reducer';
 describe('HeaderStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({header: headerReducer})
       ],
@@ -24,11 +24,11 @@ describe('HeaderStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
+    const count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -70,7 +70,7 @@ describe('HeaderStateService', () => {
 
   it('should call store.dispatch() with ACTIVATE_SEARCH action', () => {
     spyOn(store, 'dispatch');
-    let state:boolean = true;
+    const state = true;
     service.changeSearchActive(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeSearchActive(state));
@@ -78,7 +78,7 @@ describe('HeaderStateService', () => {
 
   it('should call store.dispatch() with CHANGE_SEARCH action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.changeSearch(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeSearch(state));
@@ -86,9 +86,21 @@ describe('HeaderStateService', () => {
 
   it('should call store.dispatch() with CHANGE_SIDEBAR action', () => {
     spyOn(store, 'dispatch');
-    let state:boolean = false;
+    const state = false;
     service.changeSidebar(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeSidebar(state));
+  });
+
+  it('should stream the current preloader from store', () => {
+    checkStream('preloader', 'changePreloader', true, false, true);
+  });
+
+  it('should call store.dispatch() with CHANGE_PRELOADER action', () => {
+    spyOn(store, 'dispatch');
+    const state = false;
+    service.changePreloader(state);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(actions.changePreloader(state));
   });
 });

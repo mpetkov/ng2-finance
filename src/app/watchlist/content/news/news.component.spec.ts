@@ -1,34 +1,30 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { StoreModule } from '@ngrx/store';
-import { MdlModule } from 'angular2-mdl';
-import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { NewsComponent } from './news.component';
-import { NewsApiService } from './news-api.service';
-import { NewsStateService } from './state/news-state.service';
-import { newsReducer } from './state/news.reducer';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { watchlistReducer } from '../../state/watchlist.reducer';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {StoreModule} from '@ngrx/store';
+import {MdlModule} from 'angular2-mdl';
+import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {NewsComponent} from './news.component';
+import {NewsApiService} from './news-api.service';
+import {NewsStateService} from './state/news-state.service';
+import {newsReducer} from './state/news-reducer';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {watchlistReducer} from '../../state/watchlist-reducer';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
-  @Input() type:NotificationTypeEnum;
-  @Input() value:string;
-  @Input() button:NotificationButtonInterface;
+  @Input() type: NotificationTypeEnum;
+  @Input() value: string;
+  @Input() button: NotificationButtonInterface;
 }
 
 describe('NewsComponent', () => {
-  let fixture:ComponentFixture<NewsComponent>;
-  let component:NewsComponent;
-  let api:any;
-  let newsState:any;
-  let watchlistState:any;
+  let fixture: ComponentFixture<NewsComponent>;
+  let component: NewsComponent;
+  let api: any;
+  let newsState: any;
+  let watchlistState: any;
 
   beforeEach(async(() => {
     api = jasmine.createSpyObj('api', [

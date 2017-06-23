@@ -1,30 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { environment } from '../../../../environments/environment';
-import { get } from 'lodash';
-import { CoreApiResponseService } from '../../../core/services/api-response.service';
-import { ChartStateService } from './state/chart-state.service';
-import { ChartDataInterface } from './state/chart.state';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {environment} from '../../../../environments/environment';
+import {get} from 'lodash';
+import {CoreApiResponseService} from '../../../shared/core/services/api-response.service';
+import {ChartStateService} from './state/chart-state.service';
+import {ChartDataInterface} from './state/chart-state';
 
 @Injectable()
 export class ChartApiService extends CoreApiResponseService {
-  private params:any = {};
+  private params: any = {};
 
-  constructor(public http:Http,
-              private chartState:ChartStateService) {
+  constructor(public http: Http,
+              private chartState: ChartStateService) {
     super(http, chartState);
   }
 
-  load(stock:string, range:string, interval:string, config:any = environment) {
+  load(stock: string, range: string, interval: string, env: any = environment) {
     this.params = {stock: stock, range: range, interval: interval};
     this.toggleLoader(true);
 
-    let url:string = config.paths.charts.replace('$stock', stock);
+    let url: string = env.paths.charts.replace('$stock', stock);
     url = url.replace('$range', range);
     url = url.replace('$interval', interval);
 
-    if (config.env === 'PROD') {
-      this.post(config.paths.proxy, 'url=' + encodeURIComponent(url))
+    if (env.production) {
+      this.post(env.paths.proxy, 'url=' + encodeURIComponent(url))
         .subscribe(
           data => this.complete(this.transform(data)),
           () => this.failed()
@@ -42,12 +42,12 @@ export class ChartApiService extends CoreApiResponseService {
     this.load(this.params.stock, this.params.range, this.params.interval);
   }
 
-  private transform(rawData:any):ChartDataInterface[] {
-    let data:ChartDataInterface[] = [];
+  private transform(rawData: any): ChartDataInterface[] {
+    const data: ChartDataInterface[] = [];
 
-    let chartData:any = get(rawData, 'chart.result[0]', {});
+    const chartData: any = get(rawData, 'chart.result[0]', {});
     if (chartData) {
-      let items:any = {
+      const items: any = {
         close: get(chartData, 'indicators.quote[0].close', []),
         high: get(chartData, 'indicators.quote[0].high', []),
         low: get(chartData, 'indicators.quote[0].low', []),
@@ -55,8 +55,8 @@ export class ChartApiService extends CoreApiResponseService {
         volume: get(chartData, 'indicators.quote[0].volume', []),
         dates: chartData.timestamp || []
       };
-      let close:number;
-      items.dates.forEach((value:number, index:number) => {
+      let close: number;
+      items.dates.forEach((value: number, index: number) => {
         close = get(items, 'close[' + index + ']', null);
         if (close) {
           data.push({

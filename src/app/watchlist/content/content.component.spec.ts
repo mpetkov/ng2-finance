@@ -1,23 +1,22 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { ContentComponent } from './content.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {ContentComponent} from './content.component';
 
 @Component({selector: 'mp-chart', template: ''})
-class ChartComponent {}
+class ChartComponent {
+}
 
 @Component({selector: 'mp-info', template: ''})
-class InfoComponent {}
+class InfoComponent {
+}
 
 @Component({selector: 'mp-news', template: ''})
-class NewsComponent {}
+class NewsComponent {
+}
 
 describe('ContentComponent', () => {
-  let fixture:ComponentFixture<ContentComponent>;
-  let component:ContentComponent;
+  let fixture: ComponentFixture<ContentComponent>;
+  let component: ContentComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

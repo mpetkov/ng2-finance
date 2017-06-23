@@ -1,27 +1,23 @@
-import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import {
-  Http,
-  BaseRequestOptions,
-  ConnectionBackend
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 
-import { FavoritesApiService } from './favorites-api.service';
-import { FavoritesStateService } from './favorites/state/favorites-state.service';
+import {FavoritesApiService} from './favorites-api.service';
+import {FavoritesStateService} from './favorites/state/favorites-state.service';
 
 describe('FavoritesApiService', () => {
-  let service:FavoritesApiService;
-  let getSubject:any;
-  let getSpy:any;
+  let service: FavoritesApiService;
+  let getSubject: any;
+  let getSpy: any;
 
   beforeEach(() => {
-    let favoritesStateService:any = jasmine.createSpyObj('favoritesStateService' ,[
+    const favoritesStateService: any = jasmine.createSpyObj('favoritesStateService', [
       'fetchLoader'
     ]);
     getSubject = new BehaviorSubject<any>([]);
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       providers: [
         FavoritesApiService,
         BaseRequestOptions,
@@ -56,7 +52,7 @@ describe('FavoritesApiService', () => {
     expect(service.get).toHaveBeenCalledWith('./assets/json/stocks.json');
   });
 
-    it('should call complete() with a successful completion of get() call', () => {
+  it('should call complete() with a successful completion of get() call', () => {
     service.load([]);
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([]);
@@ -69,12 +65,18 @@ describe('FavoritesApiService', () => {
   });
 
   it('should call complete() with transformed data with a completion of get() call', () => {
-    getSubject.next({query:{results:{quote:[{
-      symbol: 'a',
-      Name: 'a',
-      Change:'0.3056',
-      LastTradePriceOnly:'132.126464'
-    }]}}});
+    getSubject.next({
+      query: {
+        results: {
+          quote: [{
+            symbol: 'a',
+            Name: 'a',
+            Change: '0.3056',
+            LastTradePriceOnly: '132.126464'
+          }]
+        }
+      }
+    });
     service.load([]);
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([{
@@ -86,12 +88,18 @@ describe('FavoritesApiService', () => {
       percentage: '+0.23%'
     }]);
 
-    getSubject.next({query:{results:{quote:{
-      symbol: 'a',
-      Name: 'a',
-      Change:'-0.3056',
-      LastTradePriceOnly:'132.126464'
-    }}}});
+    getSubject.next({
+      query: {
+        results: {
+          quote: {
+            symbol: 'a',
+            Name: 'a',
+            Change: '-0.3056',
+            LastTradePriceOnly: '132.126464'
+          }
+        }
+      }
+    });
     expect(service.complete).toHaveBeenCalledTimes(2);
     expect(service.complete).toHaveBeenCalledWith([{
       symbol: 'a',
@@ -102,11 +110,17 @@ describe('FavoritesApiService', () => {
       percentage: '-0.23%'
     }]);
 
-    getSubject.next({query:{results:{quote:{
-      symbol: 'a',
-      Name: 'a',
-      LastTradePriceOnly:'132.126464'
-    }}}});
+    getSubject.next({
+      query: {
+        results: {
+          quote: {
+            symbol: 'a',
+            Name: 'a',
+            LastTradePriceOnly: '132.126464'
+          }
+        }
+      }
+    });
     expect(service.complete).toHaveBeenCalledTimes(3);
     expect(service.complete).toHaveBeenCalledWith([{
       symbol: 'a',

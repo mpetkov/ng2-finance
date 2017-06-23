@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { CoreApiStateService } from '../../../../core/state/api-state.service';
-import { SearchActions } from './search.actions';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {CoreApiStateService} from '../../../../shared/core/state/api-state.service';
+import {SearchActions} from './search-actions';
+import {SearchStateKeys} from './search-state';
 
 @Injectable()
 export class SearchStateService extends CoreApiStateService {
-  constructor(public store$:Store<any>,
+  constructor(public store$: Store<any>,
               public actions: SearchActions) {
-    super(store$, 'search', actions);
+    super(store$, SearchStateKeys.StateName, actions);
   }
 }

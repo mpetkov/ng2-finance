@@ -1,28 +1,24 @@
-import {
-  Component,
-  OnDestroy
-} from '@angular/core';
-import { InfoApiService } from './info-api.service';
-import { InfoService } from './info.service';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { StockDataInterface } from '../../state/watchlist.state';
-import { environment } from '../../../../environments/environment';
-import { CoreApiNotification } from '../../../core/api-notification';
-import { InfoDataInterface } from './state/info.state';
-import { RangeOptionsInterface } from './range/range.component';
-import { InfoStateService } from './state/info-state.service';
-import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import {Component} from '@angular/core';
+import {InfoApiService} from './info-api.service';
+import {InfoService} from './info.service';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {StockDataInterface} from '../../state/watchlist-state';
+import {environment} from '../../../../environments/environment';
+import {ApiNotification} from '../../../shared/notification/api-notification';
+import {InfoDataInterface} from './state/info-state';
+import {RangeOptionsInterface} from './range/range.component';
+import {InfoStateService} from './state/info-state.service';
+import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
 
-export class InfoComponent extends CoreApiNotification {
-  data:InfoDataInterface = {};
-  leftColumn:InfoListInterface[] = [
+export class InfoComponent extends ApiNotification {
+  data: InfoDataInterface = {};
+  leftColumn: InfoListInterface[] = [
     {text: 'Prev Close', id: 'PreviousClose'},
     {text: 'Low', id: 'DaysLow'},
     {text: '52wk Low', id: 'YearLow'},
@@ -30,7 +26,7 @@ export class InfoComponent extends CoreApiNotification {
     {text: '1Y Target', id: 'OneyrTargetPrice'},
     {text: 'EPS', id: 'EarningsShare'}
   ];
-  rightColumn:InfoListInterface[] = [
+  rightColumn: InfoListInterface[] = [
     {text: 'Open', id: 'Open'},
     {text: 'High', id: 'DaysHigh'},
     {text: '52wk High', id: 'YearHigh'},
@@ -38,16 +34,16 @@ export class InfoComponent extends CoreApiNotification {
     {text: 'Avg Vol (3m)', id: 'AverageDailyVolume'},
     {text: 'Dividend', id: 'DividendShare'}
   ];
-  dayOptions:RangeOptionsInterface = {};
-  yearOptions:RangeOptionsInterface = {};
-  private stock:string;
-  private loadedInfo:boolean;
-  private price:number;
+  dayOptions: RangeOptionsInterface = {};
+  yearOptions: RangeOptionsInterface = {};
+  private stock: string;
+  private loadedInfo: boolean;
+  private price: number;
 
-  constructor(private infoState:InfoStateService,
-              private watchlistState:WatchlistStateService,
-              private infoApiService:InfoApiService,
-              private infoService:InfoService) {
+  constructor(private infoState: InfoStateService,
+              private watchlistState: WatchlistStateService,
+              private infoApiService: InfoApiService,
+              private infoService: InfoService) {
     super(infoState, infoApiService);
     this.subscriptions.push(watchlistState.stock$.subscribe(
       stock => this.updateStock(stock)
@@ -68,7 +64,7 @@ export class InfoComponent extends CoreApiNotification {
     this.infoApiService.reload();
   }
 
-  private updateStock(stock:string) {
+  private updateStock(stock: string) {
     this.stock = stock;
     if (stock) {
       this.loadedInfo = false;
@@ -76,14 +72,14 @@ export class InfoComponent extends CoreApiNotification {
     }
   }
 
-  private updateStockData(stockData:StockDataInterface) {
+  private updateStockData(stockData: StockDataInterface) {
     this.price = stockData.price;
     if (this.loadedInfo) {
       this.updateData();
     }
   }
 
-  private updateInfo(data:InfoDataInterface = null) {
+  private updateInfo(data: InfoDataInterface = null) {
     if (!data) {
       if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, environment.notifications.noData);
@@ -111,6 +107,6 @@ export class InfoComponent extends CoreApiNotification {
 
 
 export interface InfoListInterface {
-  id?:string;
-  text?:string;
+  id?: string;
+  text?: string;
 }

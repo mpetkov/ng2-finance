@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { SidebarActions } from './sidebar.actions';
-import { sidebarReducer } from './sidebar.reducer';
-import { SidebarStateService } from './sidebar-state.service';
-import { SidebarTypeEnum } from './sidebar.state';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {SidebarActions} from './sidebar-actions';
+import {sidebarReducer} from './sidebar-reducer';
+import {SidebarStateService} from './sidebar-state.service';
+import {SidebarTypeEnum} from './sidebar-state';
 
 describe('SidebarStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({sidebar: sidebarReducer})
       ],
@@ -26,11 +26,11 @@ describe('SidebarStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
+    let count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -64,7 +64,7 @@ describe('SidebarStateService', () => {
 
   it('should call store.dispatch() with CHANGE_TYPE action', () => {
     spyOn(store, 'dispatch');
-    let state:SidebarTypeEnum = SidebarTypeEnum.Add;
+    const state: SidebarTypeEnum = SidebarTypeEnum.Add;
     service.changeType(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeType(state));

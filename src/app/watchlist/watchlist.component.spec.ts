@@ -1,24 +1,22 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { WatchlistComponent } from './watchlist.component';
-import { HeaderStateService } from '../shared/header/state/header-state.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {WatchlistComponent} from './watchlist.component';
+import {HeaderStateService} from '../shared/header/state/header-state.service';
 
 @Component({selector: 'mp-content', template: ''})
-class ContentComponent {}
+class ContentComponent {
+}
 
 @Component({selector: 'mp-sidebar', template: ''})
-class SidebarComponent {}
+class SidebarComponent {
+}
 
 describe('WatchlistComponent', () => {
-  let fixture:ComponentFixture<WatchlistComponent>;
-  let component:WatchlistComponent;
-  let headerState:any;
+  let fixture: ComponentFixture<WatchlistComponent>;
+  let component: WatchlistComponent;
+  let headerState: any;
 
   beforeEach(async(() => {
     headerState = jasmine.createSpyObj('headerStateService', [
@@ -65,7 +63,7 @@ describe('WatchlistComponent', () => {
   });
 
   it('should add css class `mp-inactive` to `mdl-layout__drawer` when sidebar is false', () => {
-    let element:any = fixture.nativeElement.querySelector('.mdl-layout__drawer');
+    const element: any = fixture.nativeElement.querySelector('.mdl-layout__drawer');
     expect(element.classList).not.toContain('mp-inactive');
 
     headerState.sidebar$.next(false);

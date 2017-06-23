@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { FavoritesActions } from './favorites.actions';
-import { favoritesReducer } from './favorites.reducer';
-import { FavoritesStateService } from './favorites-state.service';
-import { StockDataInterface } from '../../../state/watchlist.state';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {FavoritesActions} from './favorites-actions';
+import {favoritesReducer} from './favorites-reducer';
+import {FavoritesStateService} from './favorites-state.service';
+import {StockDataInterface} from '../../../state/watchlist-state';
 
 describe('FavoritesStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({favorites: favoritesReducer})
       ],
@@ -26,11 +26,11 @@ describe('FavoritesStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
+    let count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -59,10 +59,10 @@ describe('FavoritesStateService', () => {
   }
 
   it('should stream the current data from store', () => {
-    let count:number = 0;
-    let state:any = null;
+    let count = 0;
+    let state: any = null;
 
-    service['data$'].subscribe((value:any) => {
+    service['data$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -100,7 +100,7 @@ describe('FavoritesStateService', () => {
 
   it('should call store.dispatch() with FETCH_FULFILLED action', () => {
     spyOn(store, 'dispatch');
-    let state:StockDataInterface[] = [{symbol: 'a'}];
+    const state: StockDataInterface[] = [{symbol: 'a'}];
     service.fetchFulfilled(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchFulfilled(state));
@@ -108,7 +108,7 @@ describe('FavoritesStateService', () => {
 
   it('should call store.dispatch() with FETCH_LOADER action', () => {
     spyOn(store, 'dispatch');
-    let state:boolean = true;
+    const state = true;
     service.fetchLoader(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchLoader(state));
@@ -116,7 +116,7 @@ describe('FavoritesStateService', () => {
 
   it('should call store.dispatch() with FETCH_ERROR action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.fetchError(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchError(state));
@@ -124,7 +124,7 @@ describe('FavoritesStateService', () => {
 
   it('should call store.dispatch() with CHANGE_ORDER action', () => {
     spyOn(store, 'dispatch');
-    let state:string[] = ['a'];
+    const state: string[] = ['a'];
     service.changeOrder(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeOrder(state));

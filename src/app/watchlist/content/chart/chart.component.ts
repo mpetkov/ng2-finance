@@ -1,40 +1,36 @@
-import {
-  Component,
-  ViewEncapsulation
-} from '@angular/core';
-import { ChartApiService } from './chart-api.service';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { AppStateService } from '../../../state/app-state.service';
-import { StockDataInterface } from '../../state/watchlist.state';
-import { environment } from '../../../../environments/environment';
-import { findIndex } from 'lodash';
-import { CoreApiNotification } from '../../../core/api-notification';
-import { ChartStateService } from './state/chart-state.service';
-import { ChartStateKeys, ChartDataInterface } from './state/chart.state';
-import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { localStorageAdapter } from '../../../core/utils';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {ChartApiService} from './chart-api.service';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {HeaderStateService} from '../../../shared/header/state/header-state.service';
+import {StockDataInterface} from '../../state/watchlist-state';
+import {environment} from '../../../../environments/environment';
+import {findIndex} from 'lodash';
+import {ApiNotification} from '../../../shared/notification/api-notification';
+import {ChartStateService} from './state/chart-state.service';
+import {ChartDataInterface, ChartStateKeys} from './state/chart-state';
+import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {localStorageAdapter} from '../../../shared/core/utils';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class ChartComponent extends CoreApiNotification {
-  stockData:StockDataInterface = {};
-  stock:string;
-  ranges:any[] = environment.chartRanges;
-  rangeIndex:number;
-  favorite:boolean;
-  private favorites:string[] = [];
-  private range:any;
+export class ChartComponent extends ApiNotification {
+  stockData: StockDataInterface = {};
+  stock: string;
+  ranges: any[] = environment.chartRanges;
+  rangeIndex: number;
+  favorite: boolean;
+  private favorites: string[] = [];
+  private range: any;
 
-  constructor(public watchlistState:WatchlistStateService,
-              private chartState:ChartStateService,
-              private chartApiService:ChartApiService,
-              private appState:AppStateService) {
+  constructor(public watchlistState: WatchlistStateService,
+              private chartState: ChartStateService,
+              private chartApiService: ChartApiService,
+              private headerState: HeaderStateService) {
     super(chartState, chartApiService);
 
     this.subscriptions.push(watchlistState.stockData$.subscribe(
@@ -58,13 +54,13 @@ export class ChartComponent extends CoreApiNotification {
     ));
   }
 
-  tabChanged(index:number) {
+  tabChanged(index: number) {
     if (this.ranges[index]) {
       this.chartState.changeRange(this.ranges[index].id);
     }
   }
 
-  toggleFavorite(favorite:boolean) {
+  toggleFavorite(favorite: boolean) {
     if (favorite) {
       this.watchlistState.addFavorite(this.stock);
     } else {
@@ -72,12 +68,12 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
-  private updateFavorites(favorites:string[]) {
+  private updateFavorites(favorites: string[]) {
     this.favorites = favorites;
     this.favorite = this.favorites.indexOf(this.stock) !== -1;
   }
 
-  private updateStock(stock:string) {
+  private updateStock(stock: string) {
     this.stock = stock;
     this.favorite = this.favorites.indexOf(this.stock) !== -1;
     if (stock) {
@@ -87,9 +83,9 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
-  private updateRange(range:string) {
+  private updateRange(range: string) {
     localStorageAdapter.setItem(ChartStateKeys.Range, range);
-    let rangeIndex:number = findIndex(this.ranges, ['id', range]);
+    let rangeIndex: number = findIndex(this.ranges, ['id', range]);
     if (rangeIndex === -1) {
       rangeIndex = 0;
     }
@@ -107,7 +103,7 @@ export class ChartComponent extends CoreApiNotification {
     }
   }
 
-  private validateChartData(data:ChartDataInterface[]) {
+  private validateChartData(data: ChartDataInterface[]) {
     if (data.length === 0) {
       if (this.stock) {
         this.updateNotification(NotificationTypeEnum.Notification, environment.notifications.noData);
@@ -116,6 +112,6 @@ export class ChartComponent extends CoreApiNotification {
       }
     }
 
-    this.appState.changePreloader(false);
+    this.headerState.changePreloader(false);
   }
 }

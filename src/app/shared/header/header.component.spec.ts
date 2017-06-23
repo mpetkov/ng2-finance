@@ -1,25 +1,21 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HeaderComponent } from './header.component';
-import { HeaderStateService } from './state/header-state.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MdlModule} from 'angular2-mdl';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {HeaderComponent} from './header.component';
+import {HeaderStateService} from './state/header-state.service';
 
 @Component({selector: 'mp-search-box', template: ''})
 class SearchBoxComponent {
-  @Input() value:string;
-  @Input() active:boolean;
+  @Input() value: string;
+  @Input() active: boolean;
 }
 
 describe('HeaderComponent', () => {
-  let fixture:ComponentFixture<HeaderComponent>;
-  let component:HeaderComponent;
-  let headerState:any;
+  let fixture: ComponentFixture<HeaderComponent>;
+  let component: HeaderComponent;
+  let headerState: any;
 
   beforeEach(async(() => {
     headerState = jasmine.createSpyObj('headerStateService', [
@@ -74,7 +70,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should add css class `mp-active-search` to container when search box is activated', () => {
-    let element:any = fixture.nativeElement.querySelector('mdl-layout-header-row');
+    const element: any = fixture.nativeElement.querySelector('mdl-layout-header-row');
     expect(element.classList).not.toContain('mp-active-search');
 
     headerState.searchActive$.next(true);

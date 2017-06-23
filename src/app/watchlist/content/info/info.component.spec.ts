@@ -1,39 +1,35 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MdlModule } from 'angular2-mdl';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { RangeOptionsInterface } from './range/range.component';
-import { InfoComponent } from './info.component';
-import { InfoApiService } from './info-api.service';
-import { InfoService } from './info.service';
-import { InfoStateService } from './state/info-state.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {MdlModule} from 'angular2-mdl';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {RangeOptionsInterface} from './range/range.component';
+import {InfoComponent} from './info.component';
+import {InfoApiService} from './info-api.service';
+import {InfoService} from './info.service';
+import {InfoStateService} from './state/info-state.service';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
-  @Input() type:NotificationTypeEnum;
-  @Input() value:string;
-  @Input() button:NotificationButtonInterface;
+  @Input() type: NotificationTypeEnum;
+  @Input() value: string;
+  @Input() button: NotificationButtonInterface;
 }
 
 @Component({selector: 'mp-range', template: ''})
 class RangeComponent {
-  @Input() options:RangeOptionsInterface = {};
+  @Input() options: RangeOptionsInterface = {};
 }
 
 describe('InfoComponent', () => {
-  let fixture:ComponentFixture<InfoComponent>;
-  let component:InfoComponent;
-  let api:any;
-  let infoService:any;
-  let infoState:any;
-  let watchlistState:any;
+  let fixture: ComponentFixture<InfoComponent>;
+  let component: InfoComponent;
+  let api: any;
+  let infoService: any;
+  let infoState: any;
+  let watchlistState: any;
 
   beforeEach(async(() => {
     api = jasmine.createSpyObj('api', [
@@ -150,12 +146,12 @@ describe('InfoComponent', () => {
   });
 
   it('should call InfoService#getDataWithUpdatedPrice() when stock data is updated and info has already been loaded', () => {
-    watchlistState.stockData$.next({price:100});
+    watchlistState.stockData$.next({price: 100});
     fixture.detectChanges();
     expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledTimes(0);
 
     infoState.data$.next([{}]);
-    watchlistState.stockData$.next({price:200});
+    watchlistState.stockData$.next({price: 200});
     fixture.detectChanges();
     expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledTimes(2);
     expect(infoService.getDataWithUpdatedPrice).toHaveBeenCalledWith(undefined, 200);

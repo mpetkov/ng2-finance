@@ -1,12 +1,11 @@
-import { ElementRef } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { InfoService } from './info.service';
+import {TestBed} from '@angular/core/testing';
+import {InfoService} from './info.service';
 
 describe('InfoService', () => {
-  let service:InfoService;
+  let service: InfoService;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       providers: [
         InfoService
       ]

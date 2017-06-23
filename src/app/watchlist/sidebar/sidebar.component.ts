@@ -1,35 +1,34 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
-import { FavoritesApiService } from './favorites-api.service';
-import { WatchlistStateService } from '../state/watchlist-state.service';
-import { WatchlistStateKeys } from '../state/watchlist.state';
-import { HeaderStateService } from '../../shared/header/state/header-state.service';
-import { Subscriptions } from '../../core/subscriptions';
-import { localStorageAdapter } from '../../core/utils';
-import { SidebarStateService } from './state/sidebar-state.service';
-import { SidebarTypeEnum } from './state/sidebar.state';
+import {Component, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subject} from 'rxjs/Subject';
+import {FavoritesApiService} from './favorites-api.service';
+import {WatchlistStateService} from '../state/watchlist-state.service';
+import {WatchlistStateKeys} from '../state/watchlist-state';
+import {HeaderStateService} from '../../shared/header/state/header-state.service';
+import {CoreSubscriptions} from '../../shared/core/subscriptions';
+import {localStorageAdapter} from '../../shared/core/utils';
+import {SidebarStateService} from './state/sidebar-state.service';
+import {SidebarTypeEnum} from './state/sidebar-state';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class SidebarComponent extends Subscriptions implements OnDestroy {
+export class SidebarComponent extends CoreSubscriptions implements OnDestroy {
   private ngOnDestroy$ = new Subject<boolean>();
-  private favorites:string[] = [];
-  private stock:string;
+  private favorites: string[] = [];
+  private stock: string;
 
-  constructor(public sidebarState:SidebarStateService,
-              private route:ActivatedRoute,
-              private favoritesApiService:FavoritesApiService,
-              private watchlistState:WatchlistStateService,
-              private headerState:HeaderStateService) {
+  constructor(public sidebarState: SidebarStateService,
+              private route: ActivatedRoute,
+              private favoritesApiService: FavoritesApiService,
+              private watchlistState: WatchlistStateService,
+              private headerState: HeaderStateService) {
     super();
     this.subscriptions.push(watchlistState.favorites$.subscribe(
       favorites => this.updateFavorites(favorites)
@@ -47,7 +46,7 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
       .takeUntil(this.ngOnDestroy$)
       .pluck('id')
       .distinctUntilChanged()
-      .subscribe((id:string) => watchlistState.changeStock(id));
+      .subscribe((id: string) => watchlistState.changeStock(id));
   }
 
   ngOnDestroy() {
@@ -55,13 +54,13 @@ export class SidebarComponent extends Subscriptions implements OnDestroy {
     this.ngOnDestroy$.next(true);
   }
 
-  private updateFavorites(favorites:string[]) {
+  private updateFavorites(favorites: string[]) {
     localStorageAdapter.setItem(WatchlistStateKeys.Favorites, favorites);
     this.favorites = favorites.slice();
     this.loadFavoritesData();
   }
 
-  private updateStock(stock:string) {
+  private updateStock(stock: string) {
     this.stock = stock;
     if (this.favorites.indexOf(this.stock) === -1) {
       this.loadFavoritesData();

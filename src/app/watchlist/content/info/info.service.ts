@@ -1,9 +1,9 @@
-import { RangeOptionsInterface } from './range/range.component';
-import { InfoDataInterface } from './state/info.state';
+import {RangeOptionsInterface} from './range/range.component';
+import {InfoDataInterface} from './state/info-state';
 
 export class InfoService {
-  getDataWithUpdatedPrice(data:InfoDataInterface, price:number):InfoDataInterface {
-    let newData:InfoDataInterface = Object.assign({}, data);
+  getDataWithUpdatedPrice(data: InfoDataInterface, price: number): InfoDataInterface {
+    const newData: InfoDataInterface = Object.assign({}, data);
     newData.DaysLow = Math.min(data.DaysLow, price);
     newData.DaysHigh = Math.max(data.DaysHigh, price);
     newData.YearLow = Math.min(data.YearLow, price);
@@ -12,7 +12,7 @@ export class InfoService {
     return newData;
   }
 
-  getDayOptions(data:InfoDataInterface, price:number):RangeOptionsInterface {
+  getDayOptions(data: InfoDataInterface, price: number): RangeOptionsInterface {
     return {
       text: 'Day\'s Range',
       start: data.DaysLow,
@@ -23,7 +23,7 @@ export class InfoService {
     };
   }
 
-  getYearOptions(data:InfoDataInterface, price:number):RangeOptionsInterface {
+  getYearOptions(data: InfoDataInterface, price: number): RangeOptionsInterface {
     return {
       text: '52 Week Range',
       start: data.YearLow,

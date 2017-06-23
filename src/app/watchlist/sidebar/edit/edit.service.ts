@@ -1,11 +1,11 @@
-import { ElementRef } from '@angular/core';
+import {ElementRef} from '@angular/core';
 
 export class EditService {
-  getOrder(list:ElementRef, deleted:string[]):string[] {
-    let order:string[] = [];
+  getOrder(list: ElementRef, deleted: string[]): string[] {
+    const order: string[] = [];
     if (list) {
-      let children:any = list.nativeElement.getElementsByTagName('li');
-      for (let i:number = 0; i < children.length; i++) {
+      let children: any = list.nativeElement.getElementsByTagName('li');
+      for (let i = 0; i < children.length; i++) {
         if (deleted.indexOf(children[i].id) === -1) {
           order.push(children[i].id);
         }
@@ -15,9 +15,9 @@ export class EditService {
     return order;
   }
 
-  getDragOptions():any {
+  getDragOptions(): any {
     return {
-      moves: function (el:Element, container:Element, handle:Element) {
+      moves: function (el: Element, container: Element, handle: Element) {
         return handle.className.indexOf('mp-drag') !== -1;
       }
     };

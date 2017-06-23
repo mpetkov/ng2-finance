@@ -1,32 +1,28 @@
-import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import {
-  Http,
-  BaseRequestOptions,
-  ConnectionBackend
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 
-import { SearchApiService } from './search-api.service';
-import { SearchStateService } from './state/search-state.service';
+import {SearchApiService} from './search-api.service';
+import {SearchStateService} from './state/search-state.service';
 
 describe('SearchApiService', () => {
-  let service:SearchApiService;
-  let getSubject:any;
-  let getSpy:any;
-  let postSubject:any;
-  let postSpy:any;
+  let service: SearchApiService;
+  let getSubject: any;
+  let getSpy: any;
+  let postSubject: any;
+  let postSpy: any;
 
   beforeEach(() => {
-    let searchStateService:any = jasmine.createSpyObj('searchStateService' ,[
+    const searchStateService: any = jasmine.createSpyObj('searchStateService', [
       'fetchLoader'
     ]);
 
     getSubject = new BehaviorSubject<any>([]);
     postSubject = new BehaviorSubject<any>([]);
 
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       providers: [
         SearchApiService,
         BaseRequestOptions,
@@ -64,9 +60,9 @@ describe('SearchApiService', () => {
   });
 
   it('should call post() when load() is called in prod mode', () => {
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',search:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', search: 'url?stock=$stock'}});
     expect(service.post).toHaveBeenCalledTimes(1);
-    expect(service.post).toHaveBeenCalledWith('proxy','url=url%3Fstock%3Da' );
+    expect(service.post).toHaveBeenCalledWith('proxy', 'url=url%3Fstock%3Da');
   });
 
   it('should call complete() with a successful completion of get() call', () => {
@@ -76,7 +72,7 @@ describe('SearchApiService', () => {
   });
 
   it('should call complete() with a successful completion of post() call', () => {
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',search:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', search: 'url?stock=$stock'}});
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([]);
   });
@@ -89,12 +85,12 @@ describe('SearchApiService', () => {
 
   it('should call failed() when post() call errors out', () => {
     postSpy.and.callFake(() => Observable.throw('error'));
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',search:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', search: 'url?stock=$stock'}});
     expect(service.failed).toHaveBeenCalledTimes(1);
   });
 
   it('should call complete() with transformed data with a completion of get() call', () => {
-    getSubject.next({data:{items:[{symbol:'a'}]}});
+    getSubject.next({data: {items: [{symbol: 'a'}]}});
     service.load('a');
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([{
@@ -103,8 +99,8 @@ describe('SearchApiService', () => {
   });
 
   it('should call complete() with transformed data with a completion of post() call', () => {
-    postSubject.next({data:{items:[{symbol:'a'}]}});
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',search:'url?stock=$stock'}});
+    postSubject.next({data: {items: [{symbol: 'a'}]}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', search: 'url?stock=$stock'}});
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([{
       symbol: 'a'

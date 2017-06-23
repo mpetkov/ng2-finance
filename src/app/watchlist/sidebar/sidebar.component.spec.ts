@@ -1,36 +1,35 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { WatchlistStateService } from '../state/watchlist-state.service';
-import { HeaderStateService } from '../../shared/header/state/header-state.service';
-import { SidebarComponent } from './sidebar.component';
-import { SidebarTypeEnum } from './state/sidebar.state';
-import { FavoritesApiService } from './favorites-api.service';
-import { SidebarStateService } from './state/sidebar-state.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {WatchlistStateService} from '../state/watchlist-state.service';
+import {HeaderStateService} from '../../shared/header/state/header-state.service';
+import {SidebarComponent} from './sidebar.component';
+import {SidebarTypeEnum} from './state/sidebar-state';
+import {FavoritesApiService} from './favorites-api.service';
+import {SidebarStateService} from './state/sidebar-state.service';
 
 @Component({selector: 'mp-favorites', template: ''})
-class FavoritesComponent {}
+class FavoritesComponent {
+}
 
 @Component({selector: 'mp-search', template: ''})
-class SearchComponent {}
+class SearchComponent {
+}
 
 @Component({selector: 'mp-edit', template: ''})
-class EditComponent {}
+class EditComponent {
+}
 
 describe('SidebarComponent', () => {
-  let fixture:ComponentFixture<SidebarComponent>;
-  let component:SidebarComponent;
-  let api:any;
-  let sidebarState:any;
-  let watchlistState:any;
-  let headerState:any;
+  let fixture: ComponentFixture<SidebarComponent>;
+  let component: SidebarComponent;
+  let api: any;
+  let sidebarState: any;
+  let watchlistState: any;
+  let headerState: any;
   let params: Subject<any>;
 
   beforeEach(async(() => {
@@ -143,7 +142,7 @@ describe('SidebarComponent', () => {
 
     watchlistState.favorites$.next(['FB']);
     expect(api.load).toHaveBeenCalledTimes(4);
-    expect(api.load).toHaveBeenCalledWith(['FB','AAPL']);
+    expect(api.load).toHaveBeenCalledWith(['FB', 'AAPL']);
 
     watchlistState.favorites$.next(['AAPL']);
     expect(api.load).toHaveBeenCalledTimes(5);

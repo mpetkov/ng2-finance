@@ -1,33 +1,29 @@
-import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import {
-  Http,
-  BaseRequestOptions,
-  ConnectionBackend
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 
-import { NewsApiService } from './news-api.service';
-import { NewsStateService } from './state/news-state.service';
-import * as moment from 'moment'
+import {NewsApiService} from './news-api.service';
+import {NewsStateService} from './state/news-state.service';
+import * as moment from 'moment';
 
 describe('NewsApiService', () => {
-  let service:NewsApiService;
-  let getSubject:any;
-  let getSpy:any;
-  let postSubject:any;
-  let postSpy:any;
+  let service: NewsApiService;
+  let getSubject: any;
+  let getSpy: any;
+  let postSubject: any;
+  let postSpy: any;
 
   beforeEach(() => {
-    let newsStateService:any = jasmine.createSpyObj('newsStateService' ,[
+    const newsStateService: any = jasmine.createSpyObj('newsStateService', [
       'fetchLoader'
     ]);
 
     getSubject = new BehaviorSubject<any>([]);
     postSubject = new BehaviorSubject<any>([]);
 
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       providers: [
         NewsApiService,
         BaseRequestOptions,
@@ -65,9 +61,9 @@ describe('NewsApiService', () => {
   });
 
   it('should call post() when load() is called in prod mode', () => {
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',news:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', news: 'url?stock=$stock'}});
     expect(service.post).toHaveBeenCalledTimes(1);
-    expect(service.post).toHaveBeenCalledWith('proxy','url=url%3Fstock%3Da' );
+    expect(service.post).toHaveBeenCalledWith('proxy', 'url=url%3Fstock%3Da');
   });
 
   it('should call complete() with a successful completion of get() call', () => {
@@ -77,7 +73,7 @@ describe('NewsApiService', () => {
   });
 
   it('should call complete() with a successful completion of post() call', () => {
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',news:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', news: 'url?stock=$stock'}});
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith([]);
   });
@@ -90,24 +86,56 @@ describe('NewsApiService', () => {
 
   it('should call failed() when post() call errors out', () => {
     postSpy.and.callFake(() => Observable.throw('error'));
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',news:'url?stock=$stock'}});
+    service.load('a', {production: true, paths: {proxy: 'proxy', news: 'url?stock=$stock'}});
     expect(service.failed).toHaveBeenCalledTimes(1);
   });
 
   it('should call complete() with transformed data with a completion of get() call', () => {
-    getSubject.next({Content:{result:[{provider_name:'a', provider_publish_time:1486859417, title:'a', url:'a', thumbnail:'a'}]}});
+    getSubject.next({
+      Content: {
+        result: [{
+          provider_name: 'a',
+          provider_publish_time: 1486859417,
+          title: 'a',
+          url: 'a',
+          thumbnail: 'a'
+        }]
+      }
+    });
     service.load('a');
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith(
-      [{source: 'a', date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'), title: 'a', url: 'a', image: 'a'}]);
+      [{
+        source: 'a',
+        date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'),
+        title: 'a',
+        url: 'a',
+        image: 'a'
+      }]);
   });
 
   it('should call complete() with transformed data with a completion of post() call', () => {
-    postSubject.next({Content:{result:[{provider_name:'a', provider_publish_time:1486859417, title:'a', url:'a', thumbnail:'a'}]}});
-    service.load('a', {env: 'PROD', paths:{proxy:'proxy',news:'url?stock=$stock'}});
+    postSubject.next({
+      Content: {
+        result: [{
+          provider_name: 'a',
+          provider_publish_time: 1486859417,
+          title: 'a',
+          url: 'a',
+          thumbnail: 'a'
+        }]
+      }
+    });
+    service.load('a', {production: true, paths: {proxy: 'proxy', news: 'url?stock=$stock'}});
     expect(service.complete).toHaveBeenCalledTimes(1);
     expect(service.complete).toHaveBeenCalledWith(
-      [{source: 'a', date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'), title: 'a', url: 'a', image: 'a'}]);
+      [{
+        source: 'a',
+        date: moment(1486859417 * 1000).format('ddd, MMM Do YYYY h:mm A'),
+        title: 'a',
+        url: 'a',
+        image: 'a'
+      }]);
   });
 
 

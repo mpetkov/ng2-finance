@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { ChartActions } from './chart.actions';
-import { chartReducer } from './chart.reducer';
-import { ChartStateService } from './chart-state.service';
-import { ChartDataInterface } from './chart.state';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {ChartActions} from './chart-actions';
+import {chartReducer} from './chart-reducer';
+import {ChartStateService} from './chart-state.service';
+import {ChartDataInterface} from './chart-state';
 
 describe('ChartStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({chart: chartReducer})
       ],
@@ -26,11 +26,11 @@ describe('ChartStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
+    const count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -80,7 +80,7 @@ describe('ChartStateService', () => {
 
   it('should call store.dispatch() with FETCH_FULFILLED action', () => {
     spyOn(store, 'dispatch');
-    let state:ChartDataInterface[] = [{close: 10}];
+    const state: ChartDataInterface[] = [{close: 10}];
     service.fetchFulfilled(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchFulfilled(state));
@@ -88,7 +88,7 @@ describe('ChartStateService', () => {
 
   it('should call store.dispatch() with FETCH_LOADER action', () => {
     spyOn(store, 'dispatch');
-    let state:boolean = true;
+    const state = true;
     service.fetchLoader(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchLoader(state));
@@ -96,7 +96,7 @@ describe('ChartStateService', () => {
 
   it('should call store.dispatch() with FETCH_ERROR action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.fetchError(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchError(state));
@@ -104,7 +104,7 @@ describe('ChartStateService', () => {
 
   it('should call store.dispatch() with CHANGE_POINT action', () => {
     spyOn(store, 'dispatch');
-    let state:ChartDataInterface = {close: 10};
+    const state: ChartDataInterface = {close: 10};
     service.changePoint(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changePoint(state));
@@ -112,7 +112,7 @@ describe('ChartStateService', () => {
 
   it('should call store.dispatch() with CHANGE_RANGE action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.changeRange(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeRange(state));

@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
-import { ChartOptionsService } from '../services/chart-options.service';
-import { Subscriptions } from '../../../../../core/subscriptions';
-import { ChartStateService } from '../../state/chart-state.service';
-import { ChartDataInterface } from '../../state/chart.state';
+import {Component} from '@angular/core';
+import {ChartOptionsService} from '../services/chart-options.service';
+import {CoreSubscriptions} from '../../../../../shared/core/subscriptions';
+import {ChartStateService} from '../../state/chart-state.service';
+import {ChartDataInterface} from '../../state/chart-state';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-legend',
   templateUrl: './legend.component.html',
   styleUrls: ['./legend.component.scss']
 })
 
-export class LegendComponent extends Subscriptions {
-  items:LegendInterface[] = [];
+export class LegendComponent extends CoreSubscriptions {
+  items: LegendInterface[] = [];
 
-  constructor(private chartOptionsService:ChartOptionsService,
-              private chartState:ChartStateService) {
+  constructor(private chartOptionsService: ChartOptionsService,
+              private chartState: ChartStateService) {
     super();
     this.subscriptions.push(this.chartState.point$
       .subscribe(
@@ -23,7 +22,7 @@ export class LegendComponent extends Subscriptions {
       ));
   }
 
-  private updateItems(data:ChartDataInterface) {
+  private updateItems(data: ChartDataInterface) {
     if (data) {
       this.items = [
         {label: 'Open', value: this.chartOptionsService.options.priceFormat(data.open)},
@@ -39,6 +38,6 @@ export class LegendComponent extends Subscriptions {
 }
 
 export interface LegendInterface {
-  label?:string;
-  value?:string;
+  label?: string;
+  value?: string;
 }

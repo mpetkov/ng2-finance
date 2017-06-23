@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { InfoActions } from './info.actions';
-import { infoReducer } from './info.reducer';
-import { InfoStateService } from './info-state.service';
-import { InfoDataInterface } from './info.state';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {InfoActions} from './info-actions';
+import {infoReducer} from './info-reducer';
+import {InfoStateService} from './info-state.service';
+import {InfoDataInterface} from './info-state';
 
 describe('InfoStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({info: infoReducer})
       ],
@@ -26,11 +26,11 @@ describe('InfoStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
+    const count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -72,7 +72,7 @@ describe('InfoStateService', () => {
 
   it('should call store.dispatch() with FETCH_FULFILLED action', () => {
     spyOn(store, 'dispatch');
-    let state:InfoDataInterface[] = [{PreviousClose: 10}];
+    const state: InfoDataInterface[] = [{PreviousClose: 10}];
     service.fetchFulfilled(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchFulfilled(state));
@@ -80,7 +80,7 @@ describe('InfoStateService', () => {
 
   it('should call store.dispatch() with FETCH_LOADER action', () => {
     spyOn(store, 'dispatch');
-    let state:boolean = true;
+    const state = true;
     service.fetchLoader(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchLoader(state));
@@ -88,7 +88,7 @@ describe('InfoStateService', () => {
 
   it('should call store.dispatch() with FETCH_ERROR action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.fetchError(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.fetchError(state));

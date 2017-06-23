@@ -1,36 +1,33 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MdlModule } from 'angular2-mdl';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { AppStateService } from '../../../state/app-state.service';
-import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { ChartComponent } from './chart.component';
-import { ChartApiService } from './chart-api.service';
-import { ChartStateService } from './state/chart-state.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {MdlModule} from 'angular2-mdl';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {HeaderStateService} from '../../../shared/header/state/header-state.service';
+import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {ChartComponent} from './chart.component';
+import {ChartApiService} from './chart-api.service';
+import {ChartStateService} from './state/chart-state.service';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
-  @Input() type:NotificationTypeEnum;
-  @Input() value:string;
-  @Input() button:NotificationButtonInterface;
+  @Input() type: NotificationTypeEnum;
+  @Input() value: string;
+  @Input() button: NotificationButtonInterface;
 }
 
 @Component({selector: 'mp-d3fc', template: ''})
-class D3fcComponent {}
+class D3fcComponent {
+}
 
 describe('ChartComponent', () => {
-  let fixture:ComponentFixture<ChartComponent>;
-  let component:ChartComponent;
-  let api:any;
-  let chartState:any;
-  let watchlistState:any;
-  let appState:any;
+  let fixture: ComponentFixture<ChartComponent>;
+  let component: ChartComponent;
+  let api: any;
+  let chartState: any;
+  let watchlistState: any;
+  let headerState: any;
 
   beforeEach(async(() => {
     api = jasmine.createSpyObj('api', ['load']);
@@ -54,7 +51,7 @@ describe('ChartComponent', () => {
     watchlistState.favorites$ = new BehaviorSubject<any>(['AAPL', 'GOOG', 'FB']);
     watchlistState.highlights$ = new BehaviorSubject<any>({});
 
-    appState = jasmine.createSpyObj('appState', [
+    headerState = jasmine.createSpyObj('headerState', [
       'changePreloader'
     ]);
 
@@ -72,7 +69,7 @@ describe('ChartComponent', () => {
         {provide: ChartApiService, useValue: api},
         {provide: ChartStateService, useValue: chartState},
         {provide: WatchlistStateService, useValue: watchlistState},
-        {provide: AppStateService, useValue: appState}
+        {provide: HeaderStateService, useValue: headerState}
       ]
     }).compileComponents();
   }));
@@ -107,10 +104,10 @@ describe('ChartComponent', () => {
   it('should toggle css class between green and red for `mp-change` span tag when the change value is negative or positive', () => {
     watchlistState.stockData$.next({symbol: 'AAPL', change: -10});
     fixture.detectChanges();
-    let positiveColor:string = 'mdl-color-text--green-A700';
-    let negativeColor:string = 'mdl-color-text--red';
+    const positiveColor = 'mdl-color-text--green-A700';
+    const negativeColor = 'mdl-color-text--red';
 
-    let element:any = fixture.nativeElement.querySelector('.mp-change');
+    const element: any = fixture.nativeElement.querySelector('.mp-change');
     expect(element.classList).not.toContain(positiveColor);
     expect(element.classList).toContain(negativeColor);
 
@@ -124,19 +121,19 @@ describe('ChartComponent', () => {
     watchlistState.stockData$.next({symbol: 'AAPL'});
     fixture.detectChanges();
 
-    let positiveColor:string = 'mdl-color--green-A100';
-    let negativeColor:string = 'mdl-color--red-100';
-    let element:any = fixture.nativeElement.querySelector('.mp-transition');
+    const positiveColor = 'mdl-color--green-A100';
+    const negativeColor = 'mdl-color--red-100';
+    const element: any = fixture.nativeElement.querySelector('.mp-transition');
 
     expect(element.classList).not.toContain(positiveColor);
     expect(element.classList).not.toContain(negativeColor);
 
-    watchlistState.highlights$.next({AAPL:{price:positiveColor}});
+    watchlistState.highlights$.next({AAPL: {price: positiveColor}});
     fixture.detectChanges();
     expect(element.classList).toContain(positiveColor);
     expect(element.classList).not.toContain(negativeColor);
 
-    watchlistState.highlights$.next({AAPL:{price:negativeColor}});
+    watchlistState.highlights$.next({AAPL: {price: negativeColor}});
     fixture.detectChanges();
     expect(element.classList).not.toContain(positiveColor);
     expect(element.classList).toContain(negativeColor);

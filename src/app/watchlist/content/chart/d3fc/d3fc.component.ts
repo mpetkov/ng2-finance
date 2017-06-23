@@ -1,24 +1,16 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  HostListener,
-  AfterViewInit,
-  ElementRef
-} from '@angular/core';
-import { ChartVolumeService } from './services/chart-volume.service';
-import { ChartCrosshairService } from './services/chart-crosshair.service';
-import { ChartTooltipsService } from './services/chart-tooltips.service';
-import { ChartOptionsService } from './services/chart-options.service';
-import { Subscriptions } from '../../../../core/subscriptions';
-import { ChartDataInterface } from '../state/chart.state';
-import { ChartStateService } from '../state/chart-state.service';
+import {AfterViewInit, Component, ElementRef, HostListener, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ChartVolumeService} from './services/chart-volume.service';
+import {ChartCrosshairService} from './services/chart-crosshair.service';
+import {ChartTooltipsService} from './services/chart-tooltips.service';
+import {ChartOptionsService} from './services/chart-options.service';
+import {CoreSubscriptions} from '../../../../shared/core/subscriptions';
+import {ChartDataInterface} from '../state/chart-state';
+import {ChartStateService} from '../state/chart-state.service';
 
-declare let fc:any;
-declare let d3:any;
+declare const fc: any;
+declare const d3: any;
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-d3fc',
   templateUrl: './d3fc.component.html',
   styleUrls: ['./d3fc.component.scss'],
@@ -31,20 +23,20 @@ declare let d3:any;
   ]
 })
 
-export class D3fcComponent extends Subscriptions implements AfterViewInit {
-  @ViewChild('svg') svg:ElementRef;
-  smallView:boolean = false;
-  private data:ChartDataInterface[];
-  private container:any;
-  private chart:any;
-  private range:string;
-  private windowWidth:number = window.innerWidth;
+export class D3fcComponent extends CoreSubscriptions implements AfterViewInit {
+  @ViewChild('svg') svg: ElementRef;
+  smallView = false;
+  private data: ChartDataInterface[];
+  private container: any;
+  private chart: any;
+  private range: string;
+  private windowWidth: number = window.innerWidth;
 
-  constructor(public chartState:ChartStateService,
-              private chartOptionsService:ChartOptionsService,
-              private chartCrosshairService:ChartCrosshairService,
-              private chartTooltipsService:ChartTooltipsService,
-              private chartVolumeService:ChartVolumeService) {
+  constructor(public chartState: ChartStateService,
+              private chartOptionsService: ChartOptionsService,
+              private chartCrosshairService: ChartCrosshairService,
+              private chartTooltipsService: ChartTooltipsService,
+              private chartVolumeService: ChartVolumeService) {
     super();
 
     this.subscriptions.push(chartState.range$.subscribe(
@@ -67,23 +59,23 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event:any) {
+  onResize(event: any) {
     this.resize(event.currentTarget.innerWidth);
   }
 
   @HostListener('window:orientationchange', ['$event'])
-  onOrientationChange(event:any) {
+  onOrientationChange(event: any) {
     this.resize(event.currentTarget.innerWidth);
   }
 
-  private resize(windowWidth:number) {
+  private resize(windowWidth: number) {
     this.windowWidth = windowWidth;
     if (this.data) {
       this.redraw(this.data, this.container, this.chart);
     }
   }
 
-  private init(data:ChartDataInterface[]) {
+  private init(data: ChartDataInterface[]) {
     if (data && data.length > 0) {
       this.data = data;
       this.container = d3.select(this.svg.nativeElement);
@@ -93,22 +85,22 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     }
   }
 
-  private render(data:any) {
+  private render(data: any) {
     this.chart = this.getChart(data);
-    let area:any = this.getArea(this.chart.yDomain()[0]);
-    let line:any = this.getLine();
-    let gridlines:any = this.getGridLines();
-    let crosshair:any = this.chartCrosshairService.getCrosshair(data, line);
-    let lastClose:any = this.chartTooltipsService.getLastClose();
+    const area: any = this.getArea(this.chart.yDomain()[0]);
+    const line: any = this.getLine();
+    const gridlines: any = this.getGridLines();
+    const crosshair: any = this.chartCrosshairService.getCrosshair(data, line);
+    const lastClose: any = this.chartTooltipsService.getLastClose();
 
-    var items:any[] = [gridlines, area, line];
+    const items: any[] = [gridlines, area, line];
     if (!this.smallView) {
       items.push(lastClose, crosshair);
     }
 
     this.chart.plotArea(fc.series.multi()
       .series(items)
-      .mapping((series:any) => {
+      .mapping((series: any) => {
         switch (series) {
           case lastClose:
             return [data[data.length - 1]];
@@ -120,8 +112,8 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       }));
   }
 
-  private redraw(data:ChartDataInterface[], container:any, chart:any) {
-    let render:boolean = this.updateSettings();
+  private redraw(data: ChartDataInterface[], container: any, chart: any) {
+    const render: boolean = this.updateSettings();
     if (render) {
       this.render(data);
     }
@@ -136,7 +128,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
   }
 
   private updateSettings() {
-    let render:boolean = false;
+    let render = false;
     if (this.windowWidth < 420) {
       if (!this.smallView) {
         this.smallView = true;
@@ -173,7 +165,7 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
     }
   }
 
-  private getChart(data:ChartDataInterface[]):any {
+  private getChart(data: ChartDataInterface[]): any {
     return fc.chart.linearTimeSeries()
       .xDomain(fc.util.extent(data, 'date'))
       .yDomain(fc.util.extent(data, ['open', 'close']))
@@ -187,22 +179,22 @@ export class D3fcComponent extends Subscriptions implements AfterViewInit {
       .xTicks(this.chartOptionsService.options.xTicks);
   }
 
-  private getArea(y0Value:number):any {
+  private getArea(y0Value: number): any {
     return fc.series.area()
       .y0Value(y0Value)
-      .yValue((d:any) => {
+      .yValue((d: any) => {
         return d.open;
       });
   }
 
-  private getLine():any {
+  private getLine(): any {
     return fc.series.line()
-      .yValue((d:any) => {
+      .yValue((d: any) => {
         return d.open;
       });
   }
 
-  private getGridLines():any {
+  private getGridLines(): any {
     return fc.annotation.gridline()
       .yTicks(this.chartOptionsService.options.yTicks)
       .xTicks(this.chartOptionsService.options.xTicks);

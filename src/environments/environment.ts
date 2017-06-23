@@ -3,6 +3,7 @@ import {extend} from 'lodash';
 
 export const environment = extend(base, {
   production: false,
+  analytics: null,
   paths: {
     charts: './assets/json/chart/$stock/$range.json',
     news: './assets/json/news/$stock.json',

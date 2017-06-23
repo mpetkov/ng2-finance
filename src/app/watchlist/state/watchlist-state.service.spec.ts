@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { WatchlistStateService } from './watchlist-state.service';
-import { WatchlistActions } from './watchlist.actions';
-import { watchlistReducer } from './watchlist.reducer';
-import { StockDataInterface } from './watchlist.state';
+import {TestBed} from '@angular/core/testing';
+import {Store, StoreModule} from '@ngrx/store';
+import {WatchlistStateService} from './watchlist-state.service';
+import {WatchlistActions} from './watchlist-actions';
+import {watchlistReducer} from './watchlist-reducer';
+import {StockDataInterface} from './watchlist-state';
 
 describe('WatchlistStateService', () => {
-  let actions:any;
-  let service:any;
-  let store:Store<any>;
+  let actions: any;
+  let service: any;
+  let store: Store<any>;
 
   beforeEach(() => {
-    let injector = TestBed.configureTestingModule({
+    const injector = TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({watchlist: watchlistReducer})
       ],
@@ -26,11 +26,11 @@ describe('WatchlistStateService', () => {
     store = injector.get(Store);
   });
 
-  function checkStream(type:string, action:string, initialValue:any, input1:any, input2:any, state1:any, state2:any) {
-    let count:number = 0;
-    let state:any = null;
+  function checkStream(type: string, action: string, initialValue: any, input1: any, input2: any, state1: any, state2: any) {
+    let count = 0;
+    let state: any = null;
 
-    service[type + '$'].subscribe((value:any) => {
+    service[type + '$'].subscribe((value: any) => {
       count++;
       state = value;
     });
@@ -68,7 +68,7 @@ describe('WatchlistStateService', () => {
 
   it('should stream the current favorites from store', () => {
     checkStream('favorites', 'addFavorite', ['AAPL', 'GOOG', 'FB'], 'a', 'b',
-      ['a', 'AAPL', 'GOOG', 'FB'], ['b', 'a','AAPL', 'GOOG', 'FB']);
+      ['a', 'AAPL', 'GOOG', 'FB'], ['b', 'a', 'AAPL', 'GOOG', 'FB']);
   });
 
   it('should stream the current highlights from store', () => {
@@ -77,7 +77,7 @@ describe('WatchlistStateService', () => {
 
   it('should call store.dispatch() with CHANGE_STOCK_DATA action', () => {
     spyOn(store, 'dispatch');
-    let state:StockDataInterface = {symbol: 'a'};
+    const state: StockDataInterface = {symbol: 'a'};
     service.changeStockData(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeStockData(state));
@@ -85,7 +85,7 @@ describe('WatchlistStateService', () => {
 
   it('should call store.dispatch() with CHANGE_STOCK action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.changeStock(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeStock(state));
@@ -93,7 +93,7 @@ describe('WatchlistStateService', () => {
 
   it('should call store.dispatch() with ADD_FAVORITE action', () => {
     spyOn(store, 'dispatch');
-    let state:string = 'a';
+    const state = 'a';
     service.addFavorite(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.addFavorite(state));
@@ -101,7 +101,7 @@ describe('WatchlistStateService', () => {
 
   it('should call store.dispatch() with DELETE_FAVORITES action', () => {
     spyOn(store, 'dispatch');
-    let state:string[] = ['a'];
+    const state: string[] = ['a'];
     service.deleteFavorites(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.deleteFavorites(state));
@@ -109,7 +109,7 @@ describe('WatchlistStateService', () => {
 
   it('should call store.dispatch() with CHANGE_HIGHLIGHTS action', () => {
     spyOn(store, 'dispatch');
-    let state:any = {a: {price: 'a'}};
+    const state: any = {a: {price: 'a'}};
     service.changeHighlights(state);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(actions.changeHighlights(state));

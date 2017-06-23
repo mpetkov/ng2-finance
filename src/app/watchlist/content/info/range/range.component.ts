@@ -1,19 +1,14 @@
-import {
-  Component,
-  Input,
-  OnChanges
-} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-range',
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss']
 })
 
 export class RangeComponent implements OnChanges {
-  @Input() options:RangeOptionsInterface = {};
-  position:RangePositionInterface = {};
+  @Input() options: RangeOptionsInterface = {};
+  position: RangePositionInterface = {};
 
   ngOnChanges() {
     if (this.options) {
@@ -21,8 +16,8 @@ export class RangeComponent implements OnChanges {
     }
   }
 
-  private getPosition(options:RangeOptionsInterface) {
-    let total:number = Number(options.end) - Number(options.start);
+  private getPosition(options: RangeOptionsInterface) {
+    const total: number = Number(options.end) - Number(options.start);
     return {
       left: ((Number(options.activeStart) - Number(options.start)) / total) * 100,
       width: ((Number(options.activeEnd) - Number(options.activeStart)) / total) * 100,
@@ -32,16 +27,16 @@ export class RangeComponent implements OnChanges {
 }
 
 export interface RangeOptionsInterface {
-  text?:string;
-  start?:number;
-  end?:number;
-  activeStart?:number;
-  activeEnd?:number;
-  active?:number;
+  text?: string;
+  start?: number;
+  end?: number;
+  activeStart?: number;
+  activeEnd?: number;
+  active?: number;
 }
 
 export interface RangePositionInterface {
-  left?:number;
-  width?:number;
-  pin?:number;
+  left?: number;
+  width?: number;
+  pin?: number;
 }

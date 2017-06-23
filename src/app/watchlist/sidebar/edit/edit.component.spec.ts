@@ -1,38 +1,31 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
-import {
-  DragulaModule,
-  DragulaService
-} from 'ng2-dragula';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { HeaderStateService } from '../../../shared/header/state/header-state.service';
-import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { EditComponent } from './edit.component';
-import { FavoritesStateService } from '../favorites/state/favorites-state.service';
-import { SidebarStateService } from '../state/sidebar-state.service';
-import { EditService } from './edit.service';
-import { SidebarTypeEnum } from '../state/sidebar.state';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MdlModule} from 'angular2-mdl';
+import {DragulaModule, DragulaService} from 'ng2-dragula';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {HeaderStateService} from '../../../shared/header/state/header-state.service';
+import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {EditComponent} from './edit.component';
+import {FavoritesStateService} from '../favorites/state/favorites-state.service';
+import {SidebarStateService} from '../state/sidebar-state.service';
+import {EditService} from './edit.service';
+import {SidebarTypeEnum} from '../state/sidebar-state';
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
-  @Input() type:NotificationTypeEnum;
-  @Input() value:string;
+  @Input() type: NotificationTypeEnum;
+  @Input() value: string;
 }
 
 describe('EditComponent', () => {
-  let fixture:ComponentFixture<EditComponent>;
-  let component:EditComponent;
-  let favoritesState:any;
-  let sidebarState:any;
-  let headerState:any;
-  let watchlistState:any;
-  let editService:any;
+  let fixture: ComponentFixture<EditComponent>;
+  let component: EditComponent;
+  let favoritesState: any;
+  let sidebarState: any;
+  let headerState: any;
+  let watchlistState: any;
+  let editService: any;
 
   beforeEach(async(() => {
     favoritesState = jasmine.createSpyObj('favoritesStateService', [
@@ -131,7 +124,7 @@ describe('EditComponent', () => {
 
   it('should add class mp-active when the remove button is clicked', () => {
     watchlistState.favorites$.next(['a']);
-    favoritesState.data$.next([{symbol:'a'}]);
+    favoritesState.data$.next([{symbol: 'a'}]);
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mp-remove').click();
     fixture.detectChanges();
@@ -144,7 +137,7 @@ describe('EditComponent', () => {
 
   it('should add stock to deleted list when the delete button is clicked', () => {
     watchlistState.favorites$.next(['a', 'b']);
-    favoritesState.data$.next([{symbol:'a'}, {symbol:'b'}]);
+    favoritesState.data$.next([{symbol: 'a'}, {symbol: 'b'}]);
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mp-delete').click();
     fixture.detectChanges();
@@ -154,7 +147,7 @@ describe('EditComponent', () => {
 
   it('should show a notification when all stocks are deleted', () => {
     watchlistState.favorites$.next(['a']);
-    favoritesState.data$.next([{symbol:'a'}]);
+    favoritesState.data$.next([{symbol: 'a'}]);
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mp-delete').click();
     fixture.detectChanges();

@@ -1,41 +1,36 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { WatchlistStateService } from '../../state/watchlist-state.service';
-import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
-import { HeaderStateService } from '../../../shared/header/state/header-state.service';
-import { FavoritesHighlightService } from './favorites-highlight.service';
-import { FavoritesComponent } from './favorites.component';
-import { FavoritesStateService } from './state/favorites-state.service';
-import { FavoritesApiService } from '../favorites-api.service';
-import { SidebarStateService } from '../state/sidebar-state.service';
-import { FavoriteNotificationActions } from './favorites.component';
-import { SidebarTypeEnum } from '../state/sidebar.state';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {MdlModule} from 'angular2-mdl';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {WatchlistStateService} from '../../state/watchlist-state.service';
+import {NotificationButtonInterface, NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import {HeaderStateService} from '../../../shared/header/state/header-state.service';
+import {FavoritesHighlightService} from './favorites-highlight.service';
+import {FavoriteNotificationActions, FavoritesComponent} from './favorites.component';
+import {FavoritesStateService} from './state/favorites-state.service';
+import {FavoritesApiService} from '../favorites-api.service';
+import {SidebarStateService} from '../state/sidebar-state.service';
+import {SidebarTypeEnum} from '../state/sidebar-state';
 
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
-  @Input() type:NotificationTypeEnum;
-  @Input() value:string;
-  @Input() button:NotificationButtonInterface;
+  @Input() type: NotificationTypeEnum;
+  @Input() value: string;
+  @Input() button: NotificationButtonInterface;
 }
 
 describe('FavoritesComponent', () => {
-  let fixture:ComponentFixture<FavoritesComponent>;
-  let component:FavoritesComponent;
-  let watchlistState:any;
-  let favoritesState:any;
-  let api:any;
-  let favoritesHighlightService:any;
-  let sidebarState:any;
-  let headerState:any;
-  let router:any;
+  let fixture: ComponentFixture<FavoritesComponent>;
+  let component: FavoritesComponent;
+  let watchlistState: any;
+  let favoritesState: any;
+  let api: any;
+  let favoritesHighlightService: any;
+  let sidebarState: any;
+  let headerState: any;
+  let router: any;
 
   beforeEach(async(() => {
     watchlistState = jasmine.createSpyObj('watchlistState', [
@@ -142,7 +137,7 @@ describe('FavoritesComponent', () => {
 
   it('should add class mp-active when the row is the currently selected stock', () => {
     component.notificationType = 0;
-    component.favoritesData = [{symbol:'a'}];
+    component.favoritesData = [{symbol: 'a'}];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.mdl-navigation__link').classList).not.toContain('mp-active');
 
@@ -153,22 +148,22 @@ describe('FavoritesComponent', () => {
 
   it('should add transition color class when the row has a highlight applied', () => {
     component.notificationType = 0;
-    component.favoritesData = [{symbol:'a'}];
+    component.favoritesData = [{symbol: 'a'}];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.mp-highlight').classList).not.toContain('color');
 
-    watchlistState.highlights$.next({a:{price:'color'}});
+    watchlistState.highlights$.next({a: {price: 'color'}});
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.mp-highlight').classList).toContain('color');
   });
 
   it('should add green/red color class to the pill depending if the value is negative or positive', () => {
     component.notificationType = 0;
-    component.favoritesData = [{symbol:'a', change:'10'}];
+    component.favoritesData = [{symbol: 'a', change: '10'}];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.mp-pill').classList).toContain('mdl-color--green-A700');
 
-    component.favoritesData = [{symbol:'a', change:'-10'}];
+    component.favoritesData = [{symbol: 'a', change: '-10'}];
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.mp-pill').classList).toContain('mdl-color--red');
   });
@@ -196,7 +191,7 @@ describe('FavoritesComponent', () => {
 
   it('should call Router#navigate() when stock row is clicked', () => {
     component.notificationType = 0;
-    component.favoritesData = [{symbol:'a'}];
+    component.favoritesData = [{symbol: 'a'}];
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mdl-navigation__link').click();
     expect(router.navigate).toHaveBeenCalledTimes(1);
@@ -206,7 +201,7 @@ describe('FavoritesComponent', () => {
   it('should call HeaderStateService#changeSidebar() when stock row is clicked and sidebar is present', () => {
     component.notificationType = 0;
     headerState.sidebar$.next(true);
-    component.favoritesData = [{symbol:'a'}];
+    component.favoritesData = [{symbol: 'a'}];
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mdl-navigation__link').click();
     expect(headerState.changeSidebar).toHaveBeenCalledTimes(1);
@@ -223,7 +218,7 @@ describe('FavoritesComponent', () => {
 
     component.notificationType = 0;
     headerState.sidebar$.next(true);
-    component.favoritesData = [{symbol:'a'}];
+    component.favoritesData = [{symbol: 'a'}];
     fixture.detectChanges();
     fixture.nativeElement.querySelector('.mp-pill').click();
     fixture.detectChanges();
@@ -250,14 +245,14 @@ describe('FavoritesComponent', () => {
     jasmine.clock().uninstall();
     jasmine.clock().install();
 
-    favoritesState.data$.next([{symbol:'AAPL'}]);
+    favoritesState.data$.next([{symbol: 'AAPL'}]);
     fixture.detectChanges();
     expect(api.reload).toHaveBeenCalledTimes(0);
 
     jasmine.clock().tick(10001);
     expect(api.reload).toHaveBeenCalledTimes(1);
 
-    favoritesState.data$.next([{symbol:'GOOG'}]);
+    favoritesState.data$.next([{symbol: 'GOOG'}]);
     fixture.detectChanges();
     jasmine.clock().tick(10001);
     expect(api.reload).toHaveBeenCalledTimes(2);

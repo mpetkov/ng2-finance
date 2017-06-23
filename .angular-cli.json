@@ -16,7 +16,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "mp",
       "styles": [
         "../node_modules/normalize-css/normalize.css",
         "../node_modules/dragula/dist/dragula.min.css",

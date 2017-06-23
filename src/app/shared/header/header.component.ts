@@ -1,21 +1,20 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { HeaderStateService } from './state/header-state.service';
-import { Subscriptions } from '../../core/subscriptions';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {HeaderStateService} from './state/header-state.service';
+import {CoreSubscriptions} from '../core/subscriptions';
 
 @Component({
-  moduleId: module.id,
   selector: 'mp-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class HeaderComponent extends Subscriptions {
-  active:boolean;
-  sidebar:boolean;
-  private searchFromContent:boolean;
+export class HeaderComponent extends CoreSubscriptions {
+  active: boolean;
+  sidebar: boolean;
+  private searchFromContent: boolean;
 
-  constructor(private headerState:HeaderStateService) {
+  constructor(private headerState: HeaderStateService) {
     super();
     this.subscriptions.push(headerState.searchActive$.subscribe(
       searchActive => this.searchActiveChange(searchActive)
@@ -26,11 +25,11 @@ export class HeaderComponent extends Subscriptions {
     ));
   }
 
-  updateSearch(value:string) {
+  updateSearch(value: string) {
     this.headerState.changeSearch(value);
   }
 
-  activateSearch(active:boolean) {
+  activateSearch(active: boolean) {
     this.headerState.changeSearchActive(active);
   }
 
@@ -38,11 +37,11 @@ export class HeaderComponent extends Subscriptions {
     this.headerState.changeSidebar(true);
   }
 
-  toggleSearch(active:boolean) {
+  toggleSearch(active: boolean) {
     this.headerState.changeSearchActive(active);
   }
 
-  private searchActiveChange(searchActive:boolean) {
+  private searchActiveChange(searchActive: boolean) {
     this.active = searchActive;
 
     if (searchActive && !this.sidebar) {

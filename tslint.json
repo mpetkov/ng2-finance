@@ -105,13 +105,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "mp",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "mp",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
@@ -119,6 +119,7 @@
     "use-host-property-decorator": true,
     "no-input-rename": true,
     "no-output-rename": true,
+    "no-empty-interface": false,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,

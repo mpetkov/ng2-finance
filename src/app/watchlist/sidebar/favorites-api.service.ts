@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { environment } from '../../../environments/environment';
-import { CoreApiResponseService } from '../../core/services/api-response.service';
-import { FavoritesStateService } from './favorites/state/favorites-state.service';
-import { get } from 'lodash';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {environment} from '../../../environments/environment';
+import {CoreApiResponseService} from '../../shared/core/services/api-response.service';
+import {FavoritesStateService} from './favorites/state/favorites-state.service';
+import {get} from 'lodash';
 
 @Injectable()
 export class FavoritesApiService extends CoreApiResponseService {
-  private stocks:string[] = [];
+  private stocks: string[] = [];
 
-  constructor(public http:Http,
-              private favoritesState:FavoritesStateService) {
+  constructor(public http: Http,
+              private favoritesState: FavoritesStateService) {
     super(http, favoritesState);
   }
 
-  load(stocks:string[]) {
+  load(stocks: string[]) {
     this.stocks = stocks;
     this.toggleLoader(true);
     this.get(environment.paths.stocks.replace('$stocks', encodeURIComponent('"' + stocks.join('","') + '"')))
@@ -28,14 +28,14 @@ export class FavoritesApiService extends CoreApiResponseService {
     this.load(this.stocks);
   }
 
-  private transform(data:any) {
-    let stocks:any = get(data, 'query.results.quote', []);
+  private transform(data: any) {
+    let stocks: any = get(data, 'query.results.quote', []);
     if (!Array.isArray(stocks)) {
       stocks = [stocks];
     }
 
-    return stocks.map((quote:any) => {
-      let change:number = Number(quote.Change) || 0.00;
+    return stocks.map((quote: any) => {
+      const change: number = Number(quote.Change) || 0.00;
       return {
         symbol: quote.symbol,
         name: quote.Name,
@@ -47,11 +47,11 @@ export class FavoritesApiService extends CoreApiResponseService {
     });
   }
 
-  private calculateChangePercent(change:number, price:string):string {
+  private calculateChangePercent(change: number, price: string): string {
     return this.getPlusSign(change) + (change / (Number(price) - change) * 100).toFixed(2) + '%';
   }
 
-  private getPlusSign(change:number):string {
+  private getPlusSign(change: number): string {
     return (change > 0) ? '+' : '';
   }
 }

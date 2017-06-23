@@ -1,23 +1,19 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import {
-  Component,
-  ViewChild
-} from '@angular/core';
-import { RangeComponent } from './range.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {RangeComponent} from './range.component';
 
-@Component({template: `<mp-range [options]="options"></mp-range>`})
+@Component({
+  template: `
+    <mp-range [options]="options"></mp-range>`
+})
 class TestComponent {
   @ViewChild(RangeComponent) rangeComponent: RangeComponent;
-  options:any;
+  options: any;
 }
 
 describe('RangeComponent', () => {
-  let fixture:ComponentFixture<TestComponent>;
-  let component:TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
+  let component: TestComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,9 +42,9 @@ describe('RangeComponent', () => {
     component.options = {
       start: 10,
       end: 20,
-      activeStart:15,
-      activeEnd:16,
-      active:15
+      activeStart: 15,
+      activeEnd: 16,
+      active: 15
     };
     fixture.detectChanges();
     expect(component.rangeComponent.position.left).toBe(50);
