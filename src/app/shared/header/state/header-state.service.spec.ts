@@ -25,7 +25,7 @@ describe('HeaderStateService', () => {
   });
 
   function checkStream(type: string, action: string, initialValue: any, state1: any, state2: any) {
-    const count = 0;
+    let count = 0;
     let state: any = null;
 
     service[type + '$'].subscribe((value: any) => {

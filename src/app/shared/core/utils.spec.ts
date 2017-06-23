@@ -22,5 +22,8 @@ describe('Utils', () => {
 
     localStorageAdapter.setItem('test', 1);
     expect(localStorageAdapter.getItem('test', 'number')).toBe(1);
+
+    localStorage.setItem('test', '[{ss:sas]');
+    expect(localStorageAdapter.getItem('test', 'array')).toBeNull();
   });
 });
