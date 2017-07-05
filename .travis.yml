@@ -18,7 +18,7 @@ before_install:
  - sudo dpkg -i google-chrome*.deb
 
 script:
-  -  ng test -sr -cc
+  -  node_modules/\@angular/cli/bin/ng test -sr -cc
 
 after_success:
     - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
