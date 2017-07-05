@@ -1,0 +1,40 @@
+.mp-preloader {
+  display: table;
+}
+
+.mp-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  h3 {
+    margin: 10px;
+  }
+  .mp-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+.mp-loaded .mp-cover {
+  display: none;
+}
+
+.mp-fallback {
+  display: none;
+  z-index: 1001;
+  h4 {
+    font-size: 1.75rem;
+  }
+}
+
+.old-ie .mp-fallback {
+  display: table;
+}
+
+.ie-7 .mp-fallback {
+  display: inline;
+  padding-top: 50px;
+}

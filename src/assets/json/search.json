@@ -1,0 +1,41 @@
+{
+  "data": {
+    "suggestionTitleAccessor": "symbol",
+    "suggestionMeta": [
+      "symbol",
+      "name",
+      "exch",
+      "type",
+      "exchDisp",
+      "typeDisp"
+    ],
+    "hiConf": false,
+    "items": [
+      {
+        "symbol": "AAPL",
+        "name": "Apple Inc.",
+        "exch": "NMS",
+        "type": "S",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "GOOG",
+        "name": "Alphabet Inc.",
+        "exch": "NMS",
+        "type": "S",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "FB",
+        "name": "Facebook, Inc.",
+        "exch": "NAS",
+        "type": "S",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Equity"
+      }
+    ]
+  },
+  "meta": {}
+}

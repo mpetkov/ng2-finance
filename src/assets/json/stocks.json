@@ -1,0 +1,59 @@
+{
+  "query": {
+    "count": 3,
+    "created": "2017-02-12T12:44:46Z",
+    "lang": "en-US",
+    "results": {
+      "quote": [
+        {
+          "symbol": "AAPL",
+          "AverageDailyVolume": "30589900",
+          "Change": "-0.30",
+          "DaysLow": "132.05",
+          "DaysHigh": "132.94",
+          "YearLow": "89.47",
+          "YearHigh": "132.94",
+          "MarketCapitalization": "693.17B",
+          "LastTradePriceOnly": "132.12",
+          "DaysRange": "132.05 - 132.94",
+          "Name": "Apple Inc.",
+          "Symbol": "AAPL",
+          "Volume": "20065458",
+          "StockExchange": "NMS"
+        },
+        {
+          "symbol": "GOOG",
+          "AverageDailyVolume": "1612920",
+          "Change": "+4.11",
+          "DaysLow": "809.78",
+          "DaysHigh": "815.25",
+          "YearLow": "663.28",
+          "YearHigh": "841.95",
+          "MarketCapitalization": "562.59B",
+          "LastTradePriceOnly": "813.67",
+          "DaysRange": "809.78 - 815.25",
+          "Name": "Alphabet Inc.",
+          "Symbol": "GOOG",
+          "Volume": "1134976",
+          "StockExchange": "NMS"
+        },
+        {
+          "symbol": "FB",
+          "AverageDailyVolume": "21739400",
+          "Change": "+0.05",
+          "DaysLow": "133.68",
+          "DaysHigh": "134.94",
+          "YearLow": "100.24",
+          "YearHigh": "135.49",
+          "MarketCapitalization": "387.81B",
+          "LastTradePriceOnly": "134.19",
+          "DaysRange": "133.68 - 134.94",
+          "Name": "Facebook, Inc.",
+          "Symbol": "FB",
+          "Volume": "15061939",
+          "StockExchange": "NMS"
+        }
+      ]
+    }
+  }
+}
