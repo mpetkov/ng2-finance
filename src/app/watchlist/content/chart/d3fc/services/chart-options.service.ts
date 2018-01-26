@@ -1,4 +1,5 @@
 declare const d3: any;
+
 export class ChartOptionsService {
   options: any;
 

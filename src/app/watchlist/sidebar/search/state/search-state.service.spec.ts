@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {SearchActions} from './search-actions';
-import {searchReducer} from './search-reducer';
-import {SearchStateService} from './search-state.service';
+import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { SearchActions } from './search-actions';
+import { searchReducer } from './search-reducer';
+import { SearchStateService } from './search-state.service';
 
 describe('SearchStateService', () => {
   let actions: any;

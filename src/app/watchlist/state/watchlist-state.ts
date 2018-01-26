@@ -1,5 +1,5 @@
-import {Map, Record} from 'immutable';
-import {localStorageAdapter, Types} from '../../shared/core/utils';
+import { Map, Record } from 'immutable';
+import { localStorageAdapter, Types } from '../../shared/core/utils';
 
 export interface StockDataInterface {
   symbol?: string;

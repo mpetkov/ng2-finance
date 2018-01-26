@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {CoreApiService} from './api.service';
-import {CoreApiStateService} from '../state/api-state.service';
-import {CoreApiErrorInterface} from '../state/api-state';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { CoreApiService } from './api.service';
+import { CoreApiStateService } from '../state/api-state.service';
+import { CoreApiErrorInterface } from '../state/api-state';
 
 @Injectable()
 export class CoreApiResponseService extends CoreApiService {

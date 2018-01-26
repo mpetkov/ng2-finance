@@ -1,5 +1,5 @@
-import {Action} from '@ngrx/store';
-import {StockDataInterface} from './watchlist-state';
+import { Action } from '@ngrx/store';
+import { StockDataInterface } from './watchlist-state';
 
 export class WatchlistActions {
   static CHANGE_STOCK_DATA = 'WATCHLIST:CHANGE_STOCK_DATA';

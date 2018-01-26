@@ -1,6 +1,6 @@
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
-import {NewsActions} from './news-actions';
-import {NewsDataInterface} from './news-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
+import { NewsActions } from './news-actions';
+import { NewsDataInterface } from './news-state';
 
 describe('NewsActions', () => {
   let actions: NewsActions;

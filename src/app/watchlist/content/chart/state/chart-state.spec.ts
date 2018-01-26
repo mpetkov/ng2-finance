@@ -1,5 +1,5 @@
-import {Record} from 'immutable';
-import {ChartInitialState} from './chart-state';
+import { Record } from 'immutable';
+import { ChartInitialState } from './chart-state';
 
 describe('ChartInitialState', () => {
   let state: any;

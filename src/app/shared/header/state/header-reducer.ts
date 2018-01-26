@@ -1,6 +1,6 @@
-import {Action, ActionReducer} from '@ngrx/store';
-import {HeaderInitialState, HeaderStateInterface, HeaderStateKeys} from './header-state';
-import {HeaderActions} from './header-actions';
+import { Action, ActionReducer } from '@ngrx/store';
+import { HeaderInitialState, HeaderStateInterface, HeaderStateKeys } from './header-state';
+import { HeaderActions } from './header-actions';
 
 const initialState: HeaderStateInterface = new HeaderInitialState() as HeaderStateInterface;
 

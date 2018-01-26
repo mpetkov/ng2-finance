@@ -1,14 +1,14 @@
-import {Component, OnDestroy, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Subject} from 'rxjs/Subject';
-import {FavoritesApiService} from './favorites-api.service';
-import {WatchlistStateService} from '../state/watchlist-state.service';
-import {WatchlistStateKeys} from '../state/watchlist-state';
-import {HeaderStateService} from '../../shared/header/state/header-state.service';
-import {CoreSubscriptions} from '../../shared/core/subscriptions';
-import {localStorageAdapter} from '../../shared/core/utils';
-import {SidebarStateService} from './state/sidebar-state.service';
-import {SidebarTypeEnum} from './state/sidebar-state';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
+import { FavoritesApiService } from './favorites-api.service';
+import { WatchlistStateService } from '../state/watchlist-state.service';
+import { WatchlistStateKeys } from '../state/watchlist-state';
+import { HeaderStateService } from '../../shared/header/state/header-state.service';
+import { CoreSubscriptions } from '../../shared/core/subscriptions';
+import { localStorageAdapter } from '../../shared/core/utils';
+import { SidebarStateService } from './state/sidebar-state.service';
+import { SidebarTypeEnum } from './state/sidebar-state';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/takeUntil';
 

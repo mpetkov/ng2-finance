@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
-import {CoreApiResponseService} from './api-response.service';
-import {CoreApiStateService} from '../state/api-state.service';
+import { TestBed } from '@angular/core/testing';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+import { CoreApiResponseService } from './api-response.service';
+import { CoreApiStateService } from '../state/api-state.service';
 
 describe('CoreApiResponseService', () => {
   let service: CoreApiResponseService;

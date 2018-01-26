@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {DragulaModule} from 'ng2-dragula';
-import {SharedModule} from '../../../shared/shared.module';
-import {EditComponent} from './edit.component';
-import {EditService} from './edit.service';
+import { NgModule } from '@angular/core';
+import { DragulaModule } from 'ng2-dragula';
+import { SharedModule } from '../../../shared/shared.module';
+import { EditComponent } from './edit.component';
+import { EditService } from './edit.service';
 
 @NgModule({
   imports: [

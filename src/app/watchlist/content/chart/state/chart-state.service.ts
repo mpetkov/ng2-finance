@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import {CoreApiStateService} from '../../../../shared/core/state/api-state.service';
-import {ChartDataInterface, ChartStateKeys} from './chart-state';
-import {ChartActions} from './chart-actions';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { CoreApiStateService } from '../../../../shared/core/state/api-state.service';
+import { ChartDataInterface, ChartStateKeys } from './chart-state';
+import { ChartActions } from './chart-actions';
 import 'rxjs/add/operator/let';
 
 @Injectable()

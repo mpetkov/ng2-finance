@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {SidebarActions} from './sidebar-actions';
-import {sidebarReducer} from './sidebar-reducer';
-import {SidebarStateService} from './sidebar-state.service';
-import {SidebarTypeEnum} from './sidebar-state';
+import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { SidebarActions } from './sidebar-actions';
+import { sidebarReducer } from './sidebar-reducer';
+import { SidebarStateService } from './sidebar-state.service';
+import { SidebarTypeEnum } from './sidebar-state';
 
 describe('SidebarStateService', () => {
   let actions: any;

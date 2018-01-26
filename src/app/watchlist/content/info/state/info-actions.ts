@@ -1,6 +1,6 @@
-import {Action} from '@ngrx/store';
-import {InfoDataInterface} from './info-state';
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
+import { Action } from '@ngrx/store';
+import { InfoDataInterface } from './info-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 export class InfoActions {
   static FETCH_FULFILLED = 'WATCHLIST:INFO:FETCH_FULFILLED';

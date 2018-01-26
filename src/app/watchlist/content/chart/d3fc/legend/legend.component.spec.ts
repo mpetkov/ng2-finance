@@ -1,11 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {CommonModule} from '@angular/common';
-import {MdlModule} from 'angular2-mdl';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {LegendComponent} from './legend.component';
-import {ChartOptionsService} from '../services/chart-options.service';
-import {ChartStateService} from '../../state/chart-state.service';
-import {ChartDataInterface} from '../../state/chart-state';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { MdlModule } from 'angular2-mdl';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { LegendComponent } from './legend.component';
+import { ChartOptionsService } from '../services/chart-options.service';
+import { ChartStateService } from '../../state/chart-state.service';
+import { ChartDataInterface } from '../../state/chart-state';
+
 describe('LegendComponent', () => {
   let fixture: ComponentFixture<LegendComponent>;
   let component: LegendComponent;

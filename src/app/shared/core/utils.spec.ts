@@ -1,4 +1,4 @@
-import {localStorageAdapter, numberUnitFormat, typeChecker} from './utils';
+import { localStorageAdapter, numberUnitFormat, typeChecker } from './utils';
 
 describe('Utils', () => {
   it('should add correct unit to number when numberUnitFormat() is called', () => {

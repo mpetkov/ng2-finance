@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MdlModule} from 'angular2-mdl';
-import {SearchBoxComponent} from './search-box.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MdlModule } from 'angular2-mdl';
+import { SearchBoxComponent } from './search-box.component';
 
 @Component({
   template: `

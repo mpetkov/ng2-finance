@@ -1,7 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ChartOptionsService} from './chart-options.service';
+import { Injectable } from '@angular/core';
+import { ChartOptionsService } from './chart-options.service';
+
 declare const fc: any;
 declare const d3: any;
+
 @Injectable()
 export class ChartVolumeService {
   private volumeContainer: any;

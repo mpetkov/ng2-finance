@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {NewsApiService} from './news-api.service';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {environment} from '../../../../environments/environment';
-import {ApiNotification} from '../../../shared/notification/api-notification';
-import {NewsDataInterface} from './state/news-state';
-import {NewsStateService} from './state/news-state.service';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import { Component } from '@angular/core';
+import { NewsApiService } from './news-api.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { environment } from '../../../../environments/environment';
+import { ApiNotification } from '../../../shared/notification/api-notification';
+import { NewsDataInterface } from './state/news-state';
+import { NewsStateService } from './state/news-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
 
 @Component({
   selector: 'mp-news',

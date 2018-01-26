@@ -1,6 +1,6 @@
-import {Record} from 'immutable';
-import {CoreApiStateInterface, CoreApiStateKeys} from '../../../../shared/core/state/api-state';
-import {localStorageAdapter, Types} from '../../../../shared/core/utils';
+import { Record } from 'immutable';
+import { CoreApiStateInterface, CoreApiStateKeys } from '../../../../shared/core/state/api-state';
+import { localStorageAdapter, Types } from '../../../../shared/core/utils';
 
 export interface FavoritesStateInterface extends CoreApiStateInterface {
   order?: string[];

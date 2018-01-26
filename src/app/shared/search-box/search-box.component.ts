@@ -9,8 +9,8 @@ import {
   Renderer,
   ViewChild
 } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Subject} from 'rxjs/Subject';
+import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/takeUntil';
 
@@ -55,7 +55,7 @@ export class SearchBoxComponent implements OnChanges, OnDestroy {
         (event: any) => {
           if (!event.target.parentElement ||
             (event.target.parentElement.className.indexOf('mp-search-box') === -1 &&
-            event.target.className.indexOf('mdl-button') === -1)) {
+              event.target.className.indexOf('mdl-button') === -1)) {
             this.toggleActive(false);
             this.formControl.setValue('', {});
             this.destroyListener();

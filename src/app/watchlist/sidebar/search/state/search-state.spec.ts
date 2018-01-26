@@ -1,5 +1,5 @@
-import {Record} from 'immutable';
-import {SearchInitialState} from './search-state';
+import { Record } from 'immutable';
+import { SearchInitialState } from './search-state';
 
 describe('SearchInitialState', () => {
   let state: any;

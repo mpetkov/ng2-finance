@@ -1,6 +1,6 @@
-import {SearchActions} from './search-actions';
-import {searchReducer} from './search-reducer';
-import {SearchInitialState, SearchStateInterface} from './search-state';
+import { SearchActions } from './search-actions';
+import { searchReducer } from './search-reducer';
+import { SearchInitialState, SearchStateInterface } from './search-state';
 
 describe('searchReducer', () => {
   let actions: SearchActions;

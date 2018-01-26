@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {environment} from '../../../../environments/environment';
-import {SearchApiService} from './search-api.service';
-import {SearchStateService} from './state/search-state.service';
-import {FavoritesStateService} from '../favorites/state/favorites-state.service';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {ApiNotification} from '../../../shared/notification/api-notification';
-import {SidebarStateService} from '../state/sidebar-state.service';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {SidebarTypeEnum} from '../state/sidebar-state';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+import { SearchApiService } from './search-api.service';
+import { SearchStateService } from './state/search-state.service';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { ApiNotification } from '../../../shared/notification/api-notification';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { SidebarTypeEnum } from '../state/sidebar-state';
 
 @Component({
   selector: 'mp-search',

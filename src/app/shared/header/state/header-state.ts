@@ -1,4 +1,4 @@
-import {Map, Record} from 'immutable';
+import { Map, Record } from 'immutable';
 
 export interface HeaderStateInterface extends Map<string, any> {
   searchActive?: boolean;

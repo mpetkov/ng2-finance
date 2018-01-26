@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MdlModule} from 'angular2-mdl';
-import {NotificationModule} from './notification/notification.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MdlModule } from 'angular2-mdl';
+import { NotificationModule } from './notification/notification.module';
 
 @NgModule({
   imports: [

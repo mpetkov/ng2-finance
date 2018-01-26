@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {HeaderStateService} from './state/header-state.service';
-import {CoreSubscriptions} from '../core/subscriptions';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { HeaderStateService } from './state/header-state.service';
+import { CoreSubscriptions } from '../core/subscriptions';
 
 @Component({
   selector: 'mp-header',

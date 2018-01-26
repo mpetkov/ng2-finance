@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {ChartOptionsService} from '../services/chart-options.service';
-import {CoreSubscriptions} from '../../../../../shared/core/subscriptions';
-import {ChartStateService} from '../../state/chart-state.service';
-import {ChartDataInterface} from '../../state/chart-state';
+import { Component } from '@angular/core';
+import { ChartOptionsService } from '../services/chart-options.service';
+import { CoreSubscriptions } from '../../../../../shared/core/subscriptions';
+import { ChartStateService } from '../../state/chart-state.service';
+import { ChartDataInterface } from '../../state/chart-state';
 
 @Component({
   selector: 'mp-legend',

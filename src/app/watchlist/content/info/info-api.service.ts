@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {environment} from '../../../../environments/environment';
-import {CoreApiResponseService} from '../../../shared/core/services/api-response.service';
-import {numberUnitFormat} from '../../../shared/core/utils';
-import {InfoStateService} from './state/info-state.service';
-import {InfoDataInterface} from './state/info-state';
-import {get} from 'lodash';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { environment } from '../../../../environments/environment';
+import { CoreApiResponseService } from '../../../shared/core/services/api-response.service';
+import { numberUnitFormat } from '../../../shared/core/utils';
+import { InfoStateService } from './state/info-state.service';
+import { InfoDataInterface } from './state/info-state';
+import { get } from 'lodash';
 
 @Injectable()
 export class InfoApiService extends CoreApiResponseService {

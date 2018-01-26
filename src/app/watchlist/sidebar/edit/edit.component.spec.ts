@@ -1,17 +1,18 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MdlModule} from 'angular2-mdl';
-import {DragulaModule, DragulaService} from 'ng2-dragula';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {EditComponent} from './edit.component';
-import {FavoritesStateService} from '../favorites/state/favorites-state.service';
-import {SidebarStateService} from '../state/sidebar-state.service';
-import {EditService} from './edit.service';
-import {SidebarTypeEnum} from '../state/sidebar-state';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MdlModule } from 'angular2-mdl';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { EditComponent } from './edit.component';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { EditService } from './edit.service';
+import { SidebarTypeEnum } from '../state/sidebar-state';
+
 @Component({selector: 'mp-notification', template: ''})
 class NotificationComponent {
   @Input() type: NotificationTypeEnum;

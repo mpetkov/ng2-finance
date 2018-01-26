@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {ChartActions} from './chart-actions';
-import {chartReducer} from './chart-reducer';
-import {ChartStateService} from './chart-state.service';
-import {ChartDataInterface} from './chart-state';
+import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { ChartActions } from './chart-actions';
+import { chartReducer } from './chart-reducer';
+import { ChartStateService } from './chart-state.service';
+import { ChartDataInterface } from './chart-state';
 
 describe('ChartStateService', () => {
   let actions: any;

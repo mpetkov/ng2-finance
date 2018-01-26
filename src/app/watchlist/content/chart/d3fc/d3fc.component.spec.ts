@@ -1,13 +1,13 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {D3fcComponent} from './d3fc.component';
-import {ChartStateService} from '../state/chart-state.service';
-import {ChartCrosshairService} from './services/chart-crosshair.service';
-import {ChartOptionsService} from './services/chart-options.service';
-import {ChartTooltipsService} from './services/chart-tooltips.service';
-import {ChartVolumeService} from './services/chart-volume.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { D3fcComponent } from './d3fc.component';
+import { ChartStateService } from '../state/chart-state.service';
+import { ChartCrosshairService } from './services/chart-crosshair.service';
+import { ChartOptionsService } from './services/chart-options.service';
+import { ChartTooltipsService } from './services/chart-tooltips.service';
+import { ChartVolumeService } from './services/chart-volume.service';
 
 @Component({selector: 'mp-legend', template: ''})
 class LegendComponent {

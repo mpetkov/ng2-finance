@@ -1,5 +1,5 @@
-import {Record} from 'immutable';
-import {InfoInitialState} from './info-state';
+import { Record } from 'immutable';
+import { InfoInitialState } from './info-state';
 
 describe('InfoInitialState', () => {
   let state: any;

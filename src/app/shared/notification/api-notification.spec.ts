@@ -1,6 +1,6 @@
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {ApiNotification, NotificationActions} from './api-notification';
-import {NotificationTypeEnum} from './notification.component';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ApiNotification, NotificationActions } from './api-notification';
+import { NotificationTypeEnum } from './notification.component';
 
 describe('ApiNotification', () => {
   let apiNotification: ApiNotification;

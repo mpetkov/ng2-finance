@@ -1,5 +1,5 @@
-import {Action} from '@ngrx/store';
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
+import { Action } from '@ngrx/store';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 export class SearchActions {
   static FETCH_FULFILLED = 'WATCHLIST:SEARCH:FETCH_FULFILLED';

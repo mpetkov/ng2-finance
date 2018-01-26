@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import {FavoritesApiService} from './favorites-api.service';
-import {FavoritesStateService} from './favorites/state/favorites-state.service';
+import { FavoritesApiService } from './favorites-api.service';
+import { FavoritesStateService } from './favorites/state/favorites-state.service';
 
 describe('FavoritesApiService', () => {
   let service: FavoritesApiService;

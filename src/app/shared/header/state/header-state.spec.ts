@@ -1,5 +1,5 @@
-import {Record} from 'immutable';
-import {HeaderInitialState} from './header-state';
+import { Record } from 'immutable';
+import { HeaderInitialState } from './header-state';
 
 describe('HeaderInitialState', () => {
   let state: any;

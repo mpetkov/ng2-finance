@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
-import {BaseRequestOptions, ConnectionBackend, Http, RequestMethod, Response, ResponseOptions} from '@angular/http';
-import {MockBackend, MockConnection} from '@angular/http/testing';
-import {CoreApiService} from './api.service';
+import { TestBed } from '@angular/core/testing';
+import { BaseRequestOptions, ConnectionBackend, Http, RequestMethod, Response, ResponseOptions } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { CoreApiService } from './api.service';
 
 describe('CoreApiService', () => {
   const url = 'www.test.com';

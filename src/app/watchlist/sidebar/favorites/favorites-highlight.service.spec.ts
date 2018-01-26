@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {FavoritesHighlightService} from './favorites-highlight.service';
+import { TestBed } from '@angular/core/testing';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { FavoritesHighlightService } from './favorites-highlight.service';
 
 describe('FavoritesHighlightService', () => {
   let service: FavoritesHighlightService;

@@ -1,14 +1,14 @@
-import {Component, ElementRef, OnDestroy, Renderer, ViewChild, ViewEncapsulation} from '@angular/core';
-import {DragulaService} from 'ng2-dragula';
-import {environment} from '../../../../environments/environment';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {EditService} from './edit.service';
-import {CoreSubscriptions} from '../../../shared/core/subscriptions';
-import {FavoritesStateService} from '../favorites/state/favorites-state.service';
-import {SidebarStateService} from '../state/sidebar-state.service';
-import {SidebarTypeEnum} from '../state/sidebar-state';
+import { Component, ElementRef, OnDestroy, Renderer, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DragulaService } from 'ng2-dragula';
+import { environment } from '../../../../environments/environment';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { EditService } from './edit.service';
+import { CoreSubscriptions } from '../../../shared/core/subscriptions';
+import { FavoritesStateService } from '../favorites/state/favorites-state.service';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { SidebarTypeEnum } from '../state/sidebar-state';
 
 @Component({
   selector: 'mp-edit',

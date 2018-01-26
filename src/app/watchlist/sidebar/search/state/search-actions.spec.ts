@@ -1,5 +1,5 @@
-import {SearchActions} from './search-actions';
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
+import { SearchActions } from './search-actions';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 describe('SearchActions', () => {
   let actions: SearchActions;

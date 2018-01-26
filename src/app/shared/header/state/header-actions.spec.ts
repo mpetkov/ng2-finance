@@ -1,4 +1,5 @@
-import {HeaderActions} from './header-actions';
+import { HeaderActions } from './header-actions';
+
 describe('HeaderActions', () => {
   let actions: HeaderActions;
 

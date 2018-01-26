@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {WatchlistComponent} from './watchlist.component';
-import {HeaderStateService} from '../shared/header/state/header-state.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { WatchlistComponent } from './watchlist.component';
+import { HeaderStateService } from '../shared/header/state/header-state.service';
 
 @Component({selector: 'mp-content', template: ''})
 class ContentComponent {

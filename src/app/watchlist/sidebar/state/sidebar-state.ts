@@ -1,4 +1,4 @@
-import {Map, Record} from 'immutable';
+import { Map, Record } from 'immutable';
 
 export enum SidebarTypeEnum {
   List,

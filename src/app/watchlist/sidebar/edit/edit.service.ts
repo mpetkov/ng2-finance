@@ -1,4 +1,4 @@
-import {ElementRef} from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 export class EditService {
   getOrder(list: ElementRef, deleted: string[]): string[] {

@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import {ChartApiService} from './chart-api.service';
-import {ChartStateService} from './state/chart-state.service';
+import { ChartApiService } from './chart-api.service';
+import { ChartStateService } from './state/chart-state.service';
 
 describe('ChartApiService', () => {
   let service: ChartApiService;

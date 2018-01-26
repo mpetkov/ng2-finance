@@ -1,5 +1,5 @@
-import {RangeOptionsInterface} from './range/range.component';
-import {InfoDataInterface} from './state/info-state';
+import { RangeOptionsInterface } from './range/range.component';
+import { InfoDataInterface } from './state/info-state';
 
 export class InfoService {
   getDataWithUpdatedPrice(data: InfoDataInterface, price: number): InfoDataInterface {

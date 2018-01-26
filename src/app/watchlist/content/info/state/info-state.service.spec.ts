@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {InfoActions} from './info-actions';
-import {infoReducer} from './info-reducer';
-import {InfoStateService} from './info-state.service';
-import {InfoDataInterface} from './info-state';
+import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { InfoActions } from './info-actions';
+import { infoReducer } from './info-reducer';
+import { InfoStateService } from './info-state.service';
+import { InfoDataInterface } from './info-state';
 
 describe('InfoStateService', () => {
   let actions: any;

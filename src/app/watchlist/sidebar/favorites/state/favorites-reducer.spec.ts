@@ -1,6 +1,6 @@
-import {FavoritesActions} from './favorites-actions';
-import {favoritesReducer} from './favorites-reducer';
-import {FavoritesInitialState, FavoritesStateInterface} from './favorites-state';
+import { FavoritesActions } from './favorites-actions';
+import { favoritesReducer } from './favorites-reducer';
+import { FavoritesInitialState, FavoritesStateInterface } from './favorites-state';
 
 describe('favoritesReducer', () => {
   let actions: FavoritesActions;

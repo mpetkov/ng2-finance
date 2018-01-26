@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
-import {RangeComponent} from './range.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ViewChild } from '@angular/core';
+import { RangeComponent } from './range.component';
 
 @Component({
   template: `

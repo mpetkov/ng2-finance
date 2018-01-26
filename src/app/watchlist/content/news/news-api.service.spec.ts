@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import {NewsApiService} from './news-api.service';
-import {NewsStateService} from './state/news-state.service';
+import { NewsApiService } from './news-api.service';
+import { NewsStateService } from './state/news-state.service';
 import * as moment from 'moment';
 
 describe('NewsApiService', () => {

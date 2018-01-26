@@ -1,6 +1,6 @@
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
-import {ChartActions} from './chart-actions';
-import {ChartDataInterface} from './chart-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
+import { ChartActions } from './chart-actions';
+import { ChartDataInterface } from './chart-state';
 
 describe('ChartActions', () => {
   let actions: ChartActions;

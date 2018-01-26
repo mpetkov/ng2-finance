@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {InfoApiService} from './info-api.service';
-import {InfoService} from './info.service';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {environment} from '../../../../environments/environment';
-import {ApiNotification} from '../../../shared/notification/api-notification';
-import {InfoDataInterface} from './state/info-state';
-import {RangeOptionsInterface} from './range/range.component';
-import {InfoStateService} from './state/info-state.service';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
+import { Component } from '@angular/core';
+import { InfoApiService } from './info-api.service';
+import { InfoService } from './info.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { environment } from '../../../../environments/environment';
+import { ApiNotification } from '../../../shared/notification/api-notification';
+import { InfoDataInterface } from './state/info-state';
+import { RangeOptionsInterface } from './range/range.component';
+import { InfoStateService } from './state/info-state.service';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
 
 @Component({
   selector: 'mp-info',

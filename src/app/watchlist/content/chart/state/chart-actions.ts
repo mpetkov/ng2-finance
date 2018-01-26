@@ -1,6 +1,6 @@
-import {Action} from '@ngrx/store';
-import {ChartDataInterface} from './chart-state';
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
+import { Action } from '@ngrx/store';
+import { ChartDataInterface } from './chart-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 export class ChartActions {
   static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';

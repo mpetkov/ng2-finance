@@ -1,15 +1,15 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {ChartApiService} from './chart-api.service';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {environment} from '../../../../environments/environment';
-import {findIndex} from 'lodash';
-import {ApiNotification} from '../../../shared/notification/api-notification';
-import {ChartStateService} from './state/chart-state.service';
-import {ChartDataInterface, ChartStateKeys} from './state/chart-state';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {localStorageAdapter} from '../../../shared/core/utils';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ChartApiService } from './chart-api.service';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { environment } from '../../../../environments/environment';
+import { findIndex } from 'lodash';
+import { ApiNotification } from '../../../shared/notification/api-notification';
+import { ChartStateService } from './state/chart-state.service';
+import { ChartDataInterface, ChartStateKeys } from './state/chart-state';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { localStorageAdapter } from '../../../shared/core/utils';
 
 @Component({
   selector: 'mp-chart',

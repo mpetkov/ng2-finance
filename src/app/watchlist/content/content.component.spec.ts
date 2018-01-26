@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {ContentComponent} from './content.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { ContentComponent } from './content.component';
 
 @Component({selector: 'mp-chart', template: ''})
 class ChartComponent {

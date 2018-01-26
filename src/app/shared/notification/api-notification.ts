@@ -1,6 +1,6 @@
-import {CoreSubscriptions} from '../core/subscriptions';
-import {CoreApiStateService} from '../core/state/api-state.service';
-import {NotificationButtonInterface, NotificationTypeEnum} from './notification.component';
+import { CoreSubscriptions } from '../core/subscriptions';
+import { CoreApiStateService } from '../core/state/api-state.service';
+import { NotificationButtonInterface, NotificationTypeEnum } from './notification.component';
 
 export class ApiNotification extends CoreSubscriptions {
   notification: string;

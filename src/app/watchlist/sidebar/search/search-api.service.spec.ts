@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import {SearchApiService} from './search-api.service';
-import {SearchStateService} from './state/search-state.service';
+import { SearchApiService } from './search-api.service';
+import { SearchStateService } from './state/search-state.service';
 
 describe('SearchApiService', () => {
   let service: SearchApiService;

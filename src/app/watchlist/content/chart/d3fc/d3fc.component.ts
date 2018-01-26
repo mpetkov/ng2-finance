@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, HostListener, ViewChild, ViewEncapsulation} from '@angular/core';
-import {ChartVolumeService} from './services/chart-volume.service';
-import {ChartCrosshairService} from './services/chart-crosshair.service';
-import {ChartTooltipsService} from './services/chart-tooltips.service';
-import {ChartOptionsService} from './services/chart-options.service';
-import {CoreSubscriptions} from '../../../../shared/core/subscriptions';
-import {ChartDataInterface} from '../state/chart-state';
-import {ChartStateService} from '../state/chart-state.service';
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChartVolumeService } from './services/chart-volume.service';
+import { ChartCrosshairService } from './services/chart-crosshair.service';
+import { ChartTooltipsService } from './services/chart-tooltips.service';
+import { ChartOptionsService } from './services/chart-options.service';
+import { CoreSubscriptions } from '../../../../shared/core/subscriptions';
+import { ChartDataInterface } from '../state/chart-state';
+import { ChartStateService } from '../state/chart-state.service';
 
 declare const fc: any;
 declare const d3: any;

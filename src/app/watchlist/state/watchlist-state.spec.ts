@@ -1,5 +1,5 @@
-import {Record} from 'immutable';
-import {WatchlistInitialState} from './watchlist-state';
+import { Record } from 'immutable';
+import { WatchlistInitialState } from './watchlist-state';
 
 describe('WatchlistInitialState', () => {
   let state: any;

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {HeaderStateService} from './shared/header/state/header-state.service';
+import { Component } from '@angular/core';
+import { HeaderStateService } from './shared/header/state/header-state.service';
 
 @Component({
   selector: 'mp-root',

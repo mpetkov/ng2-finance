@@ -1,4 +1,4 @@
-import {Action} from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
 export class HeaderActions {
   static ACTIVATE_SEARCH = 'HEADER:ACTIVATE_SEARCH';

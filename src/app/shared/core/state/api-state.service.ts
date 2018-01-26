@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import {CoreApiErrorInterface, CoreApiStateKeys} from './api-state';
-import {CoreStateService} from './state.service';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { CoreApiErrorInterface, CoreApiStateKeys } from './api-state';
+import { CoreStateService } from './state.service';
 import 'rxjs/add/operator/let';
 
 @Injectable()

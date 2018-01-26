@@ -1,5 +1,5 @@
-import {SidebarActions} from './sidebar-actions';
-import {SidebarTypeEnum} from './sidebar-state';
+import { SidebarActions } from './sidebar-actions';
+import { SidebarTypeEnum } from './sidebar-state';
 
 describe('SidebarActions', () => {
   let actions: SidebarActions;

@@ -1,9 +1,9 @@
-import {TestBed} from '@angular/core/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {FavoritesActions} from './favorites-actions';
-import {favoritesReducer} from './favorites-reducer';
-import {FavoritesStateService} from './favorites-state.service';
-import {StockDataInterface} from '../../../state/watchlist-state';
+import { TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
+import { FavoritesActions } from './favorites-actions';
+import { favoritesReducer } from './favorites-reducer';
+import { FavoritesStateService } from './favorites-state.service';
+import { StockDataInterface } from '../../../state/watchlist-state';
 
 describe('FavoritesStateService', () => {
   let actions: any;

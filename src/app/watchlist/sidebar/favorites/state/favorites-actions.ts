@@ -1,6 +1,6 @@
-import {Action} from '@ngrx/store';
-import {StockDataInterface} from '../../../state/watchlist-state';
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
+import { Action } from '@ngrx/store';
+import { StockDataInterface } from '../../../state/watchlist-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 export class FavoritesActions {
   static CHANGE_ORDER = 'WATCHLIST:FAVORITES:CHANGE_ORDER';

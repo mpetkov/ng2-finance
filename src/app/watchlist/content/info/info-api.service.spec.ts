@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
-import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import {InfoApiService} from './info-api.service';
-import {InfoStateService} from './state/info-state.service';
+import { InfoApiService } from './info-api.service';
+import { InfoStateService } from './state/info-state.service';
 
 describe('InfoApiService', () => {
   let service: InfoApiService;

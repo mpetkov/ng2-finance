@@ -1,6 +1,6 @@
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
-import {StockDataInterface} from '../../../state/watchlist-state';
-import {FavoritesActions} from './favorites-actions';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
+import { StockDataInterface } from '../../../state/watchlist-state';
+import { FavoritesActions } from './favorites-actions';
 
 describe('FavoritesActions', () => {
   let actions: FavoritesActions;

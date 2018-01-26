@@ -1,19 +1,19 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {MdlMenuComponent} from 'angular2-mdl';
-import {WatchlistStateService} from '../../state/watchlist-state.service';
-import {StockDataInterface} from '../../state/watchlist-state';
-import {FavoritesStateService} from './state/favorites-state.service';
-import {FavoritesStateKeys} from './state/favorites-state';
-import {FavoritesApiService} from '../favorites-api.service';
-import {FavoritesHighlightService} from './favorites-highlight.service';
-import {HeaderStateService} from '../../../shared/header/state/header-state.service';
-import {localStorageAdapter} from '../../../shared/core/utils';
-import {ApiNotification} from '../../../shared/notification/api-notification';
-import {SidebarStateService} from '../state/sidebar-state.service';
-import {SidebarTypeEnum} from '../state/sidebar-state';
-import {NotificationTypeEnum} from '../../../shared/notification/notification.component';
-import {find} from 'lodash';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MdlMenuComponent } from 'angular2-mdl';
+import { WatchlistStateService } from '../../state/watchlist-state.service';
+import { StockDataInterface } from '../../state/watchlist-state';
+import { FavoritesStateService } from './state/favorites-state.service';
+import { FavoritesStateKeys } from './state/favorites-state';
+import { FavoritesApiService } from '../favorites-api.service';
+import { FavoritesHighlightService } from './favorites-highlight.service';
+import { HeaderStateService } from '../../../shared/header/state/header-state.service';
+import { localStorageAdapter } from '../../../shared/core/utils';
+import { ApiNotification } from '../../../shared/notification/api-notification';
+import { SidebarStateService } from '../state/sidebar-state.service';
+import { SidebarTypeEnum } from '../state/sidebar-state';
+import { NotificationTypeEnum } from '../../../shared/notification/notification.component';
+import { find } from 'lodash';
 
 @Component({
   selector: 'mp-favorites',

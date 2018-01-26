@@ -1,6 +1,7 @@
-import {ChartActions} from './chart-actions';
-import {chartReducer} from './chart-reducer';
-import {ChartInitialState, ChartStateInterface} from './chart-state';
+import { ChartActions } from './chart-actions';
+import { chartReducer } from './chart-reducer';
+import { ChartInitialState, ChartStateInterface } from './chart-state';
+
 describe('chartReducer', () => {
   let actions: ChartActions;
 

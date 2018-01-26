@@ -1,5 +1,5 @@
-import {environment as base} from './environment.base';
-import {extend} from 'lodash';
+import { environment as base } from './environment.base';
+import { extend } from 'lodash';
 
 export const environment = extend(base, {
   production: false,

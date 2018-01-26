@@ -1,6 +1,6 @@
-import {SidebarActions} from './sidebar-actions';
-import {sidebarReducer} from './sidebar-reducer';
-import {SidebarInitialState, SidebarStateInterface, SidebarTypeEnum} from './sidebar-state';
+import { SidebarActions } from './sidebar-actions';
+import { sidebarReducer } from './sidebar-reducer';
+import { SidebarInitialState, SidebarStateInterface, SidebarTypeEnum } from './sidebar-state';
 
 describe('sidebarReducer', () => {
   let actions: SidebarActions;

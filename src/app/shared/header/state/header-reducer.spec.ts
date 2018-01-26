@@ -1,6 +1,7 @@
-import {HeaderActions} from './header-actions';
-import {HeaderInitialState, HeaderStateInterface} from './header-state';
-import {headerReducer} from './header-reducer';
+import { HeaderActions } from './header-actions';
+import { HeaderInitialState, HeaderStateInterface } from './header-state';
+import { headerReducer } from './header-reducer';
+
 describe('headerReducer', () => {
   let actions: HeaderActions;
 

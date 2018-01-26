@@ -1,6 +1,6 @@
-import {Action, ActionReducer} from '@ngrx/store';
-import {InfoInitialState, InfoStateInterface, InfoStateKeys} from './info-state';
-import {InfoActions} from './info-actions';
+import { Action, ActionReducer } from '@ngrx/store';
+import { InfoInitialState, InfoStateInterface, InfoStateKeys } from './info-state';
+import { InfoActions } from './info-actions';
 
 const initialState: InfoStateInterface = new InfoInitialState() as InfoStateInterface;
 

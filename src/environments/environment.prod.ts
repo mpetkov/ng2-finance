@@ -1,10 +1,11 @@
-import {environment as base} from './environment.base';
-import {extend} from 'lodash';
-const yqlUrl:string = 'https://query.yahooapis.com/v1/public/yql';
+import { environment as base } from './environment.base';
+import { extend } from 'lodash';
+
+const yqlUrl: string = 'https://query.yahooapis.com/v1/public/yql';
 export const environment = extend(base, {
   production: true,
   analytics: 'ANALYTICS_ID',
-  paths: {    
+  paths: {
     charts: 'https://query1.finance.yahoo.com/v7/finance/chart/$stock?range=$range&interval=$interval&indicators=quote&' +
     'includeTimestamps=true&includePrePost=false&corsDomain=finance.yahoo.com',
     news: 'https://query1.finance.yahoo.com/v2/finance/news?lang=en-US&region=US&symbols=$stock&corsDomain=finance.yahoo.com',

@@ -1,6 +1,6 @@
-import {CoreApiErrorInterface} from '../../../../shared/core/state/api-state';
-import {InfoActions} from './info-actions';
-import {InfoDataInterface} from './info-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
+import { InfoActions } from './info-actions';
+import { InfoDataInterface } from './info-state';
 
 describe('InfoActions', () => {
   let actions: InfoActions;

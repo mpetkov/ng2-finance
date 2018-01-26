@@ -1,4 +1,4 @@
-import {get} from 'lodash';
+import { get } from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 
