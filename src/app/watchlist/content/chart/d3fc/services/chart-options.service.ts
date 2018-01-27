@@ -18,7 +18,7 @@ export class ChartOptionsService {
       priceFormat: d3.format('.2f'),
       volumeFormat: function (value: number) {
         const prefix: any = d3.formatPrefix(value);
-        return prefix.scale(value).toFixed(2) + prefix.symbol;
+        return prefix.scale(value).toFixed(2) + prefix.symbol.replace('G', 'B');;
       }
     };
 
