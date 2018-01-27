@@ -13,7 +13,7 @@ describe('FavoritesStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({favorites: favoritesReducer})
+        StoreModule.forRoot({favorites: favoritesReducer})
       ],
       providers: [
         FavoritesActions,

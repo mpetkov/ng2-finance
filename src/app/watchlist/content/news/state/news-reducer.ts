@@ -1,11 +1,12 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { NewsInitialState, NewsStateInterface, NewsStateKeys } from './news-state';
 import { NewsActions } from './news-actions';
+import { PayloadAction } from '../../../../shared/core/state/api-state';
 
 const initialState: NewsStateInterface = new NewsInitialState() as NewsStateInterface;
 
 export const newsReducer: ActionReducer<NewsStateInterface> =
-  (state: NewsStateInterface = initialState, {payload, type}: Action) => {
+  (state: NewsStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case NewsActions.FETCH_FULFILLED:
         return state.set(NewsStateKeys.Data, payload);

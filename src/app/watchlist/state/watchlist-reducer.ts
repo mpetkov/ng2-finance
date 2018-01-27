@@ -1,11 +1,12 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { WatchlistInitialState, WatchlistStateInterface, WatchlistStateKeys } from './watchlist-state';
 import { WatchlistActions } from './watchlist-actions';
+import { PayloadAction } from '../../shared/core/state/api-state';
 
 const initialState: WatchlistStateInterface = new WatchlistInitialState() as WatchlistStateInterface;
 
 export const watchlistReducer: ActionReducer<WatchlistStateInterface> =
-  (state: WatchlistStateInterface = initialState, {payload, type}: Action) => {
+  (state: WatchlistStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case WatchlistActions.CHANGE_STOCK:
         return state.set(WatchlistStateKeys.Stock, payload);

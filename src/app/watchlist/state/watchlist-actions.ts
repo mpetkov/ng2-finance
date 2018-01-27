@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
 import { StockDataInterface } from './watchlist-state';
+import { PayloadAction } from '../../shared/core/state/api-state';
 
 export class WatchlistActions {
   static CHANGE_STOCK_DATA = 'WATCHLIST:CHANGE_STOCK_DATA';
@@ -8,35 +8,35 @@ export class WatchlistActions {
   static ADD_FAVORITE = 'WATCHLIST:ADD_FAVORITE';
   static CHANGE_HIGHLIGHTS = 'WATCHLIST:CHANGE_HIGHLIGHTS';
 
-  changeStockData(data: StockDataInterface): Action {
+  changeStockData(data: StockDataInterface): PayloadAction {
     return {
       type: WatchlistActions.CHANGE_STOCK_DATA,
       payload: data
     };
   }
 
-  changeStock(stock: string): Action {
+  changeStock(stock: string): PayloadAction {
     return {
       type: WatchlistActions.CHANGE_STOCK,
       payload: stock
     };
   }
 
-  addFavorite(favorite: string): Action {
+  addFavorite(favorite: string): PayloadAction {
     return {
       type: WatchlistActions.ADD_FAVORITE,
       payload: favorite
     };
   }
 
-  deleteFavorites(favorites: string[]): Action {
+  deleteFavorites(favorites: string[]): PayloadAction {
     return {
       type: WatchlistActions.DELETE_FAVORITES,
       payload: favorites
     };
   }
 
-  changeHighlights(highlights: any): Action {
+  changeHighlights(highlights: any): PayloadAction {
     return {
       type: WatchlistActions.CHANGE_HIGHLIGHTS,
       payload: highlights

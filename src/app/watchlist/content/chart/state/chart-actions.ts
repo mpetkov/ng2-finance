@@ -1,6 +1,5 @@
-import { Action } from '@ngrx/store';
 import { ChartDataInterface } from './chart-state';
-import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
+import { CoreApiErrorInterface, PayloadAction } from '../../../../shared/core/state/api-state';
 
 export class ChartActions {
   static CHANGE_POINT = 'WATCHLIST:CHART:CHANGE_POINT';
@@ -9,35 +8,35 @@ export class ChartActions {
   static FETCH_LOADER = 'WATCHLIST:CHART:FETCH_LOADER';
   static FETCH_ERROR = 'WATCHLIST:CHART:FETCH_ERROR';
 
-  changePoint(point: ChartDataInterface): Action {
+  changePoint(point: ChartDataInterface): PayloadAction {
     return {
       type: ChartActions.CHANGE_POINT,
       payload: point
     };
   }
 
-  changeRange(range: string): Action {
+  changeRange(range: string): PayloadAction {
     return {
       type: ChartActions.CHANGE_RANGE,
       payload: range
     };
   }
 
-  fetchFulfilled(data: ChartDataInterface[]): Action {
+  fetchFulfilled(data: ChartDataInterface[]): PayloadAction {
     return {
       type: ChartActions.FETCH_FULFILLED,
       payload: data
     };
   }
 
-  fetchLoader(loader: boolean): Action {
+  fetchLoader(loader: boolean): PayloadAction {
     return {
       type: ChartActions.FETCH_LOADER,
       payload: loader
     };
   }
 
-  fetchError(error: CoreApiErrorInterface): Action {
+  fetchError(error: CoreApiErrorInterface): PayloadAction {
     return {
       type: ChartActions.FETCH_ERROR,
       payload: error

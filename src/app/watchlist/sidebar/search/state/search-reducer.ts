@@ -1,11 +1,12 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { SearchInitialState, SearchStateInterface, SearchStateKeys } from './search-state';
 import { SearchActions } from './search-actions';
+import { PayloadAction } from '../../../../shared/core/state/api-state';
 
 const initialState: SearchStateInterface = new SearchInitialState() as SearchStateInterface;
 
 export const searchReducer: ActionReducer<SearchStateInterface> =
-  (state: SearchStateInterface = initialState, {payload, type}: Action) => {
+  (state: SearchStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case SearchActions.FETCH_FULFILLED:
         return state.set(SearchStateKeys.Data, payload);

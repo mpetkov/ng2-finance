@@ -12,7 +12,7 @@ describe('HeaderStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({header: headerReducer})
+        StoreModule.forRoot({header: headerReducer})
       ],
       providers: [
         HeaderActions,

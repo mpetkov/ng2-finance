@@ -13,7 +13,7 @@ describe('NewsStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({news: newsReducer})
+        StoreModule.forRoot({news: newsReducer})
       ],
       providers: [
         NewsActions,

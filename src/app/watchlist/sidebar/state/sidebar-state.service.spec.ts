@@ -13,7 +13,7 @@ describe('SidebarStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({sidebar: sidebarReducer})
+        StoreModule.forRoot({sidebar: sidebarReducer})
       ],
       providers: [
         SidebarActions,

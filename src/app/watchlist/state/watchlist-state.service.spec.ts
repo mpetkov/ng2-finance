@@ -13,7 +13,7 @@ describe('WatchlistStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({watchlist: watchlistReducer})
+        StoreModule.forRoot({watchlist: watchlistReducer})
       ],
       providers: [
         WatchlistActions,

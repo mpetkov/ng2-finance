@@ -12,7 +12,7 @@ describe('SearchStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({search: searchReducer})
+        StoreModule.forRoot({search: searchReducer})
       ],
       providers: [
         SearchActions,

@@ -1,13 +1,14 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { FavoritesInitialState, FavoritesStateInterface, FavoritesStateKeys } from './favorites-state';
 import { FavoritesActions } from './favorites-actions';
 import { StockDataInterface } from '../../../state/watchlist-state';
 import { sortBy } from 'lodash';
+import { PayloadAction } from '../../../../shared/core/state/api-state';
 
 const initialState: FavoritesStateInterface = new FavoritesInitialState() as FavoritesStateInterface;
 
 export const favoritesReducer: ActionReducer<FavoritesStateInterface> =
-  (state: FavoritesStateInterface = initialState, {payload, type}: Action) => {
+  (state: FavoritesStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case FavoritesActions.CHANGE_ORDER:
         return state.set(FavoritesStateKeys.Order, payload);

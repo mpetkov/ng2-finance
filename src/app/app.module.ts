@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { combineReducers, compose, StoreModule } from '@ngrx/store';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -24,27 +24,23 @@ import { chartReducer } from './watchlist/content/chart/state/chart-reducer';
 import { newsReducer } from './watchlist/content/news/state/news-reducer';
 import { infoReducer } from './watchlist/content/info/state/info-reducer';
 
-export function rootReducer(state: any, action: any) {
-  const reducer = compose(combineReducers)({
-    header: headerReducer,
-    watchlist: watchlistReducer,
-    favorites: favoritesReducer,
-    sidebar: sidebarReducer,
-    search: searchReducer,
-    chart: chartReducer,
-    news: newsReducer,
-    info: infoReducer
-  });
-
-  return reducer(state, action);
-}
+export const reducers: ActionReducerMap<any> = {
+  header: headerReducer,
+  watchlist: watchlistReducer,
+  favorites: favoritesReducer,
+  sidebar: sidebarReducer,
+  search: searchReducer,
+  chart: chartReducer,
+  news: newsReducer,
+  info: infoReducer
+};
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
-    StoreModule.provideStore(rootReducer),
+    StoreModule.forRoot(reducers),
     SharedModule,
     HeaderModule,
     WatchlistModule

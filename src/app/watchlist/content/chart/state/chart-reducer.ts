@@ -1,11 +1,12 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { ChartInitialState, ChartStateInterface, ChartStateKeys } from './chart-state';
 import { ChartActions } from './chart-actions';
+import { PayloadAction } from '../../../../shared/core/state/api-state';
 
 const initialState: ChartStateInterface = new ChartInitialState() as ChartStateInterface;
 
 export const chartReducer: ActionReducer<ChartStateInterface> =
-  (state: ChartStateInterface = initialState, {payload, type}: Action) => {
+  (state: ChartStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case ChartActions.CHANGE_POINT:
         return state.set(ChartStateKeys.Point, payload);

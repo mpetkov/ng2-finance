@@ -13,7 +13,7 @@ describe('ChartStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({chart: chartReducer})
+        StoreModule.forRoot({chart: chartReducer})
       ],
       providers: [
         ChartActions,

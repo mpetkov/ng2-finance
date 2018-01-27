@@ -13,7 +13,7 @@ describe('InfoStateService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [
-        StoreModule.provideStore({info: infoReducer})
+        StoreModule.forRoot({info: infoReducer})
       ],
       providers: [
         InfoActions,

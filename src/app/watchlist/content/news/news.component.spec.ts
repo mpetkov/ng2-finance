@@ -50,7 +50,7 @@ describe('NewsComponent', () => {
       imports: [
         CommonModule,
         MdlModule,
-        StoreModule.provideStore({
+        StoreModule.forRoot({
           news: newsReducer,
           watchlist: watchlistReducer
         })

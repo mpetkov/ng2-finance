@@ -1,11 +1,12 @@
-import { Action, ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { HeaderInitialState, HeaderStateInterface, HeaderStateKeys } from './header-state';
 import { HeaderActions } from './header-actions';
+import { PayloadAction } from '../../core/state/api-state';
 
 const initialState: HeaderStateInterface = new HeaderInitialState() as HeaderStateInterface;
 
 export const headerReducer: ActionReducer<HeaderStateInterface> =
-  (state: HeaderStateInterface = initialState, {payload, type}: Action) => {
+  (state: HeaderStateInterface = initialState, {payload, type}: PayloadAction) => {
     switch (type) {
       case HeaderActions.ACTIVATE_SEARCH:
         return state.set(HeaderStateKeys.SearchActive, payload);

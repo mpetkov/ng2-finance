@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+import { Action } from '@ngrx/store';
 
 export interface CoreApiStateInterface extends Map<string, any> {
   data?: any[];
@@ -16,4 +17,8 @@ export interface CoreApiErrorInterface {
   value?: string;
   date?: string;
   count?: number;
+}
+
+export interface PayloadAction extends Action {
+  payload: any;
 }
