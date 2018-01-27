@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { CoreApiResponseService } from '../../../shared/core/services/api-response.service';
 import { numberUnitFormat } from '../../../shared/core/utils';
@@ -11,9 +11,9 @@ import { get } from 'lodash';
 export class InfoApiService extends CoreApiResponseService {
   private stock: string;
 
-  constructor(public http: Http,
+  constructor(public httpClient: HttpClient,
               private infoState: InfoStateService) {
-    super(http, infoState);
+    super(httpClient, infoState);
   }
 
   load(stock: string) {

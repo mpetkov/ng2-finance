@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { CoreApiResponseService } from '../../../shared/core/services/api-response.service';
 import { NewsStateService } from './state/news-state.service';
@@ -11,9 +11,9 @@ import * as moment from 'moment';
 export class NewsApiService extends CoreApiResponseService {
   private stock: string;
 
-  constructor(public http: Http,
+  constructor(public httpClient: HttpClient,
               private newsState: NewsStateService) {
-    super(http, newsState);
+    super(httpClient, newsState);
   }
 
   load(stock: string, env: any = environment) {

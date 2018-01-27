@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CoreApiService } from './api.service';
 import { CoreApiStateService } from '../state/api-state.service';
 import { CoreApiErrorInterface } from '../state/api-state';
@@ -9,9 +9,9 @@ export class CoreApiResponseService extends CoreApiService {
   disableLoader: boolean;
   errorCount = 0;
 
-  constructor(protected http: Http,
+  constructor(protected httpClient: HttpClient,
               protected state: CoreApiStateService) {
-    super(http);
+    super(httpClient);
   }
 
   toggleLoader(loader: boolean) {

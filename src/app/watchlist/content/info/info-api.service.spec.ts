@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { InfoApiService } from './info-api.service';
 import { InfoStateService } from './state/info-state.service';
@@ -18,17 +17,9 @@ describe('InfoApiService', () => {
     ]);
     getSubject = new BehaviorSubject<any>([]);
     const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         InfoApiService,
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: ConnectionBackend, options: BaseRequestOptions): Http => {
-            return new Http(backend, options);
-          }
-        },
         {provide: InfoStateService, useValue: infoStateService}
       ]
     });

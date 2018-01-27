@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { CoreApiResponseService } from '../../../shared/core/services/api-response.service';
 import { SearchStateService } from './state/search-state.service';
@@ -9,9 +9,9 @@ import { get } from 'lodash';
 export class SearchApiService extends CoreApiResponseService {
   private stock: string;
 
-  constructor(public http: Http,
+  constructor(public httpClient: HttpClient,
               private searchState: SearchStateService) {
-    super(http, searchState);
+    super(httpClient, searchState);
   }
 
   load(stock: string, env: any = environment) {

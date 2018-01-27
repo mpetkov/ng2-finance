@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { HttpClientTestingModule  } from '@angular/common/http/testing';
 
 import { ChartApiService } from './chart-api.service';
 import { ChartStateService } from './state/chart-state.service';
@@ -23,17 +22,9 @@ describe('ChartApiService', () => {
     postSubject = new BehaviorSubject<any>([]);
 
     const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         ChartApiService,
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: ConnectionBackend, options: BaseRequestOptions): Http => {
-            return new Http(backend, options);
-          }
-        },
         {provide: ChartStateService, useValue: chartStateService}
       ]
     });

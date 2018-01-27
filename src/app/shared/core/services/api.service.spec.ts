@@ -1,52 +1,40 @@
 import { TestBed } from '@angular/core/testing';
-import { BaseRequestOptions, ConnectionBackend, Http, RequestMethod, Response, ResponseOptions } from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CoreApiService } from './api.service';
 
 describe('CoreApiService', () => {
   const url = 'www.test.com';
-  let backend: MockBackend;
+  let httpMock: HttpTestingController;
   let service: CoreApiService;
   let response: any;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
-        CoreApiService,
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (connectionBackend: ConnectionBackend, options: BaseRequestOptions): Http => {
-            return new Http(connectionBackend, options);
-          }
-        }
+        CoreApiService
       ]
     });
 
-    backend = injector.get(MockBackend);
     service = injector.get(CoreApiService);
+    httpMock = injector.get(HttpTestingController);
 
-    response = new Response(new ResponseOptions({
-      body: JSON.stringify({test: []})
-    }));
+    response = JSON.stringify({test: []});
   });
 
-  afterEach(() => backend.verifyNoPendingRequests());
+  afterEach(() => httpMock.verify());
 
   describe('get()', () => {
     it('should perform GET request to provided url', () => {
-      backend.connections.subscribe((c: MockConnection) => {
-        expect(c.request.method).toBe(RequestMethod.Get);
-        expect(c.request.url).toMatch(url);
+      httpMock.expectOne({
+        url: url,
+        method: 'GET'
       });
-
       service.get(url);
     });
 
     it('should return response data', () => {
-      backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+      httpMock.expectOne(url).flush(response);
       service.get(url)
         .subscribe(
           (res: any) => {
@@ -57,7 +45,7 @@ describe('CoreApiService', () => {
     });
 
     it('should return error', () => {
-      backend.connections.subscribe((c: MockConnection) => c.mockRespond(null));
+      httpMock.expectOne(url).flush(null);
       service.get(url)
         .subscribe(
           (res: any) => expect(res).toBeUndefined(),
@@ -71,16 +59,15 @@ describe('CoreApiService', () => {
 
   describe('post()', () => {
     it('should perform POST request to provided url', () => {
-      backend.connections.subscribe((c: MockConnection) => {
-        expect(c.request.method).toBe(RequestMethod.Post);
-        expect(c.request.url).toMatch(url);
+      httpMock.expectOne({
+        url: url,
+        method: 'POST'
       });
-
       service.post(url, {});
     });
 
     it('should return response data', () => {
-      backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+      httpMock.expectOne(url).flush(response);
       service.post(url, {})
         .subscribe(
           (res: any) => {
@@ -91,7 +78,7 @@ describe('CoreApiService', () => {
     });
 
     it('should return error', () => {
-      backend.connections.subscribe((c: MockConnection) => c.mockRespond(null));
+      httpMock.expectOne(url).flush(null);
       service.post(url, {})
         .subscribe(
           (res: any) => expect(res).toBeUndefined(),

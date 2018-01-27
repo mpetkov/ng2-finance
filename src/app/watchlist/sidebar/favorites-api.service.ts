@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { CoreApiResponseService } from '../../shared/core/services/api-response.service';
 import { FavoritesStateService } from './favorites/state/favorites-state.service';
@@ -9,9 +9,9 @@ import { get } from 'lodash';
 export class FavoritesApiService extends CoreApiResponseService {
   private stocks: string[] = [];
 
-  constructor(public http: Http,
+  constructor(public httpClient: HttpClient,
               private favoritesState: FavoritesStateService) {
-    super(http, favoritesState);
+    super(httpClient, favoritesState);
   }
 
   load(stocks: string[]) {

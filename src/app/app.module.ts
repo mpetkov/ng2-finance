@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { combineReducers, StoreModule } from '@ngrx/store';
-import { compose } from '@ngrx/core';
+import { HttpClientModule } from '@angular/common/http';
+import { combineReducers, compose, StoreModule } from '@ngrx/store';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -43,7 +42,7 @@ export function rootReducer(state: any, action: any) {
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
     StoreModule.provideStore(rootReducer),
     SharedModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { get } from 'lodash';
 import { CoreApiResponseService } from '../../../shared/core/services/api-response.service';
@@ -10,9 +10,9 @@ import { ChartDataInterface } from './state/chart-state';
 export class ChartApiService extends CoreApiResponseService {
   private params: any = {};
 
-  constructor(public http: Http,
+  constructor(public httpClient: HttpClient,
               private chartState: ChartStateService) {
-    super(http, chartState);
+    super(httpClient, chartState);
   }
 
   load(stock: string, range: string, interval: string, env: any = environment) {

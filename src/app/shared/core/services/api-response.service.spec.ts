@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CoreApiResponseService } from './api-response.service';
 import { CoreApiStateService } from '../state/api-state.service';
 
@@ -16,17 +15,9 @@ describe('CoreApiResponseService', () => {
     ]);
 
     const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         CoreApiResponseService,
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: ConnectionBackend, options: BaseRequestOptions): Http => {
-            return new Http(backend, options);
-          }
-        },
         {provide: CoreApiStateService, useValue: coreApiStateService}
       ]
     });

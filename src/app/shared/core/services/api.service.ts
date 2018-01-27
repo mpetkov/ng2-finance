@@ -1,33 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CoreSubscriptions } from '../subscriptions';
-import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class CoreApiService extends CoreSubscriptions {
-  private options: RequestOptions;
+  private headers: HttpHeaders;
 
-  constructor(protected http: Http) {
+  constructor(protected httpClient: HttpClient) {
     super();
-    this.options = new RequestOptions({
-      headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
-    });
+    this.headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
   }
 
   get(url: string): Observable<string[]> {
     this.ngOnDestroy();
-    return this.http.get(url)
-      .map((res: Response) => res.json())
+    return this.httpClient.get(url)
       .catch((error) => Observable.throw(error));
   }
 
   post(url: string, params: any): Observable<string[]> {
     this.ngOnDestroy();
-    return this.http.post(url, params, this.options)
-      .map((res: Response) => res.json())
+    return this.httpClient.post(url, params, {headers: this.headers})
       .catch((error) => Observable.throw(error));
   }
 }
