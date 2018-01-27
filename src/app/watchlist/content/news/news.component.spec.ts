@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { StoreModule } from '@ngrx/store';
-import { MdlModule } from 'angular2-mdl';
+import { MdlModule } from '@angular-mdl/core';
 import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';
 import { NewsComponent } from './news.component';
 import { NewsApiService } from './news-api.service';

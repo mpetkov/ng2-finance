@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
+import { MdlModule } from '@angular-mdl/core';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { WatchlistStateService } from '../../state/watchlist-state.service';

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdlMenuComponent } from 'angular2-mdl';
+import { MdlMenuComponent } from '@angular-mdl/core';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { StockDataInterface } from '../../state/watchlist-state';
 import { FavoritesStateService } from './state/favorites-state.service';

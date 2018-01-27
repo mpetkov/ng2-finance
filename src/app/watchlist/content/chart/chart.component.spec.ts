@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { MdlModule } from 'angular2-mdl';
+import { MdlModule } from '@angular-mdl/core';
 import { WatchlistStateService } from '../../state/watchlist-state.service';
 import { HeaderStateService } from '../../../shared/header/state/header-state.service';
 import { NotificationButtonInterface, NotificationTypeEnum } from '../../../shared/notification/notification.component';

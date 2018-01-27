@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdlModule } from 'angular2-mdl';
+import { MdlModule } from '@angular-mdl/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HeaderComponent } from './header.component';
 import { HeaderStateService } from './state/header-state.service';

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
-import { MdlModule } from 'angular2-mdl';
+import { MdlModule } from '@angular-mdl/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppComponent } from './app.component';
 import { HeaderStateService } from './shared/header/state/header-state.service';
