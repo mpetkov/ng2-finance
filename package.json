@@ -1,6 +1,6 @@
 {
   "name": "ng2-finance",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Finance dashboard using Yahoo's public APIs.",
   "author": "Marin Petkov <mpetkov>",
   "license": "MIT",
