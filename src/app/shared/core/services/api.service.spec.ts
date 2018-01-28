@@ -4,9 +4,11 @@ import { CoreApiService } from './api.service';
 
 describe('CoreApiService', () => {
   const url = 'www.test.com';
+  const errorMessage = 'Http failure response for ' + url + ': 404 Bad Request';
+  const mockErrorResponse = {status: 404, statusText: 'Bad Request'};
+  const response = {test: []};
   let httpMock: HttpTestingController;
   let service: CoreApiService;
-  let response: any;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -18,23 +20,19 @@ describe('CoreApiService', () => {
 
     service = injector.get(CoreApiService);
     httpMock = injector.get(HttpTestingController);
-
-    response = JSON.stringify({test: []});
   });
 
   afterEach(() => httpMock.verify());
 
   describe('get()', () => {
     it('should perform GET request to provided url', () => {
-      httpMock.expectOne({
-        url: url,
-        method: 'GET'
-      });
-      service.get(url);
+      service.get(url).subscribe((res: any) => expect(res).toBeDefined());
+      const req = httpMock.expectOne(url);
+      expect(req.request.method).toBe('GET');
+      req.flush(response);
     });
 
     it('should return response data', () => {
-      httpMock.expectOne(url).flush(response);
       service.get(url)
         .subscribe(
           (res: any) => {
@@ -42,32 +40,29 @@ describe('CoreApiService', () => {
             expect(Array.isArray(res.test)).toBe(true);
           }
         );
+      httpMock.expectOne(url).flush(response);
     });
 
     it('should return error', () => {
-      httpMock.expectOne(url).flush(null);
       service.get(url)
         .subscribe(
-          (res: any) => expect(res).toBeUndefined(),
-          (error: any) => {
-            expect(error.message).toBe('Cannot read property \'json\' of null');
-          }
+          res => expect(res).toBeNull(),
+          error => expect(error.message).toBe(errorMessage)
         );
+      httpMock.expectOne(url).flush(null, mockErrorResponse);
     });
   });
 
 
   describe('post()', () => {
     it('should perform POST request to provided url', () => {
-      httpMock.expectOne({
-        url: url,
-        method: 'POST'
-      });
-      service.post(url, {});
+      service.post(url, {}).subscribe((res: any) => expect(res).toBeDefined());
+      const req = httpMock.expectOne(url);
+      expect(req.request.method).toBe('POST');
+      req.flush(response);
     });
 
     it('should return response data', () => {
-      httpMock.expectOne(url).flush(response);
       service.post(url, {})
         .subscribe(
           (res: any) => {
@@ -75,17 +70,16 @@ describe('CoreApiService', () => {
             expect(Array.isArray(res.test)).toBe(true);
           }
         );
+      httpMock.expectOne(url).flush(response);
     });
 
     it('should return error', () => {
-      httpMock.expectOne(url).flush(null);
       service.post(url, {})
         .subscribe(
-          (res: any) => expect(res).toBeUndefined(),
-          (error: any) => {
-            expect(error.message).toBe('Cannot read property \'json\' of null');
-          }
+          res => expect(res).toBeNull(),
+          error => expect(error.message).toBe(errorMessage)
         );
+      httpMock.expectOne(url).flush(null, mockErrorResponse);
     });
   });
 });

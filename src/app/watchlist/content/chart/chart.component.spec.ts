@@ -144,7 +144,7 @@ describe('ChartComponent', () => {
 
     watchlistState.stock$.next('ADS');
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('mdl-icon').textContent).toBe('star_bordered');
+    expect(fixture.nativeElement.querySelector('mdl-icon').textContent).toContain('star_bordered');
   });
 
   it('should show the tabs when stock is present', () => {

@@ -29,7 +29,7 @@ describe('searchReducer', () => {
 
   it('should set error to provided value', () => {
     let state: SearchStateInterface = new SearchInitialState({error: 'a'}) as SearchStateInterface;
-    state = searchReducer(state, actions.fetchError('b'));
-    expect(state.error).toBe('b');
+    state = searchReducer(state, actions.fetchError({value: 'b'}));
+    expect(state.error.value).toBe('b');
   });
 });

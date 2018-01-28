@@ -29,7 +29,7 @@ describe('newsReducer', () => {
 
   it('should set error to provided value', () => {
     let state: NewsStateInterface = new NewsInitialState({error: 'a'}) as NewsStateInterface;
-    state = newsReducer(state, actions.fetchError('b'));
-    expect(state.error).toBe('b');
+    state = newsReducer(state, actions.fetchError({value: 'b'}));
+    expect(state.error.value).toBe('b');
   });
 });

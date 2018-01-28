@@ -43,7 +43,7 @@ describe('favoritesReducer', () => {
 
   it('should set error to provided value', () => {
     let state: FavoritesStateInterface = new FavoritesInitialState({error: 'a'}) as FavoritesStateInterface;
-    state = favoritesReducer(state, actions.fetchError('b'));
-    expect(state.error).toBe('b');
+    state = favoritesReducer(state, actions.fetchError({value: 'b'}));
+    expect(state.error.value).toBe('b');
   });
 });

@@ -1,6 +1,7 @@
 import { ChartActions } from './chart-actions';
 import { chartReducer } from './chart-reducer';
 import { ChartInitialState, ChartStateInterface } from './chart-state';
+import { CoreApiErrorInterface } from '../../../../shared/core/state/api-state';
 
 describe('chartReducer', () => {
   let actions: ChartActions;
@@ -41,7 +42,7 @@ describe('chartReducer', () => {
 
   it('should set error to provided value', () => {
     let state: ChartStateInterface = new ChartInitialState({error: 'a'}) as ChartStateInterface;
-    state = chartReducer(state, actions.fetchError('b'));
-    expect(state.error).toBe('b');
+    state = chartReducer(state, actions.fetchError({value: 'b'}));
+    expect(state.error.value).toBe('b');
   });
 });

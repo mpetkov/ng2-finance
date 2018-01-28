@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { BaseRequestOptions, ConnectionBackend, Http } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
 
 import { FavoritesApiService } from './favorites-api.service';
 import { FavoritesStateService } from './favorites/state/favorites-state.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('FavoritesApiService', () => {
   let service: FavoritesApiService;
@@ -18,17 +17,9 @@ describe('FavoritesApiService', () => {
     ]);
     getSubject = new BehaviorSubject<any>([]);
     const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         FavoritesApiService,
-        BaseRequestOptions,
-        MockBackend,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory: (backend: ConnectionBackend, options: BaseRequestOptions): Http => {
-            return new Http(backend, options);
-          }
-        },
         {provide: FavoritesStateService, useValue: favoritesStateService}
       ]
     });

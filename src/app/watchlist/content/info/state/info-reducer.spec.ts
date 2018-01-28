@@ -29,7 +29,7 @@ describe('infoReducer', () => {
 
   it('should set error to provided value', () => {
     let state: InfoStateInterface = new InfoInitialState({error: 'a'}) as InfoStateInterface;
-    state = infoReducer(state, actions.fetchError('b'));
-    expect(state.error).toBe('b');
+    state = infoReducer(state, actions.fetchError({value: 'b'}));
+    expect(state.error.value).toBe('b');
   });
 });
